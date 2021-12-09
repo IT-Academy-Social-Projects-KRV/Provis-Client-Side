@@ -16,3 +16,5 @@ body {
     color: #2B2C40;
     -webkit-text-stroke: 0.5px white;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
