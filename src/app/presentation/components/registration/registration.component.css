@@ -27,11 +27,6 @@
     align-items: flex-start;
 }
 
-.registration_right_side {
-    align-items: center;
-    justify-content: right; 
-    font-weight: bold;
-}
 .example-form {
     min-width: 150px;
     max-width: 420px;
