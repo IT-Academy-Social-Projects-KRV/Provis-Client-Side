@@ -1,0 +1,58 @@
+<div class="register-form-container">
+    <form class="register-form" [formGroup]="registerForm" novalidate (ngSubmit)="submit()">
+        <div class="form-group">
+            <label>Ім'я</label>
+            <input class="form-control" name="firstname" formControlName="userFirstName" />
+            <div class="alert alert-danger"
+                *ngIf="registerForm.controls['userFirstName'].invalid && registerForm.controls['userFirstName'].touched">
+                Не вказано ім'я.
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Прізвище</label>
+            <input class="form-control" name="lastname" formControlName="userLastName" />
+            <div class="alert alert-danger"
+                *ngIf="registerForm.controls['userLastName'].invalid && registerForm.controls['userLastName'].touched">
+                Не вказано прізвище.
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Нік</label>
+            <input class="form-control" name="username" formControlName="userUsername" />
+            <div class="alert alert-danger"
+                *ngIf="registerForm.controls['userUsername'].invalid && registerForm.controls['userUsername'].touched">
+                Некоректний нік.
+            </div>
+        </div>
+        <div class="form-group">
+            <label>E-mail</label>
+            <input class="form-control" name="email" formControlName="userEmail" />
+            <div class="alert alert-danger"
+                *ngIf="registerForm.controls['userEmail'].invalid && registerForm.controls['userEmail'].touched">
+                Некоректна адреса.
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Пароль</label>
+            <input class="form-control" name="password" formControlName="userPassword" type="password" />
+            <div class="alert alert-danger"
+                *ngIf="registerForm.controls['userPassword'].invalid && registerForm.controls['userPassword'].touched">
+                Пароль недостатньо надійний. Довжина паролю повинна бути в межах від 8 до 50 символів,
+                використовуйте маленькі та великі літери латинського алфавіту, спец-символи та цифри.
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Повторення паролю</label>
+            <input class="form-control" name="confirmpassword" formControlName="userConfirmPassword" type="password" />
+            <div class="alert alert-danger" *ngIf="registerForm.controls['userConfirmPassword'].invalid && registerForm.controls['userConfirmPassword'].touched && 
+                registerForm.controls['userConfirmPassword'].errors!['confirmPasswordValidator']">
+                Паролі повинні співпадати.
+            </div>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-default" [disabled]="registerForm.invalid">
+                Відправити
+            </button>
+        </div>
+    </form>
+</div>

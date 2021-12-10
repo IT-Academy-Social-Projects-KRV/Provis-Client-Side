@@ -18,3 +18,22 @@ body {
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+div.register-form-container{
+    width:600px;
+    margin:0 auto;
+    padding:20px;
+    background: white;
+    border:2px solid black;
+    border-radius: 5px;
+}
+div.form-group label{
+    display: block;
+}
+
+div.form-group input.form-control{
+    width:100%;
+    padding:5px;
+}
+div.form-group{
+    margin:10px 0;
+}
