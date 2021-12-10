@@ -1,0 +1,41 @@
+<div class="container">
+
+    <mat-grid-list cols="1" rowHeight="100vh">
+               
+        <mat-grid-tile class="">
+            <div class="registration_form">
+                <div class="w-100 mb-20">
+                    <h1 class="registration_title">PROVIS</h1>
+                    <p class="registration_text">Best Task Manager</p>
+                </div>
+                
+                <div>
+                    <form class="example-form">
+                        <p class="registration_form_title">Registration</p>
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>Name</mat-label>
+                            <input type="text" matInput #name>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>Surname</mat-label>
+                            <input type="text" matInput  #surname>
+                        </mat-form-field>   
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>Email</mat-label>
+                            <input type="email" matInput placeholder="user@email.com" #email>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>Password</mat-label>
+                            <input type="password" matInput #password>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>Re-type Password</mat-label>
+                            <input type="password" matInput #password>
+                        </mat-form-field>
+                        <button mat-flat-button color="primary" class="w-100">Register</button>
+                    </form>
+                </div>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
