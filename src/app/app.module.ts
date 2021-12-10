@@ -13,6 +13,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { HomeComponent } from './presentation/components/home/home.component';
 import { LoginComponent } from './presentation/components/login/login.component';
 import { RegistrationComponent } from './presentation/components/registration/registration.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -26,14 +27,13 @@ import { RegistrationComponent } from './presentation/components/registration/re
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    
-    
+    BrowserAnimationsModule,    
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatGridListModule
-
+    MatGridListModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
