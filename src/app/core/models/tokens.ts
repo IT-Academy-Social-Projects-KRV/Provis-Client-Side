@@ -1,4 +1,4 @@
 export interface ITokens {
-    jwt: string;
-    refreshToken: string;
+    token: string;
+    //refreshToken: string;
 }

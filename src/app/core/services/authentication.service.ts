@@ -25,10 +25,8 @@ export class AuthenticationService {
 
     return this.http.post<ITokens>(this.loginUrl, user).pipe(map((tokens: ITokens) => {
       
-      if(tokens.jwt && tokens.refreshToken)
-      {
-        localStorage.setItem("jwt", tokens.jwt);
-        localStorage.setItem("refreshToken", tokens.refreshToken);
+      if(tokens.token) {
+        localStorage.setItem("token", tokens.token);
       }
     }));
   }
