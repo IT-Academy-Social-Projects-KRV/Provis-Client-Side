@@ -10,27 +10,39 @@
                 </div>
                 
                 <div>
-                    <form class="example-form">
+                    <form class="register-form" [formGroup]="registerForm" novalidate (ngSubmit)="submit()">
                         <p class="registration_form_title">Registration</p>
-                        <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-form-field hintLabel="Max 50 characters" appearance="fill">
                             <mat-label>Name</mat-label>
-                            <input type="text" matInput #name>
+                            <input type="text" matInput placeholder="Your name" #userFirstName maxlength=50 formControlName="userFirstName" required> 
+                            <mat-error *ngIf="registerForm.controls['userFirstName'].invalid && registerForm.controls['userFirstName'].touched">Invalid name</mat-error>
                         </mat-form-field>
-                        <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-form-field appearance="fill">
                             <mat-label>Surname</mat-label>
-                            <input type="text" matInput  #surname>
+                            <input type="text" matInput placeholder="Your surname" #userLastName maxlength=50 formControlName="userLastName" required>
+                            <mat-error *ngIf="registerForm.controls['userLastName'].invalid && registerForm.controls['userLastName'].touched">Invalid surname</mat-error>
                         </mat-form-field>   
-                        <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Username</mat-label>
+                            <input type="text" matInput placeholder="Your username" #userUsername maxlength=50 formControlName="userUsername" required>
+                            <mat-error *ngIf="registerForm.controls['userUsername'].invalid && registerForm.controls['userUsername'].touched">Invalid username</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill">
                             <mat-label>Email</mat-label>
-                            <input type="email" matInput placeholder="user@email.com" #email>
+                            <input type="email" matInput placeholder="Your email" #userEmail maxlength=50 formControlName="userEmail" required> 
+                            <mat-error *ngIf="registerForm.controls['userEmail'].invalid && registerForm.controls['userEmail'].touched">Invalid email</mat-error>
                         </mat-form-field>
-                        <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-form-field appearance="fill">
                             <mat-label>Password</mat-label>
-                            <input type="password" matInput #password>
+                            <input type="password" matInput  #userPassword maxlength=50 formControlName="userPassword" required>                           
+                            <mat-error class="password-error" *ngIf="registerForm.controls['userPassword'].invalid && registerForm.controls['userPassword'].touched">Password is not strong enough and it must be at least 8 characters long. </mat-error>
+                            
                         </mat-form-field>
-                        <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-form-field appearance="fill">
                             <mat-label>Re-type Password</mat-label>
-                            <input type="password" matInput #password>
+                            <input type="password" matInput  #userConfirmPassword maxlength=50 formControlName="userConfirmPassword" required>
+                            <mat-error *ngIf="registerForm.controls['userConfirmPassword'].invalid && registerForm.controls['userConfirmPassword'].touched && 
+                            registerForm.controls['userConfirmPassword'].errors!['confirmPasswordValidator']">Please make sure your passwords match</mat-error>
                         </mat-form-field>
                         <button mat-flat-button color="primary" class="w-100">Register</button>
                     </form>
