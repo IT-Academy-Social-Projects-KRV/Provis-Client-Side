@@ -31,8 +31,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     MatGridListModule,
     FormsModule,
-    ReactiveFormsModule
-    BrowserAnimationsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
