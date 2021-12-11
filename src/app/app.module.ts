@@ -14,6 +14,7 @@ import { HomeComponent } from './presentation/components/home/home.component';
 import { LoginComponent } from './presentation/components/login/login.component';
 import { RegistrationComponent } from './presentation/components/registration/registration.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthenticationService } from './core/services/authentication.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatButtonModule,
     MatGridListModule
   ],
-  providers: [],
+  providers: [AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
