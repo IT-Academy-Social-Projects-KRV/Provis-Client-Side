@@ -27,7 +27,7 @@
     align-items: flex-start;
 }
 
-.example-form {
+form.login-form {
     min-width: 150px;
     max-width: 420px;
     background: white;
@@ -36,7 +36,7 @@
     width: 100%;
   }
   
-.example-full-width {
+form.login-form .mat-form-field {
     width: 100%;
 }
 .highstring {
