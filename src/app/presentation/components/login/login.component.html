@@ -1,1 +1,34 @@
-<p class="login_page">LOGIN PAGE</p>
+<div class="container">
+
+    <mat-grid-list cols="1" rowHeight="100vh">
+               
+        <mat-grid-tile class="">
+            <div class="login_form">
+                <div class="w-100 mb-20">
+                    <h1 class="login_title">PROVIS</h1>
+                    <p class="login_text">Best Task Manager</p>
+                </div>
+                <div>
+                    <form class="example-form">
+                        <p class="login_form_title">Login</p>
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>Email</mat-label>
+                            <input type="email" matInput placeholder="user@email.com" #email>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" class="example-full-width">
+                            <mat-label>Password</mat-label>
+                            <input type="password" matInput #password>
+                        </mat-form-field> 
+
+                        <div class="highstring"><input type="checkbox"><label>Remember me</label>
+
+                        <a style="margin-left: 4cm;" href="_">Forgot password?</a></div>
+                       
+                        <button style="margin-top: 0.4cm;" mat-flat-button color="primary" class="w-100">Sign in</button>
+                        
+                    </form>
+                </div>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
