@@ -9,6 +9,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatListModule} from '@angular/material/list';
+
 
 import { HomeComponent } from './presentation/components/home/home.component';
 import { LoginComponent } from './presentation/components/login/login.component';
@@ -27,7 +30,8 @@ import { RegistrationComponent } from './presentation/components/registration/re
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    
+    MatMenuModule,
+    MatListModule,
     
     MatFormFieldModule,
     MatInputModule,
