@@ -9,20 +9,21 @@
                     <p class="login_text">Best Task Manager</p>
                 </div>
                 <div>
-                    <form class="example-form">
+                    <form class="login-form" [formGroup]="loginForm" novalidate (ngSubmit)="submit()">
                         <p class="login_form_title">Login</p>
-                        <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-form-field appearance="fill">
                             <mat-label>Email</mat-label>
-                            <input type="email" matInput placeholder="user@email.com" #email>
+                            <input type="email" matInput placeholder="Your email" #userEmail maxlength=50 formControlName="userEmail" required>
+                            <mat-error *ngIf="loginForm.controls['userEmail'].invalid && loginForm.controls['userEmail'].touched">Invalid email</mat-error>
                         </mat-form-field>
-                        <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-form-field appearance="fill">
                             <mat-label>Password</mat-label>
-                            <input type="password" matInput #password>
+                            <input type="password" matInput  #userPassword maxlength=50 formControlName="userPassword" required>                           
                         </mat-form-field> 
 
                         <div class="highstring"><input type="checkbox"><label>Remember me</label>
 
-                        <a style="margin-left: 4cm;" href="_">Forgot password?</a></div>
+                        <a style="margin-left: 4cm;" href="#">Forgot password?</a></div>
                        
                         <button style="margin-top: 0.4cm;" mat-flat-button color="primary" class="w-100">Sign in</button>
                         
