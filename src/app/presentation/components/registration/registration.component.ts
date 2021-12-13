@@ -19,17 +19,17 @@ export class RegistrationComponent implements OnInit {
 
   constructor(private fb:FormBuilder, private service: AuthenticationService, private router: Router){
       this.registerForm=fb.group({
-          "Name":["",SignInUpValidator.getNameValidator(2,50)],
-          "Surname":["",SignInUpValidator.getNameValidator(2,50)],
+          "Name":["",SignInUpValidator.getNameValidator(3,50)],
+          "Surname":["",SignInUpValidator.getNameValidator(3,50)],
           "Username":["",SignInUpValidator.getUserNameValidator(3,50)],
           "Email":["",SignInUpValidator.getEmailValidator()],
           "Password":["",SignInUpValidator.getPasswordValidator(8,50)],
-          "ConfirmPassword":["",SignInUpValidator.getRequiredValidator()]        
+          "ConfirmPassword":["",SignInUpValidator.getRequiredValidator()]
       },{
           validator: SignInUpValidator.confirmPasswordValidator("Password","ConfirmPassword")
       })
   }
-  
+
   ngOnInit(): void {
   }
 
@@ -50,7 +50,7 @@ export class RegistrationComponent implements OnInit {
     if(this.registerForm.valid){
       this.userForRegistreation = Object.assign({}, this.registerForm.value);
       this.service.register(this.userForRegistreation).subscribe(
-        () => {         
+        () => {
           Swal.fire({
             icon: 'success',
             title: 'Register',
@@ -66,13 +66,14 @@ export class RegistrationComponent implements OnInit {
             for(let key in errors){
               for(let indexError in errors[key]){
                 errorMessage += errors[key][indexError] + '\n';
+                console.log(errors[key][indexError]);
               }
             }
-            
+
             this.showAlert(errorMessage);
 
             return;
-          } 
+          }
 
           if(err.error && typeof err.error === 'object'){
             errorMessage += err.error.error;
