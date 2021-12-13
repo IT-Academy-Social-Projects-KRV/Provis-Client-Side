@@ -4,40 +4,52 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { HttpClientModule } from '@angular/common/http';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
-import {MatMenuModule} from '@angular/material/menu';
-import {MatListModule} from '@angular/material/list';
-
+import {MatIconModule} from '@angular/material/icon';
 
 import { HomeComponent } from './presentation/components/home/home.component';
+import { AboutComponent } from './presentation/components/about/about.component';
+import { ContactComponent } from './presentation/components/contact/contact.component';
 import { LoginComponent } from './presentation/components/login/login.component';
 import { RegistrationComponent } from './presentation/components/registration/registration.component';
+import { HeaderComponent } from './presentation/components/header/header.component';
+import { FooterComponent } from './presentation/components/footer/footer.component';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    AboutComponent,
+    ContactComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,    
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatGridListModule,
+    MatIconModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatMenuModule,
-    MatListModule,
-    
+    HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatGridListModule
-
   ],
   providers: [],
   bootstrap: [AppComponent]
