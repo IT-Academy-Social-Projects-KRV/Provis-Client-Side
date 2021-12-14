@@ -20,6 +20,7 @@ import { HeaderComponent } from './presentation/components/header/header.compone
 import { FooterComponent } from './presentation/components/footer/footer.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthenticationService } from './core/services/authentication.service';
 
 
 @NgModule({
@@ -44,14 +45,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
     HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatGridListModule
   ],
-  providers: [],
+  providers: [AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

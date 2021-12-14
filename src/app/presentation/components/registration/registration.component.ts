@@ -1,8 +1,11 @@
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, ɵNgNoValidate, FormControlName, FormBuilder} from '@angular/forms';
-import { ReactiveFormsModule }   from '@angular/forms';
-import { AbstractControl} from "@angular/forms";
+import { FormGroup, FormBuilder} from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserForRegister } from 'src/app/core/models/userForRegister';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { SignInUpValidator } from 'src/app/core/validators/signInUpValidator';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-registration',
@@ -12,47 +15,74 @@ import { AbstractControl} from "@angular/forms";
 export class RegistrationComponent implements OnInit {
 
   registerForm : FormGroup;
-  constructor(private fb:FormBuilder){
+  userForRegistreation: UserForRegister = new UserForRegister();
+
+  constructor(private fb:FormBuilder, private service: AuthenticationService, private router: Router){
       this.registerForm=fb.group({
-          "userFirstName":["",[
-              Validators.required,
-              Validators.pattern("[A-Za-z]{2,50}")]],
-          "userLastName":["",[
-              Validators.required,
-              Validators.pattern("[A-Za-z]{2,50}")]],
-          "userUsername":["",[
-              Validators.required,
-              Validators.pattern("[A-Za-z0-9-_]{3,50}")]],
-          "userEmail":["",[
-              Validators.required,
-              Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
-          "userPassword":["",[
-              Validators.required,
-              Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-_]).{8,50}$")
-                  ]],
-          "userConfirmPassword":["",[
-              Validators.required
-          ]]
-         
-      },
-      {
-          validator: this.confirmPasswordValidator("userPassword","userConfirmPassword")
+          "Name":["",SignInUpValidator.getNameValidator(2,50)],
+          "Surname":["",SignInUpValidator.getNameValidator(2,50)],
+          "Username":["",SignInUpValidator.getUserNameValidator(3,50)],
+          "Email":["",SignInUpValidator.getEmailValidator()],
+          "Password":["",SignInUpValidator.getPasswordValidator(8,50)],
+          "ConfirmPassword":["",SignInUpValidator.getRequiredValidator()]        
+      },{
+          validator: SignInUpValidator.confirmPasswordValidator("Password","ConfirmPassword")
       })
   }
-  confirmPasswordValidator(controlName: string, matchingControlName: string) {
-    return (formGroup: FormGroup) => {
-      let control = formGroup.controls[controlName];
-      let matchingControl = formGroup.controls[matchingControlName]          
-      if (control.value !== matchingControl.value) {
-        matchingControl.setErrors({ confirmPasswordValidator: true });
-      } else {
-        matchingControl.setErrors(null);
-      }
-    };
-  }
+  
   ngOnInit(): void {
   }
+
+  showAlert(error: string){
+    Swal.fire({
+      icon: 'error',
+      title: error,
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      }
+    })
+  }
+
   submit(){
-    alert("Ви успішно зареєструвались!");
-}
+    if(this.registerForm.valid){
+      this.userForRegistreation = Object.assign({}, this.registerForm.value);
+      this.service.register(this.userForRegistreation).subscribe(
+        () => {         
+          Swal.fire({
+            icon: 'success',
+            title: 'Register',
+            text: "Success"
+          })
+          this.router.navigate(['login']);
+        },
+        err => {
+          let errorMessage: string = '';
+          if(err.error.errors && typeof err.error.errors === 'object'){
+            const errors = err.error.errors;
+
+            for(let key in errors){
+              for(let indexError in errors[key]){
+                errorMessage += errors[key][indexError] + '\n';
+              }
+            }
+            
+            this.showAlert(errorMessage);
+
+            return;
+          } 
+
+          if(err.error && typeof err.error === 'object'){
+            errorMessage += err.error.error;
+
+            this.showAlert(errorMessage);
+
+            return;
+          }
+        }
+      )
+    }
+  }
 }

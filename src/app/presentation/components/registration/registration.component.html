@@ -14,35 +14,35 @@
                         <p class="registration_form_title">Registration</p>
                         <mat-form-field hintLabel="Max 50 characters" appearance="fill">
                             <mat-label>Name</mat-label>
-                            <input type="text" matInput placeholder="Your name" #userFirstName maxlength=50 formControlName="userFirstName" required> 
-                            <mat-error *ngIf="registerForm.controls['userFirstName'].invalid && registerForm.controls['userFirstName'].touched">Invalid name</mat-error>
+                            <input type="text" matInput placeholder="Your name" #Name maxlength=50 formControlName="Name" required> 
+                            <mat-error *ngIf="registerForm.controls['Name'].invalid && registerForm.controls['Name'].touched">Invalid name</mat-error>
                         </mat-form-field>
                         <mat-form-field appearance="fill">
                             <mat-label>Surname</mat-label>
-                            <input type="text" matInput placeholder="Your surname" #userLastName maxlength=50 formControlName="userLastName" required>
-                            <mat-error *ngIf="registerForm.controls['userLastName'].invalid && registerForm.controls['userLastName'].touched">Invalid surname</mat-error>
+                            <input type="text" matInput placeholder="Your surname" #Surname maxlength=50 formControlName="Surname" required>
+                            <mat-error *ngIf="registerForm.controls['Surname'].invalid && registerForm.controls['Surname'].touched">Invalid surname</mat-error>
                         </mat-form-field>   
                         <mat-form-field appearance="fill">
                             <mat-label>Username</mat-label>
-                            <input type="text" matInput placeholder="Your username" #userUsername maxlength=50 formControlName="userUsername" required>
-                            <mat-error *ngIf="registerForm.controls['userUsername'].invalid && registerForm.controls['userUsername'].touched">Invalid username</mat-error>
+                            <input type="text" matInput placeholder="Your username" #Username maxlength=50 formControlName="Username" required>
+                            <mat-error *ngIf="registerForm.controls['Username'].invalid && registerForm.controls['Username'].touched">Invalid username</mat-error>
                         </mat-form-field>
                         <mat-form-field appearance="fill">
                             <mat-label>Email</mat-label>
-                            <input type="email" matInput placeholder="Your email" #userEmail maxlength=50 formControlName="userEmail" required> 
-                            <mat-error *ngIf="registerForm.controls['userEmail'].invalid && registerForm.controls['userEmail'].touched">Invalid email</mat-error>
+                            <input type="email" matInput placeholder="Your email" #Email maxlength=50 formControlName="Email" required> 
+                            <mat-error *ngIf="registerForm.controls['Email'].invalid && registerForm.controls['Email'].touched">Invalid email</mat-error>
                         </mat-form-field>
                         <mat-form-field appearance="fill">
                             <mat-label>Password</mat-label>
-                            <input type="password" matInput  #userPassword maxlength=50 formControlName="userPassword" required>                           
-                            <mat-error class="password-error" *ngIf="registerForm.controls['userPassword'].invalid && registerForm.controls['userPassword'].touched">Password is not strong enough and it must be at least 8 characters long. </mat-error>
+                            <input type="password" matInput  #Password maxlength=50 formControlName="Password" required>                           
+                            <mat-error class="password-error" *ngIf="registerForm.controls['Password'].invalid && registerForm.controls['Password'].touched">Password is not strong enough and it must be at least 8 characters long. </mat-error>
                             
                         </mat-form-field>
                         <mat-form-field appearance="fill">
                             <mat-label>Re-type Password</mat-label>
-                            <input type="password" matInput  #userConfirmPassword maxlength=50 formControlName="userConfirmPassword" required>
-                            <mat-error *ngIf="registerForm.controls['userConfirmPassword'].invalid && registerForm.controls['userConfirmPassword'].touched && 
-                            registerForm.controls['userConfirmPassword'].errors!['confirmPasswordValidator']">Please make sure your passwords match</mat-error>
+                            <input type="password" matInput  #ConfirmPassword maxlength=50 formControlName="ConfirmPassword" required>
+                            <mat-error *ngIf="registerForm.controls['ConfirmPassword'].invalid && registerForm.controls['ConfirmPassword'].touched && 
+                            registerForm.controls['ConfirmPassword'].errors!['confirmPasswordValidator']">Please make sure your passwords match</mat-error>
                         </mat-form-field>
                         <button mat-raised-button color="primary" class="w-100">Register</button>
                     </form>
