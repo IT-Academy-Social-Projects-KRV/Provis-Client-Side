@@ -1,28 +1,7 @@
 .container {
-    background:linear-gradient(45deg,#161A27, #48537a)
-}
-.registration_form_title {
-    font-weight: 600;
-    text-align: center;
-    font-size: 28px;
-    padding-bottom: 20px;
-    color: #685e9d;
-}
-.registration_form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    background: linear-gradient(0deg,#3f3c52 0%,#161518 100%);
 }
 
-form.register-form {
-    min-width: 150px;
-    max-width: 420px;
-    background: white;
-    border-radius: 10px;
-    padding: 30px;
-    width: 100%;
-  }
-  
 form.register-form .mat-form-field {
     width: 100%;
     margin:5px auto;
