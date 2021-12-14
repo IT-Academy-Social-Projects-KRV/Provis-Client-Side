@@ -4,3 +4,4 @@ export const baseUrl = environment.apiUrl + '/api';
 
 export const registerUrl = baseUrl + '/Authentication/registration';
 export const loginUrl = baseUrl + '/Authentication/login';
+export const addworkspacetUrl = baseUrl + 'Workspace/addworkspace';
