@@ -1,14 +1,12 @@
 .container {
     background:linear-gradient(45deg,#161A27, #48537a)
 }
-
-
-
 .registration_form_title {
     font-weight: 600;
     text-align: center;
     font-size: 28px;
     padding-bottom: 20px;
+    color: #685e9d;
 }
 .registration_form {
     display: flex;
