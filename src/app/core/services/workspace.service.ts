@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Workspace } from '../models/workspace';
+import { CreateWorkspace } from '../models/workspace';
 import { addworkspacetUrl } from 'src/app/configs/api-endpoints';
 import { Observable } from 'rxjs';
 
@@ -18,7 +18,7 @@ export class WorkspaceService {
     }
     constructor(private http: HttpClient) { }
 
-    public CreateWorkspace(workspace: Workspace): Observable<void> {
+    public CreateWorkspace(workspace: CreateWorkspace): Observable<void> {
         return this.http.post<void>(this.WorkspaceListUrl, workspace, this.httpOption);
     }
     private GetToken(): any{
