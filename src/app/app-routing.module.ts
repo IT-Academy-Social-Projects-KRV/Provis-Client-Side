@@ -14,7 +14,7 @@ const routes: Routes = [
   {path: 'contact', component: ContactComponent},
   {path: 'login', component: LoginComponent},
   {path: 'registration', component: RegistrationComponent},
-  {path: 'workspacelist', component: WorkspaceListComponent}
+  {path: 'workspacelist', component: WorkspaceListComponent},
 ];
 
 @NgModule({

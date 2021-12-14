@@ -48,6 +48,7 @@ body * {
     color: white;
     text-align: center;
     text-shadow: 0px 3px 0px #6e67a9, 0px 14px 10px rgb(0 0 0 / 15%), 0px 24px 2px rgb(0 0 0 / 10%), 0px 34px 30px rgb(0 0 0 / 10%);
+    line-height: 1 !important;
 }
 .registration_text {
     padding-top: 5px;
@@ -58,7 +59,9 @@ body * {
 button {
     text-transform: uppercase;
     font-weight: 600 !important;
-    background-color: #685e9d !important;
+    /* background-color: #685e9d !important; */
+    background-color: #363446 !important;
+    
     letter-spacing: 1px;
 }
 
@@ -70,7 +73,9 @@ button:hover {
     background: linear-gradient(0deg,#3f3c52 0%,#161518 100%);
     padding-bottom: 70px;
 }
-
+a {
+    text-decoration: none;
+}
 .nav-menu a, .home-top-section a, .benefits a, .footer a{
     margin: 7px 0;
     padding: 0 20px;
@@ -81,7 +86,7 @@ button:hover {
     line-height: 36px;
     display: block;
     position: relative;
-    text-decoration: none;
+ 
     transition: 0.3s;
     opacity: 0.75;
     letter-spacing: 1px;
@@ -113,4 +118,42 @@ a.sign-up:hover, .home-top-section a.button:hover, .benefits a.button:hover {
     margin: 0px auto 0px;
     max-width: 1200px;
     padding: 70px 0px;
+}
+.form-section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-title {
+    font-weight: 600;
+    text-align: center;
+    font-size: 28px;
+    padding-bottom: 20px;
+    color: #685e9d;
+}
+.form-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    max-width: 480px;
+    padding: 70px 0;
+    width: 100%;
+}
+form.register-form {
+    background: white;
+    border-radius: 10px;
+    width: 100%;
+  }
+a.link-button{
+    /* background-color: #685e9d !important; */
+    background-color: #585570 !important;
+    text-transform: uppercase;
+    font-weight: 600 !important;
+    letter-spacing: 1px;
+}
+a.link-button:hover{
+    background-color: #48537a !important;
 }
