@@ -9,19 +9,30 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatIconModule} from '@angular/material/icon';
 
 import { HomeComponent } from './presentation/components/home/home.component';
+import { AboutComponent } from './presentation/components/about/about.component';
+import { ContactComponent } from './presentation/components/contact/contact.component';
 import { LoginComponent } from './presentation/components/login/login.component';
 import { RegistrationComponent } from './presentation/components/registration/registration.component';
+import { HeaderComponent } from './presentation/components/header/header.component';
+import { FooterComponent } from './presentation/components/footer/footer.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from './core/services/authentication.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    AboutComponent,
+    ContactComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -31,6 +42,7 @@ import { AuthenticationService } from './core/services/authentication.service';
     MatInputModule,
     MatButtonModule,
     MatGridListModule,
+    MatIconModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
