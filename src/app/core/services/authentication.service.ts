@@ -4,7 +4,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserForRegister } from '../models/userForRegister';
 import { map, Observable } from 'rxjs';
 import { UserForLogin } from '../models/userForLogin';
-import { loginUrl, refreshTokenUrl, registerUrl } from 'src/app/configs/api-endpoints';
+import { loginUrl, logoutUrl, refreshTokenUrl, registerUrl } from 'src/app/configs/api-endpoints';
 import { Tokens } from '../models/tokens';
 import { UserInfo } from '../models/userInfo';
 
@@ -21,6 +21,7 @@ export class AuthenticationService {
   private readonly registerUrl = registerUrl;
   private readonly loginUrl = loginUrl;
   private readonly refreshTokenUrl = refreshTokenUrl;
+  private readonly logoutUrl = logoutUrl;
 
   public currentUser: UserInfo = new UserInfo();
 
@@ -74,6 +75,20 @@ export class AuthenticationService {
         localStorage.setItem('refreshToken', tokens.refreshToken);
         localStorage.setItem('user', JSON.stringify(this.currentUser));
       }
+    }));
+  }
+
+  public Logout(): Observable<void> {
+
+    let tokens: Tokens = new Tokens();
+    tokens.token = localStorage.getItem('token')?.toString();
+    tokens.refreshToken = localStorage.getItem('refreshToken')?.toString();
+    
+    return this.http.post<Tokens>(this.loginUrl, tokens).pipe(map(() => {
+      localStorage.removeItem('token');
+      localStorage.removeItem('refreshToken');
+      localStorage.removeItem('user');
+      this.currentUser = new UserInfo();
     }));
   }
 }
