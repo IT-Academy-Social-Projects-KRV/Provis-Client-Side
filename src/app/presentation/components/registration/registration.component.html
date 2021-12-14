@@ -1,9 +1,6 @@
 <div class="container">
-
-    <mat-grid-list cols="1" rowHeight="100vh">
-               
-        <mat-grid-tile class="">
-            <div class="registration_form">
+    <div class="form-section">
+            <div class="form-block">
                 <div class="w-100 mb-20">
                     <h1 class="registration_title">PROVIS</h1>
                     <p class="registration_text">Best Task Manager</p>
@@ -11,7 +8,8 @@
                 
                 <div>
                     <form class="register-form" [formGroup]="registerForm" novalidate (ngSubmit)="submit()">
-                        <p class="registration_form_title">Registration</p>
+                        <div style="padding: 30px">
+                        <p class="form-title">Registration</p>
                         <mat-form-field hintLabel="Max 50 characters" appearance="fill">
                             <mat-label>Name</mat-label>
                             <input type="text" matInput placeholder="Your name" #Name maxlength=50 formControlName="Name" required> 
@@ -44,10 +42,11 @@
                             <mat-error *ngIf="registerForm.controls['ConfirmPassword'].invalid && registerForm.controls['ConfirmPassword'].touched && 
                             registerForm.controls['ConfirmPassword'].errors!['confirmPasswordValidator']">Please make sure your passwords match</mat-error>
                         </mat-form-field>
-                        <button mat-flat-button color="primary" class="w-100">Register</button>
+                        <button mat-raised-button color="primary" class="w-100">Register</button>
+                    </div>
                     </form>
                 </div>
             </div>
-        </mat-grid-tile>
-    </mat-grid-list>
+
+        </div>
 </div>
