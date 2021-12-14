@@ -54,5 +54,5 @@ export class RegistrationComponent implements OnInit {
   }
   submit(){
     alert("Ви успішно зареєструвались!");
-}
+  }
 }

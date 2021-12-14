@@ -38,7 +38,9 @@ body * {
 .grid-content-left .mat-grid-tile-content{
     justify-content: flex-start;
 }
-
+.grid-align-start .mat-grid-tile-content{
+    align-items: flex-start;
+}
 .registration_title {
     font-size: 60px !important;
     font-weight: 800 !important;
@@ -52,4 +54,63 @@ body * {
     font-size: 14px;
     color: white;
     text-align: center;
+}
+button {
+    text-transform: uppercase;
+    font-weight: 600 !important;
+    background-color: #685e9d !important;
+    letter-spacing: 1px;
+}
+
+
+button:hover {
+    background-color: #48537a !important;
+}
+.top-section, .footer{
+    background: linear-gradient(0deg,#3f3c52 0%,#161518 100%);
+    padding-bottom: 70px;
+}
+
+.nav-menu a, .home-top-section a, .benefits a, .footer a{
+    margin: 7px 0;
+    padding: 0 20px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    text-transform: uppercase;
+    line-height: 36px;
+    display: block;
+    position: relative;
+    text-decoration: none;
+    transition: 0.3s;
+    opacity: 0.75;
+    letter-spacing: 1px;
+}
+.nav-menu li .footer li{
+    list-style-type: none;
+    padding: 10px 0;
+}
+.nav-menu ul, .footer ul{
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+    overflow: hidden;
+}
+.sign-up, .home-top-section a.button, .benefits a.button {
+    box-shadow: inset 0 0 0 #fff;
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+a.sign-up:hover, .home-top-section a.button:hover, .benefits a.button:hover {
+    color: #202020 !important;
+    -webkit-box-shadow: inset 0 -36px 0 #fff;
+    box-shadow: inset 0 -36px 0 #fff;
+    opacity: 1;
+}
+.features, .benefits, .testimonials-block, .footer-block{
+    margin: 0px auto 0px;
+    max-width: 1200px;
+    padding: 70px 0px;
 }
