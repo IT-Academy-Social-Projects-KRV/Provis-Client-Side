@@ -23,6 +23,9 @@ body * {
 .d-flex{
     display: flex;
 }
+.d-inline{
+    display: inline-flex;
+}
 .justify-space-between {
     justify-content: space-between;
 }
