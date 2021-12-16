@@ -23,6 +23,8 @@ import { WorkspaceListComponent } from './presentation/components/workspace-list
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from './core/services/authentication.service';
+import { AuthInterceptorProvider } from './core/services/auth.interceptor';
+import { WorkspaceService } from './core/services/workspace.service';
 
 
 @NgModule({
@@ -54,7 +56,11 @@ import { AuthenticationService } from './core/services/authentication.service';
     MatButtonModule,
     MatGridListModule
   ],
-  providers: [AuthenticationService],
+  providers: [
+    AuthenticationService,
+    AuthInterceptorProvider,
+    WorkspaceService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
