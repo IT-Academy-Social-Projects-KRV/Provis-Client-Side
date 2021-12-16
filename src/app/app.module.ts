@@ -18,6 +18,7 @@ import { LoginComponent } from './presentation/components/login/login.component'
 import { RegistrationComponent } from './presentation/components/registration/registration.component';
 import { HeaderComponent } from './presentation/components/header/header.component';
 import { FooterComponent } from './presentation/components/footer/footer.component';
+import { AddWorkspaceComponent } from './presentation/components/add-workspace/add-workspace.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from './core/services/authentication.service';
@@ -32,7 +33,8 @@ import { AuthenticationService } from './core/services/authentication.service';
     LoginComponent,
     RegistrationComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    AddWorkspaceComponent
   ],
   imports: [
     BrowserModule,
@@ -45,11 +47,8 @@ import { AuthenticationService } from './core/services/authentication.service';
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatGridListModule
+    HttpClientModule    
+   
   ],
   providers: [AuthenticationService],
   bootstrap: [AppComponent]
