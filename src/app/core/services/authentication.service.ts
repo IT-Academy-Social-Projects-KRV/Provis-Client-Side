@@ -7,6 +7,7 @@ import { UserForLogin } from '../models/userForLogin';
 import { loginUrl, registerUrl } from 'src/app/configs/api-endpoints';
 import { Tokens } from '../models/tokens';
 import { UserInfo } from '../models/userInfo';
+import { BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,10 +22,23 @@ export class AuthenticationService {
   private readonly registerUrl = registerUrl;
   private readonly loginUrl = loginUrl;
 
-  public currentUser: UserInfo = new UserInfo();
+   public currentUser: UserInfo;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    const user = localStorage.getItem('user');
 
+    if(user)
+    {
+      this.currentUser = JSON.parse(user);
+    }
+    else
+    {
+      this.currentUser = new UserInfo();
+    }
+
+   }
+
+ 
   public register(user: UserForRegister): Observable<void> {
 
     return this.http.post<void>(this.registerUrl, user);
@@ -40,7 +54,7 @@ export class AuthenticationService {
         this.currentUser.Id = decodedToken[this.userId];
         this.currentUser.Username = decodedToken[this.userName];
         this.currentUser.Role = decodedToken[this.userRole];
-
+        
         localStorage.setItem('token', tokens.token);
         localStorage.setItem('user', JSON.stringify(this.currentUser));
       }
@@ -51,4 +65,5 @@ export class AuthenticationService {
     const token: any  = localStorage.getItem('token');
     return !this.jwtHelperService.isTokenExpired(token);
   }    
+
 }
