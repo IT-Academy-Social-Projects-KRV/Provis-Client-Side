@@ -1,6 +1,7 @@
 import { AuthenticationService } from './../../../core/services/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { UserInfo } from '../../../core/models/userInfo'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-header',
@@ -13,16 +14,21 @@ export class UserHeaderComponent implements OnInit {
   userMessageCount = '2';
   userName: string | undefined;
   
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(private authenticationService: AuthenticationService, private router: Router) { }
   
   ngOnInit() {
     this.userName = this.authenticationService.currentUser.Username?.toString();
-    console.log(this.userName);
   }
 
   toggle = false;
   toggleDropmenu() {
     this.toggle = !this.toggle;
+  }
+
+  logout(){
+    this.authenticationService.Logout().subscribe(()=>{
+      this.router.navigate(['']);
+    });
   }
 
 }
