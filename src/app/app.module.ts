@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatIconModule} from '@angular/material/icon';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
 
 import { HomeComponent } from './presentation/components/home/home.component';
 import { AboutComponent } from './presentation/components/about/about.component';
@@ -19,10 +21,12 @@ import { RegistrationComponent } from './presentation/components/registration/re
 import { HeaderComponent } from './presentation/components/header/header.component';
 import { FooterComponent } from './presentation/components/footer/footer.component';
 import { WorkspaceListComponent } from './presentation/components/workspace-list/workspace-list.component'
-
+import { UserProfileComponent } from './presentation/components/user-profile/user-profile.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from './core/services/authentication.service';
+import { UserService } from './core/services/user.service';
+
 
 
 @NgModule({
@@ -35,7 +39,8 @@ import { AuthenticationService } from './core/services/authentication.service';
     RegistrationComponent,
     HeaderComponent,
     FooterComponent,
-    WorkspaceListComponent
+    WorkspaceListComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -52,9 +57,13 @@ import { AuthenticationService } from './core/services/authentication.service';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatGridListModule
+    MatGridListModule,
+    MatCardModule
   ],
-  providers: [AuthenticationService],
+  providers: [
+    AuthenticationService,
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
