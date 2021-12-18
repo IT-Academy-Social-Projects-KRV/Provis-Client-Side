@@ -29,9 +29,9 @@
       </mat-grid-tile>
       <div *ngIf="toggle" class="drop">
         <ul>
-          <li><a href="">My Profile</a></li>
-          <li><a href="">Invites</a></li>
-          <li><a href="">Logout</a></li>
+          <li><a>My Profile</a></li>
+          <li><a>Invites</a></li>
+          <li><a (click)="logout()">Logout</a></li>
         </ul>
       </div>
     </mat-grid-list>
