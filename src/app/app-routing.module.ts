@@ -8,6 +8,7 @@ import { LoginComponent } from './presentation/components/login/login.component'
 import { UserComponent } from './presentation/components/user/user.component';
 
 import { RegistrationComponent } from './presentation/components/registration/registration.component';
+import { UserProfileComponent } from './presentation/components/user-profile/user-profile.component';
 import { WorkspaceListComponent } from './presentation/components/workspace-list/workspace-list.component';
 
 const userRouters: Routes = [
