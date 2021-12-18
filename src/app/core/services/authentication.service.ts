@@ -66,6 +66,12 @@ export class AuthenticationService {
     const token: any  = localStorage.getItem('token');
     const refreshToken: any = localStorage.getItem('refreshToken');
 
+    return token&& refreshToken;
+  }
+  public async isAuthenticatedWithRefreshToken(): Promise<boolean> {
+    const token: any  = localStorage.getItem('token');
+    const refreshToken: any = localStorage.getItem('refreshToken');
+
     if(!this.jwtHelperService.isTokenExpired(token) && refreshToken)
     return true;
 
@@ -114,7 +120,7 @@ export class AuthenticationService {
     tokens.token = localStorage.getItem('token')?.toString();
     tokens.refreshToken = localStorage.getItem('refreshToken')?.toString();
     
-    return this.http.post<Tokens>(this.loginUrl, tokens).pipe(map(() => {
+    return this.http.post<Tokens>(this.logoutUrl, tokens).pipe(map(() => {
       localStorage.removeItem('token');
       localStorage.removeItem('refreshToken');
       localStorage.removeItem('user');

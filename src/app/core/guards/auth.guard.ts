@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     
-    if(await this.authenticationService.isAuthenticated())
+    if(await this.authenticationService.isAuthenticatedWithRefreshToken())
     {
       return true;
     }
@@ -30,7 +30,7 @@ export class AuthGuard implements CanActivate {
       title: '',
       text: error,
       showConfirmButton: false,
-      timer: 1000
+      timer: 2000
     });
   }
 }

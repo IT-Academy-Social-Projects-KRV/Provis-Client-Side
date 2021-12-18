@@ -89,6 +89,7 @@ a.user-icons {
     padding: 0;
     margin: 0;
     width: 100%;
+    cursor: pointer;
 }
 .drop li a {
     margin: 0;

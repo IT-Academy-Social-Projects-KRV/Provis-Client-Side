@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -8,13 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
- 
+ constructor(private router: Router) {}
 
- constructor() {}
-
-
-  ngOnInit() { }
-
-
-
+  ngOnInit() {
+    this.router.navigate(['user/workspace/list']);
+   }
 }
