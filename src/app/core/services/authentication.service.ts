@@ -7,6 +7,7 @@ import { UserForLogin } from '../models/userForLogin';
 import { loginUrl, logoutUrl, refreshTokenUrl, registerUrl } from 'src/app/configs/api-endpoints';
 import { Tokens } from '../models/tokens';
 import { UserInfo } from '../models/userInfo';
+import { BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +24,21 @@ export class AuthenticationService {
   private readonly refreshTokenUrl = refreshTokenUrl;
   private readonly logoutUrl = logoutUrl;
 
-  public currentUser: UserInfo = new UserInfo();
+   public currentUser: UserInfo;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    const user = localStorage.getItem('user');
 
+    if(user) {
+      this.currentUser = JSON.parse(user);
+    }
+    else {
+      this.currentUser = new UserInfo();
+    }
+
+   }
+
+ 
   public register(user: UserForRegister): Observable<void> {
 
     return this.http.post<void>(this.registerUrl, user);
@@ -42,7 +54,7 @@ export class AuthenticationService {
         this.currentUser.Id = decodedToken[this.userId];
         this.currentUser.Username = decodedToken[this.userName];
         this.currentUser.Role = decodedToken[this.userRole];
-
+        
         localStorage.setItem('token', tokens.token);
         localStorage.setItem('refreshToken', tokens.refreshToken);
         localStorage.setItem('user', JSON.stringify(this.currentUser));
