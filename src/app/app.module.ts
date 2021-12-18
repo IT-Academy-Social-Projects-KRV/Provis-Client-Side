@@ -30,6 +30,8 @@ import {UserHeaderComponent} from './presentation/components/user-header/user-he
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from './core/services/authentication.service';
+import { AuthInterceptorProvider } from './core/services/auth.interceptor';
+import { WorkspaceService } from './core/services/workspace.service';
 
 
 @NgModule({
@@ -68,7 +70,11 @@ import { AuthenticationService } from './core/services/authentication.service';
     MatBadgeModule,
     MatIconModule
   ],
-  providers: [AuthenticationService],
+  providers: [
+    AuthenticationService,
+    AuthInterceptorProvider,
+    WorkspaceService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

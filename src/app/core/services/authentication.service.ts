@@ -62,13 +62,29 @@ export class AuthenticationService {
     }));
   }
 
-  public isAuthenticated(): boolean {
+  public async isAuthenticated(): Promise<boolean> {
     const token: any  = localStorage.getItem('token');
     const refreshToken: any = localStorage.getItem('refreshToken');
-    return !this.jwtHelperService.isTokenExpired(token) && refreshToken;
+
+    if(!this.jwtHelperService.isTokenExpired(token) && refreshToken)
+    return true;
+
+    let result = false;
+    if(token && refreshToken)
+    {
+      try{
+        var res = await this.RefreshToken().toPromise();
+        if(res?.token && res.refreshToken)
+        result = true;
+      } catch{
+        result = false;
+      }
+    }
+    
+    return result;
   }
 
-  public RefreshToken(): Observable<void> {
+  public RefreshToken(): Observable<Tokens> {
 
     let tokens: Tokens = new Tokens();
     tokens.token = localStorage.getItem('token')?.toString();
@@ -87,6 +103,8 @@ export class AuthenticationService {
         localStorage.setItem('refreshToken', tokens.refreshToken);
         localStorage.setItem('user', JSON.stringify(this.currentUser));
       }
+
+      return tokens;
     }));
   }
 
