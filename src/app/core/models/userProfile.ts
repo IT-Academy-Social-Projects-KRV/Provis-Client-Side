@@ -1,6 +1,6 @@
 export class UserProfile {
-    Name?: string;
-    Surname?: string;
-    Username?: string;
-    Email?: string;
+    name: string;
+    surname: string;
+    username: string;
+    email: string;
 }
