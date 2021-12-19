@@ -11,34 +11,26 @@ import { SignInUpValidator } from 'src/app/core/validators/signInUpValidator';
 })
 export class UserProfileComponent implements OnInit {
 
-  userInfoForm : FormGroup;
-  userProfile: UserProfile = new UserProfile();
+  userProfileForm : FormGroup;
+  userProfile: UserProfile;
 
   constructor(private fb: FormBuilder, private userService: UserService) {
-    this.userInfoForm = this.fb.group({
-      Name:[this.userProfile.Name,SignInUpValidator.getNameValidator(3,50)],
-      Surname:[this.userProfile.Surname,SignInUpValidator.getNameValidator(3,50)],
-      Username:[this.userProfile.Username,SignInUpValidator.getUserNameValidator(3,50)],
-      Email:[this.userProfile.Email,SignInUpValidator.getEmailValidator()]
+    this.userProfileForm = this.fb.group({
+      name:['',SignInUpValidator.getNameValidator(3,50)],
+      surname:['',SignInUpValidator.getNameValidator(3,50)],
+      username:['',SignInUpValidator.getUserNameValidator(3,50)],
+      email:['',SignInUpValidator.getEmailValidator()]
     });
-
-    
   }
 
   ngOnInit() {
-    this.userService.getUserPrifile().subscribe((data: UserProfile)=>{
+    this.userService.getUserProfile().subscribe((data: UserProfile) =>{
       this.userProfile = data;
-      console.log(this.userProfile);
-      this.userInfoForm.patchValue({
-        Name: "sdsdsds",
-        Surname: data.Surname,
-        Username: data.Username,
-        Email: data.Email
-      });
-    });
+      this.userProfileForm.patchValue(this.userProfile);
+    });    
   }
 
   update(){
-    console.log(this.userProfile);
+    //there will be logic for update user info.
   }
 }
