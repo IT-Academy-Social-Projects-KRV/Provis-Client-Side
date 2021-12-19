@@ -14,34 +14,34 @@
   
   <mat-card-content class="center">
 
-    <form [formGroup]="userInfoForm" (submit)="update()">
+    <form [formGroup]="userProfileForm" (submit)="update()">
 
         <mat-form-field appearance="fill">
             <mat-label>Name</mat-label>
             <input type="text" matInput placeholder="Your name" #name maxlength=50 formControlName="name" required ngDefaultControl> 
-            <mat-error *ngIf="userInfoForm.controls['name'].invalid && userInfoForm.controls['name'].touched">Invalid name</mat-error>
+            <mat-error *ngIf="userProfileForm.controls['name'].invalid && userProfileForm.controls['name'].touched">Invalid name</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>Surname</mat-label>
             <input type="text" matInput placeholder="Your surname" #surname maxlength=50 formControlName="surname" required ngDefaultControl>
-            <mat-error *ngIf="userInfoForm.controls['surname'].invalid && userInfoForm.controls['surname'].touched">Invalid surname</mat-error>
+            <mat-error *ngIf="userProfileForm.controls['surname'].invalid && userProfileForm.controls['surname'].touched">Invalid surname</mat-error>
         </mat-form-field>   
 
         <mat-form-field appearance="fill">
             <mat-label>Username</mat-label>
             <input type="text" matInput placeholder="Your username" #username maxlength=50 formControlName="username" required ngDefaultControl>
-            <mat-error *ngIf="userInfoForm.controls['username'].invalid && userInfoForm.controls['username'].touched">Invalid username</mat-error>
+            <mat-error *ngIf="userProfileForm.controls['username'].invalid && userProfileForm.controls['username'].touched">Invalid username</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>Email</mat-label>
             <input type="email" matInput placeholder="Your email" #email maxlength=50 formControlName="email" required ngDefaultControl> 
-            <mat-error *ngIf="userInfoForm.controls['email'].invalid && userInfoForm.controls['email'].touched">Invalid email</mat-error>
+            <mat-error *ngIf="userProfileForm.controls['email'].invalid && userProfileForm.controls['email'].touched">Invalid email</mat-error>
         </mat-form-field>
 
         <mat-card-actions class="center">
-          <button mat-raised-button color="primary" [disabled]="!userInfoForm.dirty">Save</button>
+          <button mat-raised-button color="primary" [disabled]="!userProfileForm.dirty">Save</button>
         </mat-card-actions>
     </form>
      
