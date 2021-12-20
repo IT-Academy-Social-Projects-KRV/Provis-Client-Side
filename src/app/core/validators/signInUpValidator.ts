@@ -13,7 +13,7 @@ export class SignInUpValidator{
     }
 
     public static getPasswordValidator(a:number, b:number){
-        return [SignInUpValidator.getRequiredValidator(),Validators.pattern(`^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-_]).{${a},${b}}$`)];
+        return [SignInUpValidator.getRequiredValidator(),Validators.pattern(`^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[""!@$%^&*(){}:;<>,.?/+_=|'~\\-]).{${a},${b}}$`)];
     }
 
     public static getRequiredValidator()
@@ -23,7 +23,7 @@ export class SignInUpValidator{
     public static confirmPasswordValidator(controlName: string, matchingControlName: string) {
         return (formGroup: FormGroup) => {
           let control = formGroup.controls[controlName];
-          let matchingControl = formGroup.controls[matchingControlName]          
+          let matchingControl = formGroup.controls[matchingControlName]
           if (control.value !== matchingControl.value) {
             matchingControl.setErrors({ confirmPasswordValidator: true });
           } else {

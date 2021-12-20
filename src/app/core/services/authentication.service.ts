@@ -4,7 +4,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserForRegister } from '../models/userForRegister';
 import { map, Observable } from 'rxjs';
 import { UserForLogin } from '../models/userForLogin';
-import { loginUrl, registerUrl } from 'src/app/configs/api-endpoints';
+import { loginUrl, logoutUrl, refreshTokenUrl, registerUrl } from 'src/app/configs/api-endpoints';
 import { Tokens } from '../models/tokens';
 import { UserInfo } from '../models/userInfo';
 import { BehaviorSubject} from 'rxjs';
@@ -21,18 +21,18 @@ export class AuthenticationService {
   private jwtHelperService = new JwtHelperService();
   private readonly registerUrl = registerUrl;
   private readonly loginUrl = loginUrl;
+  private readonly refreshTokenUrl = refreshTokenUrl;
+  private readonly logoutUrl = logoutUrl;
 
    public currentUser: UserInfo;
 
   constructor(private http: HttpClient) {
     const user = localStorage.getItem('user');
 
-    if(user)
-    {
+    if(user) {
       this.currentUser = JSON.parse(user);
     }
-    else
-    {
+    else {
       this.currentUser = new UserInfo();
     }
 
@@ -48,7 +48,7 @@ export class AuthenticationService {
 
     return this.http.post<Tokens>(this.loginUrl, user).pipe(map((tokens: Tokens) => {
       
-      if(tokens.token) {
+      if(tokens.token && tokens.refreshToken) {
         const decodedToken = this.jwtHelperService.decodeToken(tokens.token);
 
         this.currentUser.Id = decodedToken[this.userId];
@@ -56,6 +56,7 @@ export class AuthenticationService {
         this.currentUser.Role = decodedToken[this.userRole];
         
         localStorage.setItem('token', tokens.token);
+        localStorage.setItem('refreshToken', tokens.refreshToken);
         localStorage.setItem('user', JSON.stringify(this.currentUser));
       }
     }));
@@ -63,7 +64,43 @@ export class AuthenticationService {
 
   public isAuthenticated(): boolean {
     const token: any  = localStorage.getItem('token');
-    return !this.jwtHelperService.isTokenExpired(token);
-  }    
+    const refreshToken: any = localStorage.getItem('refreshToken');
+    return !this.jwtHelperService.isTokenExpired(token) && refreshToken;
+  }
 
+  public RefreshToken(): Observable<void> {
+
+    let tokens: Tokens = new Tokens();
+    tokens.token = localStorage.getItem('token')?.toString();
+    tokens.refreshToken = localStorage.getItem('refreshToken')?.toString();
+    
+    return this.http.post<Tokens>(this.refreshTokenUrl, tokens).pipe(map((tokens: Tokens) => {
+      
+      if(tokens.token && tokens.refreshToken) {
+        const decodedToken = this.jwtHelperService.decodeToken(tokens.token);
+
+        this.currentUser.Id = decodedToken[this.userId];
+        this.currentUser.Username = decodedToken[this.userName];
+        this.currentUser.Role = decodedToken[this.userRole];
+
+        localStorage.setItem('token', tokens.token);
+        localStorage.setItem('refreshToken', tokens.refreshToken);
+        localStorage.setItem('user', JSON.stringify(this.currentUser));
+      }
+    }));
+  }
+
+  public Logout(): Observable<void> {
+
+    let tokens: Tokens = new Tokens();
+    tokens.token = localStorage.getItem('token')?.toString();
+    tokens.refreshToken = localStorage.getItem('refreshToken')?.toString();
+    
+    return this.http.post<Tokens>(this.loginUrl, tokens).pipe(map(() => {
+      localStorage.removeItem('token');
+      localStorage.removeItem('refreshToken');
+      localStorage.removeItem('user');
+      this.currentUser = new UserInfo();
+    }));
+  }
 }
