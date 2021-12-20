@@ -12,9 +12,10 @@ import { UserProfileComponent } from './presentation/components/user-profile/use
 import { WorkspaceListComponent } from './presentation/components/workspace-list/workspace-list.component';
 
 const userRouters: Routes = [
-  { path: 'workspace/list', component: WorkspaceListComponent}
-
+  { path: 'workspace/list', component: WorkspaceListComponent},
+  { path: 'profile', component: UserProfileComponent}
 ];
+
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'about', component: AboutComponent},
@@ -29,6 +30,7 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+
 export class AppRoutingModule { }
 
 

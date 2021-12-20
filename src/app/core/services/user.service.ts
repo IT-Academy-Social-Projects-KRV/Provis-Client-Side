@@ -19,7 +19,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUserPrifile(): Observable<UserProfile>{
+  getUserProfile(): Observable<UserProfile>{
     return this.http.get<UserProfile>(this.userProfileUrl, this.httpOption);
   }
 
