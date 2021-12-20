@@ -25,7 +25,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.router.url);
     this.userService.getUserProfile().subscribe((data: UserProfile) =>{
       this.userProfile = data;
       this.userProfileForm.patchValue(this.userProfile);
