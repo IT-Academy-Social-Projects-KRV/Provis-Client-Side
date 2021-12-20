@@ -2,7 +2,7 @@ import { AuthenticationService } from './../../../core/services/authentication.s
 import { Component, OnInit } from '@angular/core';
 import { UserInfo } from '../../../core/models/userInfo'
 import { Router } from '@angular/router';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-user-header',
