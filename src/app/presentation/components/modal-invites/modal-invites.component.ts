@@ -17,7 +17,7 @@ export class ModalInvitesComponent implements OnInit {
   ngOnInit() {
     if (this.authenticationService.currentUser.Id)
       this.userId = this.authenticationService.currentUser.Id;
-
+  
       console.log(this.userId);
 
 

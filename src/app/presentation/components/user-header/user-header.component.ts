@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserInfo } from '../../../core/models/userInfo'
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { ModalInvitesComponent } from '../modal-invites/modal-invites.component';
 
 @Component({
   selector: 'app-user-header',
@@ -37,8 +38,4 @@ export class UserHeaderComponent implements OnInit {
   }
 
 }
-@Component({
-  selector: 'modal-invites',
-  templateUrl: '../modal-invites/modal-invites.component.html',
-})
-export class ModalInvitesComponent {}
+
