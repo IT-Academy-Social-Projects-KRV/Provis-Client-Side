@@ -17,7 +17,6 @@ const routes: Routes = [
   {path: 'registration', component: RegistrationComponent},
   {path: 'workspacelist', component: WorkspaceListComponent},
   {path: 'addworkspace', component: AddWorkspaceComponent}
-  
 ];
 
 @NgModule({

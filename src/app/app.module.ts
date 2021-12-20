@@ -19,6 +19,7 @@ import { RegistrationComponent } from './presentation/components/registration/re
 import { HeaderComponent } from './presentation/components/header/header.component';
 import { FooterComponent } from './presentation/components/footer/footer.component';
 import { AddWorkspaceComponent } from './presentation/components/add-workspace/add-workspace.component';
+import { WorkspaceListComponent } from './presentation/components/workspace-list/workspace-list.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthenticationService } from './core/services/authentication.service';
@@ -34,7 +35,10 @@ import { AuthenticationService } from './core/services/authentication.service';
     RegistrationComponent,
     HeaderComponent,
     FooterComponent,
-    AddWorkspaceComponent
+    AddWorkspaceComponent,
+    WorkspaceListComponent
+
+
   ],
   imports: [
     BrowserModule,
