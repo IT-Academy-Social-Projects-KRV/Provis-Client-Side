@@ -44,6 +44,9 @@ body * {
 .grid-align-start .mat-grid-tile-content{
     align-items: flex-start;
 }
+.overflow-initial {
+    overflow: initial !important;
+}
 .registration_title {
     font-size: 60px !important;
     font-weight: 800 !important;

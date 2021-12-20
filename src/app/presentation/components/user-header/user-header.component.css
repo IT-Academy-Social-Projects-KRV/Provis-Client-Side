@@ -79,6 +79,9 @@ a.user-icons {
     background: #ddd;
     box-shadow: 0px 0px 4px 0px rgb(59 57 74);
     border: 1px solid #7a778d;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s;
 }
 .drop ul {
     justify-content: center;
@@ -103,4 +106,9 @@ a.user-icons {
 .drop ul li:hover a{
     background: #48537a;
     color: white;
+}
+.menu-active .drop {
+    visibility: visible;
+    opacity: 1;
+
 }

@@ -8,32 +8,38 @@
           </a>
         </div>
       </mat-grid-tile>
-      <mat-grid-tile class="grid-content-right">
+      <mat-grid-tile class="grid-content-right overflow-initial">
         <div class="right">
           <ul class="d-flex top-menu">
             <li>
-              <!-- <button mat-flat-button  [matMenuTriggerFor]="afterMenu" class="user-menu-button">Menu 1</button>
+              <button mat-flat-button [matMenuTriggerFor]="afterMenu" class="user-menu-button">Menu 1</button>
               <mat-menu #afterMenu="matMenu" class="dropdown-menu">
                 <ul>
                   <li><a href="">My Profile</a></li>
                   <li><a href="">Invites</a></li>
                   <li><a href="">Logout</a></li>
                 </ul>
-              </mat-menu> -->
+              </mat-menu>
             </li>
-            <li>
-              <div mat-flat-button  (click)="toggleDropmenu()" class="user-menu-button">{{userName}}</div>
+            <li class="drop-down-menu "  [ngClass]="{'menu-active': toggle }">
+              <button mat-flat-button  (click)="toggleDropmenu()" class="user-menu-button">{{userName}}</button>
+
+              <div class="drop">
+                <ul>
+                  <li><a href="">My Profile</a></li>
+                  <li><a href="">Invites</a></li>
+                  <li><a href="">Logout</a></li>
+                </ul>
+              </div>
+
             </li>
           </ul>
         </div>
       </mat-grid-tile>
-      <div *ngIf="toggle" class="drop">
-        <ul>
-          <li><a href="">My Profile</a></li>
-          <li><a href="">Invites</a></li>
-          <li><a href="">Logout</a></li>
-        </ul>
-      </div>
+      
+
+    
     </mat-grid-list>
+   
   </div>
 </header>

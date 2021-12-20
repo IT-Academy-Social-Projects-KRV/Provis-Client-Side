@@ -9,6 +9,7 @@ export class WorkspaceListComponent implements OnInit {
 
   constructor() { }
   
+  
   ngOnInit() {
   }
 

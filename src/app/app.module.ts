@@ -67,6 +67,7 @@ import { AuthenticationService } from './core/services/authentication.service';
     MatDialogModule,
     MatBadgeModule,
     MatIconModule
+    
   ],
   providers: [AuthenticationService],
   bootstrap: [AppComponent]
