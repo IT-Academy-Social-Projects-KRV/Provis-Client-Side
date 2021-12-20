@@ -7,18 +7,18 @@
                   <h1 class="addws_title">PROVIS</h1>
                   <p class="addws_text">Best Task Manager</p>
               </div>
-              <form class="addws-form">
-                
+
+              <form class="addws-form" [formGroup]="addwsform" novalidate (ngSubmit)="submit()">                
                 <p class="addws_form_title">Create workspace</p>
                
                 <mat-form-field class="addws-name" appearance="fill">
                   <mat-label>Workspace Name</mat-label>
-                  <input matInput placeholder="Input a name of workspace" maxlength="70" value="">
+                  <input matInput placeholder="Input a name of workspace" maxlength="70" value="" formControlName="Name" required>
                 </mat-form-field>
 
                 <mat-form-field class="addws-description" appearance="fill">
                   <mat-label>Description</mat-label>
-                  <textarea matInput placeholder="Input a description of workspace"></textarea>
+                  <textarea matInput placeholder="Input a description of workspace" formControlName="Description" required></textarea>
                 </mat-form-field>
 
                 <button style="margin-top: 0.4cm;" mat-flat-button color="primary" class="w-100">Create</button>
