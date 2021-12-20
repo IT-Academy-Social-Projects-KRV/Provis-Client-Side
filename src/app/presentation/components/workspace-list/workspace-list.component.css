@@ -2,5 +2,20 @@
     margin: 0px auto 0px;
     max-width: 1200px;
     padding: 70px 0px;
+    white-space: normal;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
 
+.list{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+mat-card {
+    max-width: 250px;
+    flex: 1 0 21%;
+    margin: 5px;
+    height: 100px;
+    background: lightslategray;
 }
