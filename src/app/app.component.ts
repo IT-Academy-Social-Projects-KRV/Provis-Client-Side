@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from './core/services/authentication.service';
 
 
@@ -12,12 +12,10 @@ export class AppComponent implements OnInit {
   
   title = 'provis';
 
-  constructor(private authService: AuthenticationService, private Router: Router) {}
+  constructor() {}
 
-  async ngOnInit(): Promise<void> {
-    if(await this.authService.isAuthenticated()) {
-      this.Router.navigate(['user/workspace/list']);
-    }
+  ngOnInit(){
+
   }
 }
 

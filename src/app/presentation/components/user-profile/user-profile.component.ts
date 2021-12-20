@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UserProfile } from 'src/app/core/models/userProfile';
 import { UserService } from 'src/app/core/services/user.service';
 import { SignInUpValidator } from 'src/app/core/validators/signInUpValidator';
@@ -12,9 +13,9 @@ import { SignInUpValidator } from 'src/app/core/validators/signInUpValidator';
 export class UserProfileComponent implements OnInit {
 
   userProfileForm : FormGroup;
-  userProfile: UserProfile;
+  userProfile: UserProfile = new UserProfile();
 
-  constructor(private fb: FormBuilder, private userService: UserService) {
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
     this.userProfileForm = this.fb.group({
       name:['',SignInUpValidator.getNameValidator(3,50)],
       surname:['',SignInUpValidator.getNameValidator(3,50)],
@@ -24,6 +25,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.router.url);
     this.userService.getUserProfile().subscribe((data: UserProfile) =>{
       this.userProfile = data;
       this.userProfileForm.patchValue(this.userProfile);
