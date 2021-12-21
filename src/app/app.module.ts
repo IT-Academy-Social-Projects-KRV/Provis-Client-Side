@@ -5,11 +5,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatIconModule} from '@angular/material/icon';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatBadgeModule } from '@angular/material/badge'
+import { MatCardModule } from '@angular/material/card';
 
 import { HomeComponent } from './presentation/components/home/home.component';
 import { AboutComponent } from './presentation/components/about/about.component';
@@ -20,10 +26,14 @@ import { HeaderComponent } from './presentation/components/header/header.compone
 import { FooterComponent } from './presentation/components/footer/footer.component';
 import { AddWorkspaceComponent } from './presentation/components/add-workspace/add-workspace.component';
 import { WorkspaceListComponent } from './presentation/components/workspace-list/workspace-list.component';
+import { UserComponent } from './presentation/components/user/user.component';
+import { UserHeaderComponent} from './presentation/components/user-header/user-header.component';
+import { UserProfileComponent } from './presentation/components/user-profile/user-profile.component';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthInterceptorProvider } from './core/services/auth.interceptor';
+import { WorkspaceService } from './core/services/workspace.service';
 import { AuthenticationService } from './core/services/authentication.service';
-
+import { UserService } from './core/services/user.service';
 
 @NgModule({
   declarations: [
@@ -36,25 +46,35 @@ import { AuthenticationService } from './core/services/authentication.service';
     HeaderComponent,
     FooterComponent,
     AddWorkspaceComponent,
-    WorkspaceListComponent
-
-
+    WorkspaceListComponent,
+    UserComponent,
+    UserHeaderComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,    
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,    
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatGridListModule,
     MatIconModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule    
-   
+    MatMenuModule,
+    MatDialogModule,
+    MatBadgeModule,
+    MatCardModule
   ],
-  providers: [AuthenticationService],
+  providers: [
+    AuthInterceptorProvider,
+    AuthenticationService,
+    WorkspaceService,
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
