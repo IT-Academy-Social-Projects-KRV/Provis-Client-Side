@@ -50,8 +50,8 @@ export class AddWorkspaceComponent implements OnInit {
           Swal.fire({
             position: 'top-end',
             icon: 'success',
-            title: 'Name',
-            text: "Success",
+            title: '',
+            text: "Workspace created successful",
             showConfirmButton: false,
             timer: 1000
           });
