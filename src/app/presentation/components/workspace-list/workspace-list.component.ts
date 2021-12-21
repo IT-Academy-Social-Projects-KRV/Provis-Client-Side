@@ -15,8 +15,6 @@ export class WorkspaceListComponent implements OnInit {
   ngOnInit() {
     this.workspaceService.getUserWorkspace().subscribe((data: UserWorkspace[]) => {
       this.userWorkspaceList = data;
-      console.log(data);
-      
     });
   }
 
