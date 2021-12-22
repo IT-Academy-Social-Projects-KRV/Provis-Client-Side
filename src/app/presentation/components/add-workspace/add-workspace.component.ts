@@ -20,8 +20,8 @@ export class AddWorkspaceComponent implements OnInit {
    
   constructor(private fb:FormBuilder, private service: WorkspaceService, private router: Router) { 
     this.addwsform=fb.group({        
-      "Name": [null,[Validators.required]],
-      "Description" : [null,[Validators.required]]               
+      "Name": ['',[Validators.required]],
+      "Description" : ['',[Validators.required]]               
   })
   }
 
