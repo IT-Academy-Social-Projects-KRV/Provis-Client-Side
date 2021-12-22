@@ -11,7 +11,7 @@
     color: #fff;
     text-transform: uppercase;
 }
-.user-header right{
+.user-header .right{
     display: flex;
     align-items: center;
     margin: 0;
@@ -19,13 +19,11 @@
     overflow: hidden;
     padding-right: 20px;
 }
-
 .nav-menu {
     padding: 10px 40px;
     box-shadow: 1px 3px 10px 1px rgb(136 129 137);
     border-bottom: 1px solid #bfbfbf;
 }
-
 .user-menu-button {
     color: white;
     opacity: 0.75;
@@ -48,7 +46,6 @@
     justify-content: center;
     flex-direction: column;
     align-items: flex-start;
-
 }
 ul.dropmenu  li{
     padding: 0;
@@ -74,9 +71,7 @@ ul.dropmenu  li{
  ul.dropmenu li:hover a{
     background: #48537a;
     color: white;
-    
 }
-
 .test .mat-menu-panel {
     background: #cf4343;
 }

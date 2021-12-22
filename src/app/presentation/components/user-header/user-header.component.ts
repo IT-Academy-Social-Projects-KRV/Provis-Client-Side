@@ -14,7 +14,6 @@ import { ModalInvitesComponent } from '../modal-invites/modal-invites.component'
 
 export class UserHeaderComponent implements OnInit {
   
-  userMessageCount = '2';
   userName: string | undefined;
   
   constructor(private authenticationService: AuthenticationService, private router: Router, public dialog: MatDialog) { }
@@ -31,11 +30,6 @@ export class UserHeaderComponent implements OnInit {
 
   modalInvites() {
     const dialogRef = this.dialog.open(ModalInvitesComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
   }
 
 }
-
