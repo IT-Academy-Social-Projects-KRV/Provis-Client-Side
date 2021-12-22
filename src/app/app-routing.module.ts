@@ -11,6 +11,12 @@ import { RegistrationComponent } from './presentation/components/registration/re
 import { UserProfileComponent } from './presentation/components/user-profile/user-profile.component';
 import { WorkspaceListComponent } from './presentation/components/workspace-list/workspace-list.component';
 
+import { UserInviteComponent } from './presentation/components/user-invite/user-invite.component';
+
+const workspaceRourers: Routes = [
+  {path: 'workspace/invite', component: UserComponent}
+];
+
 const userRouters: Routes = [
   { path: 'workspace/list', component: WorkspaceListComponent},
   { path: 'profile', component: UserProfileComponent}

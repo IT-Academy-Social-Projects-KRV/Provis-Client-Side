@@ -33,6 +33,7 @@ import { AuthInterceptorProvider } from './core/services/auth.interceptor';
 import { WorkspaceService } from './core/services/workspace.service';
 import { AuthenticationService } from './core/services/authentication.service';
 import { UserService } from './core/services/user.service';
+import { UserInviteComponent } from './presentation/components/user-invite/user-invite.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { UserService } from './core/services/user.service';
     WorkspaceListComponent,
     UserComponent,
     UserHeaderComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    UserInviteComponent
   ],
   imports: [
     BrowserModule,

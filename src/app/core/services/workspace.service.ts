@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CreateWorkspace } from '../models/workspace';
-import { addworkspacetUrl, getUserWorkspaceList } from 'src/app/configs/api-endpoints';
+import { addworkspacetUrl, getUserWorkspaceList, inviteUser } from 'src/app/configs/api-endpoints';
 import { Observable } from 'rxjs';
 import { UserWorkspace } from '../models/userWorkspaceList';
+import { UserInvite } from '../models/userInvite';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,7 @@ export class WorkspaceService {
 
     private readonly getUserWorkspaceList = getUserWorkspaceList;
     private readonly WorkspaceListUrl = addworkspacetUrl;
+    private readonly getUserInvite = inviteUser;
 
     private httpOption = {
         headers: new HttpHeaders({
@@ -29,5 +31,9 @@ export class WorkspaceService {
 
     getUserWorkspace(): Observable<UserWorkspace[]>{
         return this.http.get<UserWorkspace[]>(this.getUserWorkspaceList, this.httpOption);
+    }
+
+    public InviteUser(invite: UserInvite): Observable<void> {
+        return this.http.post<void>(this.getUserInvite, invite, this.httpOption);
     }
 }
