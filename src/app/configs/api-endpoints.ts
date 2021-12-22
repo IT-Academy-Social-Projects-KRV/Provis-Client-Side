@@ -10,4 +10,4 @@ export const logoutUrl = baseUrl + '/Authentication/logout';
 export const addworkspacetUrl = baseUrl + '/Workspace/addworkspace';
 
 export const userProfileUrl = baseUrl + '/User/getpersonalinfo';
-
+export const userInviteList = baseUrl + '/User/invite';

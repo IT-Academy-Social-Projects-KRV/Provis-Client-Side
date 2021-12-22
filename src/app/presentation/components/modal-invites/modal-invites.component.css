@@ -1,0 +1,58 @@
+.invite-modal{
+    min-width: 600px;
+}
+.invite-list {
+    list-style-type: none;
+    padding: 10px 0;
+}
+.invite-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.invite-cart {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+}
+.invite-cart p {
+    margin: 0px;
+}
+.invite-title {
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.invite-description span{
+    font-size: 12px;
+    margin-left: 5px;
+}
+.invite-date {
+    margin-left: 10px;
+}
+.invite-list li {
+    padding: 15px 0px;
+    border-bottom: 1px solid #282732;
+}
+.invite-modal button  {
+    font-size: 10px;
+    margin-left: 10px;
+}
+.button-acept {
+    color: white;
+    background: green;
+}
+.invite-answer {
+    display: flex;
+    align-items: center;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.invite-accepted {
+    color: green;
+}
+.invite-declined {
+    color: #f44336;
+}

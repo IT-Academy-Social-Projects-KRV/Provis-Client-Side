@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, pipe } from 'rxjs';
-import { userProfileUrl } from 'src/app/configs/api-endpoints';
+import { userInviteList, userProfileUrl } from 'src/app/configs/api-endpoints';
+import { UserInvite } from '../models/userInviteList';
 import { UserProfile } from '../models/userProfile';
 
 @Injectable({
@@ -9,6 +10,7 @@ import { UserProfile } from '../models/userProfile';
 })
 export class UserService {
 
+  private readonly getUserInviteList = userInviteList;
   private readonly userProfileUrl = userProfileUrl;
 
   private httpOption = {
@@ -25,5 +27,9 @@ export class UserService {
 
   private getToken(): any{
     return localStorage.getItem('token')?.toString();
+  }
+
+  getUserInvite(): Observable<UserInvite[]>{
+    return this.http.get<UserInvite[]>(this.getUserInviteList, this.httpOption);
   }
 }

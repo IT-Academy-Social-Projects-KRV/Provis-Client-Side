@@ -1,3 +1,30 @@
-<div>
-  User Id: <b> {{ userId }} </b>
+<div class="invite-modal">
+  <ul class="invite-list">
+    <li *ngFor="let item of userInviteList">
+      <div class="invite-cart">
+        <div>
+          <p class="invite-title">{{item.workspaceName}}</p>
+          <p class="invite-description">
+            <span>From user:</span> <span class="font-weight-600">{{item.fromUserName}}</span>
+            <span>|</span>
+            <span>Date time:</span> <span class="font-weight-600">{{item.date}}</span>
+          </p>
+        </div>
+        <div *ngIf="item.isConfirm == null; else noButtons">
+          <button mat-raised-button class="button-acept">Accept</button>
+          <button mat-raised-button color="warn">Decline</button>
+        </div>
+
+        <ng-template #noButtons>
+          <div class="invite-answer" *ngIf="item.isConfirm == true;">
+            <p class="invite-accepted">Accepted</p>
+          </div>
+          <div class="invite-answer" *ngIf="item.isConfirm == false;">
+            <p class="invite-declined">Declined</p>
+          </div>
+        </ng-template>
+
+      </div>
+    </li>
+  </ul>
 </div>

@@ -1,5 +1,7 @@
+import { UserService } from 'src/app/core/services/user.service';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { Component, OnInit } from '@angular/core';
+import { UserInvite } from 'src/app/core/models/userInviteList';
 
 @Component({
   selector: 'app-modal-invites',
@@ -8,13 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalInvitesComponent implements OnInit {
 
-  userId: string;
+  userInviteList: UserInvite [];
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
-    if (this.authenticationService.currentUser.Id)
-      this.userId = this.authenticationService.currentUser.Id;
-    }
-
+    this.userService.getUserInvite().subscribe((data: UserInvite[])=>{
+      this.userInviteList = data;
+    })
+  }
 }
