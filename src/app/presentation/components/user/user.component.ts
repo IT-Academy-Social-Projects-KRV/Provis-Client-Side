@@ -12,6 +12,7 @@ export class UserComponent implements OnInit {
  constructor(private router: Router) {}
 
   ngOnInit() {
+    if(this.router.url=='/user')
     this.router.navigate(['user/workspace/list']);
    }
 }
