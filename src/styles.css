@@ -62,16 +62,17 @@ body * {
     color: white;
     text-align: center;
 }
-button{
+button {
     letter-spacing: 1px;
     text-transform: uppercase;
-    font-weight: 600 !important;
+    font-weight: 600;
 }
 .form-section button, .home-page button {
-    background-color: #363446 !important;  
+    background-color: #48537a;
+    color: white;
 }
 .form-section button:hover, .home-page button:hover {
-    background-color: #48537a !important;
+    background-color: #363446;
 }
 .top-section, .footer{
     background: linear-gradient(0deg,#3f3c52 0%,#161518 100%);
@@ -150,11 +151,13 @@ form.register-form {
     width: 100%;
   }
 a.link-button{
-    background-color: #585570 !important;
+    background-color: #48537a;
     text-transform: uppercase;
-    font-weight: 600 !important;
+    font-weight: 600;
     letter-spacing: 1px;
+    color: white;
+    transition: 0.3s;
 }
 a.link-button:hover{
-    background-color: #48537a !important;
+    background-color: #363446;
 }

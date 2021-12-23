@@ -1,9 +1,13 @@
 .invite-modal{
     min-width: 600px;
+    margin: -38px -24px;
+    background: #282732;
+    color: white;
 }
 .invite-list {
     list-style-type: none;
-    padding: 10px 0;
+    padding: 20px 0;
+    margin: 14px 25px;
 }
 .invite-title {
     display: flex;
@@ -20,20 +24,21 @@
     margin: 0px;
 }
 .invite-title {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 600;
     text-transform: uppercase;
 }
 .invite-description span{
     font-size: 12px;
     margin-left: 5px;
+    color:#8d8d8d;
 }
 .invite-date {
     margin-left: 10px;
 }
 .invite-list li {
-    padding: 15px 0px;
-    border-bottom: 1px solid #282732;
+    padding: 20px 0px;
+    border-bottom: 1px solid #adadad;
 }
 .invite-modal button  {
     font-size: 10px;

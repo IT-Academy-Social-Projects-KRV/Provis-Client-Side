@@ -1,8 +1,7 @@
 .home-page{
     width: 100%;
 }
-.home-tope-section-img{
-    
+.home-tope-section-img{  
     min-height: 500px;
     min-width: 800px;
     background-repeat: no-repeat;
@@ -144,4 +143,7 @@ button:hover{
 }
 .title-info a {
     display: inline-flex !important;
+}
+.home-title-color {
+    color: #cdcdcd;
 }

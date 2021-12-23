@@ -32,6 +32,7 @@
     text-transform: uppercase;
     letter-spacing: 1px;
     padding-right: 30px;
+    font-weight: 600;
 }
 .user-menu-button:hover{
     opacity: 1;
