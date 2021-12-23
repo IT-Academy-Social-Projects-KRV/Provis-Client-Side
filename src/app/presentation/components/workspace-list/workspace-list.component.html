@@ -1,7 +1,6 @@
 <section>
   <div class="container">
-    <div style="width: 400px;">
-      <p>Create New workspace</p>
+    <div>
       <a mat-raised-button class="link-button" color="primary" [routerLink]="['../create']">Create New</a>
     <div class="list">
       <mat-card *ngFor="let workspace of userWorkspaceList" [routerLink]="'../workspace/'+workspace.id">
@@ -14,7 +13,8 @@
       </mat-card>
     </div>
     <div>
-      <a mat-raised-button class="link-button" color="primary" href="./addworkspace"></a>
+      <a mat-raised-button class="link-button" color="primary" [routerLink]="['../workspace/create']"></a>
     </div>
+  </div>
   </div>
 </section>
