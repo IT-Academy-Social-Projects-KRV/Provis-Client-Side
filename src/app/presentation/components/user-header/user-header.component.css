@@ -73,6 +73,20 @@ ul.dropmenu  li{
     background: #48537a;
     color: white;
 }
+
 .test .mat-menu-panel {
     background: #cf4343;
+}
+
+.drop li a div{
+    display: inline-block;
+}
+
+.invite-circle {
+    margin-left: 5px;
+    width: 6px;
+    height: 6px;
+    border-radius: 25px;
+    background: red;
+    vertical-align: middle;
 }
