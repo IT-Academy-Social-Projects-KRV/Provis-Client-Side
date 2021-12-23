@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
             timer: 1000
           });
 
-          this.router.navigate(['user/workspace/list']);
+          this.router.navigate(['user/workspaces']);
         },
         err => {
           let errorMessage: string = '';
