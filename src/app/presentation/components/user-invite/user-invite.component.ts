@@ -18,6 +18,6 @@ export class UserInviteComponent implements OnInit {
    }
 
     Invite(): void{
-        
+        console.log('Hay');
     }
 }

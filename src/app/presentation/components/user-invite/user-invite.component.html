@@ -1,8 +1,12 @@
-<!-- 
-<div>
-    <div>
-      <label for="Email">Email: </label>
-      <input id="Email" [(ngModel)]="userInvite.UserEmail" placeholder="Email"/>
-    </div>
-    <button (click)="Invite()">Invite</button>
+<!-- <div class="invite-modal">
+  <div class="example-container">
+    <form>
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput placeholder="Your email" maxlength=50 required> 
+        <mat-error *ngIf="registerForm.controls['Email'].invalid && registerForm.controls['Email'].touched">Invalid email</mat-error>
+    </mat-form-field>
+      <button mat-raised-button color="Primary" (onClick)='Invite()'>Send</button>
+  </form>
+  </div>
 </div> -->
