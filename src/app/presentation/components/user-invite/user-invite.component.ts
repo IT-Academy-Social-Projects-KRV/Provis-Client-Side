@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserInvite } from 'src/app/core/models/userInvite';
+import { WorkspaceComponent } from '../workspace/workspace.component';
 
 
 @Component({
@@ -14,6 +15,7 @@ export class UserInviteComponent implements OnInit {
     @Input() public workspaceId: number;
     userInvite: UserInvite = new UserInvite();
     inviteUserForm: FormGroup;
+    workspaceID: WorkspaceComponent;
 
  constructor(private fb: FormBuilder) {
    this.inviteUserForm = fb.group({
@@ -28,6 +30,7 @@ export class UserInviteComponent implements OnInit {
     Invite(): void{
       if(this.inviteUserForm.valid){
         this.userInvite = this.inviteUserForm.value;
+        this.userInvite.WorkspaceId = this.workspaceId;
        console.log(this.userInvite.UserEmail);
       }
     }

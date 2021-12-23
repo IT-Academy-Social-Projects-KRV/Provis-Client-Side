@@ -34,6 +34,7 @@ import { WorkspaceService } from './core/services/workspace.service';
 import { AuthenticationService } from './core/services/authentication.service';
 import { UserService } from './core/services/user.service';
 import { UserInviteComponent } from './presentation/components/user-invite/user-invite.component';
+import { WorkspaceComponent } from './presentation/components/workspace/workspace.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { UserInviteComponent } from './presentation/components/user-invite/user-
     UserComponent,
     UserHeaderComponent,
     UserProfileComponent,
+    WorkspaceComponent,
     UserInviteComponent
   ],
   imports: [
