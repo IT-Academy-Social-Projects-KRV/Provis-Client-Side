@@ -13,3 +13,4 @@ export const answerInviteUserUrl = baseUrl + '/Workspace/invite';
 
 export const userProfileUrl = baseUrl + '/User/getpersonalinfo';
 export const userInviteList = baseUrl + '/User/invite';
+export const activeInvitesUrl = baseUrl + '/User/activeinvite';
