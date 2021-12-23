@@ -1,14 +1,16 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CreateWorkspace } from '../models/workspace';
-import { addworkspacetUrl } from 'src/app/configs/api-endpoints';
+import { addworkspacetUrl, getUserWorkspaceList } from 'src/app/configs/api-endpoints';
 import { Observable } from 'rxjs';
+import { UserWorkspace } from '../models/userWorkspaceList';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WorkspaceService {
 
+    private readonly getUserWorkspaceList = getUserWorkspaceList;
     private readonly WorkspaceListUrl = addworkspacetUrl;
 
     private httpOption = {
@@ -23,5 +25,9 @@ export class WorkspaceService {
     }
     private GetToken(): any{
         return localStorage.getItem('token')?.toString();
+    }
+
+    getUserWorkspace(): Observable<UserWorkspace[]>{
+        return this.http.get<UserWorkspace[]>(this.getUserWorkspaceList, this.httpOption);
     }
 }

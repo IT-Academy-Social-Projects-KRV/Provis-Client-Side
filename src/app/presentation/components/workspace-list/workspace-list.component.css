@@ -2,5 +2,53 @@
     margin: 0px auto 0px;
     max-width: 1200px;
     padding: 70px 0px;
+}
+
+.list{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+mat-card {
+    max-width: 240px;
+    flex: 1 0 21%;
+    margin: 14px;
+    height: 100px;
+    background: lightslategray;
+    cursor: pointer;
+}
+mat-card:hover {
+    box-shadow: 1px 3px 10px 1px rgb(136 129 137);
+}
+.link-button {
+    padding: 0px;
+    margin: 0px;
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    height: 64px;
+    width: 64px;
+    border-radius: 50%;
+ }
+ .link-button:hover {
+    box-shadow: 1px 3px 10px 1px rgb(136 129 137);
+ }
+ .link-button::before,
+ .link-button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+ }
+ .link-button::before{
+     width: 5px;
+     height: 25px;
+    }
+ .link-button::after{
+    width: 5px;
+    height: 25px;
+    transform: translate(-50%, -50%) rotate(90deg);
 
 }

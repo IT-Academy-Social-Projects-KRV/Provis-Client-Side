@@ -3,6 +3,18 @@
     <div style="width: 400px;">
       <p>Create New workspace</p>
       <a mat-raised-button class="link-button" color="primary" [routerLink]="['../create']">Create New</a>
+    <div class="list">
+      <mat-card *ngFor="let workspace of userWorkspaceList">
+        <mat-card-title>
+          {{workspace.name}}
+        </mat-card-title>
+        <mat-card-subtitle>
+          Your role: {{workspace.role}}
+        </mat-card-subtitle>
+      </mat-card>
+    </div>
+    <div>
+      <a mat-raised-button class="link-button" color="primary" href="./addworkspace"></a>
     </div>
   </div>
 </section>

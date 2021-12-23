@@ -27,13 +27,15 @@ import { FooterComponent } from './presentation/components/footer/footer.compone
 import { AddWorkspaceComponent } from './presentation/components/add-workspace/add-workspace.component';
 import { WorkspaceListComponent } from './presentation/components/workspace-list/workspace-list.component';
 import { UserComponent } from './presentation/components/user/user.component';
-import { UserHeaderComponent} from './presentation/components/user-header/user-header.component';
+import { UserHeaderComponent } from './presentation/components/user-header/user-header.component';
 import { UserProfileComponent } from './presentation/components/user-profile/user-profile.component';
 
 import { AuthInterceptorProvider } from './core/services/auth.interceptor';
 import { WorkspaceService } from './core/services/workspace.service';
 import { AuthenticationService } from './core/services/authentication.service';
 import { UserService } from './core/services/user.service';
+import { ModalInvitesComponent } from './presentation/components/modal-invites/modal-invites.component';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +51,8 @@ import { UserService } from './core/services/user.service';
     WorkspaceListComponent,
     UserComponent,
     UserHeaderComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    ModalInvitesComponent
   ],
   imports: [
     BrowserModule,
