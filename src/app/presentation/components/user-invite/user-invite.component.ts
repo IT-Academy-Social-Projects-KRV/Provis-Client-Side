@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserInvite } from 'src/app/core/models/userInvite';
 
 
 @Component({
@@ -9,8 +10,14 @@ import { Router } from '@angular/router';
 })
 export class UserInviteComponent implements OnInit {
 
+    userInvite: UserInvite;
+
  constructor(private router: Router) {}
 
   ngOnInit() {
    }
+
+    Invite(): void{
+        
+    }
 }

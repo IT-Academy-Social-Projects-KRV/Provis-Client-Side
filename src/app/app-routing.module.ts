@@ -6,18 +6,15 @@ import { ContactComponent } from './presentation/components/contact/contact.comp
 import { HomeComponent } from './presentation/components/home/home.component';
 import { LoginComponent } from './presentation/components/login/login.component';
 import { UserComponent } from './presentation/components/user/user.component';
+import { UserInviteComponent } from './presentation/components/user-invite/user-invite.component';
 
 import { RegistrationComponent } from './presentation/components/registration/registration.component';
 import { UserProfileComponent } from './presentation/components/user-profile/user-profile.component';
 import { WorkspaceListComponent } from './presentation/components/workspace-list/workspace-list.component';
 
-import { UserInviteComponent } from './presentation/components/user-invite/user-invite.component';
-
-const workspaceRourers: Routes = [
-  {path: 'workspace/invite', component: UserComponent}
-];
 
 const userRouters: Routes = [
+  { path: 'workspace/invite', component: UserInviteComponent},
   { path: 'workspace/list', component: WorkspaceListComponent},
   { path: 'profile', component: UserProfileComponent}
 ];
