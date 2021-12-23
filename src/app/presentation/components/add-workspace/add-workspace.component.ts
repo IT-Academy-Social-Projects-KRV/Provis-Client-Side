@@ -33,7 +33,7 @@ export class AddWorkspaceComponent implements OnInit {
     if(this.addwsform.valid){
       this.createWorkspace = Object.assign({}, this.addwsform.value);
       this.service.CreateWorkspace(this.createWorkspace).subscribe(
-        () => { this.router.navigate(['user/workspace/list'])}
+        () => { this.router.navigate(['user/workspaces'])}
       )      
     }
   }
