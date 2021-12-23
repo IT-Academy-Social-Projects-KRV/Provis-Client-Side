@@ -13,7 +13,7 @@
           <button mat-flat-button disableRipple=true [matMenuTriggerFor]="afterMenu" class="user-menu-button">{{userName}}</button>
           <mat-menu #afterMenu="matMenu" overlayPanelClass="test" panelClass="test" backdropClass="test" >
             <ul class="dropmenu">
-              <li><a href="">My Profile</a></li>
+              <li><a routerLink="profile">My Profile</a></li>
               <li><a (click)="modalInvites()">Invites</a></li>
               <li><a (click)="logout()">Logout</a></li>
             </ul>
