@@ -11,5 +11,5 @@ export class WorkspaceListComponent implements OnInit {
   
   ngOnInit() {
   }
-
+  
 }

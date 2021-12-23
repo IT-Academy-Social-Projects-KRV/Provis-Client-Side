@@ -4,19 +4,16 @@
       <div class="w-100 mb-20">
         <div class="addws_form">
           <form class="addws-form" [formGroup]="addwsform" novalidate (ngSubmit)="submit()">                
-            <p class="addws_form_title">Create workspace</p>
-               
+            <p class="addws_form_title">Create workspace</p>               
             <mat-form-field class="addws-name" appearance="fill">
               <mat-label>Workspace Name</mat-label>
               <input cmatInput placeholder="Input a name of workspace" maxlength="70" value="" formControlName="Name" required>
             </mat-form-field>
-
             <mat-form-field class="addws-description" appearance="fill">
               <mat-label>Description</mat-label>
               <textarea matInput placeholder="Input a description of workspace" formControlName="Description" required></textarea>
             </mat-form-field>
-
-            <button mat-raised-button color="primary" class="w-100">Create</button>
+            <button mat-raised-button color="primary" class="w-100">Create</button>            
           </form>
         </div> 
       </div> 
