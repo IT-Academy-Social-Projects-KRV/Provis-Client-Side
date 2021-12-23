@@ -11,7 +11,7 @@
           </p>
         </div>
         <div *ngIf="item.isConfirm == null; else noButtons">
-          <button mat-raised-button class="button-accept">Accept</button>
+          <button mat-raised-button class="button-accept" (click)="accept(item.id)">Accept</button>
           <button mat-raised-button color="warn" (click)="deny(item.id)">Decline</button>
         </div>
 

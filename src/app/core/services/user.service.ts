@@ -40,7 +40,12 @@ export class UserService {
   getUserInvite(): Observable<UserInvite[]>{
     return this.http.get<UserInvite[]>(this.getUserInviteList, this.httpOption);
   }
+
   denyUserInvite(inviteId:number):Observable<void>{
     return this.http.put<void>(this.answerUserInvite+"/"+inviteId+"/deny", {}, this.httpOption);
+  }
+
+  acceptUserInvite(inviteId:number):Observable<void>{
+    return this.http.put<void>(this.answerUserInvite+"/"+inviteId+"/accept", {}, this.httpOption);
   }
 }
