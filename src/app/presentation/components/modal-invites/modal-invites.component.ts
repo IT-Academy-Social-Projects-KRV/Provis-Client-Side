@@ -73,4 +73,43 @@ export class ModalInvitesComponent implements OnInit {
       }
     )
   }
+
+  accept(inviteId:number)
+  {
+    this.userService.acceptUserInvite(inviteId).subscribe(
+      () => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: "Invite was successfully accepted"
+        })
+        this.userInviteList[this.userInviteList.findIndex(x=>x.id==inviteId)].isConfirm=true;
+      },
+      err => {
+        let errorMessage: string = '';
+        if(err.error.errors && typeof err.error.errors === 'object'){
+          const errors = err.error.errors;
+
+          for(let key in errors){
+            for(let indexError in errors[key]){
+              errorMessage += errors[key][indexError] + '\n';
+              console.log(errors[key][indexError]);
+            }
+          }
+
+          this.showAlert(errorMessage);
+
+          return;
+        }
+
+        if(err.error && typeof err.error === 'object'){
+          errorMessage += err.error.error;
+
+          this.showAlert(errorMessage);
+
+          return;
+        }
+      }
+    )
+  }
 }
