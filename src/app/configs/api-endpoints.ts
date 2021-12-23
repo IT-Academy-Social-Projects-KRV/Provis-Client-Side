@@ -11,4 +11,4 @@ export const addworkspacetUrl = baseUrl + '/Workspace/addworkspace';
 export const getUserWorkspaceList = baseUrl + '/Workspace/getworlspacelist';
 
 export const userProfileUrl = baseUrl + '/User/getpersonalinfo';
-
+export const userInviteList = baseUrl + '/User/invite';
