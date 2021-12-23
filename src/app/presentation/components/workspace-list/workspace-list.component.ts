@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import { UserWorkspace } from 'src/app/core/models/userWorkspaceList';
 
-
 @Component({
   selector: 'app-workspace-list',
   templateUrl: './workspace-list.component.html',
@@ -17,4 +16,5 @@ export class WorkspaceListComponent implements OnInit {
       this.userWorkspaceList = data;
     });
   }
+
 }

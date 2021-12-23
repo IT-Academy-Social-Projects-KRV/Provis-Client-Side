@@ -26,7 +26,7 @@ import { HeaderComponent } from './presentation/components/header/header.compone
 import { FooterComponent } from './presentation/components/footer/footer.component';
 import { WorkspaceListComponent } from './presentation/components/workspace-list/workspace-list.component'
 import { UserComponent } from './presentation/components/user/user.component';
-import { UserHeaderComponent} from './presentation/components/user-header/user-header.component';
+import { UserHeaderComponent } from './presentation/components/user-header/user-header.component';
 import { UserProfileComponent } from './presentation/components/user-profile/user-profile.component';
 
 import { AuthInterceptorProvider } from './core/services/auth.interceptor';
@@ -35,6 +35,7 @@ import { AuthenticationService } from './core/services/authentication.service';
 import { UserService } from './core/services/user.service';
 import { UserInviteComponent } from './presentation/components/user-invite/user-invite.component';
 import { WorkspaceComponent } from './presentation/components/workspace/workspace.component';
+import { ModalInvitesComponent } from './presentation/components/modal-invites/modal-invites.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { WorkspaceComponent } from './presentation/components/workspace/workspac
     UserHeaderComponent,
     UserProfileComponent,
     WorkspaceComponent,
-    UserInviteComponent
+    UserInviteComponent,
+    ModalInvitesComponent
   ],
   imports: [
     BrowserModule,

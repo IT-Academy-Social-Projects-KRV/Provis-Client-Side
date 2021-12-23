@@ -8,6 +8,9 @@ body {
 body * {
     font-family: 'Montserrat', sans-serif !important;
 }
+.font-weight-600 {
+    font-weight: 600;
+}
 .w-100{
     width: 100%;
 }
@@ -60,17 +63,16 @@ body * {
     text-align: center;
 }
 button {
-    text-transform: uppercase;
-    font-weight: 600 !important;
-    /* background-color: #685e9d !important; */
-    background-color: #363446 !important;
-    
     letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 600;
 }
-
-
-button:hover {
-    background-color: #48537a !important;
+.form-section button, .home-page button {
+    background-color: #48537a;
+    color: white;
+}
+.form-section button:hover, .home-page button:hover {
+    background-color: #363446;
 }
 .top-section, .footer{
     background: linear-gradient(0deg,#3f3c52 0%,#161518 100%);
@@ -89,7 +91,6 @@ a {
     line-height: 36px;
     display: block;
     position: relative;
- 
     transition: 0.3s;
     opacity: 0.75;
     letter-spacing: 1px;
@@ -110,7 +111,6 @@ a {
     border-radius: 4px;
     transition: 0.3s;
 }
-
 a.sign-up:hover, .home-top-section a.button:hover, .benefits a.button:hover {
     color: #202020 !important;
     -webkit-box-shadow: inset 0 -36px 0 #fff;
@@ -151,12 +151,13 @@ form.register-form {
     width: 100%;
   }
 a.link-button{
-    /* background-color: #685e9d !important; */
-    background-color: #585570 !important;
+    background-color: #48537a;
     text-transform: uppercase;
-    font-weight: 600 !important;
+    font-weight: 600;
     letter-spacing: 1px;
+    color: white;
+    transition: 0.3s;
 }
 a.link-button:hover{
-    background-color: #48537a !important;
+    background-color: #363446;
 }
