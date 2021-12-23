@@ -1,9 +1,13 @@
 import { AuthenticationService } from './../../../core/services/authentication.service';
 import { Component, OnInit } from '@angular/core';
-import { UserInfo } from '../../../core/models/userInfo'
 import { Router } from '@angular/router';
+<<<<<<< HEAD
 import { MatDialog } from '@angular/material/dialog';
 import { ModalInvitesComponent } from '../modal-invites/modal-invites.component';
+=======
+import { UserService } from './../../../core/services/user.service';
+import{ ActiveInvites } from './../../../core/models/activeInvites';
+>>>>>>> feat: logic that set if there are active invites
 
 @Component({
   selector: 'app-user-header',
@@ -18,8 +22,15 @@ export class UserHeaderComponent implements OnInit {
   
   constructor(private authenticationService: AuthenticationService, private router: Router, public dialog: MatDialog) { }
     
+  // invite: boolean | undefined;
+
+  // constructor(private authenticationService: AuthenticationService,private userService: UserService, private router: Router) { }
+  
   ngOnInit() {
     this.userName = this.authenticationService.currentUser.Username?.toString();
+    this.userService.getActiveInvites().subscribe((data: ActiveInvites)=>{
+       this.invite = data.isActiveInvite;
+    });
   }
 
    logout(){
@@ -31,5 +42,4 @@ export class UserHeaderComponent implements OnInit {
   modalInvites() {
     const dialogRef = this.dialog.open(ModalInvitesComponent);
   }
-
 }
