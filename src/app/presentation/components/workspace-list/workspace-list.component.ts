@@ -16,5 +16,4 @@ export class WorkspaceListComponent implements OnInit {
       this.userWorkspaceList = data;
     });
   }
-
 }

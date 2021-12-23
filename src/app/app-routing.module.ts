@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
+
 import { AboutComponent } from './presentation/components/about/about.component';
 import { ContactComponent } from './presentation/components/contact/contact.component';
 import { HomeComponent } from './presentation/components/home/home.component';
 import { LoginComponent } from './presentation/components/login/login.component';
+import { AddWorkspaceComponent } from './presentation/components/add-workspace/add-workspace.component';
 import { UserComponent } from './presentation/components/user/user.component';
 import { UserInviteComponent } from './presentation/components/user-invite/user-invite.component';
-
 import { RegistrationComponent } from './presentation/components/registration/registration.component';
 import { UserProfileComponent } from './presentation/components/user-profile/user-profile.component';
 import { WorkspaceListComponent } from './presentation/components/workspace-list/workspace-list.component';
@@ -15,6 +16,9 @@ import { WorkspaceComponent } from './presentation/components/workspace/workspac
 
 
 const userRouters: Routes = [
+  { path: 'workspace/list', component: WorkspaceListComponent},
+  { path: 'profile', component: UserProfileComponent},
+  { path: 'workspace/create', component: AddWorkspaceComponent},
   { path: 'workspace/:id', component: WorkspaceComponent},
   { path: 'workspaces', component: WorkspaceListComponent},
   { path: 'profile', component: UserProfileComponent}

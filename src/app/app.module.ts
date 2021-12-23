@@ -24,7 +24,8 @@ import { LoginComponent } from './presentation/components/login/login.component'
 import { RegistrationComponent } from './presentation/components/registration/registration.component';
 import { HeaderComponent } from './presentation/components/header/header.component';
 import { FooterComponent } from './presentation/components/footer/footer.component';
-import { WorkspaceListComponent } from './presentation/components/workspace-list/workspace-list.component'
+import { AddWorkspaceComponent } from './presentation/components/add-workspace/add-workspace.component';
+import { WorkspaceListComponent } from './presentation/components/workspace-list/workspace-list.component';
 import { UserComponent } from './presentation/components/user/user.component';
 import { UserHeaderComponent } from './presentation/components/user-header/user-header.component';
 import { UserProfileComponent } from './presentation/components/user-profile/user-profile.component';
@@ -47,6 +48,7 @@ import { ModalInvitesComponent } from './presentation/components/modal-invites/m
     RegistrationComponent,
     HeaderComponent,
     FooterComponent,
+    AddWorkspaceComponent,
     WorkspaceListComponent,
     UserComponent,
     UserHeaderComponent,
@@ -61,7 +63,7 @@ import { ModalInvitesComponent } from './presentation/components/modal-invites/m
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
+    HttpClientModule,    
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
