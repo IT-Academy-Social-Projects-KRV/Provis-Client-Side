@@ -1,4 +1,4 @@
 export class UserInvite {
-    WorkspaceId?: number;
-    UserEmail?: string;
+    WorkspaceId: number;
+    UserEmail: string;
 }

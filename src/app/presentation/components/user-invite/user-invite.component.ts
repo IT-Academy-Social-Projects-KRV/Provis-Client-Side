@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserInvite } from 'src/app/core/models/userInvite';
 
@@ -10,14 +11,24 @@ import { UserInvite } from 'src/app/core/models/userInvite';
 })
 export class UserInviteComponent implements OnInit {
 
-    userInvite: UserInvite;
+    @Input() public workspaceId: number;
+    userInvite: UserInvite = new UserInvite();
+    inviteUserForm: FormGroup;
 
- constructor(private router: Router) {}
+ constructor(private fb: FormBuilder) {
+   this.inviteUserForm = fb.group({
+     'UserEmail': ['', [Validators.required, Validators.email]]
+   });
+ }
 
   ngOnInit() {
+    this.userInvite.WorkspaceId = this.workspaceId;
    }
 
     Invite(): void{
-        console.log('Hay');
+      if(this.inviteUserForm.valid){
+        this.userInvite = this.inviteUserForm.value;
+       console.log(this.userInvite.UserEmail);
+      }
     }
 }
