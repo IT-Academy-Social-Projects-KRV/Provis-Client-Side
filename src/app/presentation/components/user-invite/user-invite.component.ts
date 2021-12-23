@@ -6,7 +6,6 @@ import { WorkspaceComponent } from '../workspace/workspace.component';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import Swal from 'sweetalert2';
 
-
 @Component({
   selector: 'app-user',
   templateUrl: './user-invite.component.html',
