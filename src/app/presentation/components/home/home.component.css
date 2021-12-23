@@ -142,7 +142,7 @@ button:hover{
     text-align: left;
 }
 .title-info a {
-    display: inline-flex !important;
+    display: inline-flex;
 }
 .home-title-color {
     color: #cdcdcd;
