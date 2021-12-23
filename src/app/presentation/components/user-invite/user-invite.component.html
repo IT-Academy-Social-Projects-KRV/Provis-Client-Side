@@ -1,0 +1,12 @@
+<div class="invite-modal">
+  <div class="example-container">
+    <form class="register-form" [formGroup]="inviteUserForm" novalidate (ngSubmit)="Invite()">
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput placeholder="Your email" maxlength=50 formControlName="UserEmail"> 
+        <mat-error *ngIf="inviteUserForm.controls['UserEmail'].invalid && inviteUserForm.controls['UserEmail'].touched">Invalid email</mat-error>
+    </mat-form-field>
+      <button mat-raised-button color="Primary" (onClick)='Invite()'>Send</button>
+  </form>
+  </div>
+</div>

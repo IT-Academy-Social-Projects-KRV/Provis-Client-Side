@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
 
     if(await this.AuthService.isAuthenticated())
     {
-      this.router.navigate(['/user/workspace/list']);
+      this.router.navigate(['/user/workspaces']);
     }
   }
   

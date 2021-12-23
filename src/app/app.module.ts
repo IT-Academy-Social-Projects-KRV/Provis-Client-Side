@@ -33,8 +33,9 @@ import { AuthInterceptorProvider } from './core/services/auth.interceptor';
 import { WorkspaceService } from './core/services/workspace.service';
 import { AuthenticationService } from './core/services/authentication.service';
 import { UserService } from './core/services/user.service';
+import { UserInviteComponent } from './presentation/components/user-invite/user-invite.component';
+import { WorkspaceComponent } from './presentation/components/workspace/workspace.component';
 import { ModalInvitesComponent } from './presentation/components/modal-invites/modal-invites.component';
-
 
 @NgModule({
   declarations: [
@@ -50,6 +51,8 @@ import { ModalInvitesComponent } from './presentation/components/modal-invites/m
     UserComponent,
     UserHeaderComponent,
     UserProfileComponent,
+    WorkspaceComponent,
+    UserInviteComponent,
     ModalInvitesComponent
   ],
   imports: [
