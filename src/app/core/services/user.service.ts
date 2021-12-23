@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, pipe } from 'rxjs';
-import { userInviteList, userProfileUrl } from 'src/app/configs/api-endpoints';
+import { answerInviteUserUrl, userInviteList, userProfileUrl } from 'src/app/configs/api-endpoints';
 import { UserInvite } from '../models/userInviteList';
 import { UserProfile } from '../models/userProfile';
 
@@ -11,6 +11,7 @@ import { UserProfile } from '../models/userProfile';
 export class UserService {
 
   private readonly getUserInviteList = userInviteList;
+  private readonly answerUserInvite = answerInviteUserUrl;
   private readonly userProfileUrl = userProfileUrl;
 
   private httpOption = {
@@ -31,5 +32,8 @@ export class UserService {
 
   getUserInvite(): Observable<UserInvite[]>{
     return this.http.get<UserInvite[]>(this.getUserInviteList, this.httpOption);
+  }
+  denyUserInvite(inviteId:number):Observable<void>{
+    return this.http.put<void>(this.answerUserInvite+"/"+inviteId+"/deny", {}, this.httpOption);
   }
 }
