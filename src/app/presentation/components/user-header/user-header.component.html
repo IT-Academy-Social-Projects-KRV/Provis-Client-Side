@@ -10,11 +10,15 @@
       </mat-grid-tile>
       <mat-grid-tile class="grid-content-right">
         <div class="right d-flex top-menu">
-          <button mat-flat-button disableRipple=true [matMenuTriggerFor]="afterMenu" class="user-menu-button">{{userName}}</button>
+          <button mat-flat-button disableRipple=true [matMenuTriggerFor]="afterMenu" class="user-menu-button">
+            <div>
+              {{userName}}<div *ngIf="invite" class="invite-circle"></div>
+            </div>           
+          </button>
           <mat-menu #afterMenu="matMenu" overlayPanelClass="test" panelClass="test" backdropClass="test" >
             <ul class="dropmenu">
               <li><a routerLink="profile">My Profile</a></li>
-              <li><a (click)="modalInvites()">Invites</a></li>
+              <li><a (click)="modalInvites()">Invites<div *ngIf="invite" class="invite-circle"></div></a></li>
               <li><a (click)="logout()">Logout</a></li>
             </ul>
           </mat-menu>

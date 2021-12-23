@@ -37,6 +37,10 @@
 .user-menu-button:hover{
     opacity: 1;
 }
+.user-menu-button div{   
+    display: flex;
+    flex-direction: row;
+}
 .dropmenu {
     margin: -8px auto;
     overflow: hidden;
@@ -78,11 +82,14 @@ ul.dropmenu  li{
     background: #cf4343;
 }
 
-.drop li a div{
-    display: inline-block;
+.dropmenu li a{
+    display: flex;
+    flex-direction: row;
 }
 
 .invite-circle {
+    margin-top: auto;
+    margin-bottom: auto;
     margin-left: 5px;
     width: 6px;
     height: 6px;
