@@ -98,9 +98,9 @@ mat-card:hover {
 }
 .card-sub-menu{
     position: absolute;
-    color: white !important;
+    color: white;
     font-weight: 600;
-    font-size: 20px !important;
+    font-size: 20px;
     right: 10px;
     top: 5px;
 }
