@@ -17,7 +17,7 @@ import { WorkspaceComponent } from './presentation/components/workspace/workspac
 const userRouters: Routes = [
   { path: 'workspace/list', component: WorkspaceListComponent},
   { path: 'profile', component: UserProfileComponent},
-   { path: 'workspace/:id', component: WorkspaceComponent},
+  { path: 'workspace/:id', component: WorkspaceComponent},
   { path: 'workspaces', component: WorkspaceListComponent},
   { path: 'profile', component: UserProfileComponent}
 ];
