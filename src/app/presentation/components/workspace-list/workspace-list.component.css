@@ -3,18 +3,15 @@
     max-width: 1200px;
     padding: 70px 0px;
 }
-
 .list{
     display: flex;
     flex-wrap: wrap;
 }
-
 mat-card {
-    max-width: 240px;
+    max-width: 270px;
     flex: 1 0 21%;
     margin: 14px;
-    height: 100px;
-    background: lightslategray;
+    min-height: 140px;
     cursor: pointer;
 }
 mat-card:hover {
@@ -50,5 +47,60 @@ mat-card:hover {
     width: 5px;
     height: 25px;
     transform: translate(-50%, -50%) rotate(90deg);
-
+}
+.card {
+    background: white;
+    border: 1px solid #666ec3;
+    padding: 0px;
+}
+.footer-card-block {
+    font-size: 11px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 15px 15px;
+    color: #666ec3;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+.header-card-block {
+    background: #666ec3;
+    padding: 15px 15px;
+    padding: 15px 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.header-card-block span {
+    color: #ddd;
+    font-size: 12px;
+}
+.card-title {
+    font-size: 22px;
+    color: white;
+}
+.card-title h3 {
+    min-height: 50px;
+    line-height: 1.5;
+    margin-bottom: 0px;
+}
+.mat-card-subtitle {
+    margin-bottom: 0px;
+}
+.empty-card{
+    border: 1px dashed #8d8d8d;
+    background: #f1f1f1;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    color: #91919185;
+}
+.card-sub-menu{
+    position: absolute;
+    color: white !important;
+    font-weight: 600;
+    font-size: 20px !important;
+    right: 10px;
+    top: 5px;
 }

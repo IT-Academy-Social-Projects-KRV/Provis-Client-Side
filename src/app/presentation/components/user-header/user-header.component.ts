@@ -4,8 +4,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalInvitesComponent } from '../modal-invites/modal-invites.component';
 import { UserService } from './../../../core/services/user.service';
-import{ ActiveInvites } from './../../../core/models/activeInvites';
-
+import { ActiveInvites } from './../../../core/models/activeInvites';
 
 @Component({
   selector: 'app-user-header',
@@ -28,7 +27,7 @@ export class UserHeaderComponent implements OnInit {
     });
   }
 
-   logout(){
+  logout(){
     this.authenticationService.Logout().subscribe(()=>{
       this.router.navigate(['']);
     });
