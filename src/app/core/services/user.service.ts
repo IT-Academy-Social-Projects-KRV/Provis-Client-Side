@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, pipe } from 'rxjs';
-import { answerInviteUserUrl, userInviteList, userProfileUrl } from 'src/app/configs/api-endpoints';
+import { answerInviteUserUrl, userInviteList, userProfileUrl, sendConfirmEmailUrl } from 'src/app/configs/api-endpoints';
 import { UserInvite } from '../models/userInviteList';
 import { activeInvitesUrl } from 'src/app/configs/api-endpoints';
 import { ActiveInvites} from '../models/activeInvites';
@@ -16,6 +16,7 @@ export class UserService {
   private readonly answerUserInvite = answerInviteUserUrl;
   private readonly userProfileUrl = userProfileUrl;
   private readonly activeInvitesUrl = activeInvitesUrl;
+  private readonly sendConfirmEmailUrl = sendConfirmEmailUrl;
 
   private httpOption = {
     headers: new HttpHeaders({
@@ -47,5 +48,9 @@ export class UserService {
 
   acceptUserInvite(inviteId:number):Observable<void>{
     return this.http.put<void>(this.answerUserInvite+"/"+inviteId+"/accept", {}, this.httpOption);
+  }
+
+  tryConfirmEmail(){
+    return this.http.get<void>(this.sendConfirmEmailUrl, this.httpOption);
   }
 }
