@@ -13,6 +13,7 @@ import { RegistrationComponent } from './presentation/components/registration/re
 import { UserProfileComponent } from './presentation/components/user-profile/user-profile.component';
 import { WorkspaceListComponent } from './presentation/components/workspace-list/workspace-list.component';
 import { WorkspaceComponent } from './presentation/components/workspace/workspace.component';
+import { ConfirmEmailComponent } from './presentation/components/confirm-email/confirm-email.component';
 
 
 const userRouters: Routes = [
@@ -21,7 +22,8 @@ const userRouters: Routes = [
   { path: 'workspace/create', component: AddWorkspaceComponent},
   { path: 'workspace/:id', component: WorkspaceComponent},
   { path: 'workspaces', component: WorkspaceListComponent},
-  { path: 'profile', component: UserProfileComponent}
+  { path: 'profile', component: UserProfileComponent },
+  { path: 'confirmemail', component: ConfirmEmailComponent }
 ];
 
 const routes: Routes = [

@@ -29,6 +29,7 @@ import { WorkspaceListComponent } from './presentation/components/workspace-list
 import { UserComponent } from './presentation/components/user/user.component';
 import { UserHeaderComponent } from './presentation/components/user-header/user-header.component';
 import { UserProfileComponent } from './presentation/components/user-profile/user-profile.component';
+import { ConfirmEmailComponent } from './presentation/components/confirm-email/confirm-email.component';
 
 import { AuthInterceptorProvider } from './core/services/auth.interceptor';
 import { WorkspaceService } from './core/services/workspace.service';
@@ -55,7 +56,8 @@ import { ModalInvitesComponent } from './presentation/components/modal-invites/m
     UserProfileComponent,
     WorkspaceComponent,
     UserInviteComponent,
-    ModalInvitesComponent
+    ModalInvitesComponent,
+    ConfirmEmailComponent
   ],
   imports: [
     BrowserModule,
