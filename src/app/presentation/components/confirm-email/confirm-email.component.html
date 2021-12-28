@@ -1,3 +1,4 @@
-<p>
-  confirm-email works!
-</p>
+<form [formGroup]="confirmCodeForm" novalidate (ngSubmit)="submit()">
+  <input type="text" placeholder="your code" #confirmCode formControlName="confirmCode" required/>
+  <button class="w-100 font-weight-600">Confirm</button>
+</form>
