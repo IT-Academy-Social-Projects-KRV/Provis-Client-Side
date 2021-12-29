@@ -50,7 +50,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   confirmEmail(){
-    this.userService.tryConfirmEmail().subscribe(
+    this.userService.sendConfirmEmail().subscribe(
       () => {
         Swal.fire({
           title: 'Check your email address',
