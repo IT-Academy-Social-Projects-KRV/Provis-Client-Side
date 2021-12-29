@@ -14,14 +14,14 @@
   <mat-card-content class="right">
     <button mat-raised-button color="primary" (click)="confirmEmail()">Confirm Email</button>
   </mat-card-content>
-  
+
   <mat-card-content class="center">
 
     <form [formGroup]="userProfileForm" (submit)="update()">
 
         <mat-form-field appearance="fill">
             <mat-label>Name</mat-label>
-            <input type="text" matInput placeholder="Your name" #name maxlength=50 formControlName="name" required ngDefaultControl> 
+            <input type="text" matInput placeholder="Your name" #name maxlength=50 formControlName="name" required ngDefaultControl>
             <mat-error *ngIf="userProfileForm.controls['name'].invalid && userProfileForm.controls['name'].touched">Invalid name</mat-error>
         </mat-form-field>
 
@@ -29,7 +29,7 @@
             <mat-label>Surname</mat-label>
             <input type="text" matInput placeholder="Your surname" #surname maxlength=50 formControlName="surname" required ngDefaultControl>
             <mat-error *ngIf="userProfileForm.controls['surname'].invalid && userProfileForm.controls['surname'].touched">Invalid surname</mat-error>
-        </mat-form-field>   
+        </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>Username</mat-label>
@@ -39,7 +39,7 @@
 
         <mat-form-field appearance="fill">
             <mat-label>Email</mat-label>
-            <input type="email" matInput placeholder="Your email" #email maxlength=50 formControlName="email" required ngDefaultControl> 
+            <input type="email" matInput placeholder="Your email" #email maxlength=50 formControlName="email" required ngDefaultControl>
             <mat-error *ngIf="userProfileForm.controls['email'].invalid && userProfileForm.controls['email'].touched">Invalid email</mat-error>
         </mat-form-field>
 
@@ -47,7 +47,7 @@
           <button mat-raised-button color="primary" [disabled]="!userProfileForm.dirty">Save</button>
         </mat-card-actions>
     </form>
-     
+
   </mat-card-content>
 </mat-card>
 </div>
