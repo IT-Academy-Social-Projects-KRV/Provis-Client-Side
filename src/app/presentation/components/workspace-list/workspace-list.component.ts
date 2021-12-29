@@ -1,3 +1,4 @@
+import { colorWorkspaceCardArray } from './../../../configs/colorsForWorkspaceCards';
 import { AddWorkspaceComponent } from './../add-workspace/add-workspace.component';
 import { Component, OnInit } from '@angular/core';
 import { UserWorkspace } from 'src/app/core/models/userWorkspaceList';
@@ -15,7 +16,7 @@ import { Router } from '@angular/router';
 export class WorkspaceListComponent implements OnInit {
   
   userWorkspaceList: UserWorkspace[];
-  colorArray: string[] = ['#666ec3','#8b3d3d','#4c9763','#3c3c3c','#974d0e','#529992'];
+  cardColors = colorWorkspaceCardArray;
    
   constructor(private workspaceService: WorkspaceService, public dialog: MatDialog, private router: Router) {}
   
