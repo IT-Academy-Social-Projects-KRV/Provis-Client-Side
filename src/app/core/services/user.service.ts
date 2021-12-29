@@ -59,6 +59,4 @@ export class UserService {
   confirmEmail(confirmationCode: ConfirmEmailCode):Observable<void>{
     return this.http.post<void>(this.confirmEmailUrl, confirmationCode, this.httpOption);
   }
-
-
 }

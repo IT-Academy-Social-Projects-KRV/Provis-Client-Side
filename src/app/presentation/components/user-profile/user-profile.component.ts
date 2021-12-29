@@ -53,7 +53,7 @@ export class UserProfileComponent implements OnInit {
     this.userService.sendConfirmEmail().subscribe(
       () => {
         Swal.fire({
-          title: 'Check your email address',
+          title: 'Check your email address ' + this.userProfile.email,
           text: "You need to copy confirmation code and enter it in this page!",
           icon: 'warning',
           showCancelButton: false,
