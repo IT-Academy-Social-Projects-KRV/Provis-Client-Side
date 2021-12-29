@@ -1,4 +1,22 @@
-<form [formGroup]="confirmCodeForm" novalidate (ngSubmit)="submit()">
-  <input type="text" placeholder="your code" #confirmationCode formControlName="confirmationCode" required/>
-  <button class="w-100 font-weight-600">Confirm</button>
-</form>
+<div class="container">
+  <div class="form-section">
+    <div class="form-block">
+      <div class="w-100 mb-20">
+        <div class="addws_form">
+
+            <form [formGroup]="confirmCodeForm" novalidate (ngSubmit)="submit()" class="addws-form">
+
+              <mat-form-field class="addws-name" appearance="fill">
+                <mat-label>Enter code here</mat-label>
+                <input matInput type="text" #confirmationCode formControlName="confirmationCode" required/>
+              </mat-form-field>
+
+              <button mat-raised-button color="primary" class="w-100 font-weight-600">Confirm</button>
+
+            </form>
+
+        </div> 
+      </div> 
+    </div>   
+  </div>
+</div>
