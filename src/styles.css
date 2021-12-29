@@ -5,7 +5,7 @@ html, body { height: 100%; }
 body { 
     margin: 0;  
 }
-body * {
+body *:not(.material-icons) {
     font-family: 'Montserrat', sans-serif !important;
 }
 .font-weight-600 {
@@ -21,7 +21,7 @@ body * {
     margin-bottom: 20px;
 }
 .mt-30{
-    margin-top: 30px !important;
+    margin-top: 30px;
 }
 .d-flex{
     display: flex;
@@ -67,11 +67,13 @@ button {
     text-transform: uppercase;
     font-weight: 600;
 }
-.form-section button, .home-page button, .create-workspace button {
+.form-section button, .home-page button, 
+.create-workspace button, .user-page button {
     background-color: #48537a;
     color: white;
 }
-.form-section button:hover, .home-page button:hover .create-workspace button {
+.form-section button:hover, .home-page button:hover 
+.create-workspace button, .user-page button:hover {
     background-color: #363446;
 }
 .top-section, .footer{
@@ -160,4 +162,18 @@ a.link-button{
 }
 a.link-button:hover{
     background-color: #363446;
+}
+.user-page {
+    display: flex;
+}
+.user-right-side {
+    width: 100%;
+    margin: 0px;
+    padding: 30px;
+}
+a.link-button.button-accept {
+    background: #097809;;
+}
+a.link-button.button-accept:hover {
+    background: rgb(16, 102, 16);
 }

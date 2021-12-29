@@ -1,0 +1,67 @@
+<div class="user-left-side">
+  <div class="left-side-title">
+    Workspace Name
+  </div>
+  <div class="user-left-menu">
+    <ul>
+      <li>
+        <ul class="group-menu">
+          <li class="menu-item">
+              <a [routerLink]="'/user/workspace/' + workspaceId + '/managment/'">
+              <mat-icon aria-hidden="false" aria-label="Example home icon">manage_accounts</mat-icon>
+              <span>Member Managment</span>  
+            </a>
+          </li>
+          <li class="menu-item">
+            <a [routerLink]="'/user/workspace/'+workspaceId + '/memberlist/'">
+              <mat-icon aria-hidden="false" aria-label="Example home icon">group</mat-icon>
+              <span>Members List</span>  
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <ul class="group-menu">
+          <li class="menu-item">
+            <a [routerLink]="'/user/workspace/'+workspaceId">
+              <mat-icon aria-hidden="false" aria-label="Example home icon">list_alt</mat-icon>
+              <span>Task List</span>  
+            </a>
+          </li>
+          <li class="menu-item" (click)="modalCreateTask()">
+            <a>
+              <mat-icon aria-hidden="false" aria-label="Example home icon">queue</mat-icon>
+              <span>Create Task</span>  
+            </a>
+          </li>
+          <li class="menu-item" >
+            <a>
+              <mat-icon aria-hidden="false" aria-label="Example home icon">view_list</mat-icon>
+              <span>My Created Tasks</span>  
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="menu-item">
+        <a [routerLink]="'/user/workspace/' + workspaceId + '/calendar'">
+          <mat-icon aria-hidden="false" aria-label="Example home icon">calendar_month</mat-icon>
+          <span>Calendar</span>  
+        </a>
+      </li>
+      <ul class="group-menu">
+        <li class="menu-item">
+          <a [routerLink]="'/user/workspace/' + workspaceId + '/info'">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">info</mat-icon>
+            <span>Workspace info</span>  
+          </a>
+        </li>
+        <li class="menu-item">
+          <a [routerLink]="'/user/workspace/' + workspaceId + '/settings'">
+            <mat-icon aria-hidden="false" aria-label="Example home icon">admin_panel_settings</mat-icon>
+            <span>Workspace settings</span>  
+          </a>
+        </li>
+      </ul>
+    </ul>
+  </div>
+</div>
