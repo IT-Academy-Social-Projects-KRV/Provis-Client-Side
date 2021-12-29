@@ -14,8 +14,8 @@ export class ConfirmEmailComponent implements OnInit {
 
   confirmCodeForm: FormGroup;
   confirmationCode: ConfirmEmailCode = new ConfirmEmailCode();
-  
-  constructor(private fb: FormBuilder, private service: UserService, private router: Router) { 
+
+  constructor(private fb: FormBuilder, private service: UserService, private router: Router) {
     this.confirmCodeForm=fb.group(
       {
         "confirmationCode":["", Validators.required]
@@ -49,11 +49,11 @@ export class ConfirmEmailComponent implements OnInit {
             errorMessage += errors[key][indexError] + '\n';
           }
         }
-        
+
        this.showAlert(errorMessage);
 
         return;
-      } 
+      }
 
       if(err.error && typeof err.error === 'object'){
         errorMessage += err.error.error;

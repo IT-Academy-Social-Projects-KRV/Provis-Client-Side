@@ -42,7 +42,7 @@ export class UserProfileComponent implements OnInit {
     this.userService.getUserProfile().subscribe((data: UserProfile) =>{
       this.userProfile = data;
       this.userProfileForm.patchValue(this.userProfile);
-    });    
+    });
   }
 
   update(){
@@ -73,11 +73,11 @@ export class UserProfileComponent implements OnInit {
               errorMessage += errors[key][indexError] + '\n';
             }
           }
-          
+
          this.showAlert(errorMessage);
 
           return;
-        } 
+        }
 
         if(err.error && typeof err.error === 'object'){
           errorMessage += err.error.error;
