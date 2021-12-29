@@ -1,3 +1,3 @@
 export class ConfirmEmailCode{
-    confirmCode?: string;
+    confirmationCode?: string;
 }

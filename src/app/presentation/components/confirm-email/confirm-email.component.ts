@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConfirmEmailCode } from 'src/app/core/models/confirmEmailCode';
 import { UserService } from 'src/app/core/services/user.service';
@@ -13,12 +13,12 @@ import Swal from 'sweetalert2';
 export class ConfirmEmailComponent implements OnInit {
 
   confirmCodeForm: FormGroup;
-  confirmCode: ConfirmEmailCode = new ConfirmEmailCode();
+  confirmationCode: ConfirmEmailCode = new ConfirmEmailCode();
 
   constructor(private fb: FormBuilder, private service: UserService, private router: Router) { 
     this.confirmCodeForm=fb.group(
       {
-        "confirmCode":[""]
+        "confirmationCode":["", Validators.required]
       }
     )
   }
@@ -41,8 +41,8 @@ export class ConfirmEmailComponent implements OnInit {
 
   submit(){
     if(this.confirmCodeForm.valid){
-      this.confirmCode = Object.assign({}, this.confirmCodeForm.value);
-      this.service.confirmEmail(this.confirmCode).subscribe(
+      this.confirmationCode = Object.assign({}, this.confirmCodeForm.value);
+      this.service.confirmEmail(this.confirmationCode).subscribe(
         () => {
           Swal.fire({
             position: 'top-end',
@@ -81,9 +81,5 @@ export class ConfirmEmailComponent implements OnInit {
         }
       );
     }
-    else{
-      this.showAlert('else');
-    }
   }
-
 }
