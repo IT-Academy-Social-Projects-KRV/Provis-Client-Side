@@ -1,1 +1,17 @@
-<button mat-raised-button color="Primary" (click)='modalInvites()'>Invite</button>
+<section>
+    <div class="user-page">
+        <app-user-leftmenu></app-user-leftmenu>
+        <div class="user-right-side">
+            <div class="right-side-title">
+                <span>Task List</span>
+                <div>
+                    <a mat-raised-button class="link-button button-accept" (click)="modalCreateTask()">
+                        <mat-icon aria-hidden="false" aria-label="Example home icon">queue</mat-icon>
+                        <span>Create Task</span>  
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

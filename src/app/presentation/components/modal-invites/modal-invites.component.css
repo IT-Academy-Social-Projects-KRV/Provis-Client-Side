@@ -45,16 +45,16 @@
     font-size: 10px;
     margin-left: 10px;
 }
-.button-accept {
-    color: white;
-    background: green;
-}
 .invite-answer {
     display: flex;
     align-items: center;
     font-size: 10px;
     font-weight: 600;
     text-transform: uppercase;
+}
+.button-accept {
+    color: white;
+    background: green;
 }
 .invite-accepted {
     color: green;
