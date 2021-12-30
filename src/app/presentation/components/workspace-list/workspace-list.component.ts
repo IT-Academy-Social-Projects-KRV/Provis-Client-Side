@@ -1,4 +1,4 @@
-import { colorWorkspaceCardArray } from './../../../configs/colorsForWorkspaceCards';
+import { colorWorkspaceCardArray } from '../../../configs/colorsForWorkspaceCards';
 import { AddWorkspaceComponent } from './../add-workspace/add-workspace.component';
 import { Component, OnInit } from '@angular/core';
 import { UserWorkspace } from 'src/app/core/models/userWorkspaceList';
