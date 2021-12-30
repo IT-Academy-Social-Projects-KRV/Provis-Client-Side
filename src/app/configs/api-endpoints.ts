@@ -16,4 +16,6 @@ export const inviteUser = baseUrl + '/Workspace/inviteuser';
 export const userProfileUrl = baseUrl + '/User/getpersonalinfo';
 export const userInviteList = baseUrl + '/User/invite';
 export const activeInvitesUrl = baseUrl + '/User/activeinvite';
+export const sendConfirmEmailUrl = baseUrl + '/User/sendconfirmmail';
+export const confirmEmailUrl = baseUrl + '/User/confirmemail';
 export const changeUserInfoUrl = baseUrl + '/User/changeinfo';

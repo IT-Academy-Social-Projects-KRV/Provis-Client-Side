@@ -45,7 +45,7 @@ export class UserProfileComponent implements OnInit {
     this.userService.getUserProfile().subscribe((data: UserProfile) =>{
       this.userProfile = data;
       this.userProfileForm.patchValue(this.userProfile);
-    });    
+    });
   }
 
   update(){
@@ -84,5 +84,46 @@ export class UserProfileComponent implements OnInit {
        }
      )
    }
+  }
+
+  confirmEmail(){
+    this.userService.sendConfirmEmail().subscribe(
+      () => {
+        Swal.fire({
+          title: 'Check your email address ' + this.userProfile.email,
+          text: "You need to copy confirmation code and enter it in this page!",
+          icon: 'warning',
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'Ok i understand!'
+        });
+
+        this.router.navigate(['user/confirmemail']);
+      },
+      err => {
+        let errorMessage: string = '';
+        if(err.error.errors && typeof err.error.errors === 'object'){
+          const errors = err.error.errors;
+
+          for(let key in errors){
+            for(let indexError in errors[key]){
+              errorMessage += errors[key][indexError] + '\n';
+            }
+          }
+
+         this.showAlert(errorMessage);
+
+          return;
+        }
+
+        if(err.error && typeof err.error === 'object'){
+          errorMessage += err.error.error;
+
+          this.showAlert(errorMessage);
+
+          return;
+        }
+      }
+    );
   }
 }

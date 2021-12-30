@@ -11,6 +11,7 @@ import { RegistrationComponent } from './presentation/components/registration/re
 import { UserProfileComponent } from './presentation/components/user-profile/user-profile.component';
 import { WorkspaceListComponent } from './presentation/components/workspace-list/workspace-list.component';
 import { WorkspaceComponent } from './presentation/components/workspace/workspace.component';
+import { ConfirmEmailComponent } from './presentation/components/confirm-email/confirm-email.component';
 import { WorkspaceInfoComponent } from './presentation/components/workspace-info/workspace-info.component';
 import { WorkspaceSettingsComponent } from './presentation/components/workspace-settings/workspace-settings.component';
 import { MemberManagmentComponent } from './presentation/components/member-managment/member-managment.component';
@@ -22,6 +23,8 @@ const userRouters: Routes = [
   { path: 'profile', component: UserProfileComponent},
   { path: 'workspace/:id', component: WorkspaceComponent},
   { path: 'workspaces', component: WorkspaceListComponent},
+  { path: 'profile', component: UserProfileComponent },
+  { path: 'confirmemail', component: ConfirmEmailComponent },
   { path: 'workspace/:id/managment', component: MemberManagmentComponent, pathMatch: 'full'},
   { path: 'workspace/:id/memberlist', component: MemberListComponent},
   { path: 'workspace/:id/calendar', component: MemberCalendarComponent},
