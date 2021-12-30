@@ -30,14 +30,21 @@ import { UserComponent } from './presentation/components/user/user.component';
 import { UserHeaderComponent } from './presentation/components/user-header/user-header.component';
 import { UserProfileComponent } from './presentation/components/user-profile/user-profile.component';
 import { ConfirmEmailComponent } from './presentation/components/confirm-email/confirm-email.component';
+import { MemberManagmentComponent } from './presentation/components/member-managment/member-managment.component';
+import { MemberListComponent } from './presentation/components/member-list/member-list.component';
+import { MemberCalendarComponent } from './presentation/components/member-calendar/member-calendar.component';
 
 import { AuthInterceptorProvider } from './core/services/auth.interceptor';
 import { WorkspaceService } from './core/services/workspace.service';
 import { AuthenticationService } from './core/services/authentication.service';
 import { UserService } from './core/services/user.service';
 import { UserInviteComponent } from './presentation/components/user-invite/user-invite.component';
+import { CreateTaskComponent } from './presentation/components/create-task/create-task.component';
 import { WorkspaceComponent } from './presentation/components/workspace/workspace.component';
+import { WorkspaceInfoComponent } from './presentation/components/workspace-info/workspace-info.component';
+import { WorkspaceSettingsComponent } from './presentation/components/workspace-settings/workspace-settings.component';
 import { ModalInvitesComponent } from './presentation/components/modal-invites/modal-invites.component';
+import { UserLeftmenuComponent } from './presentation/components/user-leftmenu/user-leftmenu.component';
 
 @NgModule({
   declarations: [
@@ -55,9 +62,16 @@ import { ModalInvitesComponent } from './presentation/components/modal-invites/m
     UserHeaderComponent,
     UserProfileComponent,
     WorkspaceComponent,
+    WorkspaceInfoComponent,
+    WorkspaceSettingsComponent,
     UserInviteComponent,
     ModalInvitesComponent,
-    ConfirmEmailComponent
+    ConfirmEmailComponent,
+    UserLeftmenuComponent,
+    MemberManagmentComponent,
+    MemberListComponent,
+    MemberCalendarComponent,
+    CreateTaskComponent
   ],
   imports: [
     BrowserModule,

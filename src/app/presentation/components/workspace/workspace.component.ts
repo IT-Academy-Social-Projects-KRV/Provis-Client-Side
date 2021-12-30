@@ -1,8 +1,9 @@
+import { CreateTaskComponent } from './../create-task/create-task.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { UserInviteComponent } from '../user-invite/user-invite.component';
+
 
 @Component({
   selector: 'app-workspace',
@@ -25,9 +26,8 @@ export class WorkspaceComponent implements OnInit {
   ngOnDestroy(){
     this.routeSub.unsubscribe();
   }
+  modalCreateTask() {
+    let dialogRef = this.dialog.open(CreateTaskComponent);
+  } 
 
-  modalInvites() {
-    let dialogRef = this.dialog.open(UserInviteComponent);
-    dialogRef.componentInstance.workspaceId = this.workspaceId;
-  }
 }

@@ -4,6 +4,7 @@
     width: 100%;
     z-index: 1;
     padding: 0;
+    position: relative;
 }
 .logo-title{
     font-size: 22px;
@@ -77,16 +78,13 @@ ul.dropmenu  li{
     background: #48537a;
     color: white;
 }
-
 .test .mat-menu-panel {
     background: #cf4343;
 }
-
 .dropmenu li a{
     display: flex;
     flex-direction: row;
 }
-
 .invite-circle {
     margin-top: auto;
     margin-bottom: auto;

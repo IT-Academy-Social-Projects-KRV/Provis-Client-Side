@@ -39,7 +39,7 @@
 
         <mat-form-field appearance="fill">
             <mat-label>Email</mat-label>
-            <input type="email" matInput placeholder="Your email" #email maxlength=50 formControlName="email" required ngDefaultControl>
+            <input type="email" matInput placeholder="Your email" #email maxlength=50 formControlName="email" required ngDefaultControl readonly> 
             <mat-error *ngIf="userProfileForm.controls['email'].invalid && userProfileForm.controls['email'].touched">Invalid email</mat-error>
         </mat-form-field>
 

@@ -1,20 +1,27 @@
-<section>
+<section class="section-background-color">
   <div class="container">
     <div>
       <a mat-raised-button class="link-button" color="primary" [routerLink]="['../create']">Create New</a>
-    <div class="list">
-      <mat-card *ngFor="let workspace of userWorkspaceList" [routerLink]="'../workspace/'+workspace.id">
-        <mat-card-title>
-          {{workspace.name}}
-        </mat-card-title>
-        <mat-card-subtitle >
-          Your role: {{workspace.role}}
-        </mat-card-subtitle>
-      </mat-card>
+      <div class="list">
+        <mat-card *ngFor="let workspace of userWorkspaceList" [routerLink]="'../workspace/' + workspace.id" class="card" [style.border-color]="cardColors[workspace.id % cardColors.length]">
+          <div class="header-card-block" [style.background-color]="cardColors[workspace.id % cardColors.length]">
+            <mat-card-title class="card-title">
+              <h3>{{workspace.name}}</h3>
+            </mat-card-title>
+            <mat-card-subtitle >
+              <span>Your role: {{workspace.role}}</span>
+            </mat-card-subtitle>
+          </div>
+          <div>
+          </div>
+        </mat-card>
+        <mat-card class="card empty-card" (click)="modalCreateWorkspace()">
+          <p>Add New </p>
+        </mat-card>
+      </div>
+      <div>
+        <a (click)="modalCreateWorkspace()" mat-raised-button class="link-button"></a>
+      </div>
     </div>
-    <div>
-      <a mat-raised-button class="link-button" color="primary" [routerLink]="['../workspace/create']"></a>
-    </div>
-  </div>
   </div>
 </section>
