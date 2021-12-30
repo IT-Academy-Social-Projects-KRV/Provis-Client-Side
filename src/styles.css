@@ -67,11 +67,11 @@ button {
     text-transform: uppercase;
     font-weight: 600;
 }
-.form-section button, .home-page button {
+.form-section button, .home-page button, .create-workspace button {
     background-color: #48537a;
     color: white;
 }
-.form-section button:hover, .home-page button:hover {
+.form-section button:hover, .home-page button:hover .create-workspace button {
     background-color: #363446;
 }
 .top-section, .footer{
