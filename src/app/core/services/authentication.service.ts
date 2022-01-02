@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserForRegister } from '../models/userForRegister';
-import { map, Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { UserForLogin } from '../models/userForLogin';
 import { loginUrl, logoutUrl, refreshTokenUrl, registerUrl } from 'src/app/configs/api-endpoints';
 import { Tokens } from '../models/tokens';

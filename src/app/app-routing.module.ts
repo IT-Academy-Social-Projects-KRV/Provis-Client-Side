@@ -1,3 +1,4 @@
+import { MemberTasklistComponent } from './presentation/components/member-tasklist/member-tasklist.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
@@ -17,16 +18,21 @@ import { MemberManagmentComponent } from './presentation/components/member-manag
 import { MemberListComponent } from './presentation/components/member-list/member-list.component';
 import { MemberCalendarComponent } from './presentation/components/member-calendar/member-calendar.component';
 
+const userWorkspaceRouters: Routes = [
+  { path: 'managment', component: MemberManagmentComponent, pathMatch: 'full'},
+  { path: 'memberlist', component: MemberListComponent},
+  { path: 'calendar', component: MemberCalendarComponent},
+  { path: 'info', component: WorkspaceInfoComponent},
+  { path: 'tasklist', component: MemberTasklistComponent},
+  { path: 'settings', component: WorkspaceSettingsComponent}
+];
+
 const userRouters: Routes = [
   { path: 'workspace/list', component: WorkspaceListComponent},
   { path: 'profile', component: UserProfileComponent},
   { path: 'workspace/:id', component: WorkspaceComponent},
   { path: 'workspaces', component: WorkspaceListComponent},
-  { path: 'workspace/:id/managment', component: MemberManagmentComponent, pathMatch: 'full'},
-  { path: 'workspace/:id/memberlist', component: MemberListComponent},
-  { path: 'workspace/:id/calendar', component: MemberCalendarComponent},
-  { path: 'workspace/:id/info', component: WorkspaceInfoComponent},
-  { path: 'workspace/:id/settings', component: WorkspaceSettingsComponent}
+  { path: 'workspace/:id', component: WorkspaceComponent, children: userWorkspaceRouters, canActivate: [AuthGuard]},
 ];
 
 const routes: Routes = [

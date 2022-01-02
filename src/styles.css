@@ -177,3 +177,30 @@ a.link-button.button-accept {
 a.link-button.button-accept:hover {
     background: rgb(16, 102, 16);
 }
+.right-side-title {
+    border-radius: 4px;
+    padding: 10px 30px;
+    color: #3b394a;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    background: #eee;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #cfcdcd;
+    min-height: 40px;
+}
+.right-side-title a {
+    font-size: 10px;
+}
+.right-side-title mat-icon {
+    height: 18px;
+    width: 18px;
+    padding-right: 5px;
+}
+.right-side-title .material-icons {
+    font-size: 18px;
+}
