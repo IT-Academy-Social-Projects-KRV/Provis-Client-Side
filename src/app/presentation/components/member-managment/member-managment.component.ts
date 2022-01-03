@@ -25,15 +25,21 @@ export class MemberManagmentComponent implements OnInit {
   })}
 
   delete(userId:string): void{
-    this.workspServise.delUserFromWorksp(this.workspaceId, userId).subscribe(
-      () => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Success',
-          text: "User was successfully deleted"
-        })
-        // window.location.reload();
-      }
-    )
-  }
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "User will be deleted from all workspace tasks!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.workspServise.delUserFromWorksp(this.workspaceId, userId).subscribe(
+          () => { 
+            window.location.reload();
+          })
+        }
+      })
+    }
 }
