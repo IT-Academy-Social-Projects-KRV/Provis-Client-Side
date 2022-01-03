@@ -16,13 +16,23 @@ export class TwoSetpVerificationComponent implements OnInit {
   twoStepForm: FormGroup;
   token: UserTwoStepCode;
 
-  constructor(private service: AuthenticationService, private router: Router, private fb: FormBuilder, private activeRoute: ActivatedRoute) {
+  constructor(private service: AuthenticationService,
+    private fb: FormBuilder,
+    private activeRoute: ActivatedRoute) {
     this.twoStepForm = fb.group({
       "token": ""
     });
   }
 
   ngOnInit() {
+    Swal.fire({
+      title: 'Check your email address ' + this.activeRoute.snapshot.queryParams['email'],
+      text: "You need to copy code and enter it in this page!",
+      icon: 'warning',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Ok i understand!'
+    });
   }
 
   submit(){

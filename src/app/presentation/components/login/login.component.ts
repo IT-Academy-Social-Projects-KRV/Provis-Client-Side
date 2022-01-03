@@ -16,12 +16,13 @@ export class LoginComponent implements OnInit {
   loginForm : FormGroup;
   userForLogin: UserForLogin = new UserForLogin();
 
-  constructor(private fb:FormBuilder, private service: AuthenticationService, private router: Router){
-    this.loginForm=fb.group({        
+  constructor(private fb:FormBuilder, private service: AuthenticationService){
+    this.loginForm=fb.group({
         "Email":["",SignInUpValidator.getEmailValidator()],
-        "Password" : [""]               
+        "Password" : [""]
     })
-}
+    const user = localStorage.getItem('user');
+  }
   ngOnInit(): void {
   }
 
@@ -39,19 +40,21 @@ export class LoginComponent implements OnInit {
   }
 
   submit()
-  {  
+  {
     if(this.loginForm.valid){
       this.userForLogin = Object.assign({}, this.loginForm.value);
       this.service.login(this.userForLogin).subscribe(
         () => {
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Login',
-            text: "Success",
-            showConfirmButton: false,
-            timer: 1000
-          });
+          if(localStorage.getItem('isTwoFactor')){
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Login',
+              text: "Success",
+              showConfirmButton: false,
+              timer: 1000
+            });
+          }
         },
         err => {
           let errorMessage: string = '';
@@ -63,11 +66,11 @@ export class LoginComponent implements OnInit {
                 errorMessage += errors[key][indexError] + '\n';
               }
             }
-            
+
            this.showAlert(errorMessage);
 
             return;
-          } 
+          }
 
           if(err.error && typeof err.error === 'object'){
             errorMessage += err.error.error;
