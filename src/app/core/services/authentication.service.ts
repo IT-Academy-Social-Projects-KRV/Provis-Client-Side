@@ -67,9 +67,9 @@ export class AuthenticationService {
     }));
   }
 
-  public twoStepLogin(twoFactor: TwoFactorDTO){
+  public twoStepLogin(twoFactor: TwoFactorDTO): Observable<void> {
 
-    this.http.post<AuthResponse>(this.twoStepLoginUrl, twoFactor).pipe(map((tokens: AuthResponse) => {
+    return this.http.post<AuthResponse>(this.twoStepLoginUrl, twoFactor).pipe(map((tokens: AuthResponse) => {
 
       this.setTokensInLocalStorage(tokens);
     }));
