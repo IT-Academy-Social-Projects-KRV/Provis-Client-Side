@@ -5,8 +5,24 @@
         <mat-label>Email</mat-label>
         <input type="email" matInput placeholder="Your email" maxlength=50 formControlName="UserEmail"> 
         <mat-error *ngIf="inviteUserForm.controls['UserEmail'].invalid && inviteUserForm.controls['UserEmail'].touched">Invalid email</mat-error>
-    </mat-form-field>
-      <button mat-raised-button color="Primary" (onClick)='Invite()'>Send</button>
-  </form>
+      </mat-form-field>
+      <button mat-raised-button color="Primary" (onClick)='Invite()'>Send</button>      
+    </form>
+    <div class="invite-list"> 
+      <h3>Active invitations</h3>
+      <li *ngFor="let item of workspaceActiveInviteInfo">
+        <div class="active-invite">
+         <div class="info-invite">
+            {{item.id}}
+            {{item.date}}
+          </div>
+          <div>
+            <button mat-mini-fab color="warn" (click)='DeleteInvite()'>
+            <mat-icon>delete</mat-icon>
+          </button>
+          </div>
+        </div>
+      </li>
+    </div> 
   </div>
 </div>

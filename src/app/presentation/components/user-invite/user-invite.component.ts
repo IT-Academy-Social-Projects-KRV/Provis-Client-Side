@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserInvite } from 'src/app/core/models/userInvite';
 import { WorkspaceComponent } from '../workspace/workspace.component';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import Swal from 'sweetalert2';
+import { UserInvites } from 'src/app/core/models/userInviteList';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-user',
@@ -14,6 +16,7 @@ import Swal from 'sweetalert2';
 export class UserInviteComponent implements OnInit {
 
     @Input() public workspaceId: number;
+    workspaceActiveInviteInfo: UserInvites[];
     userInvite: UserInvite = new UserInvite();
     inviteUserForm: FormGroup;
     workspaceID: WorkspaceComponent;
@@ -21,11 +24,15 @@ export class UserInviteComponent implements OnInit {
  constructor(private fb: FormBuilder, private ws: WorkspaceService) {
    this.inviteUserForm = fb.group({
      'UserEmail': ['', [Validators.required, Validators.email]]
-   });
+   }); 
  }
 
   ngOnInit() {
     this.userInvite.workspaceId = this.workspaceId;
+
+    this.ws.WorkspaceInviteInfo(this.workspaceId).subscribe((data: UserInvites[]) => {
+      this.workspaceActiveInviteInfo = data;
+    });
    }
 
    showAlert(error: string){
@@ -73,5 +80,9 @@ export class UserInviteComponent implements OnInit {
           }
         );    
       }
+    }
+
+    DeleteInvite(): void{
+      this.ws.WorkspaceActiveInviteDelete(11, this.workspaceId).subscribe();
     }
 }
