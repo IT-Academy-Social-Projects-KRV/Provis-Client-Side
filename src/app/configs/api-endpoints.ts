@@ -6,6 +6,7 @@ export const registerUrl = baseUrl + '/Authentication/registration';
 export const loginUrl = baseUrl + '/Authentication/login';
 export const refreshTokenUrl = baseUrl + '/Authentication/refreshToken';
 export const logoutUrl = baseUrl + '/Authentication/logout';
+export const twoStepVerificationUrl = baseUrl + '/Authentication/logintwostep';
 
 export const addworkspacetUrl = baseUrl + '/Workspace/addworkspace';
 export const getUserWorkspaceList = baseUrl + '/Workspace/getworlspacelist';
