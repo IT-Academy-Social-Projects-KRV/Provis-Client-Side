@@ -7,7 +7,6 @@ import { UserForLogin } from '../models/userForLogin';
 import { loginUrl, logoutUrl, refreshTokenUrl, registerUrl, twoStepVerificationUrl } from 'src/app/configs/api-endpoints';
 import { AuthResponse } from '../models/tokens';
 import { UserInfo } from '../models/userInfo';
-import { BehaviorSubject} from 'rxjs';
 import { TwoFactorDTO } from '../models/twoFactorDTO';
 import { Router } from '@angular/router';
 
@@ -27,7 +26,7 @@ export class AuthenticationService {
   private readonly logoutUrl = logoutUrl;
   private readonly twoStepLoginUrl = twoStepVerificationUrl;
 
-   public currentUser: UserInfo;
+  public currentUser: UserInfo;
 
   constructor(private http: HttpClient, private router: Router) {
     const user = localStorage.getItem('user');
@@ -38,7 +37,6 @@ export class AuthenticationService {
     else {
       this.currentUser = new UserInfo();
     }
-
    }
 
 
@@ -59,8 +57,10 @@ export class AuthenticationService {
           }
         });
 
-        localStorage.setItem('isTwoFactor', tokens.provider);
+        localStorage.setItem('isTwoFactor', String(tokens.is2StepVerificationRequired));
         localStorage.setItem('provider', tokens.provider);
+
+        return;
       }
 
       this.setTokensInLocalStorage(tokens);
@@ -103,11 +103,7 @@ export class AuthenticationService {
     const isTwoFacotr: any = localStorage.getItem('isTwoFactor');
     const provider: any = localStorage.getItem('provider');
 
-    if(isTwoFacotr && provider){
-      return true;
-    }
-
-    return false;
+    return Boolean(isTwoFacotr) && provider;
   }
 
   public async isAuthenticatedWithRefreshToken(): Promise<boolean> {

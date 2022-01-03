@@ -10,7 +10,7 @@ export class AuthGuard implements CanActivate {
 
   constructor(private authenticationService: AuthenticationService, private router: Router) { }
 
-  async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+  async canActivate(): Promise<boolean> {
 
     if(await this.authenticationService.isTwoFactorAuthentucation())
     {
