@@ -5,7 +5,7 @@ import { UserForRegister } from '../models/userForRegister';
 import { map, Observable } from 'rxjs';
 import { UserForLogin } from '../models/userForLogin';
 import { loginUrl, logoutUrl, refreshTokenUrl, registerUrl } from 'src/app/configs/api-endpoints';
-import { Tokens } from '../models/tokens';
+import { AuthResponse } from '../models/tokens';
 import { UserInfo } from '../models/userInfo';
 import { BehaviorSubject} from 'rxjs';
 
@@ -46,7 +46,7 @@ export class AuthenticationService {
 
   public login(user: UserForLogin): Observable<void> {
 
-    return this.http.post<Tokens>(this.loginUrl, user).pipe(map((tokens: Tokens) => {
+    return this.http.post<AuthResponse>(this.loginUrl, user).pipe(map((tokens: AuthResponse) => {
 
       if(tokens.token && tokens.refreshToken) {
         const decodedToken = this.jwtHelperService.decodeToken(tokens.token);
@@ -90,13 +90,13 @@ export class AuthenticationService {
     return result;
   }
 
-  public RefreshToken(): Observable<Tokens> {
+  public RefreshToken(): Observable<AuthResponse> {
 
-    let tokens: Tokens = new Tokens();
+    let tokens: AuthResponse = new AuthResponse();
     tokens.token = localStorage.getItem('token')?.toString();
     tokens.refreshToken = localStorage.getItem('refreshToken')?.toString();
 
-    return this.http.post<Tokens>(this.refreshTokenUrl, tokens).pipe(map((tokens: Tokens) => {
+    return this.http.post<AuthResponse>(this.refreshTokenUrl, tokens).pipe(map((tokens: AuthResponse) => {
 
       if(tokens.token && tokens.refreshToken) {
         const decodedToken = this.jwtHelperService.decodeToken(tokens.token);
@@ -116,11 +116,11 @@ export class AuthenticationService {
 
   public Logout(): Observable<void> {
 
-    let tokens: Tokens = new Tokens();
+    let tokens: AuthResponse = new AuthResponse();
     tokens.token = localStorage.getItem('token')?.toString();
     tokens.refreshToken = localStorage.getItem('refreshToken')?.toString();
 
-    return this.http.post<Tokens>(this.logoutUrl, tokens).pipe(map(() => {
+    return this.http.post<AuthResponse>(this.logoutUrl, tokens).pipe(map(() => {
       localStorage.removeItem('token');
       localStorage.removeItem('refreshToken');
       localStorage.removeItem('user');
