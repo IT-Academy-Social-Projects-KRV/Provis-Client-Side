@@ -38,7 +38,7 @@ export class AuthenticationService {
 
    }
 
- 
+
   public register(user: UserForRegister): Observable<void> {
 
     return this.http.post<void>(this.registerUrl, user);
@@ -47,14 +47,14 @@ export class AuthenticationService {
   public login(user: UserForLogin): Observable<void> {
 
     return this.http.post<Tokens>(this.loginUrl, user).pipe(map((tokens: Tokens) => {
-      
+
       if(tokens.token && tokens.refreshToken) {
         const decodedToken = this.jwtHelperService.decodeToken(tokens.token);
 
         this.currentUser.Id = decodedToken[this.userId];
         this.currentUser.Username = decodedToken[this.userName];
         this.currentUser.Role = decodedToken[this.userRole];
-        
+
         localStorage.setItem('token', tokens.token);
         localStorage.setItem('refreshToken', tokens.refreshToken);
         localStorage.setItem('user', JSON.stringify(this.currentUser));
@@ -66,14 +66,14 @@ export class AuthenticationService {
     const token: any  = localStorage.getItem('token');
     const refreshToken: any = localStorage.getItem('refreshToken');
 
-    return token&& refreshToken;
+    return token && refreshToken;
   }
   public async isAuthenticatedWithRefreshToken(): Promise<boolean> {
     const token: any  = localStorage.getItem('token');
     const refreshToken: any = localStorage.getItem('refreshToken');
 
     if(!this.jwtHelperService.isTokenExpired(token) && refreshToken)
-    return true;
+      return true;
 
     let result = false;
     if(token && refreshToken)
@@ -86,7 +86,7 @@ export class AuthenticationService {
         result = false;
       }
     }
-    
+
     return result;
   }
 
@@ -95,9 +95,9 @@ export class AuthenticationService {
     let tokens: Tokens = new Tokens();
     tokens.token = localStorage.getItem('token')?.toString();
     tokens.refreshToken = localStorage.getItem('refreshToken')?.toString();
-    
+
     return this.http.post<Tokens>(this.refreshTokenUrl, tokens).pipe(map((tokens: Tokens) => {
-      
+
       if(tokens.token && tokens.refreshToken) {
         const decodedToken = this.jwtHelperService.decodeToken(tokens.token);
 
@@ -119,7 +119,7 @@ export class AuthenticationService {
     let tokens: Tokens = new Tokens();
     tokens.token = localStorage.getItem('token')?.toString();
     tokens.refreshToken = localStorage.getItem('refreshToken')?.toString();
-    
+
     return this.http.post<Tokens>(this.logoutUrl, tokens).pipe(map(() => {
       localStorage.removeItem('token');
       localStorage.removeItem('refreshToken');
