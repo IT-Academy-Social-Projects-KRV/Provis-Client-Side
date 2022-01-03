@@ -5,7 +5,7 @@ import { UserForRegister } from '../models/userForRegister';
 import { map, Observable } from 'rxjs';
 import { UserForLogin } from '../models/userForLogin';
 import { loginUrl, logoutUrl, refreshTokenUrl, registerUrl, twoStepVerificationUrl } from 'src/app/configs/api-endpoints';
-import { AuthResponse } from '../models/tokens';
+import { AuthResponse } from '../models/authResponse';
 import { UserInfo } from '../models/userInfo';
 import { TwoFactorDTO } from '../models/twoFactorDTO';
 import { Router } from '@angular/router';
