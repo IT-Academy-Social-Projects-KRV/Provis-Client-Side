@@ -4,10 +4,12 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserForRegister } from '../models/userForRegister';
 import { map, Observable } from 'rxjs';
 import { UserForLogin } from '../models/userForLogin';
-import { loginUrl, logoutUrl, refreshTokenUrl, registerUrl } from 'src/app/configs/api-endpoints';
+import { loginUrl, logoutUrl, refreshTokenUrl, registerUrl, twoStepVerificationUrl } from 'src/app/configs/api-endpoints';
 import { AuthResponse } from '../models/tokens';
 import { UserInfo } from '../models/userInfo';
 import { BehaviorSubject} from 'rxjs';
+import { TwoFactorDTO } from '../models/twoFactorDTO';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +25,11 @@ export class AuthenticationService {
   private readonly loginUrl = loginUrl;
   private readonly refreshTokenUrl = refreshTokenUrl;
   private readonly logoutUrl = logoutUrl;
+  private readonly twoStepLoginUrl = twoStepVerificationUrl;
 
    public currentUser: UserInfo;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     const user = localStorage.getItem('user');
 
     if(user) {
@@ -48,18 +51,45 @@ export class AuthenticationService {
 
     return this.http.post<AuthResponse>(this.loginUrl, user).pipe(map((tokens: AuthResponse) => {
 
-      if(tokens.token && tokens.refreshToken) {
-        const decodedToken = this.jwtHelperService.decodeToken(tokens.token);
+      if(tokens.is2StepVerificationRequired && tokens.provider){
+        this.router.navigate(["twoStepVerification"], {
+          queryParams: {
+            provider: tokens.provider,
+            email: user.Email
+          }
+        });
 
-        this.currentUser.Id = decodedToken[this.userId];
-        this.currentUser.Username = decodedToken[this.userName];
-        this.currentUser.Role = decodedToken[this.userRole];
-
-        localStorage.setItem('token', tokens.token);
-        localStorage.setItem('refreshToken', tokens.refreshToken);
-        localStorage.setItem('user', JSON.stringify(this.currentUser));
+        localStorage.setItem('isTwoFactor', tokens.provider);
+        localStorage.setItem('provider', tokens.provider);
       }
+
+      this.setTokensInLocalStorage(tokens);
     }));
+  }
+
+  public twoStepLogin(twoFactor: TwoFactorDTO){
+
+    this.http.post<AuthResponse>(this.twoStepLoginUrl, twoFactor).pipe(map((tokens: AuthResponse) => {
+
+      this.setTokensInLocalStorage(tokens);
+    }));
+  }
+
+  private setTokensInLocalStorage(tokens: AuthResponse){
+
+    if(tokens.token && tokens.refreshToken) {
+      const decodedToken = this.jwtHelperService.decodeToken(tokens.token);
+
+      this.currentUser.Id = decodedToken[this.userId];
+      this.currentUser.Username = decodedToken[this.userName];
+      this.currentUser.Role = decodedToken[this.userRole];
+
+      localStorage.setItem('token', tokens.token);
+      localStorage.setItem('refreshToken', tokens.refreshToken);
+      localStorage.setItem('user', JSON.stringify(this.currentUser));
+
+      this.router.navigate(['user/workspaces']);
+    }
   }
 
   public async isAuthenticated(): Promise<boolean> {
@@ -68,6 +98,18 @@ export class AuthenticationService {
 
     return token && refreshToken;
   }
+
+  public async isTwoFactorAuthentucation(): Promise<boolean>{
+    const isTwoFacotr: any = localStorage.getItem('isTwoFactor');
+    const provider: any = localStorage.getItem('provider');
+
+    if(isTwoFacotr && provider){
+      return true;
+    }
+
+    return false;
+  }
+
   public async isAuthenticatedWithRefreshToken(): Promise<boolean> {
     const token: any  = localStorage.getItem('token');
     const refreshToken: any = localStorage.getItem('refreshToken');

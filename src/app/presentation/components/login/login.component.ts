@@ -52,8 +52,6 @@ export class LoginComponent implements OnInit {
             showConfirmButton: false,
             timer: 1000
           });
-
-          this.router.navigate(['user/workspaces']);
         },
         err => {
           let errorMessage: string = '';
