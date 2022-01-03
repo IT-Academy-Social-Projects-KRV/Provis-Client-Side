@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
         "Email":["",SignInUpValidator.getEmailValidator()],
         "Password" : [""]
     })
-    const user = localStorage.getItem('user');
   }
   ngOnInit(): void {
   }
@@ -45,16 +44,14 @@ export class LoginComponent implements OnInit {
       this.userForLogin = Object.assign({}, this.loginForm.value);
       this.service.login(this.userForLogin).subscribe(
         () => {
-          if(localStorage.getItem('isTwoFactor')){
-            Swal.fire({
-              position: 'top-end',
-              icon: 'success',
-              title: 'Login',
-              text: "Success",
-              showConfirmButton: false,
-              timer: 1000
-            });
-          }
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Login',
+            text: "Success",
+            showConfirmButton: false,
+            timer: 1000
+          });
         },
         err => {
           let errorMessage: string = '';
