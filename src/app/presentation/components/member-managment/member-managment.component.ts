@@ -29,7 +29,7 @@ export class MemberManagmentComponent implements OnInit {
    }
 
   modalInvites() {
-    let dialogRef = this.dialog.open(UserInviteComponent);
+    let dialogRef = this.dialog.open(UserInviteComponent, {autoFocus: false});
     dialogRef.componentInstance.workspaceId = this.workspaceId;
   }
 }

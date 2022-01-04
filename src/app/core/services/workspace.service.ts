@@ -1,11 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CreateWorkspace } from '../models/workspace';
-import { activeInvitesUrl, addworkspacetUrl, getUserWorkspaceList, inviteUser, workspaceActiveInvite, workspaceDeleteActiveInvite } from 'src/app/configs/api-endpoints';
+import { addworkspacetUrl, getUserWorkspaceList, inviteUser, workspaceActiveInvite } from 'src/app/configs/api-endpoints';
 import { Observable } from 'rxjs';
 import { UserWorkspace } from '../models/userWorkspaceList';
 import { UserInvite } from '../models/userInvite';
-import { UserInvites } from '../models/userInviteList';
 import { WorkspaceInviteInfo } from '../models/WorkspaceInviteInfo';
 
 @Injectable({
@@ -17,8 +16,7 @@ export class WorkspaceService {
     private readonly WorkspaceListUrl = addworkspacetUrl;
     private readonly getUserInvite = inviteUser;
     private readonly activeInviteUrl = workspaceActiveInvite;
-    private readonly workspaceDeleteActiveInviteUrl = workspaceDeleteActiveInvite;
-
+  
     private httpOption = {
         headers: new HttpHeaders({
             Authorization: 'Bearer ' + this.GetToken()
@@ -42,11 +40,10 @@ export class WorkspaceService {
     }
 
     public WorkspaceInviteInfo(workspaceId: number) {
-        console.log(this.activeInviteUrl + workspaceId + "/invite/active", this.httpOption);
         return this.http.get<WorkspaceInviteInfo[]>(this.activeInviteUrl + workspaceId + "/invite/active", this.httpOption);
     }
 
     public WorkspaceActiveInviteDelete(id: number, workspaceId: number){
-        return this.http.delete<void>(this.workspaceDeleteActiveInviteUrl + workspaceId + "/invite/" + id + "/cancel", this.httpOption);
+        return this.http.delete<void>(this.activeInviteUrl + workspaceId + "/invite/" + id + "/cancel", this.httpOption);
     }
 }

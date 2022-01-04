@@ -53,7 +53,10 @@ export class UserInviteComponent implements OnInit {
         this.userInvite = this.inviteUserForm.value;
         this.userInvite.workspaceId = this.workspaceId;
         this.ws.InviteUser(this.userInvite).subscribe(
-          () => {},
+          () => {this.ws.WorkspaceInviteInfo(this.workspaceId).subscribe((data: WorkspaceInviteInfo[]) => {
+            this.workspaceActiveInviteInfo = data;
+          });
+          },
           err => {
             let errorMessage: string = '';
             if(err.error.errors && typeof err.error.errors === 'object'){
@@ -66,7 +69,7 @@ export class UserInviteComponent implements OnInit {
               }
               
              this.showAlert(errorMessage);
-  
+              
               return;
             } 
   
@@ -82,7 +85,8 @@ export class UserInviteComponent implements OnInit {
       }
     }
 
-    DeleteInvite(): void{
-      this.ws.WorkspaceActiveInviteDelete(11, this.workspaceId).subscribe();
+    DeleteInvite(inviteId: number): void{
+      this.ws.WorkspaceActiveInviteDelete(inviteId, this.workspaceId).subscribe();
+      this.workspaceActiveInviteInfo.splice(this.workspaceActiveInviteInfo.findIndex(x => x.inviteId == inviteId), 1);
     }
 }

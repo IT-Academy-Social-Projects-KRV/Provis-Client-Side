@@ -1,25 +1,29 @@
 <div class="invite-modal">
   <div class="example-container">
     <form class="register-form" [formGroup]="inviteUserForm" novalidate (ngSubmit)="Invite()">
-      <mat-form-field appearance="fill">
+      <mat-form-field class="send-email" appearance="fill">
         <mat-label>Email</mat-label>
-        <input type="email" matInput placeholder="Your email" maxlength=50 formControlName="UserEmail"> 
+        <input  type="email" matInput placeholder="Your email" maxlength=50 formControlName="UserEmail"> 
         <mat-error *ngIf="inviteUserForm.controls['UserEmail'].invalid && inviteUserForm.controls['UserEmail'].touched">Invalid email</mat-error>
       </mat-form-field>
-      <button mat-raised-button color="Primary" (onClick)='Invite()'>Send</button>      
+      <button class="button-send" mat-raised-button color="Primary" (onClick)='Invite()'>Send</button>      
     </form>
     <div class="invite-list"> 
-      <h3>Active invitations</h3>
+      <span class="title-invite">Active invitations</span>
       <span *ngFor="let item of workspaceActiveInviteInfo">
         <div class="active-invite">
          <div class="info-invite">
-            {{item.toUserEmail}}
-            {{item.date |date:'dd/MM/yyyy HH:mm'}}
-            {{item.fromUserName}}
-            {{item.toUserName}}     
+           <div class="email-info">
+             <span>{{item.toUserEmail}}</span>
+             <span class="data-info">{{item.date |date:'dd.MM.yyyy HH:mm'}}</span>
+           </div>
+           <div class="touser-info">
+              From<span class="toUserColor"> {{item.fromUserName}} </span>
+              to<span class="toUserColor"> {{item.toUserName}}</span>
+           </div>
           </div>
           <div>
-            <button mat-mini-fab color="warn" (click)='DeleteInvite()'>
+            <button mat-mini-fab color="warn" (click)='DeleteInvite(item.inviteId)'>
             <mat-icon>delete</mat-icon>
           </button>
           </div>
