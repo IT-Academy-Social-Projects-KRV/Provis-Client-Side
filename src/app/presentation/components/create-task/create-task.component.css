@@ -1,0 +1,14 @@
+.mat-form-field {
+    width: 100%;
+    margin:5px auto;
+}
+.createTask-form{
+    max-width: 400px;
+}
+.mat-raised-button{
+    background-color: #48537a;
+    color: white;
+}
+.assign{
+    margin-left: 61px;
+}

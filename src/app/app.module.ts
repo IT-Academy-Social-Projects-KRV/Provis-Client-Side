@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge'
 import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule} from '@angular/material/select';
 
 import { HomeComponent } from './presentation/components/home/home.component';
 import { AboutComponent } from './presentation/components/about/about.component';
@@ -88,7 +89,8 @@ import { UserLeftmenuComponent } from './presentation/components/user-leftmenu/u
     MatMenuModule,
     MatDialogModule,
     MatBadgeModule,
-    MatCardModule
+    MatCardModule,
+    MatSelectModule
   ],
   providers: [
     AuthInterceptorProvider,

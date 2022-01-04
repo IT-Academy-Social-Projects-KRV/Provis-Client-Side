@@ -28,6 +28,7 @@ export class WorkspaceComponent implements OnInit {
   }
   modalCreateTask() {
     let dialogRef = this.dialog.open(CreateTaskComponent);
-  } 
+    dialogRef.componentInstance.workspaceId = this.workspaceId;
+  }
 
 }
