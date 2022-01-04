@@ -16,6 +16,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge'
 import { MatCardModule } from '@angular/material/card';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSelectModule} from '@angular/material/select';
 
 import { HomeComponent } from './presentation/components/home/home.component';
 import { AboutComponent } from './presentation/components/about/about.component';
@@ -29,6 +32,7 @@ import { WorkspaceListComponent } from './presentation/components/workspace-list
 import { UserComponent } from './presentation/components/user/user.component';
 import { UserHeaderComponent } from './presentation/components/user-header/user-header.component';
 import { UserProfileComponent } from './presentation/components/user-profile/user-profile.component';
+import { ConfirmEmailComponent } from './presentation/components/confirm-email/confirm-email.component';
 import { MemberManagmentComponent } from './presentation/components/member-managment/member-managment.component';
 import { MemberListComponent } from './presentation/components/member-list/member-list.component';
 import { MemberCalendarComponent } from './presentation/components/member-calendar/member-calendar.component';
@@ -46,6 +50,8 @@ import { WorkspaceSettingsComponent } from './presentation/components/workspace-
 import { ModalInvitesComponent } from './presentation/components/modal-invites/modal-invites.component';
 import { UserLeftmenuComponent } from './presentation/components/user-leftmenu/user-leftmenu.component';
 import { ModalUpdateWorkspaceComponent } from './presentation/components/modal-updateworkspace/modal-updateworkspace.component';
+import { TwoSetpVerificationComponent } from './presentation/components/two-setp-verification/two-setp-verification.component';
+import { ChangeTwoFaComponent } from './presentation/components/change-two-fa/change-two-fa.component';
 
 @NgModule({
   declarations: [
@@ -67,13 +73,16 @@ import { ModalUpdateWorkspaceComponent } from './presentation/components/modal-u
     WorkspaceSettingsComponent,
     UserInviteComponent,
     ModalInvitesComponent,
+    ConfirmEmailComponent,
     UserLeftmenuComponent,
     MemberManagmentComponent,
     MemberListComponent,
     MemberCalendarComponent,
     MemberTasklistComponent,
     CreateTaskComponent,
-    ModalUpdateWorkspaceComponent
+    ModalUpdateWorkspaceComponent,
+    TwoSetpVerificationComponent,
+    ChangeTwoFaComponent
   ],
   imports: [
     BrowserModule,
@@ -90,7 +99,10 @@ import { ModalUpdateWorkspaceComponent } from './presentation/components/modal-u
     MatMenuModule,
     MatDialogModule,
     MatBadgeModule,
-    MatCardModule
+    MatCardModule,
+    DragDropModule,
+    MatExpansionModule,
+    MatSelectModule
   ],
   providers: [
     AuthInterceptorProvider,

@@ -13,7 +13,6 @@ import { ModalUpdateWorkspaceComponent } from '../modal-updateworkspace/modal-up
   styleUrls: ['./workspace-settings.component.css']
 })
 export class WorkspaceSettingsComponent implements OnInit {
-
   protected routeSub: Subscription;
   workspaceId: number;
   workspace: userWorkspaceInfo;
@@ -45,5 +44,6 @@ export class WorkspaceSettingsComponent implements OnInit {
 
     });
   }
+
 }
 

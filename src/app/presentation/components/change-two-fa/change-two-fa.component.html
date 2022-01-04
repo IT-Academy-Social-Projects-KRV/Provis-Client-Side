@@ -1,0 +1,17 @@
+
+      <div class="form-block">
+              <form class="login-form" [formGroup]="twoFactorForm" novalidate (ngSubmit)="submit()">
+
+                  <div style="padding:30px">
+                    <p class="form-title">Enter code</p>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Code</mat-label>
+                        <input type="text" matInput placeholder="Your code" #Token formControlName="Token" required>
+                    </mat-form-field>
+                    <button mat-raised-button class="w-100 font-weight-600">Ok</button>
+                  </div>
+                  <p class="form-title">Check your email address</p>
+
+              </form>
+      </div>
+
