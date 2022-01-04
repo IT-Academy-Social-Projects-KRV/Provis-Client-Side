@@ -1,10 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, Validator } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { enumValues, taskStatuses } from 'src/app/configs/enum.helper';
 import { CreateTask, IAssignedUser } from 'src/app/core/models/createTask';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import Swal from 'sweetalert2';
-import { WorkspaceComponent } from '../workspace/workspace.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -17,7 +16,6 @@ export class CreateTaskComponent implements OnInit {
   @Input() public workspaceId: number;
   taskForm: FormGroup;
   createTask: CreateTask = new CreateTask();
-  workspaceID: WorkspaceComponent;
   status = taskStatuses;
   selectedStatus: number;
   public enumValues = enumValues;
@@ -33,6 +31,7 @@ export class CreateTaskComponent implements OnInit {
 
   ngOnInit() {
     this.createTask.workspaceId = this.workspaceId
+    console.log(this.workspaceId)
   }
 
   showAlert(error: string){

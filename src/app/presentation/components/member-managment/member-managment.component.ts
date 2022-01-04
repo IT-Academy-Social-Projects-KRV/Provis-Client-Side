@@ -24,11 +24,14 @@ export class MemberManagmentComponent implements OnInit {
   constructor(public dialog: MatDialog, private route: ActivatedRoute, private router: Router, private workspaceServise: WorkspaceService) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.workspaceId = Number(this.route.snapshot.paramMap.get('id'))
+    this.route.parent?.params.subscribe(
+      (params) =>
+      {this.workspaceId = Number(params['id']);
+      console.log(this.workspaceId);
+    })
     this.workspaceServise.getWorkspaceUserList(this.workspaceId).subscribe(data=>{
       this.workspaceUserList=data;})
-  })}
+  }
   
   modalInvites() {
     let dialogRef = this.dialog.open(UserInviteComponent, {autoFocus: false});

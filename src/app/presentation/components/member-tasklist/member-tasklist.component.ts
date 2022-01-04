@@ -7,6 +7,8 @@ import { CreateTaskComponent } from './../create-task/create-task.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-member-tasklist',
@@ -28,11 +30,17 @@ export class MemberTasklistComponent implements OnInit {
   inReview: Array<UserTask> = [];
   completed: Array<UserTask> = [];
 
+  protected routeSub: Subscription;
+  workspaceId: number;
+
   userTaskList: UserTask [];
 
-  constructor(public dialog: MatDialog, private userTask: TaskService) { }
+  constructor(public dialog: MatDialog, private userTask: TaskService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.parent?.params.subscribe((params) => 
+    {this.workspaceId = Number(params['id'])});
+
     this.userTask.getUserTask().subscribe((data: UserTask[]) => {
       this.userTaskList = data;
     
@@ -59,6 +67,11 @@ export class MemberTasklistComponent implements OnInit {
       }
       this.countTask = this.todo.length + this.inProgress.length + this.inReview.length;
     })
+  }
+
+  modalCreateTask() {
+    let dialogRef = this.dialog.open(CreateTaskComponent);
+    dialogRef.componentInstance.workspaceId = this.workspaceId;
   }
 
   drop(event: CdkDragDrop<UserTask[]>) {
@@ -98,9 +111,4 @@ export class MemberTasklistComponent implements OnInit {
 
 
   }
-
-  modalCreateTask() {
-    let dialogRef = this.dialog.open(CreateTaskComponent);
-  } 
-
 }
