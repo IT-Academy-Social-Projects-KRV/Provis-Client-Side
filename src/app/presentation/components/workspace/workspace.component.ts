@@ -1,3 +1,5 @@
+import { CreateTaskComponent } from './../create-task/create-task.component';
+import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -13,7 +15,7 @@ export class WorkspaceComponent implements OnInit {
   protected routeSub: Subscription;
   workspaceId: number;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.routeSub = this.route.params.subscribe(params => {

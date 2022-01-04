@@ -13,7 +13,7 @@ import { answerInviteUserUrl,
          sendTwoFactorCodeUrl,
          change2fUrl,
         userImageUrl  } from 'src/app/configs/api-endpoints';
-import { UserInvite } from '../models/userInviteList';
+import { UserInvites } from '../models/userInviteList';
 import { activeInvitesUrl } from 'src/app/configs/api-endpoints';
 import { ActiveInvites} from '../models/activeInvites';
 import { UserProfile } from '../models/userProfile';

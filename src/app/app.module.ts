@@ -99,7 +99,7 @@ import { ChangeTwoFaComponent } from './presentation/components/change-two-fa/ch
     MatBadgeModule,
     MatCardModule,
     DragDropModule,
-    MatExpansionModule
+    MatExpansionModule,
     MatSelectModule
   ],
   providers: [
