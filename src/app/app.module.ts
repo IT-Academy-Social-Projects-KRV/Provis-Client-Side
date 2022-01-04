@@ -16,6 +16,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge'
 import { MatCardModule } from '@angular/material/card';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule} from '@angular/material/select';
 
 import { HomeComponent } from './presentation/components/home/home.component';
@@ -96,6 +98,8 @@ import { ChangeTwoFaComponent } from './presentation/components/change-two-fa/ch
     MatDialogModule,
     MatBadgeModule,
     MatCardModule,
+    DragDropModule,
+    MatExpansionModule
     MatSelectModule
   ],
   providers: [
