@@ -1,15 +1,20 @@
-<section>
-  <div class="user-page">
-      <app-user-leftmenu></app-user-leftmenu>
-      <div class="user-right-side">
-
-
-        <!-- Enter your code here -->
-        <h1> Member managment</h1>
-        <button mat-raised-button color="Primary" (click)='modalInvites()'>Invite</button>
-        
-      
-      
-      </div>
-  </div>
-</section>   
+<div class="right-side-title">
+  <span> Member managment</span>
+    <div class="delpage">
+      <li *ngFor="let item of workspaceUserList">
+        <div>
+          <span class="del-title">{{item.userName}}</span>
+            <div class="page2">
+              <div>
+                <span>User role:</span> 
+                <span class="font-weight-600">{{item.role}}</span>
+              </div>
+            </div>
+          </div>
+        <span *ngIf="item.role != 'Owner'">
+          <button mat-raised-button class="button-accept" (click)="delete(item.id)">Delete</button>
+        </span>
+      </li>
+    </div>
+</div>
+ <button mat-raised-button color="Primary" (click)='modalInvites()'>Invite</button>

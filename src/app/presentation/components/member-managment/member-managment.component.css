@@ -1,0 +1,30 @@
+.delpage {
+    list-style-type: none;
+    padding: 20px 0;
+    margin: 14px 25px;
+    width: 400px;
+}
+.delpage li {
+    border-bottom: 1px solid gray;
+    display: flex;
+    flex-direction: row;
+    height: 75px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.del-title {
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.delpage span{
+    margin-right: 10px;
+    line-height: 30px;
+}
+
+.page2 {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}

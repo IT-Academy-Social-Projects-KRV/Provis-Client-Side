@@ -4,16 +4,25 @@
   <mat-card-title>User profile</mat-card-title>
 
   <mat-card-content class="center">
-    <img mat-card-xl-image src="assets/img/user-profile-image.png" >
+    <img mat-card-xl-image [src]="image || defaultImage" >
   </mat-card-content>
 
   <mat-card-content class="center">
-    <button mat-raised-button color="primary">Upload</button>
+    <button mat-raised-button color="primary" (click)="fileInput.click()">
+      <span>Upload</span>
+      <input #fileInput type="file" [accept]="getImageTypes()" (change)="uploadImage($event)" style="display:none;"/>
+    </button>
   </mat-card-content>
 
-  <mat-card-content class="right">
-    <button mat-raised-button color="primary" (click)="confirmEmail()">Confirm Email</button>
-  </mat-card-content>
+  <div class="verifiaction-block">
+    <mat-card-content>
+      <button mat-raised-button color="primary" (click)="confirmEmail()">Confirm Email</button>
+    </mat-card-content>
+
+    <mat-card-content>
+      <button mat-raised-button color="primary" (click)="modelEnterCode()">2FA</button>
+    </mat-card-content>
+  </div>
 
   <mat-card-content class="center">
 

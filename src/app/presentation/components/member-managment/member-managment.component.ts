@@ -7,6 +7,11 @@ import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import { UserWorkspace } from 'src/app/core/models/userWorkspaceList';
 import { UserInvite } from 'src/app/core/models/userInvite';
 import { UserInvites } from 'src/app/core/models/userInviteList';
+import { ActivatedRoute, Router } from '@angular/router';
+import { numbers } from '@material/slider';
+import { WorkspaceMembers } from 'src/app/core/models/workspaceUsersList';
+import { WorkspaceService } from 'src/app/core/services/workspace.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -19,17 +24,38 @@ export class MemberManagmentComponent implements OnInit {
   protected routeSub: Subscription;
   workspaceId: number;
   workspaceActiveInviteInfo: UserInvites[];
+  workspaceUserList: WorkspaceMembers[];
 
-  constructor(public dialog: MatDialog, private route: ActivatedRoute, private workspaceServise: WorkspaceService) { }
+  constructor(public dialog: MatDialog, private route: ActivatedRoute,private router: Router, private workspaceServise: WorkspaceService) { }
 
   ngOnInit() {
-    this.routeSub = this.route.params.subscribe(params => {
-      this.workspaceId = params['id'];
-    });
-   }
-
+    this.route.paramMap.subscribe(params => {
+      this.workspaceId = Number(this.route.snapshot.paramMap.get('id'))
+    this.workspServise.getWorkspaceUserList(this.workspaceId).subscribe(data=>{
+      this.workspaceUserList=data;})
+  })}
+  
   modalInvites() {
     let dialogRef = this.dialog.open(UserInviteComponent, {autoFocus: false});
     dialogRef.componentInstance.workspaceId = this.workspaceId;
   }
+
+  delete(userId:string): void{
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "User will be deleted from all workspace tasks!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.workspServise.delUserFromWorksp(this.workspaceId, userId).subscribe(
+          () => { 
+            window.location.reload();
+          })
+        }
+      })
+    }
 }

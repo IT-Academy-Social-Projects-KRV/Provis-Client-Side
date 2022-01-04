@@ -1,0 +1,119 @@
+<div class="right-side-title">
+  <span>Task List</span>
+  <div>
+      <a mat-raised-button class="link-button button-accept" (click)="modalCreateTask()">
+          <mat-icon aria-hidden="false" aria-label="Example home icon">queue</mat-icon>
+          <span>Create Task</span>  
+      </a>
+  </div>
+</div>
+
+<div class="toggle-block">
+  <div class="toggle-button">
+    <div (click)="accordion.openAll()">Expand All</div>
+    <div (click)="accordion.closeAll()">Collapse All</div>
+  </div>
+</div>
+<mat-accordion multi>
+  <div *ngFor="let user of users">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{user}}
+          <span>Active task - {{countTask}}</span>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div>
+        <div class="task-card-block">
+          <div class="example-container">
+            <div class="task-status todo-border">
+              <span>To do</span>
+              <span>({{todo.length}})</span>
+            </div>
+            <div
+              id = "todo"
+              cdkDropList
+              #todoList="cdkDropList"
+              [cdkDropListData]="todo"
+              [cdkDropListConnectedTo]="[progressList, reviewList, completedList]"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)">
+              <div class="example-box todo id-{{item.id}}" *ngFor="let item of todo" cdkDrag>
+                <span class="task-title">{{item.name}}</span>
+                <div class="task-info">
+                  <span>Deadline: {{item.deadline | date:'dd.MM.yyyy'}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="example-container">
+            <div class="task-status progress-border">
+              <span>In progress</span>
+              <span>({{inProgress.length}})</span>
+            </div>
+            <div
+              id = "inProgress"
+              cdkDropList
+              #progressList="cdkDropList"
+              [cdkDropListData]="inProgress"
+              [cdkDropListConnectedTo]="[todoList, reviewList, completedList]"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)">
+              <div class="example-box progress" *ngFor="let item of inProgress" cdkDrag>
+                <span class="task-title">{{item.name}}</span>
+                <div class="task-info">
+                  <span>Deadline: {{item.deadline | date:'dd.MM.yyyy'}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <div class="example-container">
+            <div class="task-status review-border">
+              <span>In review</span>
+              <span>({{inReview.length}})</span>
+            </div>
+            <div
+              id = "inReview"
+              cdkDropList
+              #reviewList="cdkDropList"
+              [cdkDropListData]="inReview"
+              [cdkDropListConnectedTo]="[todoList, progressList, completedList]"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)">
+              <div class="example-box review" *ngFor="let item of inReview" cdkDrag >
+                <span class="task-title">{{item.name}}</span>
+                <div class="task-info">
+                  <span>Deadline: {{item.deadline | date:'dd.MM.yyyy'}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <div class="example-container">
+            <div class="task-status completed-border">
+              <span>Completed</span>
+              <span>({{completed.length}})</span>
+            </div>
+            <div
+              id = "completed"
+              cdkDropList
+              #completedList="cdkDropList"
+              [cdkDropListData]="completed"
+              [cdkDropListConnectedTo]="[todoList, progressList, reviewList]"
+              class="example-list"
+              (cdkDropListDropped)="drop($event)">
+              <div class="example-box completed" *ngFor="let item of completed" cdkDrag>
+                <span class="task-title">{{item.name}}</span>
+                <div class="task-info">
+                  <span>Deadline: {{item.deadline | date:'dd.MM.yyyy'}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </div>
+</mat-accordion>
