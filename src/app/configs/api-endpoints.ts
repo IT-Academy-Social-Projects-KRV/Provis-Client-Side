@@ -11,6 +11,7 @@ export const twoStepVerificationUrl = baseUrl + '/Authentication/logintwostep';
 export const addworkspacetUrl = baseUrl + '/Workspace/addworkspace';
 export const getUserWorkspaceList = baseUrl + '/Workspace/getworlspacelist';
 export const answerInviteUserUrl = baseUrl + '/Workspace/invite';
+export const userWorkspaceInfoUrl = baseUrl + '/Workspace/getworkspace/'
 
 export const getWorkspaceUsersUrl = baseUrl + '/Workspace/workspace'
 export const deleteUserFromWorkspaseUrl = baseUrl + '/Workspace'

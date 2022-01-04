@@ -1,3 +1,5 @@
+import { userWorkspaceInfoUrl } from './../../configs/api-endpoints';
+import { userWorkspaceInfo } from './../models/userWorkspaceInfo';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -31,9 +33,11 @@ export class UserService {
   private readonly sendConfirmEmailUrl = sendConfirmEmailUrl;
   private readonly confirmEmailUrl = confirmEmailUrl;
   private readonly changeUserInfoUrl = changeUserInfoUrl;
+  private readonly userWorkspaceInfoUrl = userWorkspaceInfoUrl;
   private readonly checkIsTwoFactorVerificationUrl = checkIsTwoFactorVerificationUrl;
   private readonly changeTwoFacotrUrl = change2fUrl;
   private readonly sendTwoFactorCodeUrl = sendTwoFactorCodeUrl;
+
 
   private readonly userImageUrl = userImageUrl;
   
@@ -109,5 +113,9 @@ export class UserService {
     formData.append('image', image, image.name);
 
     return this.http.put<void>(this.userImageUrl, formData, this.httpOption);
+  }
+
+  userWorkspaceInfo(workspaceId:number) :Observable<userWorkspaceInfo> {
+    return this.http.get<userWorkspaceInfo>(this.userWorkspaceInfoUrl + workspaceId + "/info", this.httpOption)
   }
 }

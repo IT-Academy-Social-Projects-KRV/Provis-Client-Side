@@ -34,6 +34,7 @@ import { ConfirmEmailComponent } from './presentation/components/confirm-email/c
 import { MemberManagmentComponent } from './presentation/components/member-managment/member-managment.component';
 import { MemberListComponent } from './presentation/components/member-list/member-list.component';
 import { MemberCalendarComponent } from './presentation/components/member-calendar/member-calendar.component';
+import { MemberTasklistComponent } from './presentation/components/member-tasklist/member-tasklist.component';
 
 import { AuthInterceptorProvider } from './core/services/auth.interceptor';
 import { WorkspaceService } from './core/services/workspace.service';
@@ -74,6 +75,7 @@ import { ChangeTwoFaComponent } from './presentation/components/change-two-fa/ch
     MemberManagmentComponent,
     MemberListComponent,
     MemberCalendarComponent,
+    MemberTasklistComponent,
     CreateTaskComponent,
     TwoSetpVerificationComponent,
     ChangeTwoFaComponent
