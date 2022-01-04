@@ -46,6 +46,8 @@ import { WorkspaceInfoComponent } from './presentation/components/workspace-info
 import { WorkspaceSettingsComponent } from './presentation/components/workspace-settings/workspace-settings.component';
 import { ModalInvitesComponent } from './presentation/components/modal-invites/modal-invites.component';
 import { UserLeftmenuComponent } from './presentation/components/user-leftmenu/user-leftmenu.component';
+import { TwoSetpVerificationComponent } from './presentation/components/two-setp-verification/two-setp-verification.component';
+import { ChangeTwoFaComponent } from './presentation/components/change-two-fa/change-two-fa.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +74,9 @@ import { UserLeftmenuComponent } from './presentation/components/user-leftmenu/u
     MemberManagmentComponent,
     MemberListComponent,
     MemberCalendarComponent,
-    CreateTaskComponent
+    CreateTaskComponent,
+    TwoSetpVerificationComponent,
+    ChangeTwoFaComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +84,7 @@ import { UserLeftmenuComponent } from './presentation/components/user-leftmenu/u
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,    
+    HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,

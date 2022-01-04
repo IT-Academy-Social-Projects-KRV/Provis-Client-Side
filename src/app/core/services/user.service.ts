@@ -1,13 +1,24 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { answerInviteUserUrl,
+         userInviteList,
+         userProfileUrl,
+         sendConfirmEmailUrl,
+         confirmEmailUrl,
+         changeUserInfoUrl,
+         checkIsTwoFactorVerificationUrl,
+         sendTwoFactorCodeUrl,
+         change2fUrl, 
+        userImageUrl  } from 'src/app/configs/api-endpoints';
 import { Observable, pipe } from 'rxjs';
-import { answerInviteUserUrl, userInviteList, userProfileUrl, sendConfirmEmailUrl, confirmEmailUrl, changeUserInfoUrl, userImageUrl } from 'src/app/configs/api-endpoints';
 import { UserInvite } from '../models/userInviteList';
 import { activeInvitesUrl } from 'src/app/configs/api-endpoints';
 import { ActiveInvites} from '../models/activeInvites';
 import { UserProfile } from '../models/userProfile';
 import { ConfirmEmailCode } from '../models/confirmEmailCode';
 import { ChangeUserInfo } from '../models/changeUserInfo';
+import { UserChange2fa } from '../models/userChange2fa';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +32,10 @@ export class UserService {
   private readonly sendConfirmEmailUrl = sendConfirmEmailUrl;
   private readonly confirmEmailUrl = confirmEmailUrl;
   private readonly changeUserInfoUrl = changeUserInfoUrl;
+  private readonly checkIsTwoFactorVerificationUrl = checkIsTwoFactorVerificationUrl;
+  private readonly changeTwoFacotrUrl = change2fUrl;
+  private readonly sendTwoFactorCodeUrl = sendTwoFactorCodeUrl;
+
   private readonly userImageUrl = userImageUrl;
   
   private httpOption = {
@@ -67,6 +82,18 @@ export class UserService {
     return this.http.put<void>(this.changeUserInfoUrl, changeUserInfo, this.httpOption);
   }
 
+  changeTwoFactorVerification(status: UserChange2fa): Observable<void>{
+    return this.http.post<void>(this.changeTwoFacotrUrl, status, this.httpOption);
+  }
+
+  checkIsTwoFactorVerification(): Observable<boolean>{
+    return this.http.get<boolean>(this.checkIsTwoFactorVerificationUrl, this.httpOption);
+  }
+
+  sendTwoFactorCode(): Observable<void>{
+    return this.http.get<void>(this.sendTwoFactorCodeUrl, this.httpOption);
+  }
+  
   getUserImage(): Observable<File>{
 
     const options = {

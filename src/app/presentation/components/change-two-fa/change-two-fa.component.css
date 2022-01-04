@@ -1,0 +1,10 @@
+.login-form {
+    background: white;
+    border-radius: 10px;
+    width: 100%;
+  }
+
+form.login-form .mat-form-field {
+    width: 100%;
+    margin:5px auto;
+}
