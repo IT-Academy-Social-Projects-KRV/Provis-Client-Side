@@ -22,10 +22,10 @@
               to<span class="toUserColor"> {{item.toUserName}}</span>
            </div>
           </div>
-          <div>
+          <div *ngIf="(item.fromUserName == currentUserName && currentUserRole.role == 'Manager') || currentUserRole.role == 'Owner'">
             <button mat-mini-fab color="warn" (click)='DeleteInvite(item.inviteId)'>
-            <mat-icon>delete</mat-icon>
-          </button>
+              <mat-icon>delete</mat-icon>
+            </button>
           </div>
         </div>
       </span>
