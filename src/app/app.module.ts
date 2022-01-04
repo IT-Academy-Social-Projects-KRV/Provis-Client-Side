@@ -29,6 +29,7 @@ import { WorkspaceListComponent } from './presentation/components/workspace-list
 import { UserComponent } from './presentation/components/user/user.component';
 import { UserHeaderComponent } from './presentation/components/user-header/user-header.component';
 import { UserProfileComponent } from './presentation/components/user-profile/user-profile.component';
+import { ConfirmEmailComponent } from './presentation/components/confirm-email/confirm-email.component';
 import { MemberManagmentComponent } from './presentation/components/member-managment/member-managment.component';
 import { MemberListComponent } from './presentation/components/member-list/member-list.component';
 import { MemberCalendarComponent } from './presentation/components/member-calendar/member-calendar.component';
@@ -66,6 +67,7 @@ import { UserLeftmenuComponent } from './presentation/components/user-leftmenu/u
     WorkspaceSettingsComponent,
     UserInviteComponent,
     ModalInvitesComponent,
+    ConfirmEmailComponent,
     UserLeftmenuComponent,
     MemberManagmentComponent,
     MemberListComponent,

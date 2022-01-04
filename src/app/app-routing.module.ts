@@ -12,6 +12,7 @@ import { RegistrationComponent } from './presentation/components/registration/re
 import { UserProfileComponent } from './presentation/components/user-profile/user-profile.component';
 import { WorkspaceListComponent } from './presentation/components/workspace-list/workspace-list.component';
 import { WorkspaceComponent } from './presentation/components/workspace/workspace.component';
+import { ConfirmEmailComponent } from './presentation/components/confirm-email/confirm-email.component';
 import { WorkspaceInfoComponent } from './presentation/components/workspace-info/workspace-info.component';
 import { WorkspaceSettingsComponent } from './presentation/components/workspace-settings/workspace-settings.component';
 import { MemberManagmentComponent } from './presentation/components/member-managment/member-managment.component';
@@ -30,9 +31,10 @@ const userWorkspaceRouters: Routes = [
 const userRouters: Routes = [
   { path: 'workspace/list', component: WorkspaceListComponent},
   { path: 'profile', component: UserProfileComponent},
-  { path: 'workspace/:id', component: WorkspaceComponent},
   { path: 'workspaces', component: WorkspaceListComponent},
   { path: 'workspace/:id', component: WorkspaceComponent, children: userWorkspaceRouters, canActivate: [AuthGuard]},
+  { path: 'profile', component: UserProfileComponent },
+  { path: 'confirmemail', component: ConfirmEmailComponent },
 ];
 
 const routes: Routes = [

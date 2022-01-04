@@ -3,11 +3,12 @@ import { userWorkspaceInfo } from './../models/userWorkspaceInfo';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, pipe } from 'rxjs';
-import { answerInviteUserUrl, changeUserInfoUrl, userInviteList, userProfileUrl } from 'src/app/configs/api-endpoints';
+import { answerInviteUserUrl, userInviteList, userProfileUrl, sendConfirmEmailUrl, confirmEmailUrl, changeUserInfoUrl } from 'src/app/configs/api-endpoints';
 import { UserInvite } from '../models/userInviteList';
 import { activeInvitesUrl } from 'src/app/configs/api-endpoints';
 import { ActiveInvites} from '../models/activeInvites';
 import { UserProfile } from '../models/userProfile';
+import { ConfirmEmailCode } from '../models/confirmEmailCode';
 import { ChangeUserInfo } from '../models/changeUserInfo';
 
 @Injectable({
@@ -19,6 +20,8 @@ export class UserService {
   private readonly answerUserInvite = answerInviteUserUrl;
   private readonly userProfileUrl = userProfileUrl;
   private readonly activeInvitesUrl = activeInvitesUrl;
+  private readonly sendConfirmEmailUrl = sendConfirmEmailUrl;
+  private readonly confirmEmailUrl = confirmEmailUrl;
   private readonly changeUserInfoUrl = changeUserInfoUrl;
   private readonly userWorkspaceInfoUrl = userWorkspaceInfoUrl;
 
@@ -53,9 +56,16 @@ export class UserService {
   acceptUserInvite(inviteId:number):Observable<void>{
     return this.http.put<void>(this.answerUserInvite+"/"+inviteId+"/accept", {}, this.httpOption);
   }
-  
-  updateUserInfo(changeUserUnfo: ChangeUserInfo):Observable<void>{
-    return this.http.put<void>(this.changeUserInfoUrl, changeUserUnfo, this.httpOption);
+
+  sendConfirmEmail(){
+    return this.http.get<void>(this.sendConfirmEmailUrl, this.httpOption);
+  }
+
+  confirmEmail(confirmationCode: ConfirmEmailCode):Observable<void>{
+    return this.http.post<void>(this.confirmEmailUrl, confirmationCode, this.httpOption);
+  }
+  updateUserInfo(changeUserInfo: ChangeUserInfo):Observable<void>{
+    return this.http.put<void>(this.changeUserInfoUrl, changeUserInfo, this.httpOption);
   }
 
   userWorkspaceInfo(workspaceId:number) :Observable<userWorkspaceInfo> {
