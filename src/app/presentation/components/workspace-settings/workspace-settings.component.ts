@@ -2,9 +2,8 @@ import { UserService } from './../../../core/services/user.service';
 import { userWorkspaceInfo } from './../../../core/models/userWorkspaceInfo';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Component, Input, OnInit } from '@angular/core';
-import { UserInviteComponent } from '../user-invite/user-invite.component';
+import { ActivatedRoute, } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { ModalUpdateWorkspaceComponent } from '../modal-updateworkspace/modal-updateworkspace.component';
 
 @Component({
@@ -16,10 +15,9 @@ export class WorkspaceSettingsComponent implements OnInit {
   protected routeSub: Subscription;
   workspaceId: number;
   workspace: userWorkspaceInfo;
-  constructor(private router:Router, private route: ActivatedRoute, public dialog: MatDialog, private userService: UserService) { }
+  constructor(private route: ActivatedRoute, public dialog: MatDialog, private userService: UserService) { }
 
   ngOnInit() {
-
     this.route.parent?.params.subscribe(
       (params) =>
       {
@@ -28,11 +26,6 @@ export class WorkspaceSettingsComponent implements OnInit {
           this.workspace = data;
         });
        });
-  }
-
-  modalInvites() {
-    let dialogRef = this.dialog.open(UserInviteComponent);
-    dialogRef.componentInstance.workspaceId = this.workspaceId;
   }
 
   modalUpdate() {
