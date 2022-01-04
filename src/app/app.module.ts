@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge'
 import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule} from '@angular/material/select';
 
 import { HomeComponent } from './presentation/components/home/home.component';
 import { AboutComponent } from './presentation/components/about/about.component';
@@ -29,6 +30,7 @@ import { WorkspaceListComponent } from './presentation/components/workspace-list
 import { UserComponent } from './presentation/components/user/user.component';
 import { UserHeaderComponent } from './presentation/components/user-header/user-header.component';
 import { UserProfileComponent } from './presentation/components/user-profile/user-profile.component';
+import { ConfirmEmailComponent } from './presentation/components/confirm-email/confirm-email.component';
 import { MemberManagmentComponent } from './presentation/components/member-managment/member-managment.component';
 import { MemberListComponent } from './presentation/components/member-list/member-list.component';
 import { MemberCalendarComponent } from './presentation/components/member-calendar/member-calendar.component';
@@ -45,6 +47,8 @@ import { WorkspaceInfoComponent } from './presentation/components/workspace-info
 import { WorkspaceSettingsComponent } from './presentation/components/workspace-settings/workspace-settings.component';
 import { ModalInvitesComponent } from './presentation/components/modal-invites/modal-invites.component';
 import { UserLeftmenuComponent } from './presentation/components/user-leftmenu/user-leftmenu.component';
+import { TwoSetpVerificationComponent } from './presentation/components/two-setp-verification/two-setp-verification.component';
+import { ChangeTwoFaComponent } from './presentation/components/change-two-fa/change-two-fa.component';
 
 @NgModule({
   declarations: [
@@ -66,12 +70,15 @@ import { UserLeftmenuComponent } from './presentation/components/user-leftmenu/u
     WorkspaceSettingsComponent,
     UserInviteComponent,
     ModalInvitesComponent,
+    ConfirmEmailComponent,
     UserLeftmenuComponent,
     MemberManagmentComponent,
     MemberListComponent,
     MemberCalendarComponent,
     MemberTasklistComponent,
-    CreateTaskComponent
+    CreateTaskComponent,
+    TwoSetpVerificationComponent,
+    ChangeTwoFaComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +86,7 @@ import { UserLeftmenuComponent } from './presentation/components/user-leftmenu/u
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,    
+    HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
@@ -88,7 +95,8 @@ import { UserLeftmenuComponent } from './presentation/components/user-leftmenu/u
     MatMenuModule,
     MatDialogModule,
     MatBadgeModule,
-    MatCardModule
+    MatCardModule,
+    MatSelectModule
   ],
   providers: [
     AuthInterceptorProvider,

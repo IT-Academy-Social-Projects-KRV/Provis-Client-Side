@@ -12,11 +12,13 @@ import { RegistrationComponent } from './presentation/components/registration/re
 import { UserProfileComponent } from './presentation/components/user-profile/user-profile.component';
 import { WorkspaceListComponent } from './presentation/components/workspace-list/workspace-list.component';
 import { WorkspaceComponent } from './presentation/components/workspace/workspace.component';
+import { ConfirmEmailComponent } from './presentation/components/confirm-email/confirm-email.component';
 import { WorkspaceInfoComponent } from './presentation/components/workspace-info/workspace-info.component';
 import { WorkspaceSettingsComponent } from './presentation/components/workspace-settings/workspace-settings.component';
 import { MemberManagmentComponent } from './presentation/components/member-managment/member-managment.component';
 import { MemberListComponent } from './presentation/components/member-list/member-list.component';
 import { MemberCalendarComponent } from './presentation/components/member-calendar/member-calendar.component';
+import { TwoSetpVerificationComponent } from './presentation/components/two-setp-verification/two-setp-verification.component';
 
 const userWorkspaceRouters: Routes = [
   { path: 'managment', component: MemberManagmentComponent, pathMatch: 'full'},
@@ -33,6 +35,14 @@ const userRouters: Routes = [
   { path: 'workspace/:id', component: WorkspaceComponent},
   { path: 'workspaces', component: WorkspaceListComponent},
   { path: 'workspace/:id', component: WorkspaceComponent, children: userWorkspaceRouters, canActivate: [AuthGuard]},
+  { path: 'profile', component: UserProfileComponent },
+  { path: 'confirmemail', component: ConfirmEmailComponent },
+  { path: 'workspace/:id/managment', component: MemberManagmentComponent, pathMatch: 'full'},
+  { path: 'workspace/:id/memberlist', component: MemberListComponent},
+  { path: 'workspace/:id/calendar', component: MemberCalendarComponent},
+  { path: 'workspace/:id/info', component: WorkspaceInfoComponent},
+  { path: 'workspace/:id/settings', component: WorkspaceSettingsComponent}
+
 ];
 
 const routes: Routes = [
@@ -40,6 +50,7 @@ const routes: Routes = [
   {path: 'about', component: AboutComponent},
   {path: 'contact', component: ContactComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'twoStepVerification', component: TwoSetpVerificationComponent},
   {path: 'registration', component: RegistrationComponent},
   {path: 'user', component: UserComponent, children: userRouters, canActivate: [AuthGuard]},
   {path: '**', redirectTo: '', pathMatch: 'full'}

@@ -25,4 +25,9 @@ export class WorkspaceComponent implements OnInit {
     this.routeSub.unsubscribe();
   }
 
+  modalCreateTask() {
+    let dialogRef = this.dialog.open(CreateTaskComponent);
+    dialogRef.componentInstance.workspaceId = this.workspaceId;
+  }
+
 }
