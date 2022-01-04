@@ -10,7 +10,9 @@ export const logoutUrl = baseUrl + '/Authentication/logout';
 export const addworkspacetUrl = baseUrl + '/Workspace/addworkspace';
 export const getUserWorkspaceList = baseUrl + '/Workspace/getworlspacelist';
 export const answerInviteUserUrl = baseUrl + '/Workspace/invite';
+export const userWorkspaceInfoUrl = baseUrl + '/Workspace/getworkspace/'
 export const inviteUser = baseUrl + '/Workspace/inviteuser';
+export const workspaceActiveInvite = baseUrl + '/Workspace/';
 
 export const userProfileUrl = baseUrl + '/User/getpersonalinfo';
 export const userInviteList = baseUrl + '/User/invite';
