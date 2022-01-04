@@ -4,7 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, pipe } from 'rxjs';
 import { UserInvites } from '../models/userInviteList';
-import { activeInvitesUrl } from 'src/app/configs/api-endpoints';
 import { answerInviteUserUrl, userInviteList, userProfileUrl, sendConfirmEmailUrl, confirmEmailUrl, changeUserInfoUrl, userImageUrl, activeInvitesUrl } from 'src/app/configs/api-endpoints';
 import { ActiveInvites} from '../models/activeInvites';
 import { UserProfile } from '../models/userProfile';
