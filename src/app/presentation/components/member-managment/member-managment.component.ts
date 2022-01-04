@@ -4,10 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { UserInviteComponent } from '../user-invite/user-invite.component';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
-import { UserWorkspace } from 'src/app/core/models/userWorkspaceList';
-import { UserInvite } from 'src/app/core/models/userInvite';
 import { UserInvites } from 'src/app/core/models/userInviteList';
-import { numbers } from '@material/slider';
 import { WorkspaceMembers } from 'src/app/core/models/workspaceUsersList';
 import Swal from 'sweetalert2';
 
