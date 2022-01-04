@@ -4,7 +4,7 @@ import { CreateWorkspace } from '../models/workspace';
 import { UpdateWorkspace } from '../models/workspaceUpdate';
 import { WorkspaceInviteInfo } from '../models/WorkspaceInviteInfo';
 import { CreateTask } from '../models/createTask';
-import { addworkspacetUrl, deleteUserFromWorkspaseUrl, getUserWorkspaceList, getWorkspaceUsersUrl, inviteUser, addTaskUrl, workspaceActiveInvite } from 'src/app/configs/api-endpoints';
+import { addworkspacetUrl, deleteUserFromWorkspaseUrl, getUserWorkspaceList, getWorkspaceUsersUrl, inviteUser, addTaskUrl, workspaceActiveInvite, updateWorkspaceUrl } from 'src/app/configs/api-endpoints';
 import { Observable } from 'rxjs';
 import { UserWorkspace } from '../models/userWorkspaceList';
 import { UserInvite } from '../models/userInvite';
@@ -48,6 +48,7 @@ export class WorkspaceService {
 
     public UpdateWorkspace(workspace: UpdateWorkspace): Observable<void> {
       return this.http.put<void>(this.updateWorkspaceUrl, workspace, this.httpOption);
+    }
 
     public WorkspaceInviteInfo(workspaceId: number) {
         return this.http.get<WorkspaceInviteInfo[]>(this.activeInviteUrl + workspaceId + "/invite/active", this.httpOption);
@@ -60,7 +61,7 @@ export class WorkspaceService {
     public CreateTask(task: CreateTask): Observable<void> {
         return this.http.post<void>(this.createTaskUrl, task, this.httpOption);
     }
-  
+
     public getWorkspaceUserList(workspaceId: number): Observable<WorkspaceMembers[]>{
         return this.http.get<WorkspaceMembers[]>(this.getWorkspaceUsers+"/"+workspaceId+"/members", this.httpOption);
     }
