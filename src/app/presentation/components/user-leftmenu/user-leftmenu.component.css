@@ -1,6 +1,6 @@
 .user-left-side {
     width: 250px;
-    height: calc(100vh - 174px);
+    height: calc(100vh - 175px);
     background: #3b394a;
     padding: 50px 20px;
     color: white;
@@ -11,6 +11,13 @@
 }
 .left-side-title {
     font-size: 18px;
+}
+.left-side-user-role{
+    margin-top: 20px;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    color: #ddd;
 }
 .user-left-menu {
     margin-top: 30px;
