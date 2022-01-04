@@ -21,8 +21,8 @@ export class WorkspaceComponent implements OnInit {
     });
   }
   
-  ngOnDestroy(){
-    this.routeSub.unsubscribe();
-  }
+  modalCreateTask() {
+    let dialogRef = this.dialog.open(CreateTaskComponent);
+  } 
 
 }

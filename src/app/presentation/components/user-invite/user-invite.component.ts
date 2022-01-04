@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserInvite } from 'src/app/core/models/userInvite';
 import { WorkspaceComponent } from '../workspace/workspace.component';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import Swal from 'sweetalert2';
+import { UserInvites } from 'src/app/core/models/userInviteList';
+import { WorkspaceInviteInfo } from 'src/app/core/models/WorkspaceInviteInfo';
 
 @Component({
   selector: 'app-user',
@@ -14,6 +16,7 @@ import Swal from 'sweetalert2';
 export class UserInviteComponent implements OnInit {
 
     @Input() public workspaceId: number;
+    workspaceActiveInviteInfo: WorkspaceInviteInfo[];
     userInvite: UserInvite = new UserInvite();
     inviteUserForm: FormGroup;
     workspaceID: WorkspaceComponent;
@@ -21,11 +24,15 @@ export class UserInviteComponent implements OnInit {
  constructor(private fb: FormBuilder, private ws: WorkspaceService) {
    this.inviteUserForm = fb.group({
      'UserEmail': ['', [Validators.required, Validators.email]]
-   });
+   }); 
  }
 
   ngOnInit() {
     this.userInvite.workspaceId = this.workspaceId;
+
+    this.ws.WorkspaceInviteInfo(this.workspaceId).subscribe((data: WorkspaceInviteInfo[]) => {
+      this.workspaceActiveInviteInfo = data;
+    });
    }
 
    showAlert(error: string){
@@ -46,7 +53,10 @@ export class UserInviteComponent implements OnInit {
         this.userInvite = this.inviteUserForm.value;
         this.userInvite.workspaceId = this.workspaceId;
         this.ws.InviteUser(this.userInvite).subscribe(
-          () => {},
+          () => {this.ws.WorkspaceInviteInfo(this.workspaceId).subscribe((data: WorkspaceInviteInfo[]) => {
+            this.workspaceActiveInviteInfo = data;
+          });
+          },
           err => {
             let errorMessage: string = '';
             if(err.error.errors && typeof err.error.errors === 'object'){
@@ -59,7 +69,7 @@ export class UserInviteComponent implements OnInit {
               }
               
              this.showAlert(errorMessage);
-  
+              
               return;
             } 
   
@@ -73,5 +83,10 @@ export class UserInviteComponent implements OnInit {
           }
         );    
       }
+    }
+
+    DeleteInvite(inviteId: number): void{
+      this.ws.WorkspaceActiveInviteDelete(inviteId, this.workspaceId).subscribe();
+      this.workspaceActiveInviteInfo.splice(this.workspaceActiveInviteInfo.findIndex(x => x.inviteId == inviteId), 1);
     }
 }
