@@ -9,7 +9,9 @@ import { answerInviteUserUrl,
          changeUserInfoUrl,
          checkIsTwoFactorVerificationUrl,
          sendTwoFactorCodeUrl,
-         change2fUrl } from 'src/app/configs/api-endpoints';
+         change2fUrl, 
+        userImageUrl  } from 'src/app/configs/api-endpoints';
+import { Observable, pipe } from 'rxjs';
 import { UserInvite } from '../models/userInviteList';
 import { activeInvitesUrl } from 'src/app/configs/api-endpoints';
 import { ActiveInvites} from '../models/activeInvites';
@@ -34,6 +36,8 @@ export class UserService {
   private readonly changeTwoFacotrUrl = change2fUrl;
   private readonly sendTwoFactorCodeUrl = sendTwoFactorCodeUrl;
 
+  private readonly userImageUrl = userImageUrl;
+  
   private httpOption = {
     headers: new HttpHeaders({
         Authorization: 'Bearer ' + this.getToken()
@@ -88,5 +92,23 @@ export class UserService {
 
   sendTwoFactorCode(): Observable<void>{
     return this.http.get<void>(this.sendTwoFactorCodeUrl, this.httpOption);
+  }
+  
+  getUserImage(): Observable<File>{
+
+    const options = {
+      headers: this.httpOption.headers,
+      responseType: 'Blob' as 'json'
+    }
+
+    return this.http.get<File>(this.userImageUrl, options);
+  }
+
+  updateUserImage(image: File): Observable<void>{
+
+    const formData = new FormData();
+    formData.append('image', image, image.name);
+
+    return this.http.put<void>(this.userImageUrl, formData, this.httpOption);
   }
 }

@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge'
 import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule} from '@angular/material/select';
 
 import { HomeComponent } from './presentation/components/home/home.component';
 import { AboutComponent } from './presentation/components/about/about.component';
@@ -92,7 +93,8 @@ import { ChangeTwoFaComponent } from './presentation/components/change-two-fa/ch
     MatMenuModule,
     MatDialogModule,
     MatBadgeModule,
-    MatCardModule
+    MatCardModule,
+    MatSelectModule
   ],
   providers: [
     AuthInterceptorProvider,

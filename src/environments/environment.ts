@@ -4,7 +4,18 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:5001'
+  apiUrl: 'https://localhost:5001',
+  imageSettings: {
+    maxSize: 10, //Mb
+    imageTypes: [
+    'jpg',
+    'jpeg',
+    'pjpeg',
+    'x-png',
+    'gif',
+    'png'
+    ]
+  }
 };
 
 /*
