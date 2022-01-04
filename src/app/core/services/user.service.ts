@@ -1,9 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, pipe } from 'rxjs';
-import { answerInviteUserUrl, userInviteList, userProfileUrl, sendConfirmEmailUrl, confirmEmailUrl, changeUserInfoUrl, userImageUrl } from 'src/app/configs/api-endpoints';
+import { answerInviteUserUrl, userInviteList, userProfileUrl, sendConfirmEmailUrl, confirmEmailUrl, changeUserInfoUrl, userImageUrl, activeInvitesUrl } from 'src/app/configs/api-endpoints';
 import { UserInvite } from '../models/userInviteList';
-import { activeInvitesUrl } from 'src/app/configs/api-endpoints';
 import { ActiveInvites} from '../models/activeInvites';
 import { UserProfile } from '../models/userProfile';
 import { ConfirmEmailCode } from '../models/confirmEmailCode';
@@ -43,8 +42,8 @@ export class UserService {
     return localStorage.getItem('token')?.toString();
   }
 
-  getUserInvite(): Observable<UserInvite[]>{
-    return this.http.get<UserInvite[]>(this.getUserInviteList, this.httpOption);
+  getUserInvite(): Observable<UserInvites[]>{
+    return this.http.get<UserInvites[]>(this.getUserInviteList, this.httpOption);
   }
 
   denyUserInvite(inviteId:number):Observable<void>{
