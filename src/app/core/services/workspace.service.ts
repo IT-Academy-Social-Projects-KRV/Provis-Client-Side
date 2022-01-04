@@ -1,11 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CreateWorkspace } from '../models/workspace';
-import { addworkspacetUrl, getUserWorkspaceList, inviteUser, addTaskUrl } from 'src/app/configs/api-endpoints';
+import { CreateTask } from '../models/createTask';
+import { addworkspacetUrl, deleteUserFromWorkspaseUrl, getUserWorkspaceList, getWorkspaceUsersUrl, inviteUser, addTaskUrl } from 'src/app/configs/api-endpoints';
 import { Observable } from 'rxjs';
 import { UserWorkspace } from '../models/userWorkspaceList';
 import { UserInvite } from '../models/userInvite';
-import { CreateTask } from '../models/createTask';
+import { WorkspaceMembers } from '../models/workspaceUsersList';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +17,8 @@ export class WorkspaceService {
     private readonly WorkspaceListUrl = addworkspacetUrl;
     private readonly getUserInvite = inviteUser;
     private readonly createTaskUrl = addTaskUrl;
+    private readonly getWorkspaceUsers = getWorkspaceUsersUrl;
+    private readonly delUserWorksp = deleteUserFromWorkspaseUrl;
 
     private httpOption = {
         headers: new HttpHeaders({
@@ -41,5 +44,13 @@ export class WorkspaceService {
 
     public CreateTask(task: CreateTask): Observable<void> {
         return this.http.post<void>(this.createTaskUrl, task, this.httpOption);
+    }
+  
+    public getWorkspaceUserList(workspaceId: number): Observable<WorkspaceMembers[]>{
+        return this.http.get<WorkspaceMembers[]>(this.getWorkspaceUsers+"/"+workspaceId+"/members", this.httpOption);
+    }
+
+    public delUserFromWorksp(workspaceId: number, userId: string): Observable<void>{
+        return this.http.delete<void>(this.delUserWorksp+"/"+workspaceId+"/user/"+userId, this.httpOption);
     }
 }
