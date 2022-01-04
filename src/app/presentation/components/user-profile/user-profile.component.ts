@@ -25,11 +25,11 @@ export class UserProfileComponent implements OnInit {
   userProfile: UserProfile = new UserProfile();
   changeUserInfo: ChangeUserInfo = new ChangeUserInfo();
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, public dialog: MatDialog) {
   constructor(private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
-    private sanitizer: DomSanitizer) {
+    private sanitizer: DomSanitizer,
+    public dialog: MatDialog) {
     this.userProfileForm = this.fb.group({
       name:['',SignInUpValidator.getNameValidator(3,50)],
       surname:['',SignInUpValidator.getNameValidator(3,50)],
