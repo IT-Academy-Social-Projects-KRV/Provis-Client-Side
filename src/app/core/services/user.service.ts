@@ -1,3 +1,5 @@
+import { userWorkspaceInfoUrl } from './../../configs/api-endpoints';
+import { userWorkspaceInfo } from './../models/userWorkspaceInfo';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, pipe } from 'rxjs';
@@ -21,6 +23,7 @@ export class UserService {
   private readonly sendConfirmEmailUrl = sendConfirmEmailUrl;
   private readonly confirmEmailUrl = confirmEmailUrl;
   private readonly changeUserInfoUrl = changeUserInfoUrl;
+  private readonly userWorkspaceInfoUrl = userWorkspaceInfoUrl;
 
   private httpOption = {
     headers: new HttpHeaders({
@@ -63,5 +66,9 @@ export class UserService {
   }
   updateUserInfo(changeUserInfo: ChangeUserInfo):Observable<void>{
     return this.http.put<void>(this.changeUserInfoUrl, changeUserInfo, this.httpOption);
+  }
+
+  userWorkspaceInfo(workspaceId:number) :Observable<userWorkspaceInfo> {
+    return this.http.get<userWorkspaceInfo>(this.userWorkspaceInfoUrl + workspaceId + "/info", this.httpOption)
   }
 }
