@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { UserWorkspace } from '../models/userWorkspaceList';
 import { UserInvite } from '../models/userInvite';
 import { UserInvites } from '../models/userInviteList';
+import { WorkspaceInviteInfo } from '../models/WorkspaceInviteInfo';
 
 @Injectable({
   providedIn: 'root',
@@ -41,7 +42,8 @@ export class WorkspaceService {
     }
 
     public WorkspaceInviteInfo(workspaceId: number) {
-    return this.http.get<UserInvites[]>(this.activeInviteUrl + workspaceId + "/info", this.httpOption);
+        console.log(this.activeInviteUrl + workspaceId + "/invite/active", this.httpOption);
+        return this.http.get<WorkspaceInviteInfo[]>(this.activeInviteUrl + workspaceId + "/invite/active", this.httpOption);
     }
 
     public WorkspaceActiveInviteDelete(id: number, workspaceId: number){

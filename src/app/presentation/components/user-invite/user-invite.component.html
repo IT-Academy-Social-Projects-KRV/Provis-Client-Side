@@ -10,11 +10,13 @@
     </form>
     <div class="invite-list"> 
       <h3>Active invitations</h3>
-      <li *ngFor="let item of workspaceActiveInviteInfo">
+      <span *ngFor="let item of workspaceActiveInviteInfo">
         <div class="active-invite">
          <div class="info-invite">
-            {{item.id}}
-            {{item.date}}
+            {{item.toUserEmail}}
+            {{item.date |date:'dd/MM/yyyy HH:mm'}}
+            {{item.fromUserName}}
+            {{item.toUserName}}     
           </div>
           <div>
             <button mat-mini-fab color="warn" (click)='DeleteInvite()'>
@@ -22,7 +24,7 @@
           </button>
           </div>
         </div>
-      </li>
+      </span>
     </div> 
   </div>
 </div>

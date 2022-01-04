@@ -6,7 +6,7 @@ import { WorkspaceComponent } from '../workspace/workspace.component';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import Swal from 'sweetalert2';
 import { UserInvites } from 'src/app/core/models/userInviteList';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { WorkspaceInviteInfo } from 'src/app/core/models/WorkspaceInviteInfo';
 
 @Component({
   selector: 'app-user',
@@ -16,7 +16,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class UserInviteComponent implements OnInit {
 
     @Input() public workspaceId: number;
-    workspaceActiveInviteInfo: UserInvites[];
+    workspaceActiveInviteInfo: WorkspaceInviteInfo[];
     userInvite: UserInvite = new UserInvite();
     inviteUserForm: FormGroup;
     workspaceID: WorkspaceComponent;
@@ -30,7 +30,7 @@ export class UserInviteComponent implements OnInit {
   ngOnInit() {
     this.userInvite.workspaceId = this.workspaceId;
 
-    this.ws.WorkspaceInviteInfo(this.workspaceId).subscribe((data: UserInvites[]) => {
+    this.ws.WorkspaceInviteInfo(this.workspaceId).subscribe((data: WorkspaceInviteInfo[]) => {
       this.workspaceActiveInviteInfo = data;
     });
    }
