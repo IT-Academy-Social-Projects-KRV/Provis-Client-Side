@@ -172,26 +172,27 @@ a.link-button:hover{
     padding: 30px;
 }
 a.link-button.button-accept {
-    background: #097809;;
+    background: #426356;;
 }
 a.link-button.button-accept:hover {
-    background: rgb(16, 102, 16);
+    background: #354e44;
 }
 .right-side-title {
     border-radius: 4px;
     padding: 10px 30px;
-    color: #3b394a;
-    font-size: 16px;
-    font-weight: 600;
+    margin-bottom: 30px;
+    color: #eee;
+    font-size: 13px;
+    letter-spacing: 0.75px;
+    font-weight: 500;
     text-transform: uppercase;
-    background: #eee;
+    background: #3b394a;
     display: flex;
     flex-direction: row;
     align-content: center;
     align-items: center;
     justify-content: space-between;
     border: 1px solid #cfcdcd;
-    min-height: 40px;
 }
 .right-side-title a {
     font-size: 10px;
