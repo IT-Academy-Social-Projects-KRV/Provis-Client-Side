@@ -10,14 +10,19 @@ export class AuthGuard implements CanActivate {
 
   constructor(private authenticationService: AuthenticationService, private router: Router) { }
 
-  async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-    
+  async canActivate(): Promise<boolean> {
+
+    if(await this.authenticationService.isTwoFactorAuthentucation())
+    {
+      return true;
+    }
+
     if(await this.authenticationService.isAuthenticatedWithRefreshToken())
     {
       return true;
     }
 
-    this.showErrorAlert('you need authorization'); 
+    this.showErrorAlert('you need authorization');
     this.router.navigate(['login']);
 
     return false;
