@@ -2,7 +2,7 @@ import { userWorkspaceInfoUrl } from './../../configs/api-endpoints';
 import { userWorkspaceInfo } from './../models/userWorkspaceInfo';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, pipe } from 'rxjs';
 import { answerInviteUserUrl,
          userInviteList,
          userProfileUrl,
@@ -61,8 +61,8 @@ export class UserService {
     return localStorage.getItem('token')?.toString();
   }
 
-  getUserInvite(): Observable<UserInvite[]>{
-    return this.http.get<UserInvite[]>(this.getUserInviteList, this.httpOption);
+  getUserInvite(): Observable<UserInvites[]>{
+    return this.http.get<UserInvites[]>(this.getUserInviteList, this.httpOption);
   }
 
   denyUserInvite(inviteId:number):Observable<void>{
