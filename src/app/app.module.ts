@@ -46,6 +46,7 @@ import { WorkspaceSettingsComponent } from './presentation/components/workspace-
 import { ModalInvitesComponent } from './presentation/components/modal-invites/modal-invites.component';
 import { UserLeftmenuComponent } from './presentation/components/user-leftmenu/user-leftmenu.component';
 import { TwoSetpVerificationComponent } from './presentation/components/two-setp-verification/two-setp-verification.component';
+import { ChangeTwoFaComponent } from './presentation/components/change-two-fa/change-two-fa.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { TwoSetpVerificationComponent } from './presentation/components/two-setp
     MemberListComponent,
     MemberCalendarComponent,
     CreateTaskComponent,
-    TwoSetpVerificationComponent
+    TwoSetpVerificationComponent,
+    ChangeTwoFaComponent
   ],
   imports: [
     BrowserModule,

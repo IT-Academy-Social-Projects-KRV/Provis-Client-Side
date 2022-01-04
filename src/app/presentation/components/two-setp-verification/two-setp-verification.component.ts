@@ -20,7 +20,7 @@ export class TwoSetpVerificationComponent implements OnInit {
     private fb: FormBuilder,
     private activeRoute: ActivatedRoute) {
     this.twoStepForm = fb.group({
-      "token": ""
+      "token": ['']
     });
   }
 

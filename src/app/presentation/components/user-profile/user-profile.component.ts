@@ -6,6 +6,8 @@ import { ChangeUserInfo } from 'src/app/core/models/changeUserInfo';
 import { UserService } from 'src/app/core/services/user.service';
 import { SignInUpValidator } from 'src/app/core/validators/signInUpValidator';
 import Swal from 'sweetalert2';
+import { MatDialog } from '@angular/material/dialog';
+import { ChangeTwoFaComponent } from '../change-two-fa/change-two-fa.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -19,7 +21,7 @@ export class UserProfileComponent implements OnInit {
   userProfile: UserProfile = new UserProfile();
   changeUserInfo: ChangeUserInfo = new ChangeUserInfo();
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, public dialog: MatDialog) {
     this.userProfileForm = this.fb.group({
       name:['',SignInUpValidator.getNameValidator(3,50)],
       surname:['',SignInUpValidator.getNameValidator(3,50)],
@@ -39,6 +41,31 @@ export class UserProfileComponent implements OnInit {
         popup: 'animate__animated animate__fadeOutUp'
       }
     })
+  }
+
+  handleError(err: any){
+    let errorMessage: string = '';
+        if(err.error.errors && typeof err.error.errors === 'object'){
+          const errors = err.error.errors;
+
+          for(let key in errors){
+            for(let indexError in errors[key]){
+              errorMessage += errors[key][indexError] + '\n';
+            }
+          }
+
+         this.showAlert(errorMessage);
+
+          return;
+        }
+
+        if(err.error && typeof err.error === 'object'){
+          errorMessage += err.error.error;
+
+          this.showAlert(errorMessage);
+
+          return;
+        }
   }
 
   ngOnInit() {
@@ -65,22 +92,7 @@ export class UserProfileComponent implements OnInit {
          });
        },
        err => {
-         let errorMessage: string = '';
-         if(err.error.errors && typeof err.error.errors === 'object'){
-           const errors = err.error.errors;
-           for(let key in errors){
-             for(let indexError in errors[key]){
-               errorMessage += errors[key][indexError] + '\n';
-             }
-           }
-           this.showAlert(errorMessage);
-           return;
-         } 
-         if(err.error && typeof err.error === 'object'){
-           errorMessage += err.error.error;
-           this.showAlert(errorMessage);
-           return;
-         }
+        this.handleError(err);
        }
      )
    }
@@ -101,29 +113,65 @@ export class UserProfileComponent implements OnInit {
         this.router.navigate(['user/confirmemail']);
       },
       err => {
-        let errorMessage: string = '';
-        if(err.error.errors && typeof err.error.errors === 'object'){
-          const errors = err.error.errors;
-
-          for(let key in errors){
-            for(let indexError in errors[key]){
-              errorMessage += errors[key][indexError] + '\n';
-            }
-          }
-
-         this.showAlert(errorMessage);
-
-          return;
-        }
-
-        if(err.error && typeof err.error === 'object'){
-          errorMessage += err.error.error;
-
-          this.showAlert(errorMessage);
-
-          return;
-        }
+        this.handleError(err);
       }
     );
+  }
+
+  modelEnterCode(){
+    this.userService.checkIsTwoFactorVerification().subscribe(
+      res => {
+        if(!res){
+          Swal.fire({
+            title: 'Check your email address ' + this.userProfile.email,
+            text: "To activate two-factor authentication, enter the code sent to your mail",
+            icon: 'warning',
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Ok i understand!'
+          });
+
+          this.userService.sendTwoFactorCode().subscribe();
+
+          let dialogRef = this.dialog.open(ChangeTwoFaComponent);
+          dialogRef.componentInstance.isAdded.subscribe(data => {
+            if(data){
+              dialogRef.close();
+            }
+          })
+        }
+        else{
+          Swal.fire({
+            title: 'You have already activated two-factor authentication, do you want to disable it?',
+            showDenyButton: true,
+            confirmButtonText: 'Yes',
+            denyButtonText: `No`,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                title: 'Check your email address ' + this.userProfile.email,
+                text: "To disable two-factor authentication, enter the code sent to your mail",
+                icon: 'warning',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Ok i understand!'
+              });
+
+              this.userService.sendTwoFactorCode().subscribe();
+
+              let dialogRef = this.dialog.open(ChangeTwoFaComponent);
+              dialogRef.componentInstance.isAdded.subscribe(data => {
+                if(data){
+                  dialogRef.close();
+                }
+              })
+            }
+          })
+        }
+      },
+      err => {
+        this.handleError(err);
+      }
+    )
   }
 }
