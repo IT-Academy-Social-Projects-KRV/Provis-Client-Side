@@ -3,8 +3,9 @@ import { userWorkspaceInfo } from './../models/userWorkspaceInfo';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, pipe } from 'rxjs';
+import { UserInvites } from '../models/userInviteList';
+import { activeInvitesUrl } from 'src/app/configs/api-endpoints';
 import { answerInviteUserUrl, userInviteList, userProfileUrl, sendConfirmEmailUrl, confirmEmailUrl, changeUserInfoUrl, userImageUrl, activeInvitesUrl } from 'src/app/configs/api-endpoints';
-import { UserInvite } from '../models/userInviteList';
 import { ActiveInvites} from '../models/activeInvites';
 import { UserProfile } from '../models/userProfile';
 import { ConfirmEmailCode } from '../models/confirmEmailCode';
@@ -68,7 +69,6 @@ export class UserService {
   updateUserInfo(changeUserInfo: ChangeUserInfo):Observable<void>{
     return this.http.put<void>(this.changeUserInfoUrl, changeUserInfo, this.httpOption);
   }
-
 
   getUserImage(): Observable<File>{
 
