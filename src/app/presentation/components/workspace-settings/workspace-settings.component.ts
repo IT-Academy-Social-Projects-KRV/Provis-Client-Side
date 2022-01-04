@@ -11,19 +11,10 @@ import { UserInviteComponent } from '../user-invite/user-invite.component';
 })
 export class WorkspaceSettingsComponent implements OnInit {
   
-  protected routeSub: Subscription;
-  workspaceId: number;
-
-  constructor(private route: ActivatedRoute, public dialog: MatDialog) { }
+  constructor() { }
 
   ngOnInit() {
-    this.routeSub = this.route.params.subscribe(params => {
-      this.workspaceId = params['id'];
-    });
+    
   }
 
-  modalInvites() {
-    let dialogRef = this.dialog.open(UserInviteComponent);
-    dialogRef.componentInstance.workspaceId = this.workspaceId;
-  }
 }
