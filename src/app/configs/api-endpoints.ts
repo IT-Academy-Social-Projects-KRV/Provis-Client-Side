@@ -11,7 +11,7 @@ export const twoStepVerificationUrl = baseUrl + '/Authentication/logintwostep';
 export const addworkspacetUrl = baseUrl + '/Workspace/addworkspace';
 export const getUserWorkspaceList = baseUrl + '/Workspace/getworlspacelist';
 export const answerInviteUserUrl = baseUrl + '/Workspace/invite';
-
+export const updateWorkspaceUrl = baseUrl + '/Workspace/updateworkspace';
 export const userWorkspaceInfoUrl = baseUrl + '/Workspace/getworkspace/'
 export const userTaskUrl = 'https://localhost:5001/api/Task/usertasks?userId=7b220225-d22d-4ef6-b7dc-8caf4a28da48&workspaceId=2';
 

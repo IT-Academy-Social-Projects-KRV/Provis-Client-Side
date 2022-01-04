@@ -49,6 +49,7 @@ import { WorkspaceInfoComponent } from './presentation/components/workspace-info
 import { WorkspaceSettingsComponent } from './presentation/components/workspace-settings/workspace-settings.component';
 import { ModalInvitesComponent } from './presentation/components/modal-invites/modal-invites.component';
 import { UserLeftmenuComponent } from './presentation/components/user-leftmenu/user-leftmenu.component';
+import { ModalUpdateWorkspaceComponent } from './presentation/components/modal-updateworkspace/modal-updateworkspace.component';
 import { TwoSetpVerificationComponent } from './presentation/components/two-setp-verification/two-setp-verification.component';
 import { ChangeTwoFaComponent } from './presentation/components/change-two-fa/change-two-fa.component';
 
@@ -79,6 +80,7 @@ import { ChangeTwoFaComponent } from './presentation/components/change-two-fa/ch
     MemberCalendarComponent,
     MemberTasklistComponent,
     CreateTaskComponent,
+    ModalUpdateWorkspaceComponent,
     TwoSetpVerificationComponent,
     ChangeTwoFaComponent
   ],
