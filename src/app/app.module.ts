@@ -45,6 +45,7 @@ import { WorkspaceInfoComponent } from './presentation/components/workspace-info
 import { WorkspaceSettingsComponent } from './presentation/components/workspace-settings/workspace-settings.component';
 import { ModalInvitesComponent } from './presentation/components/modal-invites/modal-invites.component';
 import { UserLeftmenuComponent } from './presentation/components/user-leftmenu/user-leftmenu.component';
+import { ModalUpdateWorkspaceComponent } from './presentation/components/modal-updateworkspace/modal-updateworkspace.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { UserLeftmenuComponent } from './presentation/components/user-leftmenu/u
     MemberListComponent,
     MemberCalendarComponent,
     MemberTasklistComponent,
-    CreateTaskComponent
+    CreateTaskComponent,
+    ModalUpdateWorkspaceComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +81,7 @@ import { UserLeftmenuComponent } from './presentation/components/user-leftmenu/u
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,    
+    HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
