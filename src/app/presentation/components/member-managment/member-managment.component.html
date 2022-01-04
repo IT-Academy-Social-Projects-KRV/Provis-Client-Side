@@ -1,5 +1,9 @@
 
 <section>
+  <div class="right-side-title">
+    <span> Member managment</span>
+    <button mat-raised-button color="Primary" (click)='modalInvites()'>Invite</button>
+  </div>
   <div class="user-page">
     <div class="delpage">
       <li *ngFor="let item of workspaceUserList">
@@ -17,16 +21,8 @@
         </span>
       </li>
     </div>
-      <div class="user-right-side">
-        <!-- Enter your code here -->
-        <h1> Member managment</h1>
-        <button mat-raised-button color="Primary" (click)='modalInvites()'>Invite</button>
-      </div>
   </div>
 </section>
 
-<div class="right-side-title">
-  <span> Member managment</span>
-  <button mat-raised-button color="Primary" (click)='modalInvites()'>Invite</button>
-</div>
+
 

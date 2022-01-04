@@ -2,12 +2,9 @@ import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { numbers } from '@material/slider';
 import { WorkspaceMembers } from 'src/app/core/models/workspaceUsersList';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import { UserInviteComponent } from '../user-invite/user-invite.component';
-import { UserWorkspace } from 'src/app/core/models/userWorkspaceList';
-import { UserInvite } from 'src/app/core/models/userInvite';
 import { UserInvites } from 'src/app/core/models/userInviteList';
 import Swal from 'sweetalert2';
 
@@ -24,15 +21,15 @@ export class MemberManagmentComponent implements OnInit {
   protected routeSub: Subscription;
   workspaceActiveInviteInfo: UserInvites[];
   
-  constructor(private route: ActivatedRoute, private router: Router, public dialog: MatDialog, private workspaceServise: WorkspaceService) {}
+  constructor(private route: ActivatedRoute, public dialog: MatDialog, private workspaceServise: WorkspaceService) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.workspaceId = Number(this.route.snapshot.paramMap.get('id'))
-    this.workspServise.getWorkspaceUserList(this.workspaceId).subscribe(data=>{
+    this.route.parent?.params.subscribe((params) =>{
+        this.workspaceId = Number(params['id']);
+    })
+    this.workspaceServise.getWorkspaceUserList(this.workspaceId).subscribe(data=>{
       this.workspaceUserList=data;})
-      
-  })}
+  }
 
   delete(userId:string): void{
     Swal.fire({
@@ -45,7 +42,7 @@ export class MemberManagmentComponent implements OnInit {
       confirmButtonText: 'Yes, delete!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.workspServise.delUserFromWorksp(this.workspaceId, userId).subscribe(
+        this.workspaceServise.delUserFromWorksp(this.workspaceId, userId).subscribe(
           () => { 
             window.location.reload();
           })
@@ -57,5 +54,4 @@ export class MemberManagmentComponent implements OnInit {
     let dialogRef = this.dialog.open(UserInviteComponent, {autoFocus: false});
     dialogRef.componentInstance.workspaceId = this.workspaceId;
   }
-
 }
