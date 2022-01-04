@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CreateWorkspace } from '../models/workspace';
+import { WorkspaceInviteInfo } from '../models/WorkspaceInviteInfo';
 import { CreateTask } from '../models/createTask';
-import { addworkspacetUrl, deleteUserFromWorkspaseUrl, getUserWorkspaceList, getWorkspaceUsersUrl, inviteUser, addTaskUrl } from 'src/app/configs/api-endpoints';
+import { addworkspacetUrl, deleteUserFromWorkspaseUrl, getUserWorkspaceList, getWorkspaceUsersUrl, inviteUser, addTaskUrl, workspaceActiveInvite } from 'src/app/configs/api-endpoints';
 import { Observable } from 'rxjs';
 import { UserWorkspace } from '../models/userWorkspaceList';
 import { UserInvite } from '../models/userInvite';
@@ -16,10 +17,11 @@ export class WorkspaceService {
     private readonly getUserWorkspaceList = getUserWorkspaceList;
     private readonly WorkspaceListUrl = addworkspacetUrl;
     private readonly getUserInvite = inviteUser;
+
+    private readonly activeInviteUrl = workspaceActiveInvite;
     private readonly createTaskUrl = addTaskUrl;
     private readonly getWorkspaceUsers = getWorkspaceUsersUrl;
     private readonly delUserWorksp = deleteUserFromWorkspaseUrl;
-
     private httpOption = {
         headers: new HttpHeaders({
             Authorization: 'Bearer ' + this.GetToken()
@@ -40,6 +42,15 @@ export class WorkspaceService {
 
     public InviteUser(invite: UserInvite): Observable<void> {
         return this.http.post<void>(this.getUserInvite, invite, this.httpOption);
+    }
+
+
+    public WorkspaceInviteInfo(workspaceId: number) {
+        return this.http.get<WorkspaceInviteInfo[]>(this.activeInviteUrl + workspaceId + "/invite/active", this.httpOption);
+    }
+
+    public WorkspaceActiveInviteDelete(id: number, workspaceId: number){
+        return this.http.delete<void>(this.activeInviteUrl + workspaceId + "/invite/" + id + "/cancel", this.httpOption);
     }
 
     public CreateTask(task: CreateTask): Observable<void> {

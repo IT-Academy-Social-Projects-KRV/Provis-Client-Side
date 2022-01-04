@@ -1,6 +1,8 @@
+import { userWorkspaceInfoUrl } from './../../configs/api-endpoints';
+import { userWorkspaceInfo } from './../models/userWorkspaceInfo';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, pipe } from 'rxjs';
 import { answerInviteUserUrl,
          userInviteList,
          userProfileUrl,
@@ -9,9 +11,8 @@ import { answerInviteUserUrl,
          changeUserInfoUrl,
          checkIsTwoFactorVerificationUrl,
          sendTwoFactorCodeUrl,
-         change2fUrl, 
+         change2fUrl,
         userImageUrl  } from 'src/app/configs/api-endpoints';
-import { Observable, pipe } from 'rxjs';
 import { UserInvite } from '../models/userInviteList';
 import { activeInvitesUrl } from 'src/app/configs/api-endpoints';
 import { ActiveInvites} from '../models/activeInvites';
@@ -32,9 +33,11 @@ export class UserService {
   private readonly sendConfirmEmailUrl = sendConfirmEmailUrl;
   private readonly confirmEmailUrl = confirmEmailUrl;
   private readonly changeUserInfoUrl = changeUserInfoUrl;
+  private readonly userWorkspaceInfoUrl = userWorkspaceInfoUrl;
   private readonly checkIsTwoFactorVerificationUrl = checkIsTwoFactorVerificationUrl;
   private readonly changeTwoFacotrUrl = change2fUrl;
   private readonly sendTwoFactorCodeUrl = sendTwoFactorCodeUrl;
+
 
   private readonly userImageUrl = userImageUrl;
   
@@ -58,8 +61,8 @@ export class UserService {
     return localStorage.getItem('token')?.toString();
   }
 
-  getUserInvite(): Observable<UserInvite[]>{
-    return this.http.get<UserInvite[]>(this.getUserInviteList, this.httpOption);
+  getUserInvite(): Observable<UserInvites[]>{
+    return this.http.get<UserInvites[]>(this.getUserInviteList, this.httpOption);
   }
 
   denyUserInvite(inviteId:number):Observable<void>{
@@ -110,5 +113,9 @@ export class UserService {
     formData.append('image', image, image.name);
 
     return this.http.put<void>(this.userImageUrl, formData, this.httpOption);
+  }
+
+  userWorkspaceInfo(workspaceId:number) :Observable<userWorkspaceInfo> {
+    return this.http.get<userWorkspaceInfo>(this.userWorkspaceInfoUrl + workspaceId + "/info", this.httpOption)
   }
 }

@@ -1,5 +1,7 @@
 import { MatAccordion } from '@angular/material/expansion';
 
+import { TaskService } from './../../../core/services/task.service';
+
 import { UserTask } from './../../../core/models/userTask';
 import { CreateTaskComponent } from './../create-task/create-task.component';
 import { MatDialog } from '@angular/material/dialog';
