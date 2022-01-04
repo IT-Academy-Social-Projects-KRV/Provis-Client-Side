@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, Validator } from '@angular/forms';
 import { enumValues, taskStatuses } from 'src/app/configs/enum.helper';
-import { CreateTask } from 'src/app/core/models/createTask';
+import { CreateTask, IAssignedUser } from 'src/app/core/models/createTask';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import Swal from 'sweetalert2';
 import { WorkspaceComponent } from '../workspace/workspace.component';
@@ -52,13 +52,17 @@ export class CreateTaskComponent implements OnInit {
     console.log('sdsdsdsdssdsd');
   }
 
+  assignedUsersArr: IAssignedUser[] =[
+    {roleTagId: 1, userId: 'dca4f278-b0bb-46bc-9758-0cb715392f66'}
+  ];
+
   CreateNewTask(): void{
     if(this.taskForm.valid){
       this.createTask = this.taskForm.value;
 
       this.createTask.workspaceId = this.workspaceId;
       this.createTask.statusId = this.selectedStatus;
-      this.createTask.assignedUsers = [{userId: 'f9074ebc-5e8f-43be-8585-ce93385347cb', roleTagId: 3}]
+      this.createTask.assignedUsers = this.assignedUsersArr;
       console.log(this.createTask);
       this.ws.CreateTask(this.createTask).subscribe(
         () => {
