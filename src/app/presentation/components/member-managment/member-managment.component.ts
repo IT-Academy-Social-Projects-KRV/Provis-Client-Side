@@ -7,6 +7,8 @@ import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import { UserInviteComponent } from '../user-invite/user-invite.component';
 import { UserInvites } from 'src/app/core/models/userInviteList';
 import Swal from 'sweetalert2';
+import { userWorkspaceInfo } from 'src/app/core/models/userWorkspaceInfo';
+import { UserService } from 'src/app/core/services/user.service';
 
 
 @Component({
@@ -20,15 +22,24 @@ export class MemberManagmentComponent implements OnInit {
   workspaceUserList: WorkspaceMembers[];
   protected routeSub: Subscription;
   workspaceActiveInviteInfo: UserInvites[];
+  userWorkspaceInfo = new userWorkspaceInfo;
   
-  constructor(private route: ActivatedRoute, public dialog: MatDialog, private workspaceServise: WorkspaceService) {}
+  constructor(
+    private route: ActivatedRoute, 
+    public dialog: MatDialog, 
+    private workspaceServise: WorkspaceService, 
+    private userService: UserService) {}
 
   ngOnInit() {
     this.route.parent?.params.subscribe((params) =>{
         this.workspaceId = Number(params['id']);
     })
     this.workspaceServise.getWorkspaceUserList(this.workspaceId).subscribe(data=>{
-      this.workspaceUserList=data;})
+      this.workspaceUserList=data;
+    })
+    this.userService.userWorkspaceInfo(this.workspaceId).subscribe((data: userWorkspaceInfo) => {
+        this.userWorkspaceInfo = data;
+      });
   }
 
   delete(userId:string): void{
