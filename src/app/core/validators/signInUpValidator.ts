@@ -30,5 +30,5 @@ export class SignInUpValidator{
             matchingControl.setErrors(null);
           }
         };
-      }
+    }
 }

@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="form-section">
+      <div class="form-block">
+          <div class="w-100 mb-20">
+              <h1 class="registration_title">PROVIS</h1>
+              <p class="registration_text">Best Task Manager</p>
+          </div>
+          <form class="login-form" [formGroup]="twoStepForm" novalidate (ngSubmit)="submit()">
+                <div class="div-padding-30">
+                    <p class="form-title">Your code</p>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Code</mat-label>
+                        <input type="text" matInput placeholder="Your code" #token formControlName="token" required>
+                        <mat-error *ngIf="twoStepForm.controls['token'].invalid && twoStepForm.controls['token'].touched">Invalid code</mat-error>
+                    </mat-form-field>
+                    <button mat-raised-button class="w-100 font-weight-600">Sign in</button>
+                </div>
+           </form>
+      </div>
+  </div>
+</div>

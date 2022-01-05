@@ -6,6 +6,8 @@ import { ChangeUserInfo } from 'src/app/core/models/changeUserInfo';
 import { UserService } from 'src/app/core/services/user.service';
 import { SignInUpValidator } from 'src/app/core/validators/signInUpValidator';
 import Swal from 'sweetalert2';
+import { MatDialog } from '@angular/material/dialog';
+import { ChangeTwoFaComponent } from '../change-two-fa/change-two-fa.component';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 
@@ -26,8 +28,8 @@ export class UserProfileComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
-    private sanitizer: DomSanitizer) {
-
+    private sanitizer: DomSanitizer,
+    public dialog: MatDialog) {
     this.userProfileForm = this.fb.group({
       name:['',SignInUpValidator.getNameValidator(3,50)],
       surname:['',SignInUpValidator.getNameValidator(3,50)],
@@ -47,7 +49,7 @@ export class UserProfileComponent implements OnInit {
         popup: 'animate__animated animate__fadeOutUp'
       }
     })
-  }
+  } 
 
   ngOnInit() {
     this.userService.getUserProfile().subscribe((data: UserProfile) =>{
@@ -79,45 +81,76 @@ export class UserProfileComponent implements OnInit {
          });
        },
        err => {
-         let errorMessage: string = '';
-         if(err.error.errors && typeof err.error.errors === 'object'){
-           const errors = err.error.errors;
-           for(let key in errors){
-             for(let indexError in errors[key]){
-               errorMessage += errors[key][indexError] + '\n';
-             }
-           }
-           this.showAlert(errorMessage);
-           return;
-         } 
-         if(err.error && typeof err.error === 'object'){
-           errorMessage += err.error.error;
-           this.showAlert(errorMessage);
-           return;
-         }
+        this.catchErr(err);
        }
      )
    }
   }
 
+  showCheckEmailAlert(){
+    Swal.fire({
+      title: 'Check your email address ' + this.userProfile.email,
+      text: "You need to copy confirmation code and enter it in this page!",
+      icon: 'warning',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Ok i understand!'
+    });
+  }
+
   confirmEmail(){
     this.userService.sendConfirmEmail().subscribe(
       () => {
-        Swal.fire({
-          title: 'Check your email address ' + this.userProfile.email,
-          text: "You need to copy confirmation code and enter it in this page!",
-          icon: 'warning',
-          showCancelButton: false,
-          confirmButtonColor: '#3085d6',
-          confirmButtonText: 'Ok i understand!'
-        });
-
+        this.showCheckEmailAlert();
         this.router.navigate(['user/confirmemail']);
       },
       err =>{
         this.catchErr(err);
       }
     );
+  }
+
+  modelEnterCode(){
+    this.userService.checkIsTwoFactorVerification().subscribe(
+      res => {
+        if(!res){
+          this.showCheckEmailAlert();
+
+          this.userService.sendTwoFactorCode().subscribe();
+
+          let dialogRef = this.dialog.open(ChangeTwoFaComponent);
+          dialogRef.componentInstance.isAdded.subscribe(data => {
+            if(data){
+              dialogRef.close();
+            }
+          })
+        }
+        else{
+          Swal.fire({
+            title: 'You have already activated two-factor authentication, do you want to disable it?',
+            showDenyButton: true,
+            confirmButtonText: 'Yes',
+            denyButtonText: `No`,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.showCheckEmailAlert();
+
+              this.userService.sendTwoFactorCode().subscribe();
+
+              let dialogRef = this.dialog.open(ChangeTwoFaComponent);
+              dialogRef.componentInstance.isAdded.subscribe(data => {
+                if(data){
+                  dialogRef.close();
+                }
+              })
+            }
+          })
+        }
+      },
+      err => {
+        this.catchErr(err);
+      }
+    )
   }
 
   getImageTypes(): string {

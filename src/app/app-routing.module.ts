@@ -18,6 +18,7 @@ import { WorkspaceSettingsComponent } from './presentation/components/workspace-
 import { MemberManagmentComponent } from './presentation/components/member-managment/member-managment.component';
 import { MemberListComponent } from './presentation/components/member-list/member-list.component';
 import { MemberCalendarComponent } from './presentation/components/member-calendar/member-calendar.component';
+import { TwoSetpVerificationComponent } from './presentation/components/two-step-verification/two-step-verification.component';
 
 const userWorkspaceRouters: Routes = [
   { path: 'managment', component: MemberManagmentComponent, pathMatch: 'full'},
@@ -42,6 +43,7 @@ const routes: Routes = [
   {path: 'about', component: AboutComponent},
   {path: 'contact', component: ContactComponent},
   {path: 'login', component: LoginComponent},
+  {path: 'twoStepVerification', component: TwoSetpVerificationComponent},
   {path: 'registration', component: RegistrationComponent},
   {path: 'user', component: UserComponent, children: userRouters, canActivate: [AuthGuard]},
   {path: '**', redirectTo: '', pathMatch: 'full'}
