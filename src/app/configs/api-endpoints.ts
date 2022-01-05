@@ -23,3 +23,5 @@ export const sendConfirmEmailUrl = baseUrl + '/User/sendconfirmmail';
 export const confirmEmailUrl = baseUrl + '/User/confirmemail';
 export const changeUserInfoUrl = baseUrl + '/User/changeinfo';
 export const userImageUrl = baseUrl + '/User/image';
+
+export const addTaskUrl = baseUrl + '/Task/addtask';
