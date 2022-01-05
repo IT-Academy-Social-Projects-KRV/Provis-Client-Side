@@ -48,6 +48,7 @@ export class WorkspaceService {
 
     public UpdateWorkspace(workspace: UpdateWorkspace): Observable<void> {
       return this.http.put<void>(this.updateWorkspaceUrl, workspace, this.httpOption);
+    }
 
     public getWorkspaceUserList(workspaceId: number): Observable<WorkspaceMembers[]>{
         return this.http.get<WorkspaceMembers[]>(this.getWorkspaceUsers+"/"+workspaceId+"/members", this.httpOption);
@@ -56,7 +57,7 @@ export class WorkspaceService {
     public delUserFromWorksp(workspaceId: number, userId: string): Observable<void>{
         return this.http.delete<void>(this.delUserWorksp+"/"+workspaceId+"/user/"+userId, this.httpOption);
     }
-  
+
     public WorkspaceInviteInfo(workspaceId: number) {
         return this.http.get<WorkspaceInviteInfo[]>(this.activeInviteUrl + workspaceId + "/invite/active", this.httpOption);
     }
