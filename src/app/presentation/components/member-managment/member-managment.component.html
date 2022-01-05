@@ -1,4 +1,3 @@
-
 <section>
   <div class="right-side-title">
     <span> Member managment</span>
@@ -11,18 +10,15 @@
           <span class="del-title">{{item.userName}}</span>
             <div class="page2">
               <div>
-                <span>User role:</span> 
+                <span>Role:</span> 
                 <span class="font-weight-600">{{item.role}}</span>
               </div>
             </div>
           </div>
-        <span *ngIf="item.role != 'Owner'">
+        <span *ngIf="userWorkspaceInfo.role == 'Owner' && item.role != 'Owner'">
           <button mat-raised-button class="button-accept" (click)="delete(item.id)">Delete</button>
         </span>
       </li>
     </div>
   </div>
 </section>
-
-
-

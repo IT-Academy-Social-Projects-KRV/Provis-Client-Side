@@ -29,3 +29,4 @@ export const sendTwoFactorCodeUrl = baseUrl + '/User/sendtwofactorcode';
 
 export const userImageUrl = baseUrl + '/User/image';
 
+export const addTaskUrl = baseUrl + '/Task/addtask';
