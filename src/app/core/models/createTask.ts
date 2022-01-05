@@ -4,10 +4,10 @@ export class CreateTask {
     dateOfEnd: string;
     workspaceId: number;
     statusId: number;
-    assignedUsers: IAssignedUser[];
+    assignedUsers: AssignedMember[];
 }
 
-export interface IAssignedUser{
+export class AssignedMember{
     userId: string;
     roleTagId: number;
 }
