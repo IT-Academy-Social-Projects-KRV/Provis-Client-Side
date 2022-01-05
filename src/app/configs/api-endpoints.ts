@@ -16,6 +16,7 @@ export const deleteUserFromWorkspaseUrl = baseUrl + '/Workspace'
 export const userWorkspaceInfoUrl = baseUrl + '/Workspace/getworkspace/'
 export const inviteUser = baseUrl + '/Workspace/inviteuser';
 export const workspaceActiveInvite = baseUrl + '/Workspace/';
+export const changeWorkspaceRoleUrl = baseUrl + '/Workspace/changerole';
 
 export const userProfileUrl = baseUrl + '/User/getpersonalinfo';
 export const userInviteList = baseUrl + '/User/invite';
