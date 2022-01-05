@@ -53,7 +53,7 @@ export class TwoSetpVerificationComponent implements OnInit {
             title: 'Login',
             text: "Success",
             showConfirmButton: false,
-            timer: 1500
+            timer: 1000
           });
         },
         err => {

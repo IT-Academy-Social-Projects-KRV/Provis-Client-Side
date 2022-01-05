@@ -2,7 +2,6 @@ import { userWorkspaceInfoUrl } from './../../configs/api-endpoints';
 import { userWorkspaceInfo } from './../models/userWorkspaceInfo';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { answerInviteUserUrl,
          userInviteList,
          userProfileUrl,
@@ -12,10 +11,8 @@ import { answerInviteUserUrl,
          checkIsTwoFactorVerificationUrl,
          sendTwoFactorCodeUrl,
          change2fUrl,
-         userImageUrl, 
+         userImageUrl,
          activeInvitesUrl} from 'src/app/configs/api-endpoints';
-import { UserInvite } from '../models/userInviteList';
-import { activeInvitesUrl } from 'src/app/configs/api-endpoints';
 import { Observable, pipe } from 'rxjs';
 import { UserInvites } from '../models/userInviteList';
 import { ActiveInvites} from '../models/activeInvites';

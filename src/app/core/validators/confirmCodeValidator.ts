@@ -7,6 +7,7 @@ export class ConfirmCodeValidator{
 
     public static getConfirmCode()
     {
-      return [ConfirmCodeValidator.getRequiredValidator(), Validators.pattern(`^[ 0-9]+$`), Validators.maxLength(6), Validators.minLength(6)];
+      return [ConfirmCodeValidator.getRequiredValidator(),
+        Validators.pattern(`^[ 0-9]+$`), Validators.maxLength(6), Validators.minLength(6)];
     }
 }

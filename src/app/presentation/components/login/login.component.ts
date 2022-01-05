@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
             title: 'Login',
             text: "Success",
             showConfirmButton: false,
-            timer: 1500
+            timer: 1000
           });
         },
         err => {
