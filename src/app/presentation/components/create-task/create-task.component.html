@@ -1,3 +1,35 @@
 <div>
-  <h1> Create Task </h1>
+  <form class="createTask-form" [formGroup]="taskForm" (ngSubmit)="CreateNewTask()">
+      <div style="padding: 30px">
+      <p class="form-title">Create Task</p>
+
+      <mat-form-field hintLabel="Max 50 characters" appearance="fill">
+        <mat-label>Name</mat-label>
+        <input type="text" matInput placeholder="Task name" #Name maxlength=50 formControlName="Name" required> 
+        <mat-error *ngIf="taskForm.controls['Name'].invalid && taskForm.controls['Name'].touched">Invalid name</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <input type="text" matInput placeholder="Task description" formControlName="Description">
+        <mat-error *ngIf="taskForm.controls['Description'].invalid && taskForm.controls['Description'].touched">Invalid description</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Due date</mat-label>
+        <input type="date" matInput placeholder="Task deadline" formControlName="DateOfEnd" required>
+        <mat-error *ngIf="taskForm.controls['DateOfEnd'].invalid && taskForm.controls['DateOfEnd'].touched">Invalid Due date</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Task status</mat-label>
+        <mat-select [(value)]="selectedStatus" formControlName="StatusId" required>
+          <mat-option *ngFor="let key of enumValues(status)" [value] = "key"> {{status[key]}} </mat-option>
+        </mat-select>
+        <mat-error *ngIf="taskForm.controls['StatusId'].invalid && taskForm.controls['StatusId'].touched">Invalid status</mat-error>
+      </mat-form-field>
+
+      <button mat-raised-button (сlick)="CreateNewTask()" >Create Task</button>
+      </div>
+  </form>
 </div>
