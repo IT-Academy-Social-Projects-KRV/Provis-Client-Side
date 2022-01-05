@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { enumValues, taskStatuses } from 'src/app/configs/enum.helper';
-import { CreateTask, IAssignedUser } from 'src/app/core/models/createTask';
+import { enumValues, taskStatuses, userTaskRole } from 'src/app/configs/enum.helper';
+import { CreateTask, AssignedMember } from 'src/app/core/models/createTask';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
+import { WorkspaceMembers } from 'src/app/core/models/workspaceUsersList';
 
 @Component({
   selector: 'app-create-task',
@@ -19,19 +20,34 @@ export class CreateTaskComponent implements OnInit {
   status = taskStatuses;
   selectedStatus: number;
   public enumValues = enumValues;
+ 
+  workspaceMemberList: WorkspaceMembers[];
+  userRole = userTaskRole;
+  public assignedMembers: AssignedMember[];
+  id : string;
+  demoForm: FormGroup;
 
-  constructor(private fb:FormBuilder, private ws: WorkspaceService, public dialog: MatDialog) {
+  constructor(private workspaceService: WorkspaceService ,private fb:FormBuilder, private ws: WorkspaceService, public dialog: MatDialog) {
     this.taskForm=fb.group({
       "Name":["",[Validators.maxLength(50)]],
       "Description":["",[Validators.maxLength(100)]],
       "DateOfEnd":["", ],
       "StatusId": ["",Validators.required]
     })
+
+    this.demoForm = this.fb.group({
+      demoArray: this.fb.array([])
+    })
   }
 
   ngOnInit() {
-    this.createTask.workspaceId = this.workspaceId
     console.log(this.workspaceId)
+    this.createTask.workspaceId = this.workspaceId;
+    this.workspaceService.getWorkspaceUserList(this.workspaceId).subscribe((data: WorkspaceMembers[]) =>{
+      this.workspaceMemberList = data;
+    });
+
+    this.assignedMembers = [];
   }
 
   showAlert(error: string){
@@ -47,21 +63,19 @@ export class CreateTaskComponent implements OnInit {
     })
   }
 
-  AssignUserOnTask(): void{
-    console.log('sdsdsdsdssdsd');
-  }
-
-  assignedUsersArr: IAssignedUser[] =[
-    {roleTagId: 1, userId: '7b220225-d22d-4ef6-b7dc-8caf4a28da48'}
-  ];
-
   CreateNewTask(): void{
+    if(this.assignedMembers.some(e => e.userId == null || e == null || e.roleTagId == null))
+    {
+      this.showAlert("Fill all fields");
+      return;
+    }
+      
     if(this.taskForm.valid){
       this.createTask = this.taskForm.value;
 
       this.createTask.workspaceId = this.workspaceId;
       this.createTask.statusId = this.selectedStatus;
-      this.createTask.assignedUsers = this.assignedUsersArr;
+      this.createTask.assignedUsers = this.assignedMembers;
       console.log(this.createTask);
       this.ws.CreateTask(this.createTask).subscribe(
         () => {
@@ -92,5 +106,26 @@ export class CreateTaskComponent implements OnInit {
         }
       );
     }
+  }
+
+  AssignMember()
+  {
+  if(this.assignedMembers.length < this.workspaceMemberList.length)
+    this.assignedMembers.unshift(new AssignedMember());
+    console.log(this.assignedMembers);
+  }
+
+  DeAssignMember(i: number) {
+    this.assignedMembers.splice(i, 1);
+  }
+
+  Contains(userId: string) : boolean
+  {
+      return this.assignedMembers.some(e => e.userId == userId);
+  }
+
+  Ok()
+  {
+    
   }
 }
