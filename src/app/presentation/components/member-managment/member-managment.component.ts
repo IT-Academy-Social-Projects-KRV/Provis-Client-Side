@@ -9,7 +9,12 @@ import { WorkspaceMembers } from 'src/app/core/models/workspaceUsersList';
 import Swal from 'sweetalert2';
 import { userWorkspaceInfo } from 'src/app/core/models/userWorkspaceInfo';
 import { UserService } from 'src/app/core/services/user.service';
-
+import { ChangeWorkspaceRole } from 'src/app/core/models/changeWorkspaceRole';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
+interface Role {
+  roleId: number;
+  nameRole: string;
+}
 
 @Component({
   selector: 'app-member-managment',
@@ -17,6 +22,13 @@ import { UserService } from 'src/app/core/services/user.service';
   styleUrls: ['./member-managment.component.css']
 })
 export class MemberManagmentComponent implements OnInit {
+
+  roles: Role[] = [
+    {roleId: 1, nameRole: 'Owner'},
+    {roleId: 2, nameRole: 'Manager'},
+    {roleId: 3, nameRole: 'Member'},
+    {roleId: 4, nameRole: 'Viewer'},
+  ];
 
   protected routeSub: Subscription;
   workspaceId: number;
@@ -29,7 +41,8 @@ export class MemberManagmentComponent implements OnInit {
     public dialog: MatDialog, 
     private router: Router,
     private workspaceServise: WorkspaceService, 
-    private userService: UserService) {}
+    private userService: UserService,
+    public authSrvice: AuthenticationService) {}
   
   ngOnInit() {
     this.route.parent?.params.subscribe(
@@ -67,4 +80,67 @@ export class MemberManagmentComponent implements OnInit {
         }
       })
     }
+
+    showAlert(error: string){
+      Swal.fire({
+        icon: 'error',
+        title: error,
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      })
+    }
+
+  chandeWorkspaceRole(roleId: number, currentRole: string, userId: string) {
+
+    if(this.roles[this.roles.findIndex(x=>x.roleId == roleId)].nameRole != currentRole)
+    {
+      let body = new ChangeWorkspaceRole()
+      body.roleId = roleId;
+      body.userId = userId;
+      body.workspaceId = this.workspaceId;
+
+      this.workspaceServise.changeWorkspaceRole(body).subscribe(
+        ()=>{
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Change role',
+            text: "Success",
+            showConfirmButton: false,
+            timer: 1000
+          })
+        },
+
+          err => {
+          let errorMessage: string = '';
+          if(err.error.errors && typeof err.error.errors === 'object'){
+            const errors = err.error.errors;
+
+            for(let key in errors){
+              for(let indexError in errors[key]){
+                errorMessage += errors[key][indexError] + '\n';
+              }
+            }
+
+           this.showAlert(errorMessage);
+
+            return;
+          }
+
+          if(err.error && typeof err.error === 'object'){
+            errorMessage += err.error.error;
+
+            this.showAlert(errorMessage);
+
+            return;
+          }
+          }
+      );
+    }
+
+  }
 }
