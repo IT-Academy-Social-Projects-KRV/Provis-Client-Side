@@ -5,21 +5,20 @@
   </div>
   <div class="user-page">
     <div class="delpage">
-      <li *ngFor="let item of workspaceUserList">
-        <div>
+      <li *ngFor="let item of workspaceUserList" style="margin-top: 30px;">
+        <div >
           <span class="del-title">{{item.userName}}</span>
             <div class="page2">
-              <div>
                 <mat-form-field appearance="fill">
-                  <mat-select [(value)]="item.role" [disabled]="item.role == 'Owner'">
+                  <mat-select [(value)]="item.role" [disabled]="item.role == 'Owner' || item.id == authSrvice.currentUser.Id">
                     <mat-option *ngFor="let role of roles" [value]="role.nameRole" 
-                    (onSelectionChange)="chandeWorkspaceRole(role.roleId, item.role, item.id)">
+                    (onSelectionChange)="chandeWorkspaceRole(role.roleId, item.role, item.id)"
+                    [disabled]="role.nameRole=='Owner'">
                       {{role.nameRole}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
-            </div>
           </div>
         <span *ngIf="userWorkspaceInfo.role == 'Owner' && item.role != 'Owner'">
           <button mat-raised-button class="button-accept" (click)="delete(item.id)">Delete</button>

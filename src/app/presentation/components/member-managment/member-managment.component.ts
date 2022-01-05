@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 import { userWorkspaceInfo } from 'src/app/core/models/userWorkspaceInfo';
 import { UserService } from 'src/app/core/services/user.service';
 import { ChangeWorkspaceRole } from 'src/app/core/models/changeWorkspaceRole';
-
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 interface Role {
   roleId: number;
   nameRole: string;
@@ -41,7 +41,8 @@ export class MemberManagmentComponent implements OnInit {
     public dialog: MatDialog, 
     private router: Router,
     private workspaceServise: WorkspaceService, 
-    private userService: UserService) {}
+    private userService: UserService,
+    public authSrvice: AuthenticationService) {}
   
   ngOnInit() {
     this.route.parent?.params.subscribe(
