@@ -1,4 +1,14 @@
+import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { UserInviteComponent } from '../user-invite/user-invite.component';
+import { WorkspaceService } from 'src/app/core/services/workspace.service';
+import { UserInvites } from 'src/app/core/models/userInviteList';
+import { WorkspaceMembers } from 'src/app/core/models/workspaceUsersList';
+import Swal from 'sweetalert2';
+import { userWorkspaceInfo } from 'src/app/core/models/userWorkspaceInfo';
+import { UserService } from 'src/app/core/services/user.service';
 
 
 @Component({
@@ -8,8 +18,53 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MemberManagmentComponent implements OnInit {
 
-  constructor() { }
+  protected routeSub: Subscription;
+  workspaceId: number;
+  workspaceActiveInviteInfo: UserInvites[];
+  userWorkspaceInfo = new userWorkspaceInfo;
+  workspaceUserList: WorkspaceMembers[];
+  
+  constructor(
+    private route: ActivatedRoute, 
+    public dialog: MatDialog, 
+    private router: Router,
+    private workspaceServise: WorkspaceService, 
+    private userService: UserService) {}
+  
+  ngOnInit() {
+    this.route.parent?.params.subscribe(
+      (params) =>
+      {this.workspaceId = Number(params['id']);
+    })
+    this.workspaceServise.getWorkspaceUserList(this.workspaceId).subscribe(data=>{
+      this.workspaceUserList=data;
+    })
+    this.userService.userWorkspaceInfo(this.workspaceId).subscribe((data: userWorkspaceInfo) => {
+        this.userWorkspaceInfo = data;
+      });
+  }
+  
+  modalInvites() {
+    let dialogRef = this.dialog.open(UserInviteComponent, {autoFocus: false});
+    dialogRef.componentInstance.workspaceId = this.workspaceId;
+  }
 
-  ngOnInit() { }
-
+  delete(userId:string): void{
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "User will be deleted from all workspace tasks!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.workspaceServise.delUserFromWorksp(this.workspaceId, userId).subscribe(
+          () => { 
+            window.location.reload();
+          })
+        }
+      })
+    }
 }

@@ -15,14 +15,6 @@ export class WorkspaceComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) { }
 
-  ngOnInit() {
-    this.routeSub = this.route.params.subscribe(params => {
-      this.workspaceId = params['id'];
-    });
-  }
+  ngOnInit() {}
   
-  ngOnDestroy(){
-    this.routeSub.unsubscribe();
-  }
-
 }

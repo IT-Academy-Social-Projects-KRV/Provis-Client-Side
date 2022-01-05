@@ -19,4 +19,8 @@ form.register-form{
     width: 100%;
 }
 
-
+.verifiaction-block{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

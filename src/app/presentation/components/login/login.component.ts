@@ -16,12 +16,12 @@ export class LoginComponent implements OnInit {
   loginForm : FormGroup;
   userForLogin: UserForLogin = new UserForLogin();
 
-  constructor(private fb:FormBuilder, private service: AuthenticationService, private router: Router){
-    this.loginForm=fb.group({        
+  constructor(private fb:FormBuilder, private service: AuthenticationService){
+    this.loginForm=fb.group({
         "Email":["",SignInUpValidator.getEmailValidator()],
-        "Password" : [""]               
+        "Password" : [""]
     })
-}
+  }
   ngOnInit(): void {
   }
 
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
   }
 
   submit()
-  {  
+  {
     if(this.loginForm.valid){
       this.userForLogin = Object.assign({}, this.loginForm.value);
       this.service.login(this.userForLogin).subscribe(
@@ -52,8 +52,6 @@ export class LoginComponent implements OnInit {
             showConfirmButton: false,
             timer: 1000
           });
-
-          this.router.navigate(['user/workspaces']);
         },
         err => {
           let errorMessage: string = '';
@@ -65,11 +63,11 @@ export class LoginComponent implements OnInit {
                 errorMessage += errors[key][indexError] + '\n';
               }
             }
-            
+
            this.showAlert(errorMessage);
 
             return;
-          } 
+          }
 
           if(err.error && typeof err.error === 'object'){
             errorMessage += err.error.error;

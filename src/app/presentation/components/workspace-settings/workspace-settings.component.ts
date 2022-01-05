@@ -45,5 +45,6 @@ export class WorkspaceSettingsComponent implements OnInit {
 
     });
   }
+
 }
 

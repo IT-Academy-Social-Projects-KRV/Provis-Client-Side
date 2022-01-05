@@ -1,4 +1,24 @@
-<div class="right-side-title">
-  <span> Member managment</span>
-  <!-- Enter your code here -->
-</div>
+<section>
+  <div class="right-side-title">
+    <span> Member managment</span>
+    <button mat-raised-button color="Primary" (click)='modalInvites()'>Invite</button>
+  </div>
+  <div class="user-page">
+    <div class="delpage">
+      <li *ngFor="let item of workspaceUserList">
+        <div>
+          <span class="del-title">{{item.userName}}</span>
+            <div class="page2">
+              <div>
+                <span>Role:</span> 
+                <span class="font-weight-600">{{item.role}}</span>
+              </div>
+            </div>
+          </div>
+        <span *ngIf="userWorkspaceInfo.role == 'Owner' && item.role != 'Owner'">
+          <button mat-raised-button class="button-accept" (click)="delete(item.id)">Delete</button>
+        </span>
+      </li>
+    </div>
+  </div>
+</section>
