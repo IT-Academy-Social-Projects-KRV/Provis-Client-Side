@@ -1,9 +1,9 @@
-<section class="section-background-color">
+<section>
   <div class="container">
     <div>
       <a mat-raised-button class="link-button" color="primary" [routerLink]="['../create']">Create New</a>
       <div class="list">
-        <mat-card *ngFor="let workspace of userWorkspaceList" [routerLink]="'../workspace/' + workspace.id" class="card" [style.border-color]="cardColors[workspace.id % cardColors.length]">
+        <mat-card *ngFor="let workspace of userWorkspaceList" [routerLink]="'../workspace/' + workspace.id + '/tasklist'" class="card" [style.border-color]="cardColors[workspace.id % cardColors.length]">
           <div class="header-card-block" [style.background-color]="cardColors[workspace.id % cardColors.length]">
             <mat-card-title class="card-title">
               <h3>{{workspace.name}}</h3>
