@@ -10,8 +10,14 @@
           <span class="del-title">{{item.userName}}</span>
             <div class="page2">
               <div>
-                <span>Role:</span> 
-                <span class="font-weight-600">{{item.role}}</span>
+                <mat-form-field appearance="fill">
+                  <mat-select [(value)]="item.role" [disabled]="item.role == 'Owner'">
+                    <mat-option *ngFor="let role of roles" [value]="role.nameRole" 
+                    (onSelectionChange)="chandeWorkspaceRole(role.roleId, item.role, item.id)">
+                      {{role.nameRole}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
               </div>
             </div>
           </div>
