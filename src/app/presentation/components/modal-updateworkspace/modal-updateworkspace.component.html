@@ -1,0 +1,20 @@
+<div class="update-workspace-modal">
+  <div class="container">
+    <div class="updws_form">
+      <form class="updws-form" [formGroup]="updwsform" novalidate (ngSubmit)="submit()">
+        <p class="updws_form_title">Update workspace</p>
+        <mat-form-field class="updws-name" appearance="fill">
+          <mat-label>Workspace Name</mat-label>
+          <input matInput #Name placeholder="Input a name of workspace" maxlength="70" value="" formControlName="Name"
+            required>
+        </mat-form-field>
+        <mat-form-field class="updws-description" appearance="fill">
+          <mat-label>Description</mat-label>
+          <textarea matInput #Description placeholder="Input a description of workspace" formControlName="Description"
+            required></textarea>
+        </mat-form-field>
+        <button mat-raised-button color="primary" class="w-100">Update</button>
+      </form>
+    </div>
+  </div>
+</div>
