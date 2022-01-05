@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { TwoSetpVerificationComponent } from './two-setp-verification.component';
+import { TwoSetpVerificationComponent } from './two-step-verification.component';
 
 describe('TwoSetpVerificationComponent', () => {
   let component: TwoSetpVerificationComponent;

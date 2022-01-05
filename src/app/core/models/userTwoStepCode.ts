@@ -1,3 +1,3 @@
 export class UserTwoStepCode{
-    token?: string;
+    token: string;
 }

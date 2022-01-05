@@ -98,18 +98,21 @@ export class UserProfileComponent implements OnInit {
    }
   }
 
+  showCheckEmailAlert(){
+    Swal.fire({
+      title: 'Check your email address ' + this.userProfile.email,
+      text: "You need to copy confirmation code and enter it in this page!",
+      icon: 'warning',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Ok i understand!'
+    });
+  }
+
   confirmEmail(){
     this.userService.sendConfirmEmail().subscribe(
       () => {
-        Swal.fire({
-          title: 'Check your email address ' + this.userProfile.email,
-          text: "You need to copy confirmation code and enter it in this page!",
-          icon: 'warning',
-          showCancelButton: false,
-          confirmButtonColor: '#3085d6',
-          confirmButtonText: 'Ok i understand!'
-        });
-
+        this.showCheckEmailAlert();
         this.router.navigate(['user/confirmemail']);
       },
       err => {
@@ -122,14 +125,7 @@ export class UserProfileComponent implements OnInit {
     this.userService.checkIsTwoFactorVerification().subscribe(
       res => {
         if(!res){
-          Swal.fire({
-            title: 'Check your email address ' + this.userProfile.email,
-            text: "To activate two-factor authentication, enter the code sent to your mail",
-            icon: 'warning',
-            showCancelButton: false,
-            confirmButtonColor: '#3085d6',
-            confirmButtonText: 'Ok i understand!'
-          });
+          this.showCheckEmailAlert();
 
           this.userService.sendTwoFactorCode().subscribe();
 
@@ -148,14 +144,7 @@ export class UserProfileComponent implements OnInit {
             denyButtonText: `No`,
           }).then((result) => {
             if (result.isConfirmed) {
-              Swal.fire({
-                title: 'Check your email address ' + this.userProfile.email,
-                text: "To disable two-factor authentication, enter the code sent to your mail",
-                icon: 'warning',
-                showCancelButton: false,
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'Ok i understand!'
-              });
+              this.showCheckEmailAlert();
 
               this.userService.sendTwoFactorCode().subscribe();
 

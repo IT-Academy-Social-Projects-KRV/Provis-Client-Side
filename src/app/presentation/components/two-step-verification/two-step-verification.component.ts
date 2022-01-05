@@ -4,12 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TwoFactorDTO } from 'src/app/core/models/twoFactorDTO';
 import { UserTwoStepCode } from 'src/app/core/models/userTwoStepCode';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { ConfirmCodeValidator } from 'src/app/core/validators/confirmCodeValidator';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-two-setp-verification',
-  templateUrl: './two-setp-verification.component.html',
-  styleUrls: ['./two-setp-verification.component.css']
+  selector: 'app-two-step-verification',
+  templateUrl: './two-step-verification.component.html',
+  styleUrls: ['./two-step-verification.component.css']
 })
 export class TwoSetpVerificationComponent implements OnInit {
 
@@ -20,7 +21,7 @@ export class TwoSetpVerificationComponent implements OnInit {
     private fb: FormBuilder,
     private activeRoute: ActivatedRoute) {
     this.twoStepForm = fb.group({
-      "token": ['']
+      "token": ["", ConfirmCodeValidator.getConfirmCode()]
     });
   }
 

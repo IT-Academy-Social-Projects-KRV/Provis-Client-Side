@@ -17,7 +17,7 @@ import { WorkspaceSettingsComponent } from './presentation/components/workspace-
 import { MemberManagmentComponent } from './presentation/components/member-managment/member-managment.component';
 import { MemberListComponent } from './presentation/components/member-list/member-list.component';
 import { MemberCalendarComponent } from './presentation/components/member-calendar/member-calendar.component';
-import { TwoSetpVerificationComponent } from './presentation/components/two-setp-verification/two-setp-verification.component';
+import { TwoSetpVerificationComponent } from './presentation/components/two-step-verification/two-step-verification.component';
 
 const userRouters: Routes = [
   { path: 'workspace/list', component: WorkspaceListComponent},

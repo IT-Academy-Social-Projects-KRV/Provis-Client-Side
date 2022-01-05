@@ -12,11 +12,6 @@ export class AuthGuard implements CanActivate {
 
   async canActivate(): Promise<boolean> {
 
-    if(await this.authenticationService.isTwoFactorAuthentucation())
-    {
-      return true;
-    }
-
     if(await this.authenticationService.isAuthenticatedWithRefreshToken())
     {
       return true;

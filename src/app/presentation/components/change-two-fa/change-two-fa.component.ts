@@ -4,6 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UserChange2fa } from 'src/app/core/models/userChange2fa';
 import { UserService } from 'src/app/core/services/user.service';
+import { ConfirmCodeValidator } from 'src/app/core/validators/confirmCodeValidator';
 import Swal from 'sweetalert2';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 
@@ -23,7 +24,7 @@ export class ChangeTwoFaComponent implements OnInit {
     private dialogRef: MatDialogRef<UserProfileComponent>,
     private service: UserService) {
     this.twoFactorForm = fb.group({
-      "Token": ['']
+      "Token": ["", ConfirmCodeValidator.getConfirmCode()]
     });
   }
 
@@ -47,8 +48,45 @@ export class ChangeTwoFaComponent implements OnInit {
 
           this.router.navigate(['/user/profile']);
           this.isAdded.emit(true);
+        },
+        err =>{
+          let errorMessage: string = '';
+          if(err.error.errors && typeof err.error.errors === 'object'){
+            const errors = err.error.errors;
+
+            for(let key in errors){
+              for(let indexError in errors[key]){
+                errorMessage += errors[key][indexError] + '\n';
+              }
+            }
+
+           this.showAlert(errorMessage);
+
+            return;
+          }
+
+          if(err.error && typeof err.error === 'object'){
+            errorMessage += err.error.error;
+
+            this.showAlert(errorMessage);
+
+            return;
+          }
         }
       )
     }
+  }
+
+  showAlert(error: string){
+    Swal.fire({
+      icon: 'error',
+      title: error,
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      }
+    })
   }
 }

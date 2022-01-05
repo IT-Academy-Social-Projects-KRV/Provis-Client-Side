@@ -57,9 +57,6 @@ export class AuthenticationService {
           }
         });
 
-        localStorage.setItem('isTwoFactor', String(tokens.is2StepVerificationRequired));
-        localStorage.setItem('provider', tokens.provider);
-
         return;
       }
 
@@ -68,7 +65,6 @@ export class AuthenticationService {
   }
 
   public twoStepLogin(twoFactor: TwoFactorDTO): Observable<void> {
-
     return this.http.post<AuthResponse>(this.twoStepLoginUrl, twoFactor).pipe(map((tokens: AuthResponse) => {
 
       this.setTokensInLocalStorage(tokens);
@@ -97,13 +93,6 @@ export class AuthenticationService {
     const refreshToken: any = localStorage.getItem('refreshToken');
 
     return token && refreshToken;
-  }
-
-  public async isTwoFactorAuthentucation(): Promise<boolean>{
-    const isTwoFacotr: any = localStorage.getItem('isTwoFactor');
-    const provider: any = localStorage.getItem('provider');
-
-    return Boolean(isTwoFacotr) && provider;
   }
 
   public async isAuthenticatedWithRefreshToken(): Promise<boolean> {
