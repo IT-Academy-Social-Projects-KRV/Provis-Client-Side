@@ -7,3 +7,18 @@
       </a>
   </div>
 </div>
+
+<div class="toggle-block">
+  <div class="toggle-button">
+    <div (click)="accordion.openAll()">Expand All</div>
+    <div (click)="accordion.closeAll()">Collapse All</div>
+  </div>
+</div>
+
+<mat-accordion multi>
+  <div *ngFor="let user of workspaceUserList">
+    
+    <app-tasklist [user]="user" [workspaceId]="workspaceId"></app-tasklist>
+ 
+  </div>
+</mat-accordion>

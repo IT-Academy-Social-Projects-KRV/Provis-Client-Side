@@ -17,6 +17,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge'
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
+import {CdkAccordionModule} from '@angular/cdk/accordion';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 import { HomeComponent } from './presentation/components/home/home.component';
 import { AboutComponent } from './presentation/components/about/about.component';
@@ -35,6 +38,7 @@ import { MemberManagmentComponent } from './presentation/components/member-manag
 import { MemberListComponent } from './presentation/components/member-list/member-list.component';
 import { MemberCalendarComponent } from './presentation/components/member-calendar/member-calendar.component';
 import { MemberTasklistComponent } from './presentation/components/member-tasklist/member-tasklist.component';
+import { TasklistComponent } from './presentation/components/tasklist/tasklist.component';
 
 import { AuthInterceptorProvider } from './core/services/auth.interceptor';
 import { WorkspaceService } from './core/services/workspace.service';
@@ -81,7 +85,8 @@ import { ChangeTwoFaComponent } from './presentation/components/change-two-fa/ch
     ChangeTwoFaComponent,
     MemberTasklistComponent,
     CreateTaskComponent,
-    ModalUpdateWorkspaceComponent
+    ModalUpdateWorkspaceComponent,
+    TasklistComponent
   ],
   imports: [
     BrowserModule,
@@ -99,7 +104,10 @@ import { ChangeTwoFaComponent } from './presentation/components/change-two-fa/ch
     MatDialogModule,
     MatBadgeModule,
     MatCardModule,
-    MatSelectModule
+    MatSelectModule,
+    CdkAccordionModule,
+    MatExpansionModule,
+    DragDropModule
   ],
   providers: [
     AuthInterceptorProvider,
