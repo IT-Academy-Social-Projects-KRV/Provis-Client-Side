@@ -52,7 +52,7 @@ export class CreateTaskComponent implements OnInit {
   }
 
   assignedUsersArr: IAssignedUser[] =[
-    {roleTagId: 1, userId: '7b220225-d22d-4ef6-b7dc-8caf4a28da48'}
+    {roleTagId: 1, userId: '7a278b6d-391e-47b8-bac9-4a9741643be1'}
   ];
 
   CreateNewTask(): void{
