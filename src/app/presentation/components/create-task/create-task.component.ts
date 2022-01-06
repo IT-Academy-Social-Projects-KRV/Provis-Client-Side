@@ -64,7 +64,7 @@ export class CreateTaskComponent implements OnInit {
   }
 
   CreateNewTask(): void{
-    if(this.assignedMembers.some(e => e.userId == null || e == null || e.roleTagId == null))
+    if(this.assignedMembers.some(e => e.userId == null || e.roleTagId == null))
     {
       this.showAlert("Fill all fields");
       return;
