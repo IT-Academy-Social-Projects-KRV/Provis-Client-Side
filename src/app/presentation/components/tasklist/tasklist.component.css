@@ -1,0 +1,197 @@
+.example-container {
+  width: 275px;
+  max-width: 100%;
+  margin: 5px 25px 25px 0;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+.example-container::-webkit-scrollbar {
+  width: 12px; 
+  height: 50%;              /* width of the entire scrollbar */
+}
+.example-container::-webkit-scrollbar-track {
+  background: #3b394a;        /* color of the tracking area */
+}
+.example-container::-webkit-scrollbar-thumb {
+  
+  background-color: #eee;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 4px solid #3b394a;  /* creates padding around scroll thumb */
+}
+.task-card-block {
+  display: flex;
+  background: #3b394a;
+  justify-content: space-around;
+  max-height: 500px;
+  margin-top: 25px;
+  min-height: 500px;
+}
+.task-status {
+  font-weight: 500;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.75px;
+}
+.example-list {
+  min-height: 60px;
+  overflow: hidden;
+}
+.example-box {
+  padding: 10px;
+  margin: 10px;
+  color: #eee;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  font-size: 12px;
+  min-height: 100px;
+  border-bottom-width: 3px;
+  border-bottom-style: solid;
+  position: relative;
+}
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+              0 8px 10px 1px rgba(0, 0, 0, 0.14),
+              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+.example-box.todo {
+  border-color: rgb(163 127 98);
+  background: rgb(151 77 14 / 20%);
+}
+.example-box.progress {
+  border-color: rgb(102, 110, 195);
+  background: rgb(102 110 195 / 20%);
+}
+.example-box.review {
+  border-color: rgb(171 132 16);
+  background: rgb(185 149 48 / 20%);
+}
+.example-box.completed {
+  border-color: rgb(133 163 142);
+  background: rgb(96 124 107 / 50%)
+}
+.example-box .task-title {
+  font-weight: 500;
+}
+.example-box .task-info {
+  font-size: 10px;
+  font-weight: 500;
+  text-align: end;
+  letter-spacing: 0.5px;
+}
+.example-container .task-status {
+  margin: 0 10px 15px;
+  padding: 5px 0;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  color: #eee;
+  position: sticky;
+  z-index: 1;
+  top: 0;
+}
+.task-status.todo-border {
+  border-bottom-color: rgb(163 127 98);
+  background-color: rgb(100 66 47);
+}
+.task-status.progress-border {
+  border-bottom-color: rgb(102, 110, 195);
+  background-color: rgb(78 81 129);
+}
+.task-status.review-border {
+  border-bottom-color: rgb(171 132 16);
+  background-color: rgb(115 98 63);
+}
+.task-status.completed-border {
+  background-color: rgb(62 76 79);
+  border-bottom-color: rgb(133 163 142);
+}
+.example-container .task-status span {
+  margin-left: 10px;
+}
+.mat-expansion-panel,
+.mat-expansion-panel.mat-expansion-panel-spacing {
+  background: #3b394a;
+}
+.mat-expansion-panel-header {
+  border-radius: 0px;
+  border-bottom: 2px solid #eee;
+  background: #3b394a;
+  color: #eee;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 500;
+  transition: 0.5s;
+}
+.mat-expansion-panel:hover .mat-expansion-panel-header{
+  background-color: #3b394a;
+  transition: 0.5s;
+}
+.mat-expansion-panel:hover .mat-expansion-panel-header-title {
+  color: white;
+  transition: 0.5s;
+}
+.mat-expansion-panel-header-description,
+.mat-expansion-panel-header-title {
+  color: #adadad;
+  transition: 0.5s;
+}
+.mat-accordion:first-child(div) {
+  margin-bottom: 25px;
+}
+.mat-accordion>div {
+  margin-bottom: 10px;
+}
+.toggle-button {
+  display: flex;
+  margin: 15px 5px;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+.toggle-button>div {
+  margin-right: 30px;
+  border: 1px solid #3b394a;
+  padding: 3px 10px;
+  border-radius: 4px;
+  transition: 0.5s;
+}
+.toggle-button div:hover {
+  background-color: #48537a;
+  ;
+  color: #eee;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.toggle-block {
+  border-bottom: 2px solid #3b394a;
+  margin: 10px 0px;
+}
+span.mat-expansion-indicator {
+  color: rgb(255 255 255 / 54%);
+}
+mat-panel-title span {
+  margin-left: 15px;
+}
+.worker-status {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: #3b394a;
+  padding: 0px 4px;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  border-top: 1px solid #484747;
+  border-right: 1px solid #484747;
+}

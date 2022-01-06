@@ -1,0 +1,103 @@
+<mat-expansion-panel (click) = "showUserTasks(user.id)">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{user.userName}}
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <div>
+    <div class="task-card-block">
+      
+      <div class="example-container">
+        <div class="task-status todo-border">
+          <span>To do</span>
+          <span>({{(statusTasks.tasks[1] || []).length}})</span>
+        </div>
+        <div
+          id = "1"
+          cdkDropList
+          #todoList="cdkDropList"
+          [cdkDropListData]="statusTasks.tasks[1] || []"
+          [cdkDropListConnectedTo]="[progressList, reviewList, completedList]"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)">
+          <div class="example-box todo id-{{item.id}}" *ngFor="let item of statusTasks.tasks[1] || []" cdkDrag>
+            <span class="worker-status">{{workerStatus[item.workerRoleId]}}</span>
+            <span class="task-title">{{item.name}}</span>
+            <div class="task-info">
+              <span>Deadline: {{item.deadline | date:'dd.MM.yyyy'}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="example-container">
+        <div class="task-status progress-border">
+          <span>In progress</span>
+          <span>({{(statusTasks.tasks[2] || []).length}})</span>
+        </div>
+        <div
+          id = "2"
+          cdkDropList
+          #progressList="cdkDropList"
+          [cdkDropListData]="statusTasks.tasks[2] || []"
+          [cdkDropListConnectedTo]="[todoList, reviewList, completedList]"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)">
+          <div class="example-box progress" *ngFor="let item of statusTasks.tasks[2] || []" cdkDrag>
+            <span class="worker-status">{{workerStatus[item.workerRoleId]}}</span>
+            <span class="task-title">{{item.name}}</span>
+            <div class="task-info">
+              <span>Deadline: {{item.deadline | date:'dd.MM.yyyy'}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="example-container">
+        <div class="task-status review-border">
+          <span>In review</span>
+          <span>({{(statusTasks.tasks[3] || []).length}})</span>
+        </div>
+        <div
+          id = "3"
+          cdkDropList
+          #reviewList="cdkDropList"
+          [cdkDropListData]="statusTasks.tasks[3] || []"
+          [cdkDropListConnectedTo]="[todoList, progressList, completedList]"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)">
+          <div class="example-box review" *ngFor="let item of statusTasks.tasks[3] || []" cdkDrag>
+            <span class="worker-status">{{workerStatus[item.workerRoleId]}}</span>
+            <span class="task-title">{{item.name}}</span>
+            <div class="task-info">
+              <span>Deadline: {{item.deadline | date:'dd.MM.yyyy'}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="example-container">
+        <div class="task-status completed-border">
+          <span>Completed</span>
+          <span>({{(statusTasks.tasks[4] || []).length}})</span>
+        </div>
+        <div
+          id = "4"
+          cdkDropList
+          #completedList="cdkDropList"
+          [cdkDropListData]="statusTasks.tasks[4] || []"
+          [cdkDropListConnectedTo]="[todoList, progressList, reviewList]"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)">
+          <div class="example-box completed" *ngFor="let item of statusTasks.tasks[4] || []" cdkDrag>
+            <span class="worker-status">{{workerStatus[item.workerRoleId]}}</span>
+            <span class="task-title">{{item.name}}</span>
+            <div class="task-info">
+              <span>Deadline: {{item.deadline | date:'dd.MM.yyyy'}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-expansion-panel>

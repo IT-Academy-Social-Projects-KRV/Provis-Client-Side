@@ -1,0 +1,29 @@
+.mat-accordion:first-child(div) {
+  margin-bottom: 25px;
+}
+.mat-accordion>div {
+  margin-bottom: 10px;
+}
+.toggle-button {
+  display: flex;
+  margin: 15px 5px;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+.toggle-button>div {
+  margin-right: 30px;
+  border: 1px solid #3b394a;
+  padding: 3px 10px;
+  border-radius: 4px;
+  transition: 0.5s;
+}
+.toggle-button div:hover {
+  background-color: #48537a;
+  color: #eee;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.toggle-block {
+  border-bottom: 2px solid #3b394a;
+  margin: 10px 0px;
+}

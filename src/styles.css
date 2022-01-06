@@ -180,11 +180,11 @@ a.link-button.button-accept:hover {
 .right-side-title {
     border-radius: 4px;
     padding: 10px 30px;
-    color: #3b394a;
-    font-size: 16px;
+    color: #dddddd;
+    font-size: 14px;
     font-weight: 600;
     text-transform: uppercase;
-    background: #eee;
+    background: #3b394a;
     display: flex;
     flex-direction: row;
     align-content: center;
