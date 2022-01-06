@@ -9,7 +9,7 @@
     <ul>
       <li>
         <ul class="group-menu">
-          <li class="menu-item">
+          <li class="menu-item" *ngIf="userWorkspaceInfo.role == 'Owner' || userWorkspaceInfo.role == 'Manager'" >
               <a [routerLink]="'/user/workspace/' + workspaceId + '/managment/'">
               <mat-icon aria-hidden="false" aria-label="Example home icon">manage_accounts</mat-icon>
               <span>Member Managment</span>  

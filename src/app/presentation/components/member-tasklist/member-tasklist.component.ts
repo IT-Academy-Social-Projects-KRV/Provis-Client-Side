@@ -20,6 +20,12 @@ export class MemberTasklistComponent implements OnInit {
   workspaceUserList: WorkspaceMembers[];
   workspaceId: number;
   
+  userNull = {
+    id:"",
+    userName: "Unassigned task",
+    role:'1'
+  };
+
   constructor(public dialog: MatDialog, private userTask: TaskService, private route: ActivatedRoute, private workspaceService: WorkspaceService) { }
 
   ngOnInit() {
@@ -28,7 +34,9 @@ export class MemberTasklistComponent implements OnInit {
     });
     this.workspaceService.getWorkspaceUserList(this.workspaceId).subscribe((data:WorkspaceMembers[])=>{
       this.workspaceUserList = data;
+      this.workspaceUserList.push(this.userNull);
     });
+
   }
 
   modalCreateTask() {
