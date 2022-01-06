@@ -31,6 +31,7 @@ export class TasklistComponent implements OnInit {
     '1': 'worker',
     '2': 'support',
     '3': 'reviewer',
+    'null': ''
   };
   
   constructor(private userTask: TaskService, private workspaceService: WorkspaceService ) { }
@@ -58,9 +59,7 @@ export class TasklistComponent implements OnInit {
       );
     }
 
-    // console.log('current array - ', event.container.id);
-    // console.log('current element index - ', event.currentIndex);
-    switch(event.container.id) { 
+      switch(event.container.id) { 
       case "1": { 
         taskInfo = this.statusTasks.tasks[1][event.currentIndex];
         break; 
