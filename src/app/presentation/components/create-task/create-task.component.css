@@ -3,7 +3,9 @@
     margin:5px auto;
 }
 .createTask-form{
-    max-width: 400px;
+    max-height: 600px;
+    min-width: 700px;
+    max-width: 700px;
 }
 .mat-raised-button{
     background-color: #48537a;
@@ -11,4 +13,20 @@
 }
 .assign{
     margin-left: 61px;
+}
+.member-section{
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+.mat-form-field-infix{
+    width: 100px;
+}
+form button{
+    margin-top:5px;
+    margin-bottom: 5px;
+}
+.assign-fields{
+    width: 240px;
+    justify-content: space-between;
 }
