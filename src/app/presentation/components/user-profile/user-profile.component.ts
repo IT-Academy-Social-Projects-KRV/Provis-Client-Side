@@ -28,6 +28,7 @@ export class UserProfileComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
+    private alertService: AlertService,
     private sanitizer: DomSanitizer,
     public dialog: MatDialog) {
     this.userProfileForm = this.fb.group({
@@ -58,7 +59,7 @@ export class UserProfileComponent implements OnInit {
       this.changeUserInfo.UserName = this.userProfileForm.get('username')?.value;
       this.userService.updateUserInfo(this.changeUserInfo).subscribe(
        () => {
-         AlertService.alertSuccessTop("Update personal information", "Success");
+         this.alertService.successMessage("Update personal information", "Success");
        },
        err => {
         this.catchErr(err);
@@ -68,7 +69,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   showCheckEmailAlert(){
-    AlertService.alertWarning("You need to copy confirmation code and enter it in this page!",
+    this.alertService.warningMessage("You need to copy confirmation code and enter it in this page!",
     'Check your email address ' + this.userProfile.email);
   }
 
@@ -100,23 +101,25 @@ export class UserProfileComponent implements OnInit {
           })
         }
         else{
-          AlertService.alertAreYouSure(
-            'You have already activated two-factor authentication, do you want to disable it?', 
-            'Yes, disable')
-          .then((result) => {
-            if (result.isConfirmed) {
-              this.showCheckEmailAlert();
 
-              this.userService.sendTwoFactorCode().subscribe();
+          if (
+          this.alertService.confirmMessage(
+            'You have already activated two-factor authentication, do you want to disable it?',
+            'Are you sure?', 
+            'Yes, disable'))
+          {
+            this.showCheckEmailAlert();
 
-              let dialogRef = this.dialog.open(ChangeTwoFaComponent);
-              dialogRef.componentInstance.isAdded.subscribe(data => {
-                if(data){
-                  dialogRef.close();
-                }
-              })
-            }
-          })
+            this.userService.sendTwoFactorCode().subscribe();
+
+            let dialogRef = this.dialog.open(ChangeTwoFaComponent);
+            dialogRef.componentInstance.isAdded.subscribe(data => {
+              if(data){
+                dialogRef.close();
+              }
+            })
+          }
+          
         }
       },
       err => {
@@ -141,7 +144,7 @@ export class UserProfileComponent implements OnInit {
     
     if(file.size > environment.imageSettings.maxSize * 1024 * 1024)
     {
-      AlertService.alertError('Max size is ' + environment.imageSettings.maxSize + ' Mb', 'Error')
+      this.alertService.errorMessage('Max size is ' + environment.imageSettings.maxSize + ' Mb', 'Error')
       return;
     }
 
@@ -165,14 +168,14 @@ export class UserProfileComponent implements OnInit {
         }
       }
 
-      AlertService.alertError(errorMessage, "Error");
+      this.alertService.errorMessage(errorMessage, "Error");
       return;
     }
 
     if(err.error && typeof err.error === 'object'){
       errorMessage += err.error.error;
 
-      AlertService.alertError(errorMessage, "Error");
+      this.alertService.errorMessage(errorMessage, "Error");
 
       return;
     }
