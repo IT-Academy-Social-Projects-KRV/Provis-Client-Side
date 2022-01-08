@@ -1,9 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { enumValues, taskStatuses, userTaskRole } from 'src/app/configs/enum-helper';
+
 import { AssignedMember, CreateTask } from 'src/app/core/models/create-task';
+import { TaskStatuses } from 'src/app/core/models/taskStatuses';
+import { TaskWorkerRole } from 'src/app/core/models/taskWorkerRoles';
 import { WorkspaceMembers } from 'src/app/core/models/workspaceUsersList';
+import { TaskService } from 'src/app/core/services/task.service';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import Swal from 'sweetalert2';
 
@@ -18,17 +21,16 @@ export class CreateTaskComponent implements OnInit {
   @Input() public workspaceId: number;
   taskForm: FormGroup;
   createTask: CreateTask = new CreateTask();
-  status = taskStatuses;
+  statusList: TaskStatuses[];
+  taskRole: TaskWorkerRole[];
   selectedStatus: number;
-  public enumValues = enumValues;
   
   workspaceMemberList: WorkspaceMembers[];
-  userRole = userTaskRole;
   public assignedMembers: AssignedMember[];
   id : string;
   demoForm: FormGroup;
 
-  constructor(private workspaceService: WorkspaceService, private fb:FormBuilder, private ws: WorkspaceService, public dialog: MatDialog) {
+  constructor(private workspaceService: WorkspaceService, private fb:FormBuilder, private ws: WorkspaceService, public dialog: MatDialog, private taskServise: TaskService) {
     this.taskForm=fb.group({
       "Name":["",[Validators.maxLength(50)]],
       "Description":["",[Validators.maxLength(100)]],
@@ -46,6 +48,14 @@ export class CreateTaskComponent implements OnInit {
     this.workspaceService.getWorkspaceUserList(this.workspaceId).subscribe((data: WorkspaceMembers[]) =>{
       this.workspaceMemberList = data;
     });
+
+    this.taskServise.getStatusTask().subscribe((statList: TaskStatuses[]) => {
+      this.statusList = statList;
+    });
+    
+    this.taskServise.getWorkerRole().subscribe((role: TaskWorkerRole[]) => {
+      this.taskRole = role;
+    })
 
     this.assignedMembers = [];
   }
@@ -69,9 +79,9 @@ export class CreateTaskComponent implements OnInit {
       this.showAlert("Fill all fields");
       return;
     }
+    console.log(this.assignedMembers)
     if(this.taskForm.valid){
       this.createTask = this.taskForm.value;
-
       this.createTask.workspaceId = this.workspaceId;
       this.createTask.statusId = this.selectedStatus;
       this.createTask.assignedUsers = this.assignedMembers;
@@ -110,7 +120,6 @@ export class CreateTaskComponent implements OnInit {
   {
   if(this.assignedMembers.length < this.workspaceMemberList.length)
     this.assignedMembers.unshift(new AssignedMember());
-    console.log(this.assignedMembers);
   }
 
   DeAssignMember(i: number) {

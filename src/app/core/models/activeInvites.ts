@@ -1,3 +1,3 @@
 export class ActiveInvites{
-    isActiveInvite?:boolean;
+    isActiveInvite?: boolean;
 }
