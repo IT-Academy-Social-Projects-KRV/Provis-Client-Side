@@ -1,5 +1,4 @@
 import { UserService } from 'src/app/core/services/user.service';
-import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { UserInvites } from 'src/app/core/models/userInviteList';
 import { Router } from '@angular/router';
@@ -47,29 +46,7 @@ export class ModalInvitesComponent implements OnInit {
         this.userInviteList[this.userInviteList.findIndex(x=>x.id==inviteId)].isConfirm=false;
       },
       err => {
-        let errorMessage: string = '';
-        if(err.error.errors && typeof err.error.errors === 'object'){
-          const errors = err.error.errors;
-
-          for(let key in errors){
-            for(let indexError in errors[key]){
-              errorMessage += errors[key][indexError] + '\n';
-              console.log(errors[key][indexError]);
-            }
-          }
-
-          this.showAlert(errorMessage);
-
-          return;
-        }
-
-        if(err.error && typeof err.error === 'object'){
-          errorMessage += err.error.error;
-
-          this.showAlert(errorMessage);
-
-          return;
-        }
+        this.showAlert(err);
       }
     )
   }
@@ -86,29 +63,7 @@ export class ModalInvitesComponent implements OnInit {
         this.userInviteList[this.userInviteList.findIndex(x=>x.id==inviteId)].isConfirm=true;
       },
       err => {
-        let errorMessage: string = '';
-        if(err.error.errors && typeof err.error.errors === 'object'){
-          const errors = err.error.errors;
-
-          for(let key in errors){
-            for(let indexError in errors[key]){
-              errorMessage += errors[key][indexError] + '\n';
-              console.log(errors[key][indexError]);
-            }
-          }
-
-          this.showAlert(errorMessage);
-
-          return;
-        }
-
-        if(err.error && typeof err.error === 'object'){
-          errorMessage += err.error.error;
-
-          this.showAlert(errorMessage);
-
-          return;
-        }
+        this.showAlert(err);
       }
     )
   }

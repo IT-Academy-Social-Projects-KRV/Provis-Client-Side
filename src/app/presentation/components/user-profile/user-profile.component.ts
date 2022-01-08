@@ -81,7 +81,7 @@ export class UserProfileComponent implements OnInit {
          });
        },
        err => {
-        this.catchErr(err);
+        this.showAlert(err);
        }
      )
    }
@@ -105,7 +105,7 @@ export class UserProfileComponent implements OnInit {
         this.router.navigate(['user/confirmemail']);
       },
       err =>{
-        this.catchErr(err);
+        this.showAlert(err);
       }
     );
   }
@@ -148,7 +148,7 @@ export class UserProfileComponent implements OnInit {
         }
       },
       err => {
-        this.catchErr(err);
+        this.showAlert(err);
       }
     )
   }
@@ -178,32 +178,7 @@ export class UserProfileComponent implements OnInit {
       this.image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
     },
     err =>{
-      this.catchErr(err);
+      this.showAlert(err);
     });
-  }
-
-  catchErr(err: any): void {
-    let errorMessage: string = '';
-    if(err.error.errors && typeof err.error.errors === 'object'){
-      const errors = err.error.errors;
-
-      for(let key in errors){
-        for(let indexError in errors[key]){
-          errorMessage += errors[key][indexError] + '\n';
-        }
-      }
-
-     this.showAlert(errorMessage);
-
-      return;
-    }
-
-    if(err.error && typeof err.error === 'object'){
-      errorMessage += err.error.error;
-
-      this.showAlert(errorMessage);
-
-      return;
-    }
   }
 }

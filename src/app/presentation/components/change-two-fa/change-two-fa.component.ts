@@ -50,28 +50,7 @@ export class ChangeTwoFaComponent implements OnInit {
           this.isAdded.emit(true);
         },
         err =>{
-          let errorMessage: string = '';
-          if(err.error.errors && typeof err.error.errors === 'object'){
-            const errors = err.error.errors;
-
-            for(let key in errors){
-              for(let indexError in errors[key]){
-                errorMessage += errors[key][indexError] + '\n';
-              }
-            }
-
-           this.showAlert(errorMessage);
-
-            return;
-          }
-
-          if(err.error && typeof err.error === 'object'){
-            errorMessage += err.error.error;
-
-            this.showAlert(errorMessage);
-
-            return;
-          }
+          this.showAlert(err);
         }
       )
     }

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, Observable, switchMap, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
-import { AuthenticationService } from './authentication.service';
+import { AuthenticationService } from '../authentication.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -20,7 +20,7 @@ export class AuthInterceptor implements HttpInterceptor {
                     return this.handle401Error(req, next);
                 }
 
-                return throwError(err);
+                return throwError(() => err);
             }));
     }
 
@@ -38,7 +38,7 @@ export class AuthInterceptor implements HttpInterceptor {
                 this.showErrorAlert('you need authorization');
                 this.router.navigate(['/login']);
             }
-            return throwError(err);
+            return throwError(() => err);
         })
         );
     }

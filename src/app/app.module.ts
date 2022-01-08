@@ -40,7 +40,7 @@ import { MemberCalendarComponent } from './presentation/components/member-calend
 import { MemberTasklistComponent } from './presentation/components/member-tasklist/member-tasklist.component';
 import { TasklistComponent } from './presentation/components/tasklist/tasklist.component';
 
-import { AuthInterceptorProvider } from './core/services/auth.interceptor';
+import { AuthInterceptorProvider } from './core/services/interceptors/auth.interceptor';
 import { WorkspaceService } from './core/services/workspace.service';
 import { AuthenticationService } from './core/services/authentication.service';
 import { UserService } from './core/services/user.service';
@@ -54,6 +54,7 @@ import { UserLeftmenuComponent } from './presentation/components/user-leftmenu/u
 import { ModalUpdateWorkspaceComponent } from './presentation/components/modal-updateworkspace/modal-updateworkspace.component';
 import { TwoSetpVerificationComponent } from './presentation/components/two-step-verification/two-step-verification.component';
 import { ChangeTwoFaComponent } from './presentation/components/change-two-fa/change-two-fa.component';
+import { ErrorInterceptorProvider } from './core/services/interceptors/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -111,6 +112,7 @@ import { ChangeTwoFaComponent } from './presentation/components/change-two-fa/ch
   ],
   providers: [
     AuthInterceptorProvider,
+    ErrorInterceptorProvider,
     AuthenticationService,
     WorkspaceService,
     UserService
