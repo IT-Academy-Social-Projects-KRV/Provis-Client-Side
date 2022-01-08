@@ -1,5 +1,5 @@
 import { UserService } from './../../../core/services/user.service';
-import { userWorkspaceInfo } from './../../../core/models/userWorkspaceInfo';
+import { WorkspaceInfo } from '../../../core/models/workspace/workspaceInfo';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,7 +16,7 @@ export class WorkspaceSettingsComponent implements OnInit {
 
   protected routeSub: Subscription;
   workspaceId: number;
-  workspace: userWorkspaceInfo;
+  workspace: WorkspaceInfo;
   constructor(private router:Router, private route: ActivatedRoute, public dialog: MatDialog, private userService: UserService) { }
 
   ngOnInit() {
@@ -25,7 +25,7 @@ export class WorkspaceSettingsComponent implements OnInit {
       (params) =>
       {
         this.workspaceId = Number(params['id']);
-        this.userService.userWorkspaceInfo(this.workspaceId).subscribe((data: userWorkspaceInfo) => {
+        this.userService.userWorkspaceInfo(this.workspaceId).subscribe((data: WorkspaceInfo) => {
           this.workspace = data;
         });
        });

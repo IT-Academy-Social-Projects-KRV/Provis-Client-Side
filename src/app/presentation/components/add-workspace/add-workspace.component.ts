@@ -4,7 +4,7 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import { Router } from '@angular/router';
-import { CreateWorkspace } from 'src/app/core/models/workspace';
+import { CreateWorkspace } from 'src/app/core/models/workspace/createWorkspace';
 
 @Component({
   selector: 'app-add-workspace',

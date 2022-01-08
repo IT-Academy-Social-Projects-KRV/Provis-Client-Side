@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalInvitesComponent } from '../modal-invites/modal-invites.component';
 import { UserService } from './../../../core/services/user.service';
-import { ActiveInvites } from './../../../core/models/activeInvites';
+import { UserInfoActiveInvites } from '../../../core/models/user/userInfoActiveInvites';
 
 @Component({
   selector: 'app-user-header',
@@ -21,8 +21,8 @@ export class UserHeaderComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService, private userService: UserService, private router: Router, public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.userName = this.authenticationService.currentUser.Username?.toString();
-    this.userService.getActiveInvites().subscribe((data: ActiveInvites)=>{
+    this.userName = this.authenticationService.currentUser.username?.toString();
+    this.userService.getActiveInvites().subscribe((data: UserInfoActiveInvites)=>{
        this.invite = data.isActiveInvite;
     });
   }

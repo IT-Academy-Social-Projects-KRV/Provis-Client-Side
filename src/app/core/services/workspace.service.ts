@@ -1,15 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CreateWorkspace } from '../models/workspace';
-import { UpdateWorkspace } from '../models/workspaceUpdate';
+import { WorkspaceUpdate } from '../models/workspace/workspaceUpdate';
 import { addworkspacetUrl, deleteUserFromWorkspaseUrl, getUserWorkspaceList, getWorkspaceUsersUrl, inviteUser, workspaceActiveInvite, addTaskUrl, changeWorkspaceRoleUrl, updateWorkspaceUrl } from 'src/app/configs/api-endpoints';
 import { Observable } from 'rxjs';
-import { UserWorkspace } from '../models/userWorkspaceList';
-import { UserInvite } from '../models/userInvite';
-import { WorkspaceMembers } from '../models/workspaceUsersList';
-import { WorkspaceInviteInfo } from '../models/WorkspaceInviteInfo';
-import { CreateTask } from '../models/create-task';
-import { ChangeWorkspaceRole } from '../models/changeWorkspaceRole';
+import { WorkspaceCard } from '../models/workspace/workspaceCard';
+import { InviteToWorkspace } from '../models/workspace/inviteToWorkspace';
+import { CreateTask } from '../models/task/createTask';
+import { WorkspaceChangeRole } from '../models/workspace/workspaceChangeRole';
+import { WorkspaceMembers } from '../models/workspace/workspaceMembers';
+import { WorkspaceInfoInvite } from '../models/workspace/workspaceInfoInvite';
+import { CreateWorkspace } from '../models/workspace/createWorkspace';
 
 @Injectable({
   providedIn: 'root',
@@ -40,15 +40,15 @@ export class WorkspaceService {
         return localStorage.getItem('token')?.toString();
     }
 
-    getUserWorkspace(): Observable<UserWorkspace[]>{
-        return this.http.get<UserWorkspace[]>(this.getUserWorkspaceList, this.httpOption);
+    getUserWorkspace(): Observable<WorkspaceCard[]>{
+        return this.http.get<WorkspaceCard[]>(this.getUserWorkspaceList, this.httpOption);
     }
 
-    public InviteUser(invite: UserInvite): Observable<void> {
+    public InviteUser(invite: InviteToWorkspace): Observable<void> {
         return this.http.post<void>(this.getUserInvite, invite, this.httpOption);
     }
 
-    public UpdateWorkspace(workspace: UpdateWorkspace): Observable<void> {
+    public UpdateWorkspace(workspace: WorkspaceUpdate): Observable<void> {
       return this.http.put<void>(this.updateWorkspaceUrl, workspace, this.httpOption);
     }
 
@@ -61,7 +61,7 @@ export class WorkspaceService {
     }
 
     public WorkspaceInviteInfo(workspaceId: number) {
-        return this.http.get<WorkspaceInviteInfo[]>(this.activeInviteUrl + workspaceId + "/invite/active", this.httpOption);
+        return this.http.get<WorkspaceInfoInvite[]>(this.activeInviteUrl + workspaceId + "/invite/active", this.httpOption);
     }
 
     public WorkspaceActiveInviteDelete(id: number, workspaceId: number){
@@ -73,7 +73,7 @@ export class WorkspaceService {
 
     }
 
-    public changeWorkspaceRole(body: ChangeWorkspaceRole): Observable<void>{
+    public changeWorkspaceRole(body: WorkspaceChangeRole): Observable<void>{
         return this.http.put<void>(this.changeWorkspaceRoleUrl, body, this.httpOption);
     }
 }

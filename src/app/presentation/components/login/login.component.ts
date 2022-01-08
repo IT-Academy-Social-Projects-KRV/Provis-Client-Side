@@ -3,8 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { SignInUpValidator } from 'src/app/core/validators/signInUpValidator';
 import Swal from 'sweetalert2';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
-import { UserForLogin } from 'src/app/core/models/userForLogin';
-import { Router } from '@angular/router';
+import { UserLogin } from 'src/app/core/models/user/userLogin';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +13,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginForm : FormGroup;
-  userForLogin: UserForLogin = new UserForLogin();
+  userForLogin: UserLogin = new UserLogin();
 
   constructor(private fb:FormBuilder, private service: AuthenticationService){
     this.loginForm=fb.group({

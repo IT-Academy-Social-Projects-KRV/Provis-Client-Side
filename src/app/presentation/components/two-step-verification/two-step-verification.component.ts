@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TwoFactorDTO } from 'src/app/core/models/twoFactorDTO';
-import { UserTwoStepCode } from 'src/app/core/models/userTwoStepCode';
+import { UserTwoFactor } from 'src/app/core/models/user/userTwoFactor';
+import { UserTwoStepCode } from 'src/app/core/models/user/userTwoStepCode';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { ConfirmCodeValidator } from 'src/app/core/validators/confirmCodeValidator';
 import Swal from 'sweetalert2';
@@ -39,7 +39,7 @@ export class TwoSetpVerificationComponent implements OnInit {
   submit(){
     if(this.twoStepForm.valid){
       this.token = Object.assign({}, this.twoStepForm.value);
-      let twoFactorDTO: TwoFactorDTO = {
+      let twoFactorDTO: UserTwoFactor = {
         token: this.token.token,
         email: this.activeRoute.snapshot.queryParams['email'],
         provider: this.activeRoute.snapshot.queryParams['provider']

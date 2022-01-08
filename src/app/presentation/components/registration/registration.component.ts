@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder} from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserForRegister } from 'src/app/core/models/userForRegister';
+import { UserRegister } from 'src/app/core/models/user/userRegister';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { SignInUpValidator } from 'src/app/core/validators/signInUpValidator';
 import Swal from 'sweetalert2';
@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 export class RegistrationComponent implements OnInit {
 
   registerForm : FormGroup;
-  userForRegistreation: UserForRegister = new UserForRegister();
+  userForRegistreation: UserRegister = new UserRegister();
 
   constructor(private fb:FormBuilder, private service: AuthenticationService, private router: Router){
       this.registerForm=fb.group({

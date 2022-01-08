@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { UserForRegister } from '../models/userForRegister';
+import { UserRegister } from '../models/user/userRegister';
 import { map, Observable, of } from 'rxjs';
-import { UserForLogin } from '../models/userForLogin';
+import { UserLogin } from '../models/user/userLogin';
 import { loginUrl, logoutUrl, refreshTokenUrl, registerUrl, twoStepVerificationUrl } from 'src/app/configs/api-endpoints';
-import { AuthResponse } from '../models/authResponse';
-import { UserInfo } from '../models/userInfo';
-import { TwoFactorDTO } from '../models/twoFactorDTO';
+import { UserAuthResponse } from '../models/user/userAuthResponse';
+import { UserInfo } from '../models/user/userInfo';
+import { UserTwoFactor } from '../models/user/userTwoFactor';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -40,20 +40,20 @@ export class AuthenticationService {
    }
 
 
-  public register(user: UserForRegister): Observable<void> {
+  public register(user: UserRegister): Observable<void> {
 
     return this.http.post<void>(this.registerUrl, user);
   }
 
-  public login(user: UserForLogin): Observable<void> {
+  public login(user: UserLogin): Observable<void> {
 
-    return this.http.post<AuthResponse>(this.loginUrl, user).pipe(map((tokens: AuthResponse) => {
+    return this.http.post<UserAuthResponse>(this.loginUrl, user).pipe(map((tokens: UserAuthResponse) => {
 
       if(tokens.is2StepVerificationRequired && tokens.provider){
         this.router.navigate(["twoStepVerification"], {
           queryParams: {
             provider: tokens.provider,
-            email: user.Email
+            email: user.email
           }
         });
 
@@ -64,21 +64,21 @@ export class AuthenticationService {
     }));
   }
 
-  public twoStepLogin(twoFactor: TwoFactorDTO): Observable<void> {
-    return this.http.post<AuthResponse>(this.twoStepLoginUrl, twoFactor).pipe(map((tokens: AuthResponse) => {
+  public twoStepLogin(twoFactor: UserTwoFactor): Observable<void> {
+    return this.http.post<UserAuthResponse>(this.twoStepLoginUrl, twoFactor).pipe(map((tokens: UserAuthResponse) => {
 
       this.setTokensInLocalStorage(tokens);
     }));
   }
 
-  private setTokensInLocalStorage(tokens: AuthResponse){
+  private setTokensInLocalStorage(tokens: UserAuthResponse){
 
     if(tokens.token && tokens.refreshToken) {
       const decodedToken = this.jwtHelperService.decodeToken(tokens.token);
 
-      this.currentUser.Id = decodedToken[this.userId];
-      this.currentUser.Username = decodedToken[this.userName];
-      this.currentUser.Role = decodedToken[this.userRole];
+      this.currentUser.id = decodedToken[this.userId];
+      this.currentUser.username = decodedToken[this.userName];
+      this.currentUser.role = decodedToken[this.userRole];
 
       localStorage.setItem('token', tokens.token);
       localStorage.setItem('refreshToken', tokens.refreshToken);
@@ -117,20 +117,20 @@ export class AuthenticationService {
     return result;
   }
 
-  public RefreshToken(): Observable<AuthResponse> {
+  public RefreshToken(): Observable<UserAuthResponse> {
 
-    let tokens: AuthResponse = new AuthResponse();
+    let tokens: UserAuthResponse = new UserAuthResponse();
     tokens.token = localStorage.getItem('token')?.toString();
     tokens.refreshToken = localStorage.getItem('refreshToken')?.toString();
 
-    return this.http.post<AuthResponse>(this.refreshTokenUrl, tokens).pipe(map((tokens: AuthResponse) => {
+    return this.http.post<UserAuthResponse>(this.refreshTokenUrl, tokens).pipe(map((tokens: UserAuthResponse) => {
 
       if(tokens.token && tokens.refreshToken) {
         const decodedToken = this.jwtHelperService.decodeToken(tokens.token);
 
-        this.currentUser.Id = decodedToken[this.userId];
-        this.currentUser.Username = decodedToken[this.userName];
-        this.currentUser.Role = decodedToken[this.userRole];
+        this.currentUser.id = decodedToken[this.userId];
+        this.currentUser.username = decodedToken[this.userName];
+        this.currentUser.role = decodedToken[this.userRole];
 
         localStorage.setItem('token', tokens.token);
         localStorage.setItem('refreshToken', tokens.refreshToken);
@@ -143,11 +143,11 @@ export class AuthenticationService {
 
   public Logout(): Observable<void> {
 
-    let tokens: AuthResponse = new AuthResponse();
+    let tokens: UserAuthResponse = new UserAuthResponse();
     tokens.token = localStorage.getItem('token')?.toString();
     tokens.refreshToken = localStorage.getItem('refreshToken')?.toString();
 
-    return this.http.post<AuthResponse>(this.logoutUrl, tokens).pipe(map(() => {
+    return this.http.post<UserAuthResponse>(this.logoutUrl, tokens).pipe(map(() => {
       localStorage.removeItem('token');
       localStorage.removeItem('refreshToken');
       localStorage.removeItem('user');
