@@ -1,7 +1,7 @@
 import { colorWorkspaceCardArray } from './../../../configs/colorsForWorkspaceCards';
 import { AddWorkspaceComponent } from './../add-workspace/add-workspace.component';
 import { Component, OnInit } from '@angular/core';
-import { UserWorkspace } from 'src/app/core/models/userWorkspaceList';
+import { WorkspaceCard } from 'src/app/core/models/workspace/workspaceCard';
 import { MatDialog } from '@angular/material/dialog';
 
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
@@ -15,13 +15,13 @@ import { Router } from '@angular/router';
 })
 export class WorkspaceListComponent implements OnInit {
   
-  userWorkspaceList: UserWorkspace[];
+  userWorkspaceList: WorkspaceCard[];
   cardColors = colorWorkspaceCardArray;
    
   constructor(private workspaceService: WorkspaceService, public dialog: MatDialog, private router: Router) {}
   
   ngOnInit() {
-    this.workspaceService.getUserWorkspace().subscribe((data: UserWorkspace[]) => {
+    this.workspaceService.getUserWorkspace().subscribe((data: WorkspaceCard[]) => {
       this.userWorkspaceList = data;
     });
   }

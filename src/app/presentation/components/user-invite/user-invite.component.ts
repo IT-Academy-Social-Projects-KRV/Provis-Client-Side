@@ -1,13 +1,12 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserInvite } from 'src/app/core/models/userInvite';
+import { InviteToWorkspace } from 'src/app/core/models/workspace/inviteToWorkspace';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
-import { WorkspaceInviteInfo } from 'src/app/core/models/WorkspaceInviteInfo';
 import Swal from 'sweetalert2';
 import { UserService } from 'src/app/core/services/user.service';
-import { userWorkspaceInfo } from 'src/app/core/models/userWorkspaceInfo';
+import { WorkspaceInfo } from 'src/app/core/models/workspace/workspaceInfo';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
-import { UserInfo } from 'src/app/core/models/userInfo';
+import { WorkspaceInfoInvite } from 'src/app/core/models/workspace/workspaceInfoInvite';
 
 @Component({
   selector: 'app-user',
@@ -17,10 +16,10 @@ import { UserInfo } from 'src/app/core/models/userInfo';
 export class UserInviteComponent implements OnInit {
 
     @Input() public workspaceId: number;
-    workspaceActiveInviteInfo: WorkspaceInviteInfo[];
-    userInvite: UserInvite = new UserInvite();
+    workspaceActiveInviteInfo: WorkspaceInfoInvite[];
+    userInvite: InviteToWorkspace = new InviteToWorkspace();
     inviteUserForm: FormGroup;
-    currentUserRole = new userWorkspaceInfo();
+    currentUserRole = new WorkspaceInfo();
     currentUserName: string|undefined;
 
  constructor(private fb: FormBuilder, private ws: WorkspaceService, private us: UserService, private as: AuthenticationService) {
@@ -32,13 +31,13 @@ export class UserInviteComponent implements OnInit {
   ngOnInit() {
     this.userInvite.workspaceId = this.workspaceId;
 
-    this.ws.WorkspaceInviteInfo(this.workspaceId).subscribe((data: WorkspaceInviteInfo[]) => {
+    this.ws.WorkspaceInviteInfo(this.workspaceId).subscribe((data: WorkspaceInfoInvite[]) => {
       this.workspaceActiveInviteInfo = data;
     });
 
-    this.us.userWorkspaceInfo(this.workspaceId).subscribe((data: userWorkspaceInfo) => {
+    this.us.userWorkspaceInfo(this.workspaceId).subscribe((data: WorkspaceInfo) => {
       this.currentUserRole = data;
-      this.currentUserName = this.as.currentUser.Username;
+      this.currentUserName = this.as.currentUser.username;
     });
   }
 
@@ -60,7 +59,7 @@ export class UserInviteComponent implements OnInit {
       this.userInvite = this.inviteUserForm.value;
       this.userInvite.workspaceId = this.workspaceId;
       this.ws.InviteUser(this.userInvite).subscribe(
-        () => {this.ws.WorkspaceInviteInfo(this.workspaceId).subscribe((data: WorkspaceInviteInfo[]) => {
+        () => {this.ws.WorkspaceInviteInfo(this.workspaceId).subscribe((data: WorkspaceInfoInvite[]) => {
             this.workspaceActiveInviteInfo = data;
             });
           },

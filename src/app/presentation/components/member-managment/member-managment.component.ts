@@ -4,13 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { UserInviteComponent } from '../user-invite/user-invite.component';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
-import { UserInvites } from 'src/app/core/models/userInviteList';
-import { WorkspaceMembers } from 'src/app/core/models/workspaceUsersList';
+import { UserInvite } from 'src/app/core/models/user/userInvite';
 import Swal from 'sweetalert2';
-import { userWorkspaceInfo } from 'src/app/core/models/userWorkspaceInfo';
+import { WorkspaceInfo } from 'src/app/core/models/workspace/workspaceInfo';
 import { UserService } from 'src/app/core/services/user.service';
-import { ChangeWorkspaceRole } from 'src/app/core/models/changeWorkspaceRole';
+import { WorkspaceChangeRole } from 'src/app/core/models/workspace/workspaceChangeRole';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { WorkspaceMembers } from 'src/app/core/models/workspace/workspaceMembers';
 interface Role {
   roleId: number;
   nameRole: string;
@@ -32,8 +32,8 @@ export class MemberManagmentComponent implements OnInit {
 
   protected routeSub: Subscription;
   workspaceId: number;
-  workspaceActiveInviteInfo: UserInvites[];
-  userWorkspaceInfo = new userWorkspaceInfo;
+  workspaceActiveInviteInfo: UserInvite[];
+  userWorkspaceInfo = new WorkspaceInfo;
   workspaceUserList: WorkspaceMembers[];
   
   constructor(
@@ -52,7 +52,7 @@ export class MemberManagmentComponent implements OnInit {
     this.workspaceServise.getWorkspaceUserList(this.workspaceId).subscribe(data=>{
       this.workspaceUserList=data;
     })
-    this.userService.userWorkspaceInfo(this.workspaceId).subscribe((data: userWorkspaceInfo) => {
+    this.userService.userWorkspaceInfo(this.workspaceId).subscribe((data: WorkspaceInfo) => {
         this.userWorkspaceInfo = data;
       });
   }
@@ -98,7 +98,7 @@ export class MemberManagmentComponent implements OnInit {
 
     if(this.roles[this.roles.findIndex(x=>x.roleId == roleId)].nameRole != currentRole)
     {
-      let body = new ChangeWorkspaceRole()
+      let body = new WorkspaceChangeRole()
       body.roleId = roleId;
       body.userId = userId;
       body.workspaceId = this.workspaceId;

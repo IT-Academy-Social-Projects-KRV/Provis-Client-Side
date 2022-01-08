@@ -1,4 +1,4 @@
-export class UserInvites {
+export class UserInvite {
     id : number;
     date: string;
     isConfirm?: boolean;

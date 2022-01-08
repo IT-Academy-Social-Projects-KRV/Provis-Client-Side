@@ -1,4 +1,4 @@
-export class TaskStatuses {
+export class TaskStatus {
     id: number;
     name: string;
 }

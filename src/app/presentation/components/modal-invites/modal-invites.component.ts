@@ -1,7 +1,6 @@
 import { UserService } from 'src/app/core/services/user.service';
-import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { Component, OnInit } from '@angular/core';
-import { UserInvites } from 'src/app/core/models/userInviteList';
+import { UserInvite } from 'src/app/core/models/user/userInvite';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
@@ -12,12 +11,12 @@ import Swal from 'sweetalert2';
 })
 export class ModalInvitesComponent implements OnInit {
 
-  userInviteList: UserInvites [];
+  userInviteList: UserInvite [];
 
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
-    this.userService.getUserInvite().subscribe((data: UserInvites[])=>{
+    this.userService.getUserInvite().subscribe((data: UserInvite[])=>{
       this.userInviteList = data;
     })
   }

@@ -1,10 +1,10 @@
-import { Tasks } from './../models/tasks';
+import { Tasks } from '../models/task/tasks';
 import { Observable } from 'rxjs';
 import { getTaskStatuses, getTaskWorkerRoles, userTaskUrl } from './../../configs/api-endpoints';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { TaskStatuses } from '../models/taskStatuses';
-import { TaskWorkerRole } from '../models/taskWorkerRoles';
+import { TaskStatus } from '../models/task/taskStatus';
+import { TaskWorkerRole } from '../models/task/taskWorkerRoles';
 
 
 @Injectable({
@@ -39,7 +39,7 @@ export class TaskService {
   }
 
   getStatusTask() {
-    return this.http.get<TaskStatuses[]>(this.taskStatusesUrl, this.httpOption);
+    return this.http.get<TaskStatus[]>(this.taskStatusesUrl, this.httpOption);
   }
 
   getWorkerRole(){

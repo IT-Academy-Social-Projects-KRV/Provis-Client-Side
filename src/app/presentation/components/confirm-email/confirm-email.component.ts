@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ConfirmEmailCode } from 'src/app/core/models/confirmEmailCode';
+import { ConfirmEmailCode } from 'src/app/core/models/user/confirmEmailCode';
 import { UserService } from 'src/app/core/services/user.service';
 import Swal from 'sweetalert2';
 

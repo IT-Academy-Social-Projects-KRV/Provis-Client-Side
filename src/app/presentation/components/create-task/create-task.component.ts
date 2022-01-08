@@ -2,10 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 
-import { AssignedMember, CreateTask } from 'src/app/core/models/create-task';
-import { TaskStatuses } from 'src/app/core/models/taskStatuses';
-import { TaskWorkerRole } from 'src/app/core/models/taskWorkerRoles';
-import { WorkspaceMembers } from 'src/app/core/models/workspaceUsersList';
+import { AssignedMember, CreateTask } from 'src/app/core/models/task/createTask';
+import { TaskStatus } from 'src/app/core/models/task/taskStatus';
+import { TaskWorkerRole } from 'src/app/core/models/task/taskWorkerRoles';
+import { WorkspaceMembers } from 'src/app/core/models/workspace/workspaceMembers';
 import { TaskService } from 'src/app/core/services/task.service';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import Swal from 'sweetalert2';
@@ -21,7 +21,7 @@ export class CreateTaskComponent implements OnInit {
   @Input() public workspaceId: number;
   taskForm: FormGroup;
   createTask: CreateTask = new CreateTask();
-  statusList: TaskStatuses[];
+  statusList: TaskStatus[];
   taskRole: TaskWorkerRole[];
   selectedStatus: number;
   
@@ -49,7 +49,7 @@ export class CreateTaskComponent implements OnInit {
       this.workspaceMemberList = data;
     });
 
-    this.taskServise.getStatusTask().subscribe((statList: TaskStatuses[]) => {
+    this.taskServise.getStatusTask().subscribe((statList: TaskStatus[]) => {
       this.statusList = statList;
     });
     
