@@ -18,11 +18,11 @@ export class AddWorkspaceComponent implements OnInit {
   @Output() public isAdded = new EventEmitter<boolean>(false);
 
   constructor(
-    private fb:FormBuilder, 
+    private fb:FormBuilder,
     private service: WorkspaceService, 
     private router: Router,
     private formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<WorkspaceListComponent>) 
+    private dialogRef: MatDialogRef<WorkspaceListComponent>)
     {     
       this.addwsform=fb.group({        
       "Name": ['',[Validators.required]],
