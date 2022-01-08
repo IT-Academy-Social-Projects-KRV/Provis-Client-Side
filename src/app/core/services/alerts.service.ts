@@ -1,54 +1,56 @@
 import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class AlertService{
 
-  public static alertError(stringError: string, stringTitle?: string) {
-    return Swal.fire({
+  public errorMessage(text: string, title?: string) {
+    Swal.fire({
       icon: 'error',
-      title: stringTitle,
-      text: stringError,
-      showClass: {
-        popup: 'animate__animated animate__fadeInDown'
-      },
-      hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
+      title: title,
+      text: text
     })
   }
 
-  public static alertSuccessTop(stringSuccess: string, stringTitle?: string){
-    return Swal.fire({
+  public successMessage(text: string, title?: string){
+    Swal.fire({
       icon: 'success',
-      title: stringTitle,
-      text: stringSuccess,
-      position: 'top-end',      
+      title: title,
+      text: text,
+      position: environment.alertSettings.position,
       showConfirmButton: false,
-      timer: 1000
+      timer: environment.alertSettings.timer
     })
   }
   
-  public static alertWarning(stringWarning: string, stringTitle?: string){
-    return Swal.fire({
+  public warningMessage(text: string, title?: string, confirmText: string='Ok'){
+    Swal.fire({
       icon: 'warning',
-      title: stringTitle,
-      text: stringWarning,    
+      title: title,
+      text: text,
       showCancelButton: false,
-      confirmButtonColor: '#3085d6',
-      confirmButtonText: 'Ok'
+      confirmButtonColor: environment.alertSettings.confirmButtonColor,
+      confirmButtonText: confirmText
     })
   }
 
-  public static alertAreYouSure(stringText: string, stringButton: string){
-    return Swal.fire({
-      title: 'Are you sure?',
-      text: stringText,
+  public confirmMessage(text: string, title: string, button: string): boolean {
+
+    let isConfirmo: boolean = false;
+    Swal.fire({
       icon: 'warning',
+      title: title,
+      text: text,
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: stringButton
-    })
+      confirmButtonColor: environment.alertSettings.confirmButtonColor,
+      cancelButtonColor: environment.alertSettings.cancelButtonColor,
+      confirmButtonText: button
+    }).then((result) => {
+      if (result.isConfirmed) 
+        isConfirmo=true;
+    });
+
+    return isConfirmo;
   }
 }
