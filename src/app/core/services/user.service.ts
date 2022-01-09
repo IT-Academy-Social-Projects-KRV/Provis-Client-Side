@@ -114,6 +114,6 @@ export class UserService {
   }
   
   userWorkspaceInfo(workspaceId:number) :Observable<WorkspaceInfo> {
-    return this.http.get<WorkspaceInfo>(this.userWorkspaceInfoUrl + workspaceId + "/info", this.httpOption)
+    return this.http.get<WorkspaceInfo>(this.userWorkspaceInfoUrl + "/" + workspaceId + "/info", this.httpOption)
   }
 }

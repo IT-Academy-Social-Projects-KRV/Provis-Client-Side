@@ -1,7 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { WorkspaceUpdate } from '../models/workspace/workspaceUpdate';
-import { addworkspacetUrl, deleteUserFromWorkspaseUrl, getUserWorkspaceList, getWorkspaceUsersUrl, inviteUser, workspaceActiveInvite, addTaskUrl, changeWorkspaceRoleUrl, updateWorkspaceUrl } from 'src/app/configs/api-endpoints';
+import { addworkspacetUrl, 
+    workspaceUrl, 
+    getUserWorkspaceList, 
+    getWorkspaceUsersUrl, 
+    inviteUser,
+    addTaskUrl, 
+    changeWorkspaceRoleUrl, 
+    updateWorkspaceUrl } from 'src/app/configs/api-endpoints';
 import { Observable } from 'rxjs';
 import { WorkspaceCard } from '../models/workspace/workspaceCard';
 import { InviteToWorkspace } from '../models/workspace/inviteToWorkspace';
@@ -21,8 +28,8 @@ export class WorkspaceService {
     private readonly getUserInvite = inviteUser;
     private readonly updateWorkspaceUrl = updateWorkspaceUrl;
     private readonly getWorkspaceUsers = getWorkspaceUsersUrl;
-    private readonly delUserWorksp = deleteUserFromWorkspaseUrl;
-    private readonly activeInviteUrl = workspaceActiveInvite;
+    private readonly delUserWorksp = workspaceUrl;
+    private readonly activeInviteUrl = workspaceUrl;
     private readonly createTaskUrl = addTaskUrl;
     private readonly changeWorkspaceRoleUrl = changeWorkspaceRoleUrl;
 
@@ -57,7 +64,7 @@ export class WorkspaceService {
     }
 
     public delUserFromWorksp(workspaceId: number, userId: string): Observable<void>{
-        return this.http.delete<void>(this.delUserWorksp+"/"+workspaceId+"/user/"+userId, this.httpOption);
+        return this.http.delete<void>(this.delUserWorksp+workspaceId+"/user/"+userId, this.httpOption);
     }
 
     public WorkspaceInviteInfo(workspaceId: number) {
