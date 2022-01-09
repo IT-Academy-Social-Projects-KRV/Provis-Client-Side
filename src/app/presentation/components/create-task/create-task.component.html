@@ -1,7 +1,9 @@
 <div>
+  <div class="modal-title">
+    <span class="title-invite">Create Task</span>
+  </div>
   <form class="createTask-form" [formGroup]="taskForm" (ngSubmit)="CreateNewTask()">
-      <div style="padding: 30px">
-      <p class="form-title">Create Task</p>
+    <div>
 
       <mat-form-field hintLabel="Max 50 characters" appearance="fill">
         <mat-label>Name</mat-label>
@@ -15,47 +17,51 @@
         <mat-error *ngIf="taskForm.controls['Description'].invalid && taskForm.controls['Description'].touched">Invalid description</mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Due date</mat-label>
-        <input type="date" matInput placeholder="Task deadline" formControlName="DateOfEnd" required>
-        <mat-error *ngIf="taskForm.controls['DateOfEnd'].invalid && taskForm.controls['DateOfEnd'].touched">Invalid Due date</mat-error>
-      </mat-form-field>
+      <div class="form-half-input">
+        <mat-form-field appearance="fill">
+          <mat-label>Due date</mat-label>
+          <input type="date" matInput placeholder="Task deadline" formControlName="DateOfEnd" required>
+          <mat-error *ngIf="taskForm.controls['DateOfEnd'].invalid && taskForm.controls['DateOfEnd'].touched">Invalid Due date</mat-error>
+        </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Task status</mat-label>
-        <mat-select [(value)]="selectedStatus" formControlName="StatusId" required>
-          <mat-option *ngFor="let key of enumValues(status)" [value] = "key"> {{status[key]}} </mat-option>
-        </mat-select>
-        <mat-error *ngIf="taskForm.controls['StatusId'].invalid && taskForm.controls['StatusId'].touched">Invalid status</mat-error>
-      </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Task status</mat-label>
+          <mat-select [(value)]="selectedStatus" formControlName="StatusId" required>
+            <mat-option *ngFor="let key of enumValues(status)" [value] = "key"> {{status[key]}} </mat-option>
+          </mat-select>
+          <mat-error *ngIf="taskForm.controls['StatusId'].invalid && taskForm.controls['StatusId'].touched">Invalid status</mat-error>
+        </mat-form-field>
+      </div>
 
       <form #assignForm="ngForm" [formGroup]="demoForm" class="assign-modal" (ngSubmit)="Ok()">
-        <button mat-raised-button (click)="AssignMember()">Add</button>
+        <button mat-raised-button (click)="AssignMember()" class="additional">Add members</button>
         <section formArrayName="demoArray" *ngFor="let member of assignedMembers;let i = index;" class="member-section">
-          
-          <mat-form-field appearance="fill" class="assign-fields">
-            <mat-label>Member</mat-label>
-            <mat-select [(ngModel)]="member.userId" name="userId_{{i}}" [ngModelOptions]="{standalone: true}">
-              <mat-option *ngFor="let item of workspaceMemberList" [value]="item.id" [disabled]="Contains(item.id)">
-                {{item.userName}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-      
-          <mat-form-field appearance="fill" class="assign-fields">
-            <mat-label>Role</mat-label>
-            <mat-select [(ngModel)]="member.roleTagId" name="role_{{i}}" [ngModelOptions]="{standalone: true}">
-              <mat-option *ngFor="let item of enumValues(userRole)" [value]="item">
-                {{userRole[item]}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>  
-          <button mat-raised-button (click)="DeAssignMember(i)" >remove</button>
+          <div>
+            <mat-form-field appearance="fill" class="assign-fields">
+              <mat-label>Member</mat-label>
+              <mat-select [(ngModel)]="member.userId" name="userId_{{i}}" [ngModelOptions]="{standalone: true}">
+                <mat-option *ngFor="let item of workspaceMemberList" [value]="item.id" [disabled]="Contains(item.id)">
+                  {{item.userName}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+        
+            <mat-form-field appearance="fill" class="assign-fields">
+              <mat-label>Role</mat-label>
+              <mat-select [(ngModel)]="member.roleTagId" name="role_{{i}}" [ngModelOptions]="{standalone: true}">
+                <mat-option *ngFor="let item of enumValues(userRole)" [value]="item">
+                  {{userRole[item]}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>  
+          </div>
+          <button mat-raised-button (click)="DeAssignMember(i)" class="warning">remove</button>
 
         </section>
       </form>
-
-      <button mat-raised-button (сlick)="CreateNewTask()" >Create Task</button>
+      <div class="modal-button">
+        <button mat-raised-button (сlick)="CreateNewTask()" class="button-accept">Create</button>
       </div>
+    </div>
   </form>
 </div>

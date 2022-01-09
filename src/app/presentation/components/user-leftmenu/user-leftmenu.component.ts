@@ -29,7 +29,7 @@ export class UserLeftmenuComponent implements OnInit {
   }
   
   modalCreateTask() {
-    let dialogRef = this.dialog.open(CreateTaskComponent);
+    let dialogRef = this.dialog.open(CreateTaskComponent, {autoFocus: false});
     dialogRef.componentInstance.workspaceId = this.workspaceId;
   } 
 

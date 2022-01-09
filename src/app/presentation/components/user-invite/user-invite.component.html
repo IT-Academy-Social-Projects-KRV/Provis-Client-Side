@@ -1,4 +1,7 @@
 <div class="invite-modal">
+  <div class="modal-title">
+    <span>Invitation</span>
+  </div>
   <div class="example-container">
     <form class="register-form" [formGroup]="inviteUserForm" novalidate (ngSubmit)="Invite()">
       <mat-form-field class="send-email" appearance="fill">
@@ -6,11 +9,13 @@
         <input  type="email" matInput placeholder="Your email" maxlength=50 formControlName="UserEmail"> 
         <mat-error *ngIf="inviteUserForm.controls['UserEmail'].invalid && inviteUserForm.controls['UserEmail'].touched">Invalid email</mat-error>
       </mat-form-field>
-      <button class="button-send" mat-raised-button color="Primary" (onClick)='Invite()'>Send</button>      
+      <button class="button-send button-accept" mat-raised-button color="Primary" (onClick)='Invite()'>Send</button>      
     </form>
-    <div class="invite-list"> 
-      <span class="title-invite">Active invitations</span>
-      <span *ngFor="let item of workspaceActiveInviteInfo">
+    <div class="modal-title active-invitation">
+      <span>Active invitations</span>
+    </div>
+    <div class="invite-list" *ngIf="workspaceActiveInviteInfo.length !=0; else noInvitations"> 
+      <div *ngFor="let item of workspaceActiveInviteInfo" class="invitations-message">
         <div class="active-invite">
          <div class="info-invite">
            <div class="email-info">
@@ -23,12 +28,17 @@
            </div>
           </div>
           <div *ngIf="(item.fromUserName == currentUserName && currentUserRole.role == 'Manager') || currentUserRole.role == 'Owner'">
-            <button mat-mini-fab color="warn" (click)='DeleteInvite(item.inviteId)'>
-              <mat-icon>delete</mat-icon>
+            <button class="warning" mat-raised-button color="Primary" (click)='DeleteInvite(item.inviteId)'>
+              Delete
             </button>
           </div>
         </div>
-      </span>
+      </div>
     </div> 
+    <ng-template #noInvitations>
+    <div class="noInvitations">
+      <p>You have no active invitations</p>
+    </div>
+    </ng-template>
   </div>
 </div>

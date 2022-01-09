@@ -8,6 +8,20 @@ body {
 body *:not(.material-icons) {
     font-family: 'Montserrat', sans-serif !important;
 }
+body::-webkit-scrollbar {
+    width: 12px;
+    height: 50%;
+}
+    body::-webkit-scrollbar-track {
+    background: #ddd;
+}
+    body::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    border: 4px solid #ddd;
+}
+    body::-webkit-scrollbar-thumb {
+    background-color: #3b394a
+}
 .font-weight-600 {
     font-weight: 600;
 }
@@ -152,8 +166,9 @@ form.register-form {
     border-radius: 10px;
     width: 100%;
   }
-a.link-button{
+a.link-button, button.warning, button.additional{
     background-color: #48537a;
+    font-size: 10px;
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 1px;
@@ -167,15 +182,32 @@ a.link-button:hover{
     display: flex;
 }
 .user-right-side {
-    width: 100%;
+    width: calc(100vw - 350px);
     margin: 0px;
     padding: 30px;
 }
-a.link-button.button-accept {
-    background: #097809;;
+button.additional {
+    background: rgb(77 84 151);
 }
-a.link-button.button-accept:hover {
-    background: rgb(16, 102, 16);
+button.additional:hover {
+    background: #3f3c52;
+}
+button.warning {
+    background: #9f4b45;
+}
+button.warning:hover {
+    background: #811f1f;
+}
+a.link-button.button-accept, 
+button.button-accept {
+    background: #3e724c;
+    color: #eee;
+    font-size: 11px;
+    font-weight: 600;
+}
+a.link-button.button-accept:hover, 
+button.button-accept:hover {
+    background: #008725;
 }
 .right-side-title {
     border-radius: 4px;
@@ -192,15 +224,30 @@ a.link-button.button-accept:hover {
     justify-content: space-between;
     border: 1px solid #cfcdcd;
     min-height: 40px;
+    margin-bottom: 20px;
 }
-.right-side-title a {
+.button-after-page-title a {
     font-size: 10px;
 }
-.right-side-title mat-icon {
+.button-after-page-title mat-icon {
     height: 18px;
     width: 18px;
     padding-right: 5px;
 }
-.right-side-title .material-icons {
+.button-after-page-title .material-icons {
     font-size: 18px;
+}
+.modal-title {
+    text-align: end;
+    background: #3b394a;
+    padding: 10px 15px;
+    border-radius: 4px;
+}
+.modal-title span {
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 0.75px;
+    color: #eee;
+    line-height: 30px;
 }

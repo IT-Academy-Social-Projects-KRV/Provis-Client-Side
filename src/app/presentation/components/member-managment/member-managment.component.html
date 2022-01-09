@@ -1,29 +1,37 @@
 <section>
   <div class="right-side-title">
     <span> Member managment</span>
-    <button mat-raised-button color="Primary" (click)='modalInvites()'>Invite</button>
+  </div>
+  <div class="button-after-page-title">
+    <a mat-raised-button class="link-button button-accept" (click)="modalInvites()">
+      <mat-icon aria-hidden="false" aria-label="Example home icon">person_add</mat-icon>
+      <span>Invite</span>  
+    </a>
   </div>
   <div class="user-page">
-    <div class="delpage">
-      <li *ngFor="let item of workspaceUserList" style="margin-top: 30px;">
-        <div >
-          <span class="del-title">{{item.userName}}</span>
-            <div class="page2">
-                <mat-form-field appearance="fill">
-                  <mat-select [(value)]="item.role" [disabled]="item.role == 'Owner' || item.id == authSrvice.currentUser.Id">
-                    <mat-option *ngFor="let role of roles" [value]="role.nameRole" 
-                    (onSelectionChange)="chandeWorkspaceRole(role.roleId, item.role, item.id)"
-                    [disabled]="role.nameRole=='Owner'">
-                      {{role.nameRole}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
+    <ul class="managment-section">
+      <li *ngFor="let item of workspaceUserList">
+        <div class="">
+          <div class="managment-title">
+            <span>{{item.userName}}</span>
           </div>
-        <span *ngIf="userWorkspaceInfo.role == 'Owner' && item.role != 'Owner'">
-          <button mat-raised-button class="button-accept" (click)="delete(item.id)">Delete</button>
+          <div>
+              <mat-form-field appearance="fill">
+                <mat-label>Member role</mat-label>
+                <mat-select [(value)]="item.role" [disabled]="item.role == 'Owner' || item.id == authSrvice.currentUser.Id">
+                  <mat-option *ngFor="let role of roles" [value]="role.nameRole" 
+                  (onSelectionChange)="chandeWorkspaceRole(role.roleId, item.role, item.id)"
+                  [disabled]="role.nameRole=='Owner'">
+                    {{role.nameRole}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        <span>
+          <button [disabled]="!(userWorkspaceInfo.role == 'Owner' && item.role != 'Owner')" mat-raised-button class="warning" (click)="delete(item.id)">Delete</button>
         </span>
       </li>
-    </div>
+    </ul>
   </div>
 </section>

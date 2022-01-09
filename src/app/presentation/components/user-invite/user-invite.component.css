@@ -1,13 +1,15 @@
 .invite-modal{
     min-width: 600px;
 }
+.example-container {
+    margin-top: 15px;
+}
 .active-invite {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     align-content: space-around;
-    border-bottom: 2px solid #282732;
 }
 mat-icon {
     height: 20px;
@@ -24,29 +26,44 @@ mat-icon {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    font-size: 15px;
+    font-size: 13px;
+    font-weight: 600;
 }
 .email-info .data-info{
     margin-left: 20px;
 }
 .toUserColor{
-    color: red;
+    color: #cb574f;
 }
 .touser-info{
     margin-top: 5px;
 }
-.title-invite{
-    font-size: 17px;
-    text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-    color: #282732;
-    line-height: 30px;
-}
 .send-email{
-    width: 80%;
+    width: 85%;
 }
 .button-send{
-    width: 18%;
+    width: 78px;
     margin-left: 10px;
+}
+.invitations-message{
+    margin-top: 15px;
+    background-color: #f5f5f5;
+    color: #3b394a;
+    padding: 0 10px;
+    border-radius: 4px 4px 0 0;
+    border-bottom: 2px solid #3b394a;
+}
+.noInvitations {
+    margin: 15px 0px 0px 10px;
+    font-weight: 600;
+    color: #3e724c;
+}
+.modal-title.active-invitation {
+    background: white;
+    padding-bottom: 0px;
+}
+.modal-title.active-invitation span{
+    color: #3b394a;
+    font-weight: 600;
+    border-bottom: 2px solid #3b394a;
 }

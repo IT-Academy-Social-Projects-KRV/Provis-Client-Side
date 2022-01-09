@@ -27,7 +27,7 @@ export class WorkspaceListComponent implements OnInit {
   }
 
   modalCreateWorkspace() {
-    let dialogRef = this.dialog.open(AddWorkspaceComponent);
+    let dialogRef = this.dialog.open(AddWorkspaceComponent, {autoFocus: false});
     dialogRef.componentInstance.isAdded.subscribe(data => {
       if(data) 
         dialogRef.close();
