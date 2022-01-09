@@ -1,11 +1,11 @@
-import { TaskInfo } from './../../../core/models/taskInfo';
-import { Tasks } from './../../../core/models/tasks';
-import { WorkspaceMembers } from './../../../core/models/workspaceUsersList';
+import { TaskInfo } from '../../../core/models/task/taskInfo';
+import { Tasks } from '../../../core/models/task/tasks';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import { TaskService } from './../../../core/services/task.service';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { WorkspaceMembers } from 'src/app/core/models/workspace/workspaceMembers';
 
 
 @Component({

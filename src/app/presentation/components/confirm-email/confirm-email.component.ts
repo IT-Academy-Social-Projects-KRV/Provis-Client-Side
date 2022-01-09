@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ConfirmEmailCode } from 'src/app/core/models/confirmEmailCode';
+import { ConfirmEmailCode } from 'src/app/core/models/user/confirmEmailCode';
 import { UserService } from 'src/app/core/services/user.service';
 import Swal from 'sweetalert2';
 
@@ -39,31 +39,6 @@ export class ConfirmEmailComponent implements OnInit {
     })
   }
 
-  handleErrors(err: any){
-    let errorMessage: string = '';
-      if(err.error.errors && typeof err.error.errors === 'object'){
-        const errors = err.error.errors;
-
-        for(let key in errors){
-          for(let indexError in errors[key]){
-            errorMessage += errors[key][indexError] + '\n';
-          }
-        }
-
-       this.showAlert(errorMessage);
-
-        return;
-      }
-
-      if(err.error && typeof err.error === 'object'){
-        errorMessage += err.error.error;
-
-        this.showAlert(errorMessage);
-
-        return;
-      }
-  }
-
   submit(){
     if(this.confirmCodeForm.valid){
       this.confirmationCode = Object.assign({}, this.confirmCodeForm.value);
@@ -81,7 +56,7 @@ export class ConfirmEmailComponent implements OnInit {
           this.router.navigate(['user/workspaces']);
         },
         err => {
-          this.handleErrors(err);
+          this.showAlert(err);
         }
       );
     }

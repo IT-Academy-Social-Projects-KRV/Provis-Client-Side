@@ -1,11 +1,11 @@
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
-import { WorkspaceMembers } from './../../../core/models/workspaceUsersList';
 import { MatAccordion } from '@angular/material/expansion';
 import { TaskService } from './../../../core/services/task.service';
 import { CreateTaskComponent } from './../create-task/create-task.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { WorkspaceMembers } from 'src/app/core/models/workspace/workspaceMembers';
 
 @Component({
   selector: 'app-member-tasklist',

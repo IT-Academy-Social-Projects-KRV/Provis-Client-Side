@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder} from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserForRegister } from 'src/app/core/models/userForRegister';
+import { UserRegister } from 'src/app/core/models/user/userRegister';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { SignInUpValidator } from 'src/app/core/validators/signInUpValidator';
 import Swal from 'sweetalert2';
@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 export class RegistrationComponent implements OnInit {
 
   registerForm : FormGroup;
-  userForRegistreation: UserForRegister = new UserForRegister();
+  userForRegistreation: UserRegister = new UserRegister();
 
   constructor(private fb:FormBuilder, private service: AuthenticationService, private router: Router){
       this.registerForm=fb.group({
@@ -59,29 +59,7 @@ export class RegistrationComponent implements OnInit {
           this.router.navigate(['login']);
         },
         err => {
-          let errorMessage: string = '';
-          if(err.error.errors && typeof err.error.errors === 'object'){
-            const errors = err.error.errors;
-
-            for(let key in errors){
-              for(let indexError in errors[key]){
-                errorMessage += errors[key][indexError] + '\n';
-                console.log(errors[key][indexError]);
-              }
-            }
-
-            this.showAlert(errorMessage);
-
-            return;
-          }
-
-          if(err.error && typeof err.error === 'object'){
-            errorMessage += err.error.error;
-
-            this.showAlert(errorMessage);
-
-            return;
-          }
+          this.showAlert(err);
         }
       )
     }

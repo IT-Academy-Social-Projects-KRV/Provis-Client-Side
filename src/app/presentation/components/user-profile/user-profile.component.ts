@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserProfile } from 'src/app/core/models/userProfile';
-import { ChangeUserInfo } from 'src/app/core/models/changeUserInfo';
+import { UserProfile } from 'src/app/core/models/user/userProfile';
+import { UserChangeProfile } from 'src/app/core/models/user/userChangeProfile';
 import { UserService } from 'src/app/core/services/user.service';
 import { SignInUpValidator } from 'src/app/core/validators/signInUpValidator';
 import { MatDialog } from '@angular/material/dialog';
@@ -23,7 +23,7 @@ export class UserProfileComponent implements OnInit {
   defaultImage: string = 'assets/img/user-profile-image.png';
   userProfileForm : FormGroup;
   userProfile: UserProfile = new UserProfile();
-  changeUserInfo: ChangeUserInfo = new ChangeUserInfo();
+  changeUserInfo: UserChangeProfile = new UserChangeProfile();
 
   constructor(private fb: FormBuilder,
     private userService: UserService,
@@ -54,15 +54,15 @@ export class UserProfileComponent implements OnInit {
 
   update(){
     if(this.userProfileForm.valid){
-      this.changeUserInfo.Name = this.userProfileForm.get('name')?.value;
-      this.changeUserInfo.Surname = this.userProfileForm.get('surname')?.value;
-      this.changeUserInfo.UserName = this.userProfileForm.get('username')?.value;
+      this.changeUserInfo.name = this.userProfileForm.get('name')?.value;
+      this.changeUserInfo.surname = this.userProfileForm.get('surname')?.value;
+      this.changeUserInfo.userName = this.userProfileForm.get('username')?.value;
       this.userService.updateUserInfo(this.changeUserInfo).subscribe(
        () => {
          this.alertService.successMessage("Update personal information", "Success");
        },
        err => {
-        this.catchErr(err);
+        this.alertService.errorMessage(err);
        }
      )
    }
@@ -80,7 +80,7 @@ export class UserProfileComponent implements OnInit {
         this.router.navigate(['user/confirmemail']);
       },
       err =>{
-        this.catchErr(err);
+        this.alertService.errorMessage(err);
       }
     );
   }
@@ -123,7 +123,7 @@ export class UserProfileComponent implements OnInit {
         }
       },
       err => {
-        this.catchErr(err);
+        this.alertService.errorMessage(err);
       }
     )
   }
@@ -153,31 +153,7 @@ export class UserProfileComponent implements OnInit {
       this.image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
     },
     err =>{
-      this.catchErr(err);
+      this.alertService.errorMessage(err);
     });
-  }
-
-  catchErr(err: any): void {
-    let errorMessage: string = '';
-    if(err.error.errors && typeof err.error.errors === 'object'){
-      const errors = err.error.errors;
-
-      for(let key in errors){
-        for(let indexError in errors[key]){
-          errorMessage += errors[key][indexError] + '\n';
-        }
-      }
-
-      this.alertService.errorMessage(errorMessage, "Error");
-      return;
-    }
-
-    if(err.error && typeof err.error === 'object'){
-      errorMessage += err.error.error;
-
-      this.alertService.errorMessage(errorMessage, "Error");
-
-      return;
-    }
   }
 }

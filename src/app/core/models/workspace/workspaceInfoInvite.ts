@@ -1,4 +1,4 @@
-export class WorkspaceInviteInfo{
+export class WorkspaceInfoInvite {
     date: string;
     fromUserName: string;
     toUserName: string;

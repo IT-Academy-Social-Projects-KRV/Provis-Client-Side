@@ -3,8 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { SignInUpValidator } from 'src/app/core/validators/signInUpValidator';
 import Swal from 'sweetalert2';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
-import { UserForLogin } from 'src/app/core/models/userForLogin';
-import { Router } from '@angular/router';
+import { UserLogin } from 'src/app/core/models/user/userLogin';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +13,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   loginForm : FormGroup;
-  userForLogin: UserForLogin = new UserForLogin();
+  userForLogin: UserLogin = new UserLogin();
 
   constructor(private fb:FormBuilder, private service: AuthenticationService){
     this.loginForm=fb.group({
@@ -54,28 +53,7 @@ export class LoginComponent implements OnInit {
           });
         },
         err => {
-          let errorMessage: string = '';
-          if(err.error.errors && typeof err.error.errors === 'object'){
-            const errors = err.error.errors;
-
-            for(let key in errors){
-              for(let indexError in errors[key]){
-                errorMessage += errors[key][indexError] + '\n';
-              }
-            }
-
-           this.showAlert(errorMessage);
-
-            return;
-          }
-
-          if(err.error && typeof err.error === 'object'){
-            errorMessage += err.error.error;
-
-            this.showAlert(errorMessage);
-
-            return;
-          }
+          this.showAlert(err);
         }
       )
     }
