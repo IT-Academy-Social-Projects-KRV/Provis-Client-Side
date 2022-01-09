@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
 import { environment } from 'src/environments/environment';
+import { async } from '@angular/core/testing';
 
 @Injectable()
 export class AlertService{
@@ -35,10 +36,10 @@ export class AlertService{
     })
   }
 
-  public confirmMessage(text: string, title: string, button: string): boolean {
+  public async confirmMessage(text: string, title: string, button: string): Promise<boolean> {
 
-    let isConfirmo: boolean = false;
-    Swal.fire({
+    let isConfirm: boolean = false;
+    await Swal.fire({
       icon: 'warning',
       title: title,
       text: text,
@@ -47,10 +48,9 @@ export class AlertService{
       cancelButtonColor: environment.alertSettings.cancelButtonColor,
       confirmButtonText: button
     }).then((result) => {
-      if (result.isConfirmed) 
-        isConfirmo=true;
-    });
-
-    return isConfirmo;
+      if (result.isConfirmed)
+        isConfirm=true;
+    })
+    return isConfirm;
   }
 }
