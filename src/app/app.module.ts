@@ -57,7 +57,6 @@ import { ChangeTwoFaComponent } from './presentation/components/change-two-fa/ch
 import { AlertService } from './core/services/alerts.service';
 import { ErrorInterceptorProvider } from './core/services/interceptors/error.interceptor';
 
-
 @NgModule({
   declarations: [
     AppComponent,
