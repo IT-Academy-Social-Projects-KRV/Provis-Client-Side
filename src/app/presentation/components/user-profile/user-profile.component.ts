@@ -87,7 +87,7 @@ export class UserProfileComponent implements OnInit {
 
   modelEnterCode(){
     this.userService.checkIsTwoFactorVerification().subscribe(
-      res => {
+      async res => {
         if(!res){
           this.showCheckEmailAlert();
 
@@ -103,7 +103,7 @@ export class UserProfileComponent implements OnInit {
         else{
 
           if (
-          this.alertService.confirmMessage(
+          await this.alertService.confirmMessage(
             'You have already activated two-factor authentication, do you want to disable it?',
             'Are you sure?', 
             'Yes, disable'))
