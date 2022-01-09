@@ -2,7 +2,6 @@ import { WorkspaceUpdate } from 'src/app/core/models/workspace/workspaceUpdate';
 import { WorkspaceInfo } from 'src/app/core/models/workspace/workspaceInfo';
 import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 
@@ -18,7 +17,9 @@ export class ModalUpdateWorkspaceComponent implements OnInit {
   updateWorkspace: WorkspaceUpdate = new WorkspaceUpdate();
   @Output() public isUpdated = new EventEmitter<boolean>(false);
 
-  constructor(private fb: FormBuilder, private service: WorkspaceService, private router: Router) {
+  constructor(private fb: FormBuilder, 
+    private service: WorkspaceService, 
+    private router: Router,) {
     this.updwsform = fb.group({
       "Name": ['', [Validators.required]],
       "Description": ['', [Validators.required]]
@@ -34,18 +35,6 @@ export class ModalUpdateWorkspaceComponent implements OnInit {
     this.updwsform.controls['Description'].setValue(this.updateWorkspace.Description);
   }
 
-  showAlert(error: string) {
-    Swal.fire({
-      icon: 'error',
-      title: error,
-      showClass: {
-        popup: 'animate__animated animate__fadeInDown'
-      },
-      hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
-    })
-  }
   submit() {
     if(this.updwsform.valid){
       this.updateWorkspace.Name=this.updwsform.controls['Name'].value;

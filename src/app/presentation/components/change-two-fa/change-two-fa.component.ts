@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UserChangeTwoFactor } from 'src/app/core/models/user/userChangeTwoFactor';
+import { AlertService } from 'src/app/core/services/alerts.service';
 import { UserService } from 'src/app/core/services/user.service';
 import { ConfirmCodeValidator } from 'src/app/core/validators/confirmCodeValidator';
-import Swal from 'sweetalert2';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 
 @Component({
@@ -21,6 +21,7 @@ export class ChangeTwoFaComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private router: Router,
+    private alertService: AlertService,
     private dialogRef: MatDialogRef<UserProfileComponent>,
     private service: UserService) {
     this.twoFactorForm = fb.group({
@@ -36,36 +37,15 @@ export class ChangeTwoFaComponent implements OnInit {
       this.userChange2fa = Object.assign({}, this.twoFactorForm.value);
       this.service.changeTwoFactorVerification(this.userChange2fa).subscribe(
         () => {
-
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Update 2fa',
-            text: "Success",
-            showConfirmButton: false,
-            timer: 1000
-          });
-
+          this.alertService.successMessage('Success', 'Update 2fa');
+          
           this.router.navigate(['/user/profile']);
           this.isAdded.emit(true);
         },
         err =>{
-          this.showAlert(err);
+          this.alertService.errorMessage(err);
         }
       )
     }
-  }
-
-  showAlert(error: string){
-    Swal.fire({
-      icon: 'error',
-      title: error,
-      showClass: {
-        popup: 'animate__animated animate__fadeInDown'
-      },
-      hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
-    })
   }
 }

@@ -1,15 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-
 import { AssignedMember, CreateTask } from 'src/app/core/models/task/createTask';
 import { TaskStatus } from 'src/app/core/models/task/taskStatus';
 import { TaskWorkerRole } from 'src/app/core/models/task/taskWorkerRoles';
 import { WorkspaceMembers } from 'src/app/core/models/workspace/workspaceMembers';
+import { AlertService } from 'src/app/core/services/alerts.service';
 import { TaskService } from 'src/app/core/services/task.service';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
-import Swal from 'sweetalert2';
-
 
 @Component({
   selector: 'app-create-task',
@@ -30,7 +28,12 @@ export class CreateTaskComponent implements OnInit {
   id : string;
   demoForm: FormGroup;
 
-  constructor(private workspaceService: WorkspaceService, private fb:FormBuilder, private ws: WorkspaceService, public dialog: MatDialog, private taskServise: TaskService) {
+  constructor(private workspaceService: WorkspaceService, 
+    private fb:FormBuilder, 
+    private alertService: AlertService, 
+    private ws: WorkspaceService, 
+    public dialog: MatDialog, 
+    private taskServise: TaskService) {
     this.taskForm=fb.group({
       "Name":["",[Validators.maxLength(50)]],
       "Description":["",[Validators.maxLength(100)]],
@@ -60,23 +63,10 @@ export class CreateTaskComponent implements OnInit {
     this.assignedMembers = [];
   }
 
-  showAlert(error: string){
-    Swal.fire({
-      icon: 'error',
-      title: error,
-      showClass: {
-        popup: 'animate__animated animate__fadeInDown'
-      },
-      hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
-    })
-  }
-
   CreateNewTask(): void{
     if(this.assignedMembers.some(e => e.userId == null || e.roleTagId == null))
     {
-      this.showAlert("Fill all fields");
+      this.alertService.errorMessage("Fill all fields");
       return;
     }
     console.log(this.assignedMembers)
@@ -90,7 +80,7 @@ export class CreateTaskComponent implements OnInit {
           this.dialog.closeAll();
         },
         err => {
-          this.showAlert(err);
+          this.alertService.errorMessage(err);
         }
       );
     }

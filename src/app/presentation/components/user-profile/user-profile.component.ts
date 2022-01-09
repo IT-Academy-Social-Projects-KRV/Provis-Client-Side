@@ -5,11 +5,11 @@ import { UserProfile } from 'src/app/core/models/user/userProfile';
 import { UserChangeProfile } from 'src/app/core/models/user/userChangeProfile';
 import { UserService } from 'src/app/core/services/user.service';
 import { SignInUpValidator } from 'src/app/core/validators/signInUpValidator';
-import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
 import { ChangeTwoFaComponent } from '../change-two-fa/change-two-fa.component';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
+import { AlertService } from 'src/app/core/services/alerts.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -28,6 +28,7 @@ export class UserProfileComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
+    private alertService: AlertService,
     private sanitizer: DomSanitizer,
     public dialog: MatDialog) {
     this.userProfileForm = this.fb.group({
@@ -37,19 +38,6 @@ export class UserProfileComponent implements OnInit {
       email:['',SignInUpValidator.getEmailValidator()]
     });
   }
-
-  showAlert(error: string){
-    Swal.fire({
-      icon: 'error',
-      title: error,
-      showClass: {
-        popup: 'animate__animated animate__fadeInDown'
-      },
-      hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
-    })
-  } 
 
   ngOnInit() {
     this.userService.getUserProfile().subscribe((data: UserProfile) =>{
@@ -71,31 +59,18 @@ export class UserProfileComponent implements OnInit {
       this.changeUserInfo.userName = this.userProfileForm.get('username')?.value;
       this.userService.updateUserInfo(this.changeUserInfo).subscribe(
        () => {
-         Swal.fire({
-           position: 'top-end',
-           icon: 'success',
-           title: 'Update Personal Information',
-           text: "Success",
-           showConfirmButton: false,
-           timer: 1000
-         });
+         this.alertService.successMessage("Update personal information", "Success");
        },
        err => {
-        this.showAlert(err);
+        this.alertService.errorMessage(err);
        }
      )
    }
   }
 
   showCheckEmailAlert(){
-    Swal.fire({
-      title: 'Check your email address ' + this.userProfile.email,
-      text: "You need to copy confirmation code and enter it in this page!",
-      icon: 'warning',
-      showCancelButton: false,
-      confirmButtonColor: '#3085d6',
-      confirmButtonText: 'Ok i understand!'
-    });
+    this.alertService.warningMessage("You need to copy confirmation code and enter it in this page!",
+    'Check your email address ' + this.userProfile.email);
   }
 
   confirmEmail(){
@@ -105,14 +80,14 @@ export class UserProfileComponent implements OnInit {
         this.router.navigate(['user/confirmemail']);
       },
       err =>{
-        this.showAlert(err);
+        this.alertService.errorMessage(err);
       }
     );
   }
 
   modelEnterCode(){
     this.userService.checkIsTwoFactorVerification().subscribe(
-      res => {
+      async res => {
         if(!res){
           this.showCheckEmailAlert();
 
@@ -126,29 +101,29 @@ export class UserProfileComponent implements OnInit {
           })
         }
         else{
-          Swal.fire({
-            title: 'You have already activated two-factor authentication, do you want to disable it?',
-            showDenyButton: true,
-            confirmButtonText: 'Yes',
-            denyButtonText: `No`,
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.showCheckEmailAlert();
 
-              this.userService.sendTwoFactorCode().subscribe();
+          if (
+          await this.alertService.confirmMessage(
+            'You have already activated two-factor authentication, do you want to disable it?',
+            'Are you sure?', 
+            'Yes, disable'))
+          {
+            this.showCheckEmailAlert();
 
-              let dialogRef = this.dialog.open(ChangeTwoFaComponent);
-              dialogRef.componentInstance.isAdded.subscribe(data => {
-                if(data){
-                  dialogRef.close();
-                }
-              })
-            }
-          })
+            this.userService.sendTwoFactorCode().subscribe();
+
+            let dialogRef = this.dialog.open(ChangeTwoFaComponent);
+            dialogRef.componentInstance.isAdded.subscribe(data => {
+              if(data){
+                dialogRef.close();
+              }
+            })
+          }
+          
         }
       },
       err => {
-        this.showAlert(err);
+        this.alertService.errorMessage(err);
       }
     )
   }
@@ -169,7 +144,7 @@ export class UserProfileComponent implements OnInit {
     
     if(file.size > environment.imageSettings.maxSize * 1024 * 1024)
     {
-      this.showAlert('Max size is ' + environment.imageSettings.maxSize + ' Mb');
+      this.alertService.errorMessage('Max size is ' + environment.imageSettings.maxSize + ' Mb', 'Error')
       return;
     }
 
@@ -178,7 +153,7 @@ export class UserProfileComponent implements OnInit {
       this.image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
     },
     err =>{
-      this.showAlert(err);
+      this.alertService.errorMessage(err);
     });
   }
 }

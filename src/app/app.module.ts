@@ -54,6 +54,7 @@ import { UserLeftmenuComponent } from './presentation/components/user-leftmenu/u
 import { ModalUpdateWorkspaceComponent } from './presentation/components/modal-updateworkspace/modal-updateworkspace.component';
 import { TwoSetpVerificationComponent } from './presentation/components/two-step-verification/two-step-verification.component';
 import { ChangeTwoFaComponent } from './presentation/components/change-two-fa/change-two-fa.component';
+import { AlertService } from './core/services/alerts.service';
 import { ErrorInterceptorProvider } from './core/services/interceptors/error.interceptor';
 
 @NgModule({
@@ -115,7 +116,8 @@ import { ErrorInterceptorProvider } from './core/services/interceptors/error.int
     ErrorInterceptorProvider,
     AuthenticationService,
     WorkspaceService,
-    UserService
+    UserService,
+    AlertService
   ],
   bootstrap: [AppComponent]
 })
