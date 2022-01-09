@@ -5,12 +5,12 @@ import { Component, OnInit } from '@angular/core';
 import { UserInviteComponent } from '../user-invite/user-invite.component';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import { UserInvite } from 'src/app/core/models/user/userInvite';
-import Swal from 'sweetalert2';
 import { WorkspaceInfo } from 'src/app/core/models/workspace/workspaceInfo';
 import { UserService } from 'src/app/core/services/user.service';
 import { WorkspaceChangeRole } from 'src/app/core/models/workspace/workspaceChangeRole';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { WorkspaceMembers } from 'src/app/core/models/workspace/workspaceMembers';
+import { AlertService } from 'src/app/core/services/alerts.service';
 interface Role {
   roleId: number;
   nameRole: string;
@@ -40,6 +40,7 @@ export class MemberManagmentComponent implements OnInit {
     private route: ActivatedRoute, 
     public dialog: MatDialog, 
     private router: Router,
+    private alertService: AlertService,
     private workspaceServise: WorkspaceService, 
     private userService: UserService,
     public authSrvice: AuthenticationService) {}
@@ -62,37 +63,18 @@ export class MemberManagmentComponent implements OnInit {
     dialogRef.componentInstance.workspaceId = this.workspaceId;
   }
 
-  delete(userId:string): void{
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "User will be deleted from all workspace tasks!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.workspaceServise.delUserFromWorksp(this.workspaceId, userId).subscribe(
-          () => { 
-            window.location.reload();
-          })
-        }
-      })
-    }
+  async delete(userId:string): Promise<void>{
 
-    showAlert(error: string){
-      Swal.fire({
-        icon: 'error',
-        title: error,
-        showClass: {
-          popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOutUp'
-        }
-      })
-    }
+    if  (await this.alertService.confirmMessage('User will be deleted from all workspace tasks!', 
+        'Are you sure?', 
+        'Yes, delete!'))
+      {
+      this.workspaceServise.delUserFromWorksp(this.workspaceId, userId).subscribe(
+        () => { 
+          window.location.reload();
+        })
+      }
+  }
 
   chandeWorkspaceRole(roleId: number, currentRole: string, userId: string) {
 
@@ -105,18 +87,11 @@ export class MemberManagmentComponent implements OnInit {
 
       this.workspaceServise.changeWorkspaceRole(body).subscribe(
         ()=>{
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Change role',
-            text: "Success",
-            showConfirmButton: false,
-            timer: 1000
-          })
+          this.alertService.successMessage('Change role');
         },
 
           err => {
-            this.showAlert(err);
+            this.alertService.errorMessage(err);
           }
       );
     }
