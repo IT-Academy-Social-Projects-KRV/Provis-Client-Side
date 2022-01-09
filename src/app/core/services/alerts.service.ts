@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 @Injectable()
 export class AlertService{
 
-  public errorMessage(text: string, title?: string) {
+  public errorMessage(text: string, title: string = 'Error') {
     Swal.fire({
       icon: 'error',
       title: title,
@@ -13,7 +13,7 @@ export class AlertService{
     })
   }
 
-  public successMessage(text: string, title?: string){
+  public successMessage(text?: string, title: string = 'Success'){
     Swal.fire({
       icon: 'success',
       title: title,
@@ -35,7 +35,7 @@ export class AlertService{
     })
   }
 
-  public async confirmMessage(text: string, title: string, button: string): Promise<boolean> {
+  public async confirmMessage(text: string, title: string, button: string = 'Confirm'): Promise<boolean> {
 
     let isConfirm: boolean = false;
     await Swal.fire({
