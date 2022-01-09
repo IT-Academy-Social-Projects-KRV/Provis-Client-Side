@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserTwoFactor } from 'src/app/core/models/user/userTwoFactor';
 import { UserTwoStepCode } from 'src/app/core/models/user/userTwoStepCode';
+import { AlertService } from 'src/app/core/services/alerts.service';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { ConfirmCodeValidator } from 'src/app/core/validators/confirmCodeValidator';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-two-step-verification',
@@ -18,6 +18,7 @@ export class TwoSetpVerificationComponent implements OnInit {
   token: UserTwoStepCode;
 
   constructor(private service: AuthenticationService,
+    private alertService: AlertService,
     private fb: FormBuilder,
     private activeRoute: ActivatedRoute) {
     this.twoStepForm = fb.group({
@@ -26,14 +27,8 @@ export class TwoSetpVerificationComponent implements OnInit {
   }
 
   ngOnInit() {
-    Swal.fire({
-      title: 'Check your email address ' + this.activeRoute.snapshot.queryParams['email'],
-      text: "You need to copy code and enter it in this page!",
-      icon: 'warning',
-      showCancelButton: false,
-      confirmButtonColor: '#3085d6',
-      confirmButtonText: 'Ok i understand!'
-    });
+    this.alertService.warningMessage('You need to copy code and enter it in this page!', 
+    'Check your email address ' + this.activeRoute.snapshot.queryParams['email']);
   }
 
   submit(){
@@ -47,14 +42,7 @@ export class TwoSetpVerificationComponent implements OnInit {
 
       this.service.twoStepLogin(twoFactorDTO).subscribe(
         () => {
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Login',
-            text: "Success",
-            showConfirmButton: false,
-            timer: 1000
-          });
+          this.alertService.successMessage('Login');
         },
         err => {
           this.showAlert(err);
@@ -64,15 +52,6 @@ export class TwoSetpVerificationComponent implements OnInit {
   }
 
   showAlert(error: string){
-    Swal.fire({
-      icon: 'error',
-      title: error,
-      showClass: {
-        popup: 'animate__animated animate__fadeInDown'
-      },
-      hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
-    })
+    this.alertService.errorMessage(error);
   }
 }
