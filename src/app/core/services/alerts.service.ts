@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import Swal from 'sweetalert2';
 import { environment } from 'src/environments/environment';
-import { async } from '@angular/core/testing';
 
 @Injectable()
 export class AlertService{
