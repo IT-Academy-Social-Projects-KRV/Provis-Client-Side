@@ -1,6 +1,6 @@
 import { Tasks } from '../models/task/tasks';
 import { Observable } from 'rxjs';
-import { getTaskStatuses, getTaskWorkerRoles, userTaskUrl } from './../../configs/api-endpoints';
+import { getTaskStatuses, getTaskWorkerRoles, taskUrl } from './../../configs/api-endpoints';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TaskStatus } from '../models/task/taskStatus';
@@ -14,7 +14,7 @@ import { TaskWorkerRole } from '../models/task/taskWorkerRoles';
 export class TaskService {
 
 
-  private readonly userTaskUrl = userTaskUrl;
+  private readonly userTaskUrl = taskUrl;
   private readonly taskStatusesUrl = getTaskStatuses;
   private readonly workerRoleUri = getTaskWorkerRoles;
 

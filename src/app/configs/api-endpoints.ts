@@ -2,36 +2,36 @@ import { environment } from 'src/environments/environment';
 
 export const baseUrl = environment.apiUrl + '/api';
 
-export const registerUrl = baseUrl + '/Authentication/registration';
-export const loginUrl = baseUrl + '/Authentication/login';
-export const refreshTokenUrl = baseUrl + '/Authentication/refreshToken';
-export const logoutUrl = baseUrl + '/Authentication/logout';
-export const twoStepVerificationUrl = baseUrl + '/Authentication/logintwostep';
+export const authenticationUrl = baseUrl + '/Authentication/';
+export const registerUrl = authenticationUrl + 'registration';
+export const loginUrl = authenticationUrl + 'login';
+export const refreshTokenUrl = authenticationUrl + 'refresh-token';
+export const logoutUrl = authenticationUrl + 'logout';
+export const twoStepVerificationUrl = authenticationUrl + 'login-two-step';
 
-export const addworkspacetUrl = baseUrl + '/Workspace/addworkspace';
-export const getUserWorkspaceList = baseUrl + '/Workspace/getworlspacelist';
-export const answerInviteUserUrl = baseUrl + '/Workspace/invite';
-export const userWorkspaceInfoUrl = baseUrl + '/Workspace/getworkspace/';
-export const updateWorkspaceUrl = baseUrl + '/Workspace/updateworkspace';
-export const getWorkspaceUsersUrl = baseUrl + '/Workspace/workspace'
-export const deleteUserFromWorkspaseUrl = baseUrl + '/Workspace';
-export const inviteUser = baseUrl + '/Workspace/inviteuser';
-export const workspaceActiveInvite = baseUrl + '/Workspace/';
-export const changeWorkspaceRoleUrl = baseUrl + '/Workspace/changerole';
-export const userTaskUrl = baseUrl + '/Task/';
+export const workspaceUrl = baseUrl + '/Workspace/';
+export const addworkspacetUrl = workspaceUrl + 'workspace';
+export const getUserWorkspaceList = workspaceUrl + 'workspaces';
+export const answerInviteUserUrl = workspaceUrl + 'invite';
+export const userWorkspaceInfoUrl = workspaceUrl + 'workspace';
+export const updateWorkspaceUrl = workspaceUrl + 'workspace';
+export const getWorkspaceUsersUrl = workspaceUrl + 'workspaces';
+export const inviteUser = workspaceUrl + 'invite';
+export const changeWorkspaceRoleUrl = workspaceUrl + 'role';
 
-export const userProfileUrl = baseUrl + '/User/getpersonalinfo';
-export const userInviteList = baseUrl + '/User/invite';
-export const activeInvitesUrl = baseUrl + '/User/activeinvite';
-export const sendConfirmEmailUrl = baseUrl + '/User/sendconfirmmail';
-export const confirmEmailUrl = baseUrl + '/User/confirmemail';
-export const changeUserInfoUrl = baseUrl + '/User/changeinfo';
-export const checkIsTwoFactorVerificationUrl = baseUrl + '/User/checkistwofactor';
-export const change2fUrl = baseUrl + '/User/change2fastatus';
-export const sendTwoFactorCodeUrl = baseUrl + '/User/sendtwofactorcode';
+export const userUrl = baseUrl + '/User/';
+export const userProfileUrl = userUrl + 'info';
+export const userInviteList = userUrl + 'invites';
+export const activeInvitesUrl = userUrl + 'active-invite';
+export const sendConfirmEmailUrl = userUrl + 'confirm-email';
+export const confirmEmailUrl = userUrl + 'confirm-email';
+export const changeUserInfoUrl = userUrl + 'info';
+export const checkIsTwoFactorVerificationUrl = userUrl + 'two-factor-auntification/enable';
+export const change2fUrl = userUrl + 'two-factor-auntification/enable';
+export const sendTwoFactorCodeUrl = userUrl + 'two-factor-auntification/code';
+export const userImageUrl = userUrl + 'image';
 
-export const userImageUrl = baseUrl + '/User/image';
-
-export const addTaskUrl = baseUrl + '/Task/addtask';
-export const getTaskStatuses = baseUrl + '/Task/statuses';
-export const getTaskWorkerRoles = baseUrl + '/Task/workerroles';
+export const taskUrl = baseUrl + '/Task/';
+export const addTaskUrl = taskUrl + 'task';
+export const getTaskStatuses = taskUrl + 'statuses';
+export const getTaskWorkerRoles = taskUrl + 'roles';
