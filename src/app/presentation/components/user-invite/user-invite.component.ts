@@ -2,11 +2,11 @@ import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InviteToWorkspace } from 'src/app/core/models/workspace/inviteToWorkspace';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
-import Swal from 'sweetalert2';
 import { UserService } from 'src/app/core/services/user.service';
 import { WorkspaceInfo } from 'src/app/core/models/workspace/workspaceInfo';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { WorkspaceInfoInvite } from 'src/app/core/models/workspace/workspaceInfoInvite';
+import { AlertService } from 'src/app/core/services/alerts.service';
 
 @Component({
   selector: 'app-user',
@@ -22,7 +22,11 @@ export class UserInviteComponent implements OnInit {
     currentUserRole = new WorkspaceInfo();
     currentUserName: string|undefined;
 
- constructor(private fb: FormBuilder, private ws: WorkspaceService, private us: UserService, private as: AuthenticationService) {
+ constructor(private fb: FormBuilder, 
+  private ws: WorkspaceService, 
+  private us: UserService, 
+  private as: AuthenticationService, 
+  private alertService: AlertService) {
    this.inviteUserForm = fb.group({
      'UserEmail': ['', [Validators.required, Validators.email]]
    }); 
@@ -41,19 +45,6 @@ export class UserInviteComponent implements OnInit {
     });
   }
 
-  showAlert(error: string){
-    Swal.fire({
-      icon: 'error',
-      title: error,
-      showClass: {
-        popup: 'animate__animated animate__fadeInDown'
-      },
-      hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
-    })
-  }
-
   Invite(): void{
     if(this.inviteUserForm.valid){
       this.userInvite = this.inviteUserForm.value;
@@ -64,7 +55,7 @@ export class UserInviteComponent implements OnInit {
             });
           },
           err => {
-            this.showAlert(err);
+            this.alertService.errorMessage(err);
           }
         );    
     }
