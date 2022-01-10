@@ -1,0 +1,21 @@
+.center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card {
+    margin-top: 50px;
+    max-width: 40%;
+}
+form.register-form{
+    width: 70%;
+    min-width: 70%;
+}
+.mat-form-field {
+    width: 100%;
+}
+.verifiaction-block{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

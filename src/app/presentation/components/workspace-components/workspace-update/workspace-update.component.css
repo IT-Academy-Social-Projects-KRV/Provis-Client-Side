@@ -1,0 +1,28 @@
+.container {
+  background:linear-gradient(45deg,#161A27, #48537a)
+}
+.invite-modal{
+  background: white;
+  color: black;
+}
+.updws_form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.updws_form_title {
+  font-weight: 600;
+  text-align: center;
+  font-size: 28px;
+  padding-bottom: 20px;
+}
+form.updws-form {
+  min-width: 150px;
+  max-width: 420px;
+  background: white;
+  padding: 30px;
+  width: 100%;
+}
+form.updws-form .mat-form-field {
+  width: 100%;
+}

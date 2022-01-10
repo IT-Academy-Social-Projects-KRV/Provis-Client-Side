@@ -1,0 +1,10 @@
+.container {
+    background: linear-gradient(0deg,#3f3c52 0%,#161518 100%);
+}
+form.register-form .mat-form-field {
+    width: 100%;
+    margin:5px auto;
+}
+.password-error{
+    margin-bottom: 5px;
+}
