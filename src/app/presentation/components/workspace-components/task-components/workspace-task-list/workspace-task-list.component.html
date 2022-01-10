@@ -1,0 +1,25 @@
+<div class="right-side-title">
+  <span>Task List</span>
+
+</div>
+
+<div class="toggle-block">
+  <div class="button-after-page-title">
+    <a mat-raised-button class="link-button button-accept" (click)="modalCreateTask()">
+        <mat-icon aria-hidden="false" aria-label="Example home icon">queue</mat-icon>
+        <span>Create Task</span>  
+    </a>
+  </div>
+  <div class="toggle-button">
+    <div (click)="accordion.openAll()">Expand All</div>
+    <div (click)="accordion.closeAll()">Collapse All</div>
+  </div>
+</div>
+
+<mat-accordion multi>
+  <div *ngFor="let user of workspaceUserList">
+    
+    <app-workspace-user-task-list [user]="user" [workspaceId]="workspaceId"></app-workspace-user-task-list>
+ 
+  </div>
+</mat-accordion>

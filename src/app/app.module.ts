@@ -21,39 +21,39 @@ import {CdkAccordionModule} from '@angular/cdk/accordion';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 
-import { HomeComponent } from './presentation/components/home/home.component';
-import { AboutComponent } from './presentation/components/about/about.component';
-import { ContactComponent } from './presentation/components/contact/contact.component';
-import { LoginComponent } from './presentation/components/login/login.component';
-import { RegistrationComponent } from './presentation/components/registration/registration.component';
-import { HeaderComponent } from './presentation/components/header/header.component';
-import { FooterComponent } from './presentation/components/footer/footer.component';
-import { AddWorkspaceComponent } from './presentation/components/add-workspace/add-workspace.component';
-import { WorkspaceListComponent } from './presentation/components/workspace-list/workspace-list.component';
-import { UserComponent } from './presentation/components/user/user.component';
-import { UserHeaderComponent } from './presentation/components/user-header/user-header.component';
-import { UserProfileComponent } from './presentation/components/user-profile/user-profile.component';
-import { ConfirmEmailComponent } from './presentation/components/confirm-email/confirm-email.component';
-import { MemberManagmentComponent } from './presentation/components/member-managment/member-managment.component';
-import { MemberListComponent } from './presentation/components/member-list/member-list.component';
-import { MemberCalendarComponent } from './presentation/components/member-calendar/member-calendar.component';
-import { MemberTasklistComponent } from './presentation/components/member-tasklist/member-tasklist.component';
-import { TasklistComponent } from './presentation/components/tasklist/tasklist.component';
+import { HomeComponent } from './presentation/components/home-components/home/home.component';
+import { AboutComponent } from './presentation/components/home-components/about/about.component';
+import { ContactComponent } from './presentation/components/home-components/contact/contact.component';
+import { LoginComponent } from './presentation/components/home-components/login/login.component';
+import { RegistrationComponent } from './presentation/components/home-components/registration/registration.component';
+import { HeaderComponent } from './presentation/components/home-components/header/header.component';
+import { FooterComponent } from './presentation/components/home-components/footer/footer.component';
+import { WorkspaceCreateComponent } from './presentation/components/workspace-components/workspace-create/workspace-create.component';
+import { UserWorkspaceListComponent } from './presentation/components/user-components/user-workspace-list/user-workspace-list.component';
+import { UserComponent } from './presentation/components/user-components/user/user.component';
+import { UserMenuComponent } from './presentation/components/user-components/user-menu/user-menu.component';
+import { UserProfileComponent } from './presentation/components/user-components/user-profile/user-profile.component';
+import { ConfirmEmailComponent } from './presentation/components/user-components/confirm-email/confirm-email.component';
+import { WorkspaceMemberManagmentComponent } from './presentation/components/workspace-components/workspace-member-managment/workspace-member-managment.component';
+import { WorkspaceMemberListComponent } from './presentation/components/workspace-components/workspace-member-list/workspace-member-list.component';
+import { WorkspaceCalendarComponent } from './presentation/components/workspace-components/workspace-calendar/workspace-calendar.component';
+import { WorkspaceTaskListComponent } from './presentation/components/workspace-components/task-components/workspace-task-list/workspace-task-list.component';
+import { WorkspaceUserTaskListComponent } from './presentation/components/workspace-components/task-components/workspace-user-task-list/workspace-user-task-list.component';
 
 import { AuthInterceptorProvider } from './core/services/interceptors/auth.interceptor';
 import { WorkspaceService } from './core/services/workspace.service';
 import { AuthenticationService } from './core/services/authentication.service';
 import { UserService } from './core/services/user.service';
-import { UserInviteComponent } from './presentation/components/user-invite/user-invite.component';
-import { CreateTaskComponent } from './presentation/components/create-task/create-task.component';
-import { WorkspaceComponent } from './presentation/components/workspace/workspace.component';
-import { WorkspaceInfoComponent } from './presentation/components/workspace-info/workspace-info.component';
-import { WorkspaceSettingsComponent } from './presentation/components/workspace-settings/workspace-settings.component';
-import { ModalInvitesComponent } from './presentation/components/modal-invites/modal-invites.component';
-import { UserLeftmenuComponent } from './presentation/components/user-leftmenu/user-leftmenu.component';
-import { ModalUpdateWorkspaceComponent } from './presentation/components/modal-updateworkspace/modal-updateworkspace.component';
-import { TwoSetpVerificationComponent } from './presentation/components/two-step-verification/two-step-verification.component';
-import { ChangeTwoFaComponent } from './presentation/components/change-two-fa/change-two-fa.component';
+import { WorkspaceInviteComponent } from './presentation/components/workspace-components/workspace-invite/workspace-invite.component';
+import { WorkspaceTaskCreateComponent } from './presentation/components/workspace-components/task-components/workspace-task-create/workspace-task-create.component';
+import { WorkspaceComponent } from './presentation/components/workspace-components/workspace/workspace.component';
+import { WorkspaceInfoComponent } from './presentation/components/workspace-components/workspace-info/workspace-info.component';
+import { WorkspaceSettingsComponent } from './presentation/components/workspace-components/workspace-settings/workspace-settings.component';
+import { UserInviteListComponent } from './presentation/components/user-components/user-invite-list/user-invite-list.component';
+import { WorkspaceMenuComponent } from './presentation/components/workspace-components/workspace-menu/workspace-menu.component';
+import { WorkspaceUpdateComponent } from './presentation/components/workspace-components/workspace-update/workspace-update.component';
+import { TwoSetpVerificationComponent } from './presentation/components/user-components/two-step-verification/two-step-verification.component';
+import { ChangeTwoFaComponent } from './presentation/components/user-components/change-two-fa/change-two-fa.component';
 import { AlertService } from './core/services/alerts.service';
 import { ErrorInterceptorProvider } from './core/services/interceptors/error.interceptor';
 
@@ -67,28 +67,28 @@ import { ErrorInterceptorProvider } from './core/services/interceptors/error.int
     RegistrationComponent,
     HeaderComponent,
     FooterComponent,
-    AddWorkspaceComponent,
-    WorkspaceListComponent,
+    WorkspaceCreateComponent,
+    UserWorkspaceListComponent,
     UserComponent,
-    UserHeaderComponent,
+    UserMenuComponent,
     UserProfileComponent,
     WorkspaceComponent,
     WorkspaceInfoComponent,
     WorkspaceSettingsComponent,
-    UserInviteComponent,
-    ModalInvitesComponent,
+    WorkspaceInviteComponent,
+    UserInviteListComponent,
     ConfirmEmailComponent,
-    UserLeftmenuComponent,
-    MemberManagmentComponent,
-    MemberListComponent,
-    MemberCalendarComponent,
-    CreateTaskComponent,
+    WorkspaceMenuComponent,
+    WorkspaceMemberManagmentComponent,
+    WorkspaceMemberListComponent,
+    WorkspaceCalendarComponent,
+    WorkspaceTaskCreateComponent,
     TwoSetpVerificationComponent,
     ChangeTwoFaComponent,
-    MemberTasklistComponent,
-    CreateTaskComponent,
-    ModalUpdateWorkspaceComponent,
-    TasklistComponent
+    WorkspaceTaskListComponent,
+    WorkspaceTaskCreateComponent,
+    WorkspaceUpdateComponent,
+    WorkspaceUserTaskListComponent
   ],
   imports: [
     BrowserModule,
