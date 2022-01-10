@@ -4,13 +4,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { UserInviteComponent } from '../user-invite/user-invite.component';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
-import { UserInvites } from 'src/app/core/models/userInviteList';
-import { WorkspaceMembers } from 'src/app/core/models/workspaceUsersList';
-import Swal from 'sweetalert2';
-import { userWorkspaceInfo } from 'src/app/core/models/userWorkspaceInfo';
+import { UserInvite } from 'src/app/core/models/user/userInvite';
+import { WorkspaceInfo } from 'src/app/core/models/workspace/workspaceInfo';
 import { UserService } from 'src/app/core/services/user.service';
-import { ChangeWorkspaceRole } from 'src/app/core/models/changeWorkspaceRole';
+import { WorkspaceChangeRole } from 'src/app/core/models/workspace/workspaceChangeRole';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { WorkspaceMembers } from 'src/app/core/models/workspace/workspaceMembers';
+import { AlertService } from 'src/app/core/services/alerts.service';
 interface Role {
   roleId: number;
   nameRole: string;
@@ -32,14 +32,15 @@ export class MemberManagmentComponent implements OnInit {
 
   protected routeSub: Subscription;
   workspaceId: number;
-  workspaceActiveInviteInfo: UserInvites[];
-  userWorkspaceInfo = new userWorkspaceInfo;
+  workspaceActiveInviteInfo: UserInvite[];
+  userWorkspaceInfo = new WorkspaceInfo;
   workspaceUserList: WorkspaceMembers[];
   
   constructor(
     private route: ActivatedRoute, 
     public dialog: MatDialog, 
     private router: Router,
+    private alertService: AlertService,
     private workspaceServise: WorkspaceService, 
     private userService: UserService,
     public authSrvice: AuthenticationService) {}
@@ -52,7 +53,7 @@ export class MemberManagmentComponent implements OnInit {
     this.workspaceServise.getWorkspaceUserList(this.workspaceId).subscribe(data=>{
       this.workspaceUserList=data;
     })
-    this.userService.userWorkspaceInfo(this.workspaceId).subscribe((data: userWorkspaceInfo) => {
+    this.userService.userWorkspaceInfo(this.workspaceId).subscribe((data: WorkspaceInfo) => {
         this.userWorkspaceInfo = data;
       });
   }
@@ -62,82 +63,35 @@ export class MemberManagmentComponent implements OnInit {
     dialogRef.componentInstance.workspaceId = this.workspaceId;
   }
 
-  delete(userId:string): void{
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "User will be deleted from all workspace tasks!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        this.workspaceServise.delUserFromWorksp(this.workspaceId, userId).subscribe(
-          () => { 
-            window.location.reload();
-          })
-        }
-      })
-    }
+  async delete(userId:string): Promise<void>{
 
-    showAlert(error: string){
-      Swal.fire({
-        icon: 'error',
-        title: error,
-        showClass: {
-          popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOutUp'
-        }
-      })
-    }
+    if  (await this.alertService.confirmMessage('User will be deleted from all workspace tasks!', 
+        'Are you sure?', 
+        'Yes, delete!'))
+      {
+      this.workspaceServise.delUserFromWorksp(this.workspaceId, userId).subscribe(
+        () => { 
+          window.location.reload();
+        })
+      }
+  }
 
   chandeWorkspaceRole(roleId: number, currentRole: string, userId: string) {
 
     if(this.roles[this.roles.findIndex(x=>x.roleId == roleId)].nameRole != currentRole)
     {
-      let body = new ChangeWorkspaceRole()
+      let body = new WorkspaceChangeRole()
       body.roleId = roleId;
       body.userId = userId;
       body.workspaceId = this.workspaceId;
 
       this.workspaceServise.changeWorkspaceRole(body).subscribe(
         ()=>{
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Change role',
-            text: "Success",
-            showConfirmButton: false,
-            timer: 1000
-          })
+          this.alertService.successMessage('Change role');
         },
 
           err => {
-          let errorMessage: string = '';
-          if(err.error.errors && typeof err.error.errors === 'object'){
-            const errors = err.error.errors;
-
-            for(let key in errors){
-              for(let indexError in errors[key]){
-                errorMessage += errors[key][indexError] + '\n';
-              }
-            }
-
-           this.showAlert(errorMessage);
-
-            return;
-          }
-
-          if(err.error && typeof err.error === 'object'){
-            errorMessage += err.error.error;
-
-            this.showAlert(errorMessage);
-
-            return;
-          }
+            this.alertService.errorMessage(err);
           }
       );
     }

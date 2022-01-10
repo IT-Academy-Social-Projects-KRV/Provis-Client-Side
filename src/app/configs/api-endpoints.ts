@@ -33,3 +33,5 @@ export const sendTwoFactorCodeUrl = baseUrl + '/User/sendtwofactorcode';
 export const userImageUrl = baseUrl + '/User/image';
 
 export const addTaskUrl = baseUrl + '/Task/addtask';
+export const getTaskStatuses = baseUrl + '/Task/statuses';
+export const getTaskWorkerRoles = baseUrl + '/Task/workerroles';

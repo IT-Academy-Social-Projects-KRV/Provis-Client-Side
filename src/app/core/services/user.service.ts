@@ -1,5 +1,5 @@
 import { userWorkspaceInfoUrl } from './../../configs/api-endpoints';
-import { userWorkspaceInfo } from './../models/userWorkspaceInfo';
+import { WorkspaceInfo } from '../models/workspace/workspaceInfo';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { answerInviteUserUrl,
@@ -14,12 +14,12 @@ import { answerInviteUserUrl,
          userImageUrl,
          activeInvitesUrl} from 'src/app/configs/api-endpoints';
 import { Observable, pipe } from 'rxjs';
-import { UserInvites } from '../models/userInviteList';
-import { ActiveInvites} from '../models/activeInvites';
-import { UserProfile } from '../models/userProfile';
-import { ConfirmEmailCode } from '../models/confirmEmailCode';
-import { ChangeUserInfo } from '../models/changeUserInfo';
-import { UserChange2fa } from '../models/userChange2fa';
+import { UserInvite } from '../models/user/userInvite';
+import { UserInfoActiveInvites} from '../models/user/userInfoActiveInvites';
+import { UserProfile } from '../models/user/userProfile';
+import { ConfirmEmailCode } from '../models/user/confirmEmailCode';
+import { UserChangeProfile } from '../models/user/userChangeProfile';
+import { UserChangeTwoFactor } from '../models/user/userChangeTwoFactor';
 
 @Injectable({
   providedIn: 'root'
@@ -51,16 +51,16 @@ export class UserService {
     return this.http.get<UserProfile>(this.userProfileUrl, this.httpOption);
   }
 
-  getActiveInvites():Observable<ActiveInvites>{
-    return this.http.get<ActiveInvites>(this.activeInvitesUrl,this.httpOption);
+  getActiveInvites():Observable<UserInfoActiveInvites>{
+    return this.http.get<UserInfoActiveInvites>(this.activeInvitesUrl,this.httpOption);
   }
 
   private getToken(): any{
     return localStorage.getItem('token')?.toString();
   }
 
-  getUserInvite(): Observable<UserInvites[]>{
-    return this.http.get<UserInvites[]>(this.getUserInviteList, this.httpOption);
+  getUserInvite(): Observable<UserInvite[]>{
+    return this.http.get<UserInvite[]>(this.getUserInviteList, this.httpOption);
   }
 
   denyUserInvite(inviteId:number):Observable<void>{
@@ -79,11 +79,11 @@ export class UserService {
     return this.http.post<void>(this.confirmEmailUrl, confirmationCode, this.httpOption);
   }
 
-  updateUserInfo(changeUserInfo: ChangeUserInfo):Observable<void>{
+  updateUserInfo(changeUserInfo: UserChangeProfile):Observable<void>{
     return this.http.put<void>(this.changeUserInfoUrl, changeUserInfo, this.httpOption);
   }
 
-  changeTwoFactorVerification(status: UserChange2fa): Observable<void>{
+  changeTwoFactorVerification(status: UserChangeTwoFactor): Observable<void>{
     return this.http.post<void>(this.changeTwoFacotrUrl, status, this.httpOption);
   }
 
@@ -113,7 +113,7 @@ export class UserService {
     return this.http.put<void>(this.userImageUrl, formData, this.httpOption);
   }
   
-  userWorkspaceInfo(workspaceId:number) :Observable<userWorkspaceInfo> {
-    return this.http.get<userWorkspaceInfo>(this.userWorkspaceInfoUrl + workspaceId + "/info", this.httpOption)
+  userWorkspaceInfo(workspaceId:number) :Observable<WorkspaceInfo> {
+    return this.http.get<WorkspaceInfo>(this.userWorkspaceInfoUrl + workspaceId + "/info", this.httpOption)
   }
 }

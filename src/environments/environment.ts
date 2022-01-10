@@ -2,6 +2,8 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { SweetAlertPosition } from "sweetalert2";
+
 export const environment = {
   production: false,
   apiUrl: 'https://localhost:5001',
@@ -15,6 +17,12 @@ export const environment = {
     'gif',
     'png'
     ]
+  },
+  alertSettings:{
+    timer: 1200, //ms
+    position: 'top-end' as SweetAlertPosition,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33'
   }
 };
 

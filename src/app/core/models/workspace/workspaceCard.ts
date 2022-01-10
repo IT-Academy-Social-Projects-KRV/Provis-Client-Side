@@ -1,4 +1,4 @@
-export class UserWorkspace {
+export class WorkspaceCard {
     id: number;
     name: string;
     role: string;

@@ -1,13 +1,12 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserInvite } from 'src/app/core/models/userInvite';
+import { InviteToWorkspace } from 'src/app/core/models/workspace/inviteToWorkspace';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
-import { WorkspaceInviteInfo } from 'src/app/core/models/WorkspaceInviteInfo';
-import Swal from 'sweetalert2';
 import { UserService } from 'src/app/core/services/user.service';
-import { userWorkspaceInfo } from 'src/app/core/models/userWorkspaceInfo';
+import { WorkspaceInfo } from 'src/app/core/models/workspace/workspaceInfo';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
-import { UserInfo } from 'src/app/core/models/userInfo';
+import { WorkspaceInfoInvite } from 'src/app/core/models/workspace/workspaceInfoInvite';
+import { AlertService } from 'src/app/core/services/alerts.service';
 
 @Component({
   selector: 'app-user',
@@ -17,13 +16,17 @@ import { UserInfo } from 'src/app/core/models/userInfo';
 export class UserInviteComponent implements OnInit {
 
     @Input() public workspaceId: number;
-    workspaceActiveInviteInfo: WorkspaceInviteInfo[];
-    userInvite: UserInvite = new UserInvite();
+    workspaceActiveInviteInfo: WorkspaceInfoInvite[];
+    userInvite: InviteToWorkspace = new InviteToWorkspace();
     inviteUserForm: FormGroup;
-    currentUserRole = new userWorkspaceInfo();
+    currentUserRole = new WorkspaceInfo();
     currentUserName: string|undefined;
 
- constructor(private fb: FormBuilder, private ws: WorkspaceService, private us: UserService, private as: AuthenticationService) {
+ constructor(private fb: FormBuilder, 
+  private ws: WorkspaceService, 
+  private us: UserService, 
+  private as: AuthenticationService, 
+  private alertService: AlertService) {
    this.inviteUserForm = fb.group({
      'UserEmail': ['', [Validators.required, Validators.email]]
    }); 
@@ -32,27 +35,14 @@ export class UserInviteComponent implements OnInit {
   ngOnInit() {
     this.userInvite.workspaceId = this.workspaceId;
 
-    this.ws.WorkspaceInviteInfo(this.workspaceId).subscribe((data: WorkspaceInviteInfo[]) => {
+    this.ws.WorkspaceInviteInfo(this.workspaceId).subscribe((data: WorkspaceInfoInvite[]) => {
       this.workspaceActiveInviteInfo = data;
     });
 
-    this.us.userWorkspaceInfo(this.workspaceId).subscribe((data: userWorkspaceInfo) => {
+    this.us.userWorkspaceInfo(this.workspaceId).subscribe((data: WorkspaceInfo) => {
       this.currentUserRole = data;
-      this.currentUserName = this.as.currentUser.Username;
+      this.currentUserName = this.as.currentUser.username;
     });
-  }
-
-  showAlert(error: string){
-    Swal.fire({
-      icon: 'error',
-      title: error,
-      showClass: {
-        popup: 'animate__animated animate__fadeInDown'
-      },
-      hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
-    })
   }
 
   Invite(): void{
@@ -60,31 +50,12 @@ export class UserInviteComponent implements OnInit {
       this.userInvite = this.inviteUserForm.value;
       this.userInvite.workspaceId = this.workspaceId;
       this.ws.InviteUser(this.userInvite).subscribe(
-        () => {this.ws.WorkspaceInviteInfo(this.workspaceId).subscribe((data: WorkspaceInviteInfo[]) => {
+        () => {this.ws.WorkspaceInviteInfo(this.workspaceId).subscribe((data: WorkspaceInfoInvite[]) => {
             this.workspaceActiveInviteInfo = data;
             });
           },
           err => {
-            let errorMessage: string = '';
-            if(err.error.errors && typeof err.error.errors === 'object'){
-              const errors = err.error.errors;
-  
-              for(let key in errors){
-                for(let indexError in errors[key]){
-                  errorMessage += errors[key][indexError] + '\n';
-                }
-              }
-              
-             this.showAlert(errorMessage);
-              return;
-            } 
-  
-            if(err.error && typeof err.error === 'object'){
-              errorMessage += err.error.error;
-
-              this.showAlert(errorMessage);
-              return;
-            }
+            this.alertService.errorMessage(err);
           }
         );    
     }

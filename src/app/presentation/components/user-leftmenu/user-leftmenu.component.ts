@@ -1,4 +1,4 @@
-import { userWorkspaceInfo } from './../../../core/models/userWorkspaceInfo';
+import { WorkspaceInfo } from '../../../core/models/workspace/workspaceInfo';
 import { UserService } from 'src/app/core/services/user.service';
 import { CreateTaskComponent } from './../create-task/create-task.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 export class UserLeftmenuComponent implements OnInit {
   
   workspaceId: number;
-  userWorkspaceInfo = new userWorkspaceInfo;
+  userWorkspaceInfo = new WorkspaceInfo;
 
   constructor(private route: ActivatedRoute, public dialog: MatDialog, private userService: UserService) { }
   
@@ -22,7 +22,7 @@ export class UserLeftmenuComponent implements OnInit {
       this.workspaceId = Number(this.route.snapshot.paramMap.get('id'));
     });
 
-    this.userService.userWorkspaceInfo(this.workspaceId).subscribe((data: userWorkspaceInfo) => {
+    this.userService.userWorkspaceInfo(this.workspaceId).subscribe((data: WorkspaceInfo) => {
       this.userWorkspaceInfo = data;
     });
 

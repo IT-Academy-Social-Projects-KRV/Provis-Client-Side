@@ -4,7 +4,7 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import { Router } from '@angular/router';
-import { CreateWorkspace } from 'src/app/core/models/workspace';
+import { CreateWorkspace } from 'src/app/core/models/workspace/createWorkspace';
 
 @Component({
   selector: 'app-add-workspace',
@@ -18,11 +18,11 @@ export class AddWorkspaceComponent implements OnInit {
   @Output() public isAdded = new EventEmitter<boolean>(false);
 
   constructor(
-    private fb:FormBuilder, 
+    private fb:FormBuilder,
     private service: WorkspaceService, 
     private router: Router,
     private formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<WorkspaceListComponent>) 
+    private dialogRef: MatDialogRef<WorkspaceListComponent>)
     {     
       this.addwsform=fb.group({        
       "Name": ['',[Validators.required]],

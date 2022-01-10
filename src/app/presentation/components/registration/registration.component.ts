@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder} from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserForRegister } from 'src/app/core/models/userForRegister';
+import { UserRegister } from 'src/app/core/models/user/userRegister';
+import { AlertService } from 'src/app/core/services/alerts.service';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { SignInUpValidator } from 'src/app/core/validators/signInUpValidator';
-import Swal from 'sweetalert2';
-
 
 @Component({
   selector: 'app-registration',
@@ -15,9 +14,12 @@ import Swal from 'sweetalert2';
 export class RegistrationComponent implements OnInit {
 
   registerForm : FormGroup;
-  userForRegistreation: UserForRegister = new UserForRegister();
+  userForRegistreation: UserRegister = new UserRegister();
 
-  constructor(private fb:FormBuilder, private service: AuthenticationService, private router: Router){
+  constructor(private fb:FormBuilder, 
+    private service: AuthenticationService, 
+    private router: Router, 
+    private alertService: AlertService){
       this.registerForm=fb.group({
           "Name":["",SignInUpValidator.getNameValidator(3,50)],
           "Surname":["",SignInUpValidator.getNameValidator(3,50)],
@@ -33,55 +35,16 @@ export class RegistrationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  showAlert(error: string){
-    Swal.fire({
-      icon: 'error',
-      title: error,
-      showClass: {
-        popup: 'animate__animated animate__fadeInDown'
-      },
-      hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
-    })
-  }
-
   submit(){
     if(this.registerForm.valid){
       this.userForRegistreation = Object.assign({}, this.registerForm.value);
       this.service.register(this.userForRegistreation).subscribe(
         () => {
-          Swal.fire({
-            icon: 'success',
-            title: 'Register',
-            text: "Success"
-          })
+          this.alertService.successMessage('Register')
           this.router.navigate(['login']);
         },
         err => {
-          let errorMessage: string = '';
-          if(err.error.errors && typeof err.error.errors === 'object'){
-            const errors = err.error.errors;
-
-            for(let key in errors){
-              for(let indexError in errors[key]){
-                errorMessage += errors[key][indexError] + '\n';
-                console.log(errors[key][indexError]);
-              }
-            }
-
-            this.showAlert(errorMessage);
-
-            return;
-          }
-
-          if(err.error && typeof err.error === 'object'){
-            errorMessage += err.error.error;
-
-            this.showAlert(errorMessage);
-
-            return;
-          }
+          this.alertService.errorMessage(err);
         }
       )
     }

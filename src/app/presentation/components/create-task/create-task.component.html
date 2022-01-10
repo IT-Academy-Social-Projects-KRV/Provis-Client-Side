@@ -27,7 +27,7 @@
         <mat-form-field appearance="fill">
           <mat-label>Task status</mat-label>
           <mat-select [(value)]="selectedStatus" formControlName="StatusId" required>
-            <mat-option *ngFor="let key of enumValues(status)" [value] = "key"> {{status[key]}} </mat-option>
+            <mat-option *ngFor="let item of statusList" [value]="item.id">{{item.name}}</mat-option>
           </mat-select>
           <mat-error *ngIf="taskForm.controls['StatusId'].invalid && taskForm.controls['StatusId'].touched">Invalid status</mat-error>
         </mat-form-field>
@@ -36,6 +36,7 @@
       <form #assignForm="ngForm" [formGroup]="demoForm" class="assign-modal" (ngSubmit)="Ok()">
         <button mat-raised-button (click)="AssignMember()" class="additional">Add members</button>
         <section formArrayName="demoArray" *ngFor="let member of assignedMembers;let i = index;" class="member-section">
+
           <div>
             <mat-form-field appearance="fill" class="assign-fields">
               <mat-label>Member</mat-label>
@@ -45,17 +46,17 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-        
+
             <mat-form-field appearance="fill" class="assign-fields">
               <mat-label>Role</mat-label>
               <mat-select [(ngModel)]="member.roleTagId" name="role_{{i}}" [ngModelOptions]="{standalone: true}">
-                <mat-option *ngFor="let item of enumValues(userRole)" [value]="item">
-                  {{userRole[item]}}
+                <mat-option *ngFor="let item of taskRole" [value]="item.id">
+                  {{item.name}}
                 </mat-option>
               </mat-select>
-            </mat-form-field>  
+            </mat-form-field>
           </div>
-          <button mat-raised-button (click)="DeAssignMember(i)" class="warning">remove</button>
+          <button mat-raised-button (click)="DeAssignMember(i)" >remove</button>
 
         </section>
       </form>

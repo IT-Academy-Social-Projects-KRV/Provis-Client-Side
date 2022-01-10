@@ -5,7 +5,7 @@
   <div class="button-after-page-title">
     <a mat-raised-button class="link-button button-accept" (click)="modalInvites()">
       <mat-icon aria-hidden="false" aria-label="Example home icon">person_add</mat-icon>
-      <span>Invite</span>  
+      <span>Invite</span>
     </a>
   </div>
   <div class="user-page">
@@ -19,7 +19,7 @@
               <mat-form-field appearance="fill">
                 <mat-label>Member role</mat-label>
                 <mat-select [(value)]="item.role" [disabled]="item.role == 'Owner' || item.id == authSrvice.currentUser.Id">
-                  <mat-option *ngFor="let role of roles" [value]="role.nameRole" 
+                  <mat-option *ngFor="let role of roles" [value]="role.nameRole"
                   (onSelectionChange)="chandeWorkspaceRole(role.roleId, item.role, item.id)"
                   [disabled]="role.nameRole=='Owner'">
                     {{role.nameRole}}

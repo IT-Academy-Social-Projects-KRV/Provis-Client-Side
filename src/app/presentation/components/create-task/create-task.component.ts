@@ -1,12 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { enumValues, taskStatuses, userTaskRole } from 'src/app/configs/enum-helper';
-import { AssignedMember, CreateTask } from 'src/app/core/models/create-task';
-import { WorkspaceMembers } from 'src/app/core/models/workspaceUsersList';
+import { AssignedMember, CreateTask } from 'src/app/core/models/task/createTask';
+import { TaskStatus } from 'src/app/core/models/task/taskStatus';
+import { TaskWorkerRole } from 'src/app/core/models/task/taskWorkerRoles';
+import { WorkspaceMembers } from 'src/app/core/models/workspace/workspaceMembers';
+import { AlertService } from 'src/app/core/services/alerts.service';
+import { TaskService } from 'src/app/core/services/task.service';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
-import Swal from 'sweetalert2';
-
 
 @Component({
   selector: 'app-create-task',
@@ -18,17 +19,21 @@ export class CreateTaskComponent implements OnInit {
   @Input() public workspaceId: number;
   taskForm: FormGroup;
   createTask: CreateTask = new CreateTask();
-  status = taskStatuses;
+  statusList: TaskStatus[];
+  taskRole: TaskWorkerRole[];
   selectedStatus: number;
-  public enumValues = enumValues;
   
   workspaceMemberList: WorkspaceMembers[];
-  userRole = userTaskRole;
   public assignedMembers: AssignedMember[];
   id : string;
   demoForm: FormGroup;
 
-  constructor(private workspaceService: WorkspaceService, private fb:FormBuilder, private ws: WorkspaceService, public dialog: MatDialog) {
+  constructor(private workspaceService: WorkspaceService, 
+    private fb:FormBuilder, 
+    private alertService: AlertService, 
+    private ws: WorkspaceService, 
+    public dialog: MatDialog, 
+    private taskServise: TaskService) {
     this.taskForm=fb.group({
       "Name":["",[Validators.maxLength(50)]],
       "Description":["",[Validators.maxLength(100)]],
@@ -47,31 +52,26 @@ export class CreateTaskComponent implements OnInit {
       this.workspaceMemberList = data;
     });
 
-    this.assignedMembers = [];
-  }
-
-  showAlert(error: string){
-    Swal.fire({
-      icon: 'error',
-      title: error,
-      showClass: {
-        popup: 'animate__animated animate__fadeInDown'
-      },
-      hideClass: {
-        popup: 'animate__animated animate__fadeOutUp'
-      }
+    this.taskServise.getStatusTask().subscribe((statList: TaskStatus[]) => {
+      this.statusList = statList;
+    });
+    
+    this.taskServise.getWorkerRole().subscribe((role: TaskWorkerRole[]) => {
+      this.taskRole = role;
     })
+
+    this.assignedMembers = [];
   }
 
   CreateNewTask(): void{
     if(this.assignedMembers.some(e => e.userId == null || e.roleTagId == null))
     {
-      this.showAlert("Fill all fields");
+      this.alertService.errorMessage("Fill all fields");
       return;
     }
+    console.log(this.assignedMembers)
     if(this.taskForm.valid){
       this.createTask = this.taskForm.value;
-
       this.createTask.workspaceId = this.workspaceId;
       this.createTask.statusId = this.selectedStatus;
       this.createTask.assignedUsers = this.assignedMembers;
@@ -80,27 +80,7 @@ export class CreateTaskComponent implements OnInit {
           this.dialog.closeAll();
         },
         err => {
-          let errorMessage: string = '';
-          if(err.error.errors && typeof err.error.errors === 'object'){
-            const errors = err.error.errors;
-
-            for(let key in errors){
-              for(let indexError in errors[key]){
-                errorMessage += errors[key][indexError] + '\n';
-              }
-            }
-
-            this.showAlert(errorMessage);
-
-            return;
-          }
-          if(err.error && typeof err.error === 'object'){
-            errorMessage += err.error.error;
-
-            this.showAlert(errorMessage);
-
-            return;
-          }
+          this.alertService.errorMessage(err);
         }
       );
     }
@@ -110,7 +90,6 @@ export class CreateTaskComponent implements OnInit {
   {
   if(this.assignedMembers.length < this.workspaceMemberList.length)
     this.assignedMembers.unshift(new AssignedMember());
-    console.log(this.assignedMembers);
   }
 
   DeAssignMember(i: number) {

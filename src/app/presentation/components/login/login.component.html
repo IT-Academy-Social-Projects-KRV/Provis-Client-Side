@@ -12,14 +12,14 @@
                     <p class="form-title">Login</p>
                     <mat-form-field appearance="fill">
                         <mat-label>Email</mat-label>
-                        <input type="email" matInput placeholder="Your email" #Email maxlength=50 formControlName="Email" required>
-                        <mat-error *ngIf="loginForm.controls['Email'].invalid && loginForm.controls['Email'].touched">Invalid email</mat-error>
+                        <input type="email" matInput placeholder="Your email" #email maxlength=50 formControlName="email" required>
+                        <mat-error *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched">Invalid email</mat-error>
                     </mat-form-field>
 
                     <mat-form-field appearance="fill">
                         <mat-label>Password</mat-label>
-                        <input type="password" matInput  #Password maxlength=50 formControlName="Password" required>                           
-                    </mat-form-field > 
+                        <input type="password" matInput  #password maxlength=50 formControlName="password" required>
+                    </mat-form-field >
                     <div class="forgot-pass">
                         <div>
                             <input type="checkbox">
@@ -31,6 +31,6 @@
                 </div>
                 </form>
 
-        </div>    
+        </div>
     </div>
 </div>
