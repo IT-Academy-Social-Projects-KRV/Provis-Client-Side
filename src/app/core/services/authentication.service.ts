@@ -4,7 +4,11 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserRegister } from '../models/user/userRegister';
 import { map, Observable, of } from 'rxjs';
 import { UserLogin } from '../models/user/userLogin';
-import { loginUrl, logoutUrl, refreshTokenUrl, registerUrl, twoStepVerificationUrl } from 'src/app/configs/api-endpoints';
+import { loginUrl,
+  logoutUrl,
+  refreshTokenUrl,
+  registrationUrl,
+  twoStepVerificationUrl } from 'src/app/configs/api-endpoints';
 import { UserAuthResponse } from '../models/user/userAuthResponse';
 import { UserInfo } from '../models/user/userInfo';
 import { UserTwoFactor } from '../models/user/userTwoFactor';
@@ -20,11 +24,11 @@ export class AuthenticationService {
   private readonly userRole: string = 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role';
 
   private jwtHelperService = new JwtHelperService();
-  private readonly registerUrl = registerUrl;
+  private readonly registrationUrl = registrationUrl;
   private readonly loginUrl = loginUrl;
   private readonly refreshTokenUrl = refreshTokenUrl;
   private readonly logoutUrl = logoutUrl;
-  private readonly twoStepLoginUrl = twoStepVerificationUrl;
+  private readonly twoStepVerificationUrl = twoStepVerificationUrl;
 
   public currentUser: UserInfo;
 
@@ -42,7 +46,7 @@ export class AuthenticationService {
 
   public register(user: UserRegister): Observable<void> {
 
-    return this.http.post<void>(this.registerUrl, user);
+    return this.http.post<void>(this.registrationUrl, user);
   }
 
   public login(user: UserLogin): Observable<void> {
@@ -65,7 +69,7 @@ export class AuthenticationService {
   }
 
   public twoStepLogin(twoFactor: UserTwoFactor): Observable<void> {
-    return this.http.post<UserAuthResponse>(this.twoStepLoginUrl, twoFactor).pipe(map((tokens: UserAuthResponse) => {
+    return this.http.post<UserAuthResponse>(this.twoStepVerificationUrl, twoFactor).pipe(map((tokens: UserAuthResponse) => {
 
       this.setTokensInLocalStorage(tokens);
     }));
