@@ -6,8 +6,8 @@
   </mat-expansion-panel-header>
   <div>
     <div class="task-card-block">
-  
-      <div class="example-container">
+
+      <div class="example-container scroll-todo">
         <div class="task-status todo-border">
           <span>To do</span>
           <span>({{(statusTasks.tasks[1] || []).length}})</span>
@@ -21,7 +21,7 @@
           class="example-list"
           (cdkDropListDropped)="drop($event)">
           <div class="example-box todo id-{{item.id}}" *ngFor="let item of statusTasks.tasks[1] || []" cdkDrag>
-            <span class="worker-status">{{workerStatus[item.workerRoleId]}}</span>
+            <span class="worker-status worker-todo">{{workerStatus[item.workerRoleId]}}</span>
             <span class="task-title">{{item.name}}</span>
             <div class="task-info">
               <span>Deadline: {{item.deadline | date:'dd.MM.yyyy'}}</span>
@@ -29,8 +29,8 @@
           </div>
         </div>
       </div>
-      
-      <div class="example-container">
+
+      <div class="example-container scroll-progress">
         <div class="task-status progress-border">
           <span>In progress</span>
           <span>({{(statusTasks.tasks[2] || []).length}})</span>
@@ -44,7 +44,7 @@
           class="example-list"
           (cdkDropListDropped)="drop($event)">
           <div class="example-box progress" *ngFor="let item of statusTasks.tasks[2] || []" cdkDrag>
-            <span class="worker-status">{{workerStatus[item.workerRoleId]}}</span>
+            <span class="worker-status worker-progress">{{workerStatus[item.workerRoleId]}}</span>
             <span class="task-title">{{item.name}}</span>
             <div class="task-info">
               <span>Deadline: {{item.deadline | date:'dd.MM.yyyy'}}</span>
@@ -52,8 +52,8 @@
           </div>
         </div>
       </div>
-  
-      <div class="example-container">
+
+      <div class="example-container scroll-review">
         <div class="task-status review-border">
           <span>In review</span>
           <span>({{(statusTasks.tasks[3] || []).length}})</span>
@@ -67,7 +67,7 @@
           class="example-list"
           (cdkDropListDropped)="drop($event)">
           <div class="example-box review" *ngFor="let item of statusTasks.tasks[3] || []" cdkDrag>
-            <span class="worker-status">{{workerStatus[item.workerRoleId]}}</span>
+            <span class="worker-status worker-review">{{workerStatus[item.workerRoleId]}}</span>
             <span class="task-title">{{item.name}}</span>
             <div class="task-info">
               <span>Deadline: {{item.deadline | date:'dd.MM.yyyy'}}</span>
@@ -75,8 +75,8 @@
           </div>
         </div>
       </div>
-  
-      <div class="example-container">
+
+      <div class="example-container scroll-completed">
         <div class="task-status completed-border">
           <span>Completed</span>
           <span>({{(statusTasks.tasks[4] || []).length}})</span>
@@ -90,7 +90,7 @@
           class="example-list"
           (cdkDropListDropped)="drop($event)">
           <div class="example-box completed" *ngFor="let item of statusTasks.tasks[4] || []" cdkDrag>
-            <span class="worker-status">{{workerStatus[item.workerRoleId]}}</span>
+            <span class="worker-status worker-completed">{{workerStatus[item.workerRoleId]}}</span>
             <span class="task-title">{{item.name}}</span>
             <div class="task-info">
               <span>Deadline: {{item.deadline | date:'dd.MM.yyyy'}}</span>
@@ -98,8 +98,6 @@
           </div>
         </div>
       </div>
-
-
     </div>
   </div>
 </mat-expansion-panel>

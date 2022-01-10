@@ -50,8 +50,8 @@ mat-card:hover {
 }
 .card {
     background: white;
-    border: 1px solid #666ec3;
     padding: 0px;
+    border-radius: 6px;
 }
 .footer-card-block {
     font-size: 11px;
@@ -66,10 +66,11 @@ mat-card:hover {
 .header-card-block {
     background: #666ec3;
     padding: 15px 15px;
-    padding: 15px 15px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    min-height: 112px;
+    border-radius: 4px;
 }
 .header-card-block span {
     color: #ddd;
@@ -79,10 +80,16 @@ mat-card:hover {
     font-size: 22px;
     color: white;
 }
+.card mat-card-subtitle {
+    text-align: end;
+}
 .card-title h3 {
     min-height: 50px;
+    font-size: 13px;
     line-height: 1.5;
     margin-bottom: 0px;
+    text-transform: uppercase;
+    letter-spacing: 0.75px;
 }
 .mat-card-subtitle {
     margin-bottom: 0px;

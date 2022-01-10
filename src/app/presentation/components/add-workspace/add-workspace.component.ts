@@ -19,21 +19,21 @@ export class AddWorkspaceComponent implements OnInit {
 
   constructor(
     private fb:FormBuilder,
-    private service: WorkspaceService, 
+    private service: WorkspaceService,
     private router: Router,
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<WorkspaceListComponent>)
-    {     
-      this.addwsform=fb.group({        
+    {
+      this.addwsform=fb.group({
       "Name": ['',[Validators.required]],
-      "Description" : ['',[Validators.required]]               
+      "Description" : ['',[Validators.required]]
       })
     }
 
   ngOnInit() {}
 
   submit()
-  {  
+  {
     if(this.addwsform.valid){
       this.createWorkspace = Object.assign({}, this.addwsform.value);
       this.service.CreateWorkspace(this.createWorkspace).subscribe(
