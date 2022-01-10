@@ -24,7 +24,7 @@ export class CreateTaskComponent implements OnInit {
   statusList: TaskStatus[];
   taskRole: TaskWorkerRole[];
   selectedStatus: number;
-  
+
   workspaceMemberList: WorkspaceMembers[];
   public assignedMembers: AssignedMember[];
   id : string;
@@ -52,7 +52,7 @@ export class CreateTaskComponent implements OnInit {
     this.taskServise.getStatusTask().subscribe((statList: TaskStatus[]) => {
       this.statusList = statList;
     });
-    
+
     this.taskServise.getWorkerRole().subscribe((role: TaskWorkerRole[]) => {
       this.taskRole = role;
     })
