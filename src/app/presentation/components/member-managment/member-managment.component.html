@@ -18,7 +18,7 @@
           <div>
               <mat-form-field appearance="fill">
                 <mat-label>Member role</mat-label>
-                <mat-select [(value)]="item.role" [disabled]="item.role == 'Owner' || item.id == authSrvice.currentUser.Id">
+                <mat-select [(value)]="item.role" [disabled]="item.role == 'Owner' || item.id == authSrvice.currentUser.id">
                   <mat-option *ngFor="let role of roles" [value]="role.nameRole"
                   (onSelectionChange)="chandeWorkspaceRole(role.roleId, item.role, item.id)"
                   [disabled]="role.nameRole=='Owner'">

@@ -38,7 +38,7 @@
 .user-menu-button:hover{
     opacity: 1;
 }
-.user-menu-button div{   
+.user-menu-button div{
     display: flex;
     flex-direction: row;
 }

@@ -24,7 +24,7 @@ export class TasklistComponent implements OnInit {
     2:[],
     3:[],
     4:[]
-  },  
+  },
     userId: ''};
 
   workerStatus: { [key: string]: string } = {
@@ -33,14 +33,14 @@ export class TasklistComponent implements OnInit {
     '3': 'reviewer',
     'null': ''
   };
-  
+
   constructor(private userTask: TaskService, private workspaceService: WorkspaceService ) { }
 
   ngOnInit() {}
 
   showUserTasks(userId: string) {
     this.userTask.getUserTask(userId, this.workspaceId).subscribe((data: {tasks: Tasks, userId: string}) => {
-      this.statusTasks = {tasks: {...this.statusTasks.tasks,...data.tasks}, userId: data.userId}    
+      this.statusTasks = {tasks: {...this.statusTasks.tasks,...data.tasks}, userId: data.userId}
     })
     console.log(this.user);
   }
@@ -59,22 +59,22 @@ export class TasklistComponent implements OnInit {
       );
     }
 
-      switch(event.container.id) { 
-      case "1": { 
+      switch(event.container.id) {
+      case "1": {
         taskInfo = this.statusTasks.tasks[1][event.currentIndex];
-        break; 
-      } 
-      case "2": { 
-        taskInfo = this.statusTasks.tasks[2][event.currentIndex];
-        break; 
-      } 
-      case "3": { 
-        taskInfo = this.statusTasks.tasks[3][event.currentIndex];
-        break; 
+        break;
       }
-      case "4": { 
+      case "2": {
+        taskInfo = this.statusTasks.tasks[2][event.currentIndex];
+        break;
+      }
+      case "3": {
+        taskInfo = this.statusTasks.tasks[3][event.currentIndex];
+        break;
+      }
+      case "4": {
         taskInfo = this.statusTasks.tasks[4][event.currentIndex];
-        break; 
+        break;
       }
     }
 

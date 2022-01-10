@@ -22,17 +22,17 @@ export class CreateTaskComponent implements OnInit {
   statusList: TaskStatus[];
   taskRole: TaskWorkerRole[];
   selectedStatus: number;
-  
+
   workspaceMemberList: WorkspaceMembers[];
   public assignedMembers: AssignedMember[];
   id : string;
   demoForm: FormGroup;
 
-  constructor(private workspaceService: WorkspaceService, 
-    private fb:FormBuilder, 
-    private alertService: AlertService, 
-    private ws: WorkspaceService, 
-    public dialog: MatDialog, 
+  constructor(private workspaceService: WorkspaceService,
+    private fb:FormBuilder,
+    private alertService: AlertService,
+    private ws: WorkspaceService,
+    public dialog: MatDialog,
     private taskServise: TaskService) {
     this.taskForm=fb.group({
       "Name":["",[Validators.maxLength(50)]],
@@ -55,7 +55,7 @@ export class CreateTaskComponent implements OnInit {
     this.taskServise.getStatusTask().subscribe((statList: TaskStatus[]) => {
       this.statusList = statList;
     });
-    
+
     this.taskServise.getWorkerRole().subscribe((role: TaskWorkerRole[]) => {
       this.taskRole = role;
     })
@@ -103,6 +103,6 @@ export class CreateTaskComponent implements OnInit {
 
   Ok()
   {
-    
+
   }
 }

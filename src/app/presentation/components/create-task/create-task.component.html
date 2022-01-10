@@ -7,7 +7,7 @@
 
       <mat-form-field hintLabel="Max 50 characters" appearance="fill">
         <mat-label>Name</mat-label>
-        <input type="text" matInput placeholder="Task name" #Name maxlength=50 formControlName="Name" required> 
+        <input type="text" matInput placeholder="Task name" #Name maxlength=50 formControlName="Name" required>
         <mat-error *ngIf="taskForm.controls['Name'].invalid && taskForm.controls['Name'].touched">Invalid name</mat-error>
       </mat-form-field>
 
