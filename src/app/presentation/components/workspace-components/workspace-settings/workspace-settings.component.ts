@@ -59,7 +59,7 @@ export class WorkspaceSettingsComponent implements OnInit {
         'Yes, leave!'))
       {
       this.alertService.successMessage();
-      this.workspaceServise.LeaveFromWorkspace(this.workspaceId).subscribe(
+      this.workspaceServise.leaveFromWorkspace(this.workspaceId).subscribe(
         () => { 
           this.router.navigate(['/user/workspaces']);
         })
