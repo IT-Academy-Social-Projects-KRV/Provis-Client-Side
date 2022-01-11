@@ -1,18 +1,15 @@
-import { userWorkspaceInfoUrl } from './../../configs/api-endpoints';
+import { workspaceUrl } from './../../configs/api-endpoints';
 import { WorkspaceInfo } from '../models/workspace/workspaceInfo';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { answerInviteUserUrl,
-         userInviteList,
-         userProfileUrl,
-         sendConfirmEmailUrl,
+import { inviteUrl,
+         invitesUrl,
+         infoUrl,
          confirmEmailUrl,
-         changeUserInfoUrl,
-         checkIsTwoFactorVerificationUrl,
-         sendTwoFactorCodeUrl,
-         change2fUrl,
-         userImageUrl,
-         activeInvitesUrl} from 'src/app/configs/api-endpoints';
+         twoFactorVerificationUrl,
+         twoFactorCodeUrl,
+         imageUrl,
+         activeInviteUrl} from 'src/app/configs/api-endpoints';
 import { Observable, pipe } from 'rxjs';
 import { UserInvite } from '../models/user/userInvite';
 import { UserInfoActiveInvites} from '../models/user/userInfoActiveInvites';
@@ -26,18 +23,15 @@ import { UserChangeTwoFactor } from '../models/user/userChangeTwoFactor';
 })
 export class UserService {
 
-  private readonly getUserInviteList = userInviteList;
-  private readonly answerUserInvite = answerInviteUserUrl;
-  private readonly userProfileUrl = userProfileUrl;
-  private readonly activeInvitesUrl = activeInvitesUrl;
-  private readonly sendConfirmEmailUrl = sendConfirmEmailUrl;
+  private readonly invitesUrl = invitesUrl;
+  private readonly inviteUrl = inviteUrl;
+  private readonly infoUrl = infoUrl;
+  private readonly activeInviteUrl = activeInviteUrl;
   private readonly confirmEmailUrl = confirmEmailUrl;
-  private readonly changeUserInfoUrl = changeUserInfoUrl;
-  private readonly checkIsTwoFactorVerificationUrl = checkIsTwoFactorVerificationUrl;
-  private readonly changeTwoFacotrUrl = change2fUrl;
-  private readonly sendTwoFactorCodeUrl = sendTwoFactorCodeUrl;
-  private readonly userImageUrl = userImageUrl;
-  private readonly userWorkspaceInfoUrl = userWorkspaceInfoUrl;
+  private readonly twoFactorVerificationUrl = twoFactorVerificationUrl;
+  private readonly twoFactorCodeUrl = twoFactorCodeUrl;
+  private readonly imageUrl = imageUrl;
+  private readonly workspaceUrl = workspaceUrl;
 
   private httpOption = {
     headers: new HttpHeaders({
@@ -48,11 +42,11 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUserProfile(): Observable<UserProfile>{
-    return this.http.get<UserProfile>(this.userProfileUrl, this.httpOption);
+    return this.http.get<UserProfile>(this.infoUrl, this.httpOption);
   }
 
   getActiveInvites():Observable<UserInfoActiveInvites>{
-    return this.http.get<UserInfoActiveInvites>(this.activeInvitesUrl,this.httpOption);
+    return this.http.get<UserInfoActiveInvites>(this.activeInviteUrl,this.httpOption);
   }
 
   private getToken(): any{
@@ -60,19 +54,19 @@ export class UserService {
   }
 
   getUserInvite(): Observable<UserInvite[]>{
-    return this.http.get<UserInvite[]>(this.getUserInviteList, this.httpOption);
+    return this.http.get<UserInvite[]>(this.invitesUrl, this.httpOption);
   }
 
   denyUserInvite(inviteId:number):Observable<void>{
-    return this.http.put<void>(this.answerUserInvite+"/"+inviteId+"/deny", {}, this.httpOption);
+    return this.http.put<void>(this.inviteUrl + "/" + inviteId + "/deny", {}, this.httpOption);
   }
 
   acceptUserInvite(inviteId:number):Observable<void>{
-    return this.http.put<void>(this.answerUserInvite+"/"+inviteId+"/accept", {}, this.httpOption);
+    return this.http.put<void>(this.inviteUrl + "/" + inviteId + "/accept", {}, this.httpOption);
   }
 
   sendConfirmEmail(){
-    return this.http.get<void>(this.sendConfirmEmailUrl, this.httpOption);
+    return this.http.get<void>(this.confirmEmailUrl, this.httpOption);
   }
 
   confirmEmail(confirmationCode: ConfirmEmailCode):Observable<void>{
@@ -80,21 +74,21 @@ export class UserService {
   }
 
   updateUserInfo(changeUserInfo: UserChangeProfile):Observable<void>{
-    return this.http.put<void>(this.changeUserInfoUrl, changeUserInfo, this.httpOption);
+    return this.http.put<void>(this.infoUrl, changeUserInfo, this.httpOption);
   }
 
   changeTwoFactorVerification(status: UserChangeTwoFactor): Observable<void>{
-    return this.http.post<void>(this.changeTwoFacotrUrl, status, this.httpOption);
+    return this.http.post<void>(this.twoFactorVerificationUrl, status, this.httpOption);
   }
 
   checkIsTwoFactorVerification(): Observable<boolean>{
-    return this.http.get<boolean>(this.checkIsTwoFactorVerificationUrl, this.httpOption);
+    return this.http.get<boolean>(this.twoFactorVerificationUrl, this.httpOption);
   }
 
   sendTwoFactorCode(): Observable<void>{
-    return this.http.get<void>(this.sendTwoFactorCodeUrl, this.httpOption);
+    return this.http.get<void>(this.twoFactorCodeUrl, this.httpOption);
   }
-  
+
   getUserImage(): Observable<File>{
 
     const options = {
@@ -102,7 +96,7 @@ export class UserService {
       responseType: 'Blob' as 'json'
     }
 
-    return this.http.get<File>(this.userImageUrl, options);
+    return this.http.get<File>(this.imageUrl, options);
   }
 
   updateUserImage(image: File): Observable<void>{
@@ -110,10 +104,10 @@ export class UserService {
     const formData = new FormData();
     formData.append('image', image, image.name);
 
-    return this.http.put<void>(this.userImageUrl, formData, this.httpOption);
+    return this.http.put<void>(this.imageUrl, formData, this.httpOption);
   }
-  
+
   userWorkspaceInfo(workspaceId:number) :Observable<WorkspaceInfo> {
-    return this.http.get<WorkspaceInfo>(this.userWorkspaceInfoUrl + workspaceId + "/info", this.httpOption)
+    return this.http.get<WorkspaceInfo>(this.workspaceUrl + "/" + workspaceId + "/info", this.httpOption)
   }
 }
