@@ -15,6 +15,8 @@ import { WorkspaceChangeRole } from '../models/workspace/workspaceChangeRole';
 import { WorkspaceMembers } from '../models/workspace/workspaceMembers';
 import { WorkspaceInfoInvite } from '../models/workspace/workspaceInfoInvite';
 import { CreateWorkspace } from '../models/workspace/createWorkspace';
+import { WorkspaceInfo } from '../models/workspace/workspaceInfo';
+import { WorkspaceDescription } from 'src/app/core/models/workspace/WorkspaceDescription';
 
 @Injectable({
   providedIn: 'root',
@@ -77,5 +79,13 @@ export class WorkspaceService {
 
     public changeWorkspaceRole(body: WorkspaceChangeRole): Observable<void>{
         return this.http.put<void>(this.changeWorkspaceRoleUrl, body, this.httpOption);
+    }
+
+    public getWorkspaceInfo(workspaceId: number): Observable<WorkspaceInfo> {
+        return this.http.get<WorkspaceInfo>(this.workspaceServiceUrl + workspaceId + "/info", this.httpOption)
+    }
+
+    public getWorkspaceDecscription(workspaceId: number): Observable<WorkspaceDescription> {
+        return this.http.get<WorkspaceDescription>(this.workspaceServiceUrl + workspaceId + "/description", this.httpOption)
     }
 }
