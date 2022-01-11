@@ -60,6 +60,10 @@ export class WorkspaceService {
         return this.http.delete<void>(this.delUserWorksp+"/"+workspaceId+"/user/"+userId, this.httpOption);
     }
 
+    public leaveFromWorksp(workspaceId: number): Observable<void>{
+        return this.http.delete<void>(this.delUserWorksp+"/"+workspaceId+"/user", this.httpOption);
+    }
+
     public WorkspaceInviteInfo(workspaceId: number) {
         return this.http.get<WorkspaceInfoInvite[]>(this.activeInviteUrl + workspaceId + "/invite/active", this.httpOption);
     }
@@ -70,7 +74,6 @@ export class WorkspaceService {
 
     public CreateTask(task: CreateTask): Observable<void> {
         return this.http.post<void>(this.createTaskUrl, task, this.httpOption);
-
     }
 
     public changeWorkspaceRole(body: WorkspaceChangeRole): Observable<void>{
