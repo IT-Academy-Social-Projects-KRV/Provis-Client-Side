@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlternativeServiceOptions } from 'http2';
 import { UserRegister } from 'src/app/core/models/user/userRegister';
+import { AlertService } from 'src/app/core/services/alerts.service';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { SignInUpValidator } from 'src/app/core/validators/signInUpValidator';
 
@@ -19,7 +20,7 @@ export class RegistrationComponent implements OnInit {
   constructor(private fb:FormBuilder, 
     private service: AuthenticationService, 
     private router: Router, 
-    private alertService: AlternativeServiceOptions){
+    private alertService: AlertService){
       this.registerForm=fb.group({
           "Name":["",SignInUpValidator.getNameValidator(3,50)],
           "Surname":["",SignInUpValidator.getNameValidator(3,50)],
