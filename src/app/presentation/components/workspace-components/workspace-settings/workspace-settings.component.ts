@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { WorkspaceInviteComponent } from '../workspace-invite/workspace-invite.component';
 import { WorkspaceUpdateComponent } from '../workspace-update/workspace-update.component';
+import { AlertService } from 'src/app/core/services/alerts.service';
+import { WorkspaceService } from 'src/app/core/services/workspace.service';
 
 @Component({
   selector: 'app-workspace-settings',
@@ -17,7 +19,13 @@ export class WorkspaceSettingsComponent implements OnInit {
   protected routeSub: Subscription;
   workspaceId: number;
   workspace: WorkspaceInfo;
-  constructor(private route: ActivatedRoute, public dialog: MatDialog, private userService: UserService) { }
+  
+  constructor(private route: ActivatedRoute, 
+    public dialog: MatDialog,
+    private router: Router, 
+    private userService: UserService, 
+    private alertService: AlertService,
+    private workspaceServise: WorkspaceService,) {}
 
   ngOnInit() {
     this.route.parent?.params.subscribe(
@@ -43,4 +51,17 @@ export class WorkspaceSettingsComponent implements OnInit {
         dialogRef.close();
     });
   }
+
+  async leave (){
+
+      if  (await this.alertService.confirmMessage('You will be deleted from all workspace tasks!', 
+        'Are you sure?', 
+        'Yes, leave!'))
+      {
+      this.workspaceServise.leaveFromWorksp(this.workspaceId).subscribe(
+        () => { 
+          this.router.navigate(['/user/workspaces']);
+        })
+      }
+    }
 }
