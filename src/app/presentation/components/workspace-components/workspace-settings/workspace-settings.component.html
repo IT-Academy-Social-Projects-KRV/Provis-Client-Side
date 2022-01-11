@@ -2,3 +2,10 @@
   <span> Workspace settings</span>
 </div>
 <br><div><button mat-raised-button color="Primary" (click)='modalUpdate()'>Update</button></div>
+<br>
+<div>
+  <span>
+    <button [disabled]="!(workspace.role != 'Owner')" 
+      mat-raised-button class="warning" (click)="leave()">Leave</button>
+  </span>
+</div>
