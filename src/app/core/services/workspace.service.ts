@@ -60,7 +60,7 @@ export class WorkspaceService {
         return this.http.delete<void>(this.delUserWorksp+"/"+workspaceId+"/user/"+userId, this.httpOption);
     }
 
-    public leaveFromWorksp(workspaceId: number): Observable<void>{
+    public LeaveFromWorkspace(workspaceId: number): Observable<void>{
         return this.http.delete<void>(this.delUserWorksp+"/"+workspaceId+"/user", this.httpOption);
     }
 
