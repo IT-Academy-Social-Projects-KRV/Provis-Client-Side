@@ -19,6 +19,11 @@ body::-webkit-scrollbar {
     body::-webkit-scrollbar-thumb {
     background-color: #3b394a
 }
+.header-sticky {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
 .font-weight-600 {
     font-weight: 600;
 }
@@ -177,11 +182,18 @@ a.link-button:hover{
 }
 .user-page {
     display: flex;
+    align-items: flex-start;
+}
+.sidebar {
+    position: sticky;
+    top: 72px;
 }
 .user-right-side {
     width: calc(100vw - 350px);
     margin: 0px;
     padding: 30px;
+    display: flex;
+    flex-direction: column;
 }
 button.additional {
     background: rgb(77 84 151);
