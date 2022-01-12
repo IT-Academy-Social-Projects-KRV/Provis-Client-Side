@@ -1,10 +1,10 @@
 import { WorkspaceUpdate } from 'src/app/core/models/workspace/workspaceUpdate';
 import { WorkspaceInfo } from 'src/app/core/models/workspace/workspaceInfo';
 import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
-import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import { WorkspaceDescription } from 'src/app/core/models/workspace/WorkspaceDescription';
+import { DataShareService } from 'src/app/core/services/DataShare.service';
 
 @Component({
   selector: 'app-workspace-update',
@@ -14,14 +14,15 @@ import { WorkspaceDescription } from 'src/app/core/models/workspace/WorkspaceDes
 export class WorkspaceUpdateComponent implements OnInit {
 
   updwsform: FormGroup;
+  workspaceInfo: WorkspaceInfo;
   @Input() workspaceId: number;
   updateWorkspace: WorkspaceUpdate = new WorkspaceUpdate();
   @Output() public isUpdated = new EventEmitter<boolean>(false);
 
   constructor(formBuilder: FormBuilder, 
-    private service: WorkspaceService, 
-    private router: Router,
-    private workspaceService: WorkspaceService) {
+    private service: WorkspaceService,
+    private workspaceService: WorkspaceService,
+    private dataShareService: DataShareService) {
     this.updwsform = formBuilder.group({
       "Name": ['', [Validators.required]],
       "Description": ['', [Validators.required]]
@@ -30,7 +31,7 @@ export class WorkspaceUpdateComponent implements OnInit {
 
   ngOnInit() {
 
-    this.workspaceService.getWorkspaceInfo(this.workspaceId).subscribe((data: WorkspaceInfo) => {
+    this.dataShareService.workspaceInfo.subscribe((data: WorkspaceInfo) => {
       this.updateWorkspace.workspaceId = data.id;
       this.updateWorkspace.Name = data.name;
       this.updwsform.controls['Name'].setValue(this.updateWorkspace.Name);

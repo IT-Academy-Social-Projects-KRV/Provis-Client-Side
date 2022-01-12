@@ -76,9 +76,9 @@ export class WorkspaceMemberManagmentComponent implements OnInit {
       }
   }
 
-  chandeWorkspaceRole(roleId: number, currentRole: string, userId: string) {
+  chandeWorkspaceRole(roleId: number, currentRole: number, userId: string) {
 
-    if(this.roles[this.roles.findIndex(x=>x.roleId == roleId)].nameRole != currentRole)
+    if(roleId != currentRole)
     {
       let body = new WorkspaceChangeRole()
       body.roleId = roleId;
