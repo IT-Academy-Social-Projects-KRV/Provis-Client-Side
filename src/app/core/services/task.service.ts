@@ -13,7 +13,6 @@ import { TaskWorkerRole } from '../models/task/taskWorkerRoles';
 
 export class TaskService {
 
-
   private readonly taskServiceUrl = taskServiceUrl;
   private readonly statusesUrl = statusesUrl;
   private readonly rolesUrl = rolesUrl;
