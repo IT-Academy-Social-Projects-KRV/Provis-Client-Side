@@ -1,6 +1,8 @@
+import { TaskStatus } from 'src/app/core/models/task/taskStatus';
+import { TaskWorkerRole } from 'src/app/core/models/task/taskWorkerRoles';
+import { colorWorkerStatus, kanbanColors } from './../../../../../configs/colorsForWorkspaceCards';
 import { TaskInfo } from '../../../../../core/models/task/taskInfo';
 import { Tasks } from '../../../../../core/models/task/tasks';
-import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import { TaskService } from '../../../../../core/services/task.service';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
@@ -18,36 +20,38 @@ export class WorkspaceUserTaskListComponent implements OnInit {
   @ViewChild(MatAccordion) accordion: MatAccordion;
   @Input() public workspaceId: number;
   @Input() public user: WorkspaceMembers;
+  @Input() public index: number;
 
-  statusTasks:{tasks: Tasks, userId: string} = {tasks : {
-    1:[],
-    2:[],
-    3:[],
-    4:[]
-  },
-    userId: ''};
+  taskStatuses: Array<TaskStatus>;
+  workerStatus: TaskWorkerRole[];
+  statusColor = colorWorkerStatus;
+  kanbanClasses = kanbanColors;
+  kanban: TaskStatus[] = [];
+  listStatus: string[] = [];
+  statusTasks:{tasks: Tasks, userId: string} = {tasks:{}, userId:''};
 
-  workerStatus: { [key: string]: string } = {
-    '1': 'worker',
-    '2': 'support',
-    '3': 'reviewer',
-    'null': ''
-  };
+  constructor(private userTask: TaskService) { }
 
-  constructor(private userTask: TaskService, private workspaceService: WorkspaceService ) { }
-
-  ngOnInit() {}
+  ngOnInit() {
+    this.userTask.getStatusTask().subscribe(data => {
+      this.kanban = data;
+      data.map(element => {
+        this.listStatus.push(this.index + '_' + element.id.toString());
+        this.statusTasks.tasks[element.id] = [];
+      });
+    });
+    this.userTask.getWorkerRole().subscribe(data => {
+      this.workerStatus = data;
+    });
+  }
 
   showUserTasks(userId: string) {
     this.userTask.getUserTask(userId, this.workspaceId).subscribe((data: {tasks: Tasks, userId: string}) => {
-      this.statusTasks = {tasks: {...this.statusTasks.tasks,...data.tasks}, userId: data.userId}
-    })
-    console.log(this.user);
+      this.statusTasks = {tasks: {...this.statusTasks.tasks,...data.tasks}, userId: data.userId};
+    });
   }
 
   drop(event: CdkDragDrop<TaskInfo[]>) {
-    let taskInfo = new TaskInfo;
-    console.log(this.statusTasks);
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -58,27 +62,12 @@ export class WorkspaceUserTaskListComponent implements OnInit {
         event.currentIndex,
       );
     }
-
-      switch(event.container.id) {
-      case "1": {
-        taskInfo = this.statusTasks.tasks[1][event.currentIndex];
-        break;
-      }
-      case "2": {
-        taskInfo = this.statusTasks.tasks[2][event.currentIndex];
-        break;
-      }
-      case "3": {
-        taskInfo = this.statusTasks.tasks[3][event.currentIndex];
-        break;
-      }
-      case "4": {
-        taskInfo = this.statusTasks.tasks[4][event.currentIndex];
-        break;
-      }
-    }
-
-    let taskTo = {workspaceId: this.workspaceId, statusId: +event.container.id, taskId: taskInfo.id};
+    let columnId = event.container.id.replace(this.index + '_','');
+    let taskTo = {
+      workspaceId: this.workspaceId,
+      statusId: +columnId,
+      taskId: this.statusTasks.tasks[+columnId][event.currentIndex].id
+    };
     this.userTask.updateStatusTask(taskTo).subscribe();
   }
 }

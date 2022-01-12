@@ -13,10 +13,9 @@ import { TaskWorkerRole } from '../models/task/taskWorkerRoles';
 
 export class TaskService {
 
-
   private readonly userTaskUrl = userTaskUrl;
   private readonly taskStatusesUrl = getTaskStatuses;
-  private readonly workerRoleUri = getTaskWorkerRoles;
+  private readonly workerRoleUrl = getTaskWorkerRoles;
 
   private httpOption = {
     headers: new HttpHeaders({
@@ -43,6 +42,6 @@ export class TaskService {
   }
 
   getWorkerRole(){
-    return this.http.get<TaskWorkerRole[]>(this.workerRoleUri, this.httpOption);
+    return this.http.get<TaskWorkerRole[]>(this.workerRoleUrl, this.httpOption);
   }
 }
