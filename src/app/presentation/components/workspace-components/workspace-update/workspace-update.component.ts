@@ -32,6 +32,7 @@ export class WorkspaceUpdateComponent implements OnInit {
   ngOnInit() {
 
     this.dataShareService.workspaceInfo.subscribe((data: WorkspaceInfo) => {
+      this.workspaceInfo = data;
       this.updateWorkspace.workspaceId = data.id;
       this.updateWorkspace.Name = data.name;
       this.updwsform.controls['Name'].setValue(this.updateWorkspace.Name);
@@ -45,10 +46,13 @@ export class WorkspaceUpdateComponent implements OnInit {
 
   submit() {
     if(this.updwsform.valid){
+
       this.updateWorkspace.Name=this.updwsform.controls['Name'].value;
       this.updateWorkspace.Description=this.updwsform.controls['Description'].value;
-      this.service.UpdateWorkspace(this.updateWorkspace).subscribe(
-        () => {
+
+      this.service.UpdateWorkspace(this.updateWorkspace).subscribe(() => {
+        this.workspaceInfo.name = this.updateWorkspace.Name;
+        this.dataShareService.nextWorkspaceInfo(this.workspaceInfo);
         this.isUpdated.emit(true);
        });
     }
