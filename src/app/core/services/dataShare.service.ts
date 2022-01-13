@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map, mergeMap, Observable, Subject, switchMap } from 'rxjs';
+import { BehaviorSubject, map, mergeMap, Observable, Subject, switchMap } from 'rxjs';
 import { WorkspaceInfo } from '../models/workspace/workspaceInfo';
 import { WorkspaceRole } from '../models/workspace/workspaceRole';
 
@@ -8,15 +8,24 @@ import { WorkspaceRole } from '../models/workspace/workspaceRole';
 })
 export class DataShareService {
 
-  public workspaceInfo = new Subject<WorkspaceInfo>();
-  public work = this.workspaceInfo.asObservable();
-  public workspaceRoles = new Subject<WorkspaceRole[]>();
+  private workspaceInfoSub = new BehaviorSubject<WorkspaceInfo>(new WorkspaceInfo());
+  public workspaceInfo = this.workspaceInfoSub.asObservable();
+
+  private workspaceRolesSub = new BehaviorSubject<WorkspaceRole[]>([new WorkspaceRole()]);
+  public workspaceRoles = this.workspaceRolesSub.asObservable();
 
   constructor() { }
 
-  public getWorkspaceRoleName(roleId: number): Observable<string> {
-    return this.workspaceRoles.asObservable().pipe(map(data=>{
-      console.log(roleId);
+  public nextWorkspaceInfo(workspaceInfo: WorkspaceInfo): void {
+    this.workspaceInfoSub.next(workspaceInfo);
+  }
+
+  public nextWorkspaceRoles(workspaceRoles: WorkspaceRole[]): void {
+    this.workspaceRolesSub.next(workspaceRoles);
+  }
+
+  public getworkspaceRoleName(roleId: number): Observable<string> {
+    return this.workspaceRoles.pipe(map(data => {
       return data[data.findIndex(x=>x.id == roleId)].name;
     }));
   }

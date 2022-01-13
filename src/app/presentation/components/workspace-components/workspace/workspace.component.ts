@@ -20,9 +20,8 @@ export class WorkspaceComponent implements OnInit {
       let workspaceId = Number(this.route.snapshot.paramMap.get('id'));
 
       this.workspaceService.getWorkspaceInfo(workspaceId).subscribe((data: WorkspaceInfo) => {
-        this.dataShareSrervice.workspaceInfo.next(data);
+        this.dataShareSrervice.nextWorkspaceInfo(data);
       });
     });
   }
-  
 }

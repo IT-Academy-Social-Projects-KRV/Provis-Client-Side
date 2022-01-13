@@ -15,7 +15,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.workspaceService.getWorkspaceRoles().subscribe((data: WorkspaceRole[]) =>{
-      this.dataShareService.workspaceRoles.next(data);
+      this.dataShareService.nextWorkspaceRoles(data);
     })
 
     if(this.router.url=='/user')
