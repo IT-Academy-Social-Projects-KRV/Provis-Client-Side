@@ -23,7 +23,7 @@ export class WorkspaceTaskListComponent implements OnInit {
   userNull = {
     id:"",
     userName: "Unassigned task",
-    role:'1'
+    role: 1
   };
 
   constructor(public dialog: MatDialog, private userTask: TaskService, private route: ActivatedRoute, private workspaceService: WorkspaceService) { }

@@ -1,5 +1,5 @@
 export class WorkspaceMembers {
     id: string;
     userName: string;
-    role: string;
+    role: number;
 }
