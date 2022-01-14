@@ -5,7 +5,7 @@
 <br>
 <div>
   <span>
-    <button [disabled]="!(workspace.role != 'Owner')" 
+    <button [disabled]="(workspace.role == 1)" 
       mat-raised-button class="warning" (click)="leave()">Leave</button>
   </span>
 </div>
