@@ -50,7 +50,6 @@ export class WorkspaceSettingsComponent implements OnInit {
   }
 
   async leave (){
-
       if  (await this.alertService.confirmMessage('You will be deleted from all workspace tasks!', 
         'Are you sure?', 
         'Yes, leave!'))

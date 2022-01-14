@@ -3,7 +3,7 @@ import { WorkspaceInfo } from 'src/app/core/models/workspace/workspaceInfo';
 import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
-import { WorkspaceDescription } from 'src/app/core/models/workspace/WorkspaceDescription';
+import { WorkspaceDescription } from 'src/app/core/models/workspace/workspaceDescription';
 import { DataShareService } from 'src/app/core/services/DataShare.service';
 
 @Component({
