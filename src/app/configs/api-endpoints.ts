@@ -14,7 +14,7 @@ export const workspaceUrl = workspaceServiceUrl + 'workspace';
 export const workspacesUrl = workspaceServiceUrl + 'workspaces';
 export const inviteUrl = workspaceServiceUrl + 'invite';
 export const changeWorkspaceRoleUrl = workspaceServiceUrl + 'role';
-export const workspaceUserRolesUrl = workspaceServiceUrl + 'roles';
+export const workspaceRolesUrl = workspaceServiceUrl + 'roles';
 
 export const userServiceUrl = baseUrl + '/User/';
 export const infoUrl = userServiceUrl + 'info';

@@ -1,5 +1,3 @@
-import { workspaceUserRolesUrl } from './../../configs/api-endpoints';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { WorkspaceUpdate } from '../models/workspace/workspaceUpdate';
 import { workspaceUrl,
@@ -7,7 +5,8 @@ import { workspaceUrl,
     workspacesUrl,
     inviteUrl,
     taskUrl,
-    changeWorkspaceRoleUrl } from 'src/app/configs/api-endpoints';
+    changeWorkspaceRoleUrl,
+    workspaceRolesUrl} from 'src/app/configs/api-endpoints';
 import { Observable } from 'rxjs';
 import { WorkspaceCard } from '../models/workspace/workspaceCard';
 import { InviteToWorkspace } from '../models/workspace/inviteToWorkspace';
@@ -16,7 +15,11 @@ import { WorkspaceChangeRole } from '../models/workspace/workspaceChangeRole';
 import { WorkspaceMembers } from '../models/workspace/workspaceMembers';
 import { WorkspaceInfoInvite } from '../models/workspace/workspaceInfoInvite';
 import { CreateWorkspace } from '../models/workspace/createWorkspace';
-import { workspaceUserRoles } from '../models/workspace/workspaceUserRole';
+import { WorkspaceInfo } from '../models/workspace/workspaceInfo';
+import { WorkspaceRole } from '../models/workspace/workspaceRole';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { WorkspaceDescription } from '../models/workspace/workspaceDescription';
+
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +32,7 @@ export class WorkspaceService {
     private readonly workspaceServiceUrl = workspaceServiceUrl;
     private readonly taskUrl = taskUrl;
     private readonly changeWorkspaceRoleUrl = changeWorkspaceRoleUrl;
-    private readonly workspaceUserRolesUrl = workspaceUserRolesUrl;
+    private readonly workspaceRolesUrl = workspaceRolesUrl;
 
     private httpOption = {
         headers: new HttpHeaders({
@@ -75,14 +78,21 @@ export class WorkspaceService {
 
     public CreateTask(task: CreateTask): Observable<void> {
         return this.http.post<void>(this.taskUrl, task, this.httpOption);
-
     }
 
     public changeWorkspaceRole(body: WorkspaceChangeRole): Observable<void>{
         return this.http.put<void>(this.changeWorkspaceRoleUrl, body, this.httpOption);
     }
 
-    public getAllWorkspaceUserRole() {
-        return this.http.get<workspaceUserRoles[]>(this.workspaceUserRolesUrl, this.httpOption);
+    public getWorkspaceInfo(workspaceId: number): Observable<WorkspaceInfo> {
+        return this.http.get<WorkspaceInfo>(this.workspaceServiceUrl + workspaceId + "/info", this.httpOption)
+    }
+
+    public getWorkspaceDecscription(workspaceId: number): Observable<WorkspaceDescription> {
+        return this.http.get<WorkspaceDescription>(this.workspaceServiceUrl + workspaceId + "/description", this.httpOption)
+    }
+
+    public getWorkspaceRoles(): Observable<WorkspaceRole[]> {
+        return this.http.get<WorkspaceRole[]>(this.workspaceRolesUrl, this.httpOption)
     }
 }

@@ -53,7 +53,7 @@ export class WorkspaceMemberManagmentComponent implements OnInit {
     this.workspaceServise.getWorkspaceUserList(this.workspaceId).subscribe(data=>{
       this.workspaceUserList=data;
     })
-    this.userService.userWorkspaceInfo(this.workspaceId).subscribe((data: WorkspaceInfo) => {
+    this.workspaceServise.getWorkspaceInfo(this.workspaceId).subscribe((data: WorkspaceInfo) => {
         this.userWorkspaceInfo = data;
       });
   }
@@ -76,9 +76,9 @@ export class WorkspaceMemberManagmentComponent implements OnInit {
       }
   }
 
-  chandeWorkspaceRole(roleId: number, currentRole: string, userId: string) {
+  chandeWorkspaceRole(roleId: number, currentRole: number, userId: string) {
 
-    if(this.roles[this.roles.findIndex(x=>x.roleId == roleId)].nameRole != currentRole)
+    if(roleId != currentRole)
     {
       let body = new WorkspaceChangeRole()
       body.roleId = roleId;

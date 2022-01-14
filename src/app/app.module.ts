@@ -57,6 +57,8 @@ import { ChangeTwoFaComponent } from './presentation/components/user-components/
 import { AlertService } from './core/services/alerts.service';
 import { ErrorInterceptorProvider } from './core/services/interceptors/error.interceptor';
 import { IfUserRolesDirective } from './core/directives/IfUserRoles.directive';
+import { DataShareService } from './core/services/DataShare.service';
+
 
 @NgModule({
   declarations: [
@@ -119,7 +121,8 @@ import { IfUserRolesDirective } from './core/directives/IfUserRoles.directive';
     AuthenticationService,
     WorkspaceService,
     UserService,
-    AlertService
+    AlertService,
+    DataShareService
   ],
   bootstrap: [AppComponent]
 })
