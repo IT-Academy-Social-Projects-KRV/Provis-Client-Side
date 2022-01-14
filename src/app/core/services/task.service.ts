@@ -1,6 +1,6 @@
 import { Tasks } from '../models/task/tasks';
 import { Observable } from 'rxjs';
-import { getTaskStatuses, getTaskWorkerRoles, userTaskUrl } from './../../configs/api-endpoints';
+import { statusesUrl, rolesUrl, taskServiceUrl } from './../../configs/api-endpoints';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TaskStatus } from '../models/task/taskStatus';
@@ -13,10 +13,9 @@ import { TaskWorkerRole } from '../models/task/taskWorkerRoles';
 
 export class TaskService {
 
-
-  private readonly userTaskUrl = userTaskUrl;
-  private readonly taskStatusesUrl = getTaskStatuses;
-  private readonly workerRoleUri = getTaskWorkerRoles;
+  private readonly taskServiceUrl = taskServiceUrl;
+  private readonly statusesUrl = statusesUrl;
+  private readonly rolesUrl = rolesUrl;
 
   private httpOption = {
     headers: new HttpHeaders({
@@ -31,18 +30,18 @@ export class TaskService {
   }
 
   getUserTask(userId: string, workspaceId: number): Observable<{tasks: Tasks, userId: string}>{
-    return this.http.get<{tasks: Tasks, userId: string}>(this.userTaskUrl + 'tasks?userId='  + userId + '&workspaceId=' + workspaceId, this.httpOption);
+    return this.http.get<{tasks: Tasks, userId: string}>(this.taskServiceUrl + 'tasks?userId='  + userId + '&workspaceId=' + workspaceId, this.httpOption);
   }
 
   public updateStatusTask(data:{workspaceId: number, statusId: number, taskId: number}):Observable<void>{
-    return this.http.put<void>(this.userTaskUrl + 'status', data, this.httpOption);
+    return this.http.put<void>(this.taskServiceUrl + 'status', data, this.httpOption);
   }
 
   getStatusTask() {
-    return this.http.get<TaskStatus[]>(this.taskStatusesUrl, this.httpOption);
+    return this.http.get<TaskStatus[]>(this.statusesUrl, this.httpOption);
   }
 
   getWorkerRole(){
-    return this.http.get<TaskWorkerRole[]>(this.workerRoleUri, this.httpOption);
+    return this.http.get<TaskWorkerRole[]>(this.rolesUrl, this.httpOption);
   }
 }

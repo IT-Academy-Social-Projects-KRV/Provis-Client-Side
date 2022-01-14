@@ -56,6 +56,7 @@ import { TwoSetpVerificationComponent } from './presentation/components/user-com
 import { ChangeTwoFaComponent } from './presentation/components/user-components/change-two-fa/change-two-fa.component';
 import { AlertService } from './core/services/alerts.service';
 import { ErrorInterceptorProvider } from './core/services/interceptors/error.interceptor';
+import { DataShareService } from './core/services/DataShare.service';
 
 @NgModule({
   declarations: [
@@ -117,7 +118,8 @@ import { ErrorInterceptorProvider } from './core/services/interceptors/error.int
     AuthenticationService,
     WorkspaceService,
     UserService,
-    AlertService
+    AlertService,
+    DataShareService
   ],
   bootstrap: [AppComponent]
 })

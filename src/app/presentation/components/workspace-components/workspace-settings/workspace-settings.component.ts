@@ -1,4 +1,3 @@
-import { UserService } from '../../../../core/services/user.service';
 import { WorkspaceInfo } from '../../../../core/models/workspace/workspaceInfo';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,6 +7,7 @@ import { WorkspaceInviteComponent } from '../workspace-invite/workspace-invite.c
 import { WorkspaceUpdateComponent } from '../workspace-update/workspace-update.component';
 import { AlertService } from 'src/app/core/services/alerts.service';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
+import { UserService } from 'src/app/core/services/user.service';
 
 @Component({
   selector: 'app-workspace-settings',
@@ -19,7 +19,7 @@ export class WorkspaceSettingsComponent implements OnInit {
   protected routeSub: Subscription;
   workspaceId: number;
   workspace: WorkspaceInfo;
-  
+
   constructor(private route: ActivatedRoute, 
     public dialog: MatDialog,
     private router: Router, 
@@ -32,9 +32,6 @@ export class WorkspaceSettingsComponent implements OnInit {
       (params) =>
       {
         this.workspaceId = Number(params['id']);
-        this.userService.userWorkspaceInfo(this.workspaceId).subscribe((data: WorkspaceInfo) => {
-          this.workspace = data;
-        });
        });
   }
 
@@ -45,7 +42,7 @@ export class WorkspaceSettingsComponent implements OnInit {
 
   modalUpdate() {
     let dialogRef = this.dialog.open(WorkspaceUpdateComponent);
-    dialogRef.componentInstance.workspaceInput=this.workspace;
+    dialogRef.componentInstance.workspaceId=this.workspaceId;
     dialogRef.componentInstance.isUpdated.subscribe(data => {
       if(data)
         dialogRef.close();

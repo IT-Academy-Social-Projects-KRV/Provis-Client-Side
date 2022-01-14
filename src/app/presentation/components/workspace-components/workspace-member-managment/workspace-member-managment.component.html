@@ -18,7 +18,7 @@
           <div>
               <mat-form-field appearance="fill">
                 <mat-label>Member role</mat-label>
-                <mat-select [(value)]="item.role" [disabled]="item.role == 'Owner' || item.id == authSrvice.currentUser.id">
+                <mat-select [(value)]="item.role" [disabled]="item.role == 1 || item.id == authSrvice.currentUser.id">
                   <mat-option *ngFor="let role of roles" [value]="role.nameRole"
                   (onSelectionChange)="chandeWorkspaceRole(role.roleId, item.role, item.id)"
                   [disabled]="role.nameRole=='Owner'">
@@ -29,8 +29,12 @@
             </div>
           </div>
         <span>
+<<<<<<< HEAD
           <button [disabled]="!(userWorkspaceInfo.role == 'Owner' && item.role != 'Owner')" 
             mat-raised-button class="warning" (click)="delete(item.id)">Delete</button>
+=======
+          <button [disabled]="!(userWorkspaceInfo.role == 1 && item.role != 1)" mat-raised-button class="warning" (click)="delete(item.id)">Delete</button>
+>>>>>>> dev
         </span>
       </li>
     </ul>
