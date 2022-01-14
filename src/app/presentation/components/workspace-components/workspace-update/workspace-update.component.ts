@@ -19,7 +19,8 @@ export class WorkspaceUpdateComponent implements OnInit {
   updateWorkspace: WorkspaceUpdate = new WorkspaceUpdate();
   @Output() public isUpdated = new EventEmitter<boolean>(false);
 
-  constructor(formBuilder: FormBuilder,
+  constructor(formBuilder: FormBuilder, 
+
     private service: WorkspaceService,
     private workspaceService: WorkspaceService,
     private dataShareService: DataShareService) {

@@ -6,6 +6,7 @@ import { WorkspaceRole } from '../models/workspace/workspaceRole';
 @Injectable({
   providedIn: 'root'
 })
+
 export class DataShareService {
 
   private workspaceInfoSub = new BehaviorSubject<WorkspaceInfo>(new WorkspaceInfo());
