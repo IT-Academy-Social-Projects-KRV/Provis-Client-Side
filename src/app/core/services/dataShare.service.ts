@@ -26,7 +26,13 @@ export class DataShareService {
 
   public getworkspaceRoleName(roleId: number): Observable<string> {
     return this.workspaceRoles.pipe(map(data => {
-      return data[data.findIndex(x=>x.id == roleId)].name;
+      if(roleId)
+      {
+        return data[data.findIndex(x=>x.id == roleId)].name;
+      }
+      else{
+        return "";
+      }
     }));
   }
 }

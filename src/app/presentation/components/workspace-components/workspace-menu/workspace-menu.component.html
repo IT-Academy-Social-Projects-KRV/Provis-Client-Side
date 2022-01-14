@@ -9,9 +9,8 @@
     <ul>
       <li>
         <ul class="group-menu">
-          <!-- <li class="menu-item" *ngIf="userWorkspaceInfo.role == 'Owner' || userWorkspaceInfo.role == 'Manager'" > -->
           <li *appIfUserRoles='[1,2]' class="menu-item">
-              <a [routerLink]="'/user/workspace/' + workspaceId + '/managment/'">
+              <a [routerLink]="'/user/workspace/' + userWorkspaceInfo.id + '/managment/'">
               <mat-icon aria-hidden="false" aria-label="Example home icon">manage_accounts</mat-icon>
               <span>Member Managment</span>
             </a>
@@ -65,7 +64,7 @@
             <span>Workspace info</span>
           </a>
         </li>
-        <li class="menu-item">
+        <li *appIfUserRoles='[1]' class="menu-item">
           <a [routerLink]="'/user/workspace/' + userWorkspaceInfo.id + '/settings'">
             <mat-icon aria-hidden="false" aria-label="Example home icon">admin_panel_settings</mat-icon>
             <span>Workspace settings</span>

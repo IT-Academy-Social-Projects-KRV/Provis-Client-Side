@@ -1,8 +1,9 @@
-import { workspaceUserRoles } from './../models/workspace/workspaceUserRole';
+import { DataShareService } from 'src/app/core/services/DataShare.service';
 import Swal from 'sweetalert2';
-import { Injectable, Input } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import { GlobalVariablesService } from '../services/globalVariables.service';
+import { firstValueFrom } from 'rxjs';
 
 
 @Injectable({
@@ -11,16 +12,17 @@ import { GlobalVariablesService } from '../services/globalVariables.service';
 
 
 export class PermissionGuard implements CanActivate {
-  // need change this variable
-  currentUserRole: number = 3;
 
-  constructor(private router: Router, private globalVariables: GlobalVariablesService){}
+  currentUserRole: number;
+
+  constructor(private router: Router, private globalVariables: GlobalVariablesService, private dataShare: DataShareService){}
 
   async canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
 
     let allowedUserRoles = route.data['userRoles'];
 
-    console.log(this.globalVariables.globalWorkspaceUserRoles);
+    this.currentUserRole = (await firstValueFrom(this.dataShare.workspaceInfo)).role;
+
     if(allowedUserRoles.indexOf(this.currentUserRole) != -1) {
       return true;
     }
