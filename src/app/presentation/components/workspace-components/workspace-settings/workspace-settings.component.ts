@@ -19,6 +19,7 @@ export class WorkspaceSettingsComponent implements OnInit {
   protected routeSub: Subscription;
   workspaceId: number;
   workspace: WorkspaceInfo;
+  isOwner: boolean;
 
   constructor(private route: ActivatedRoute, 
     public dialog: MatDialog,
@@ -33,6 +34,15 @@ export class WorkspaceSettingsComponent implements OnInit {
       {
         this.workspaceId = Number(params['id']);
        });
+       this.workspaceServise.getWorkspaceInfo(this.workspaceId).subscribe((data: WorkspaceInfo) => {
+        this.workspace = data;
+      });
+
+      if (this.workspace.role==1) {
+        this.isOwner = false
+      }
+       
+      console.log(this.isOwner)
   }
 
   modalInvites() {
