@@ -1,3 +1,4 @@
+import { workspaceUserRolesUrl } from './../../configs/api-endpoints';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { WorkspaceUpdate } from '../models/workspace/workspaceUpdate';
@@ -15,6 +16,7 @@ import { WorkspaceChangeRole } from '../models/workspace/workspaceChangeRole';
 import { WorkspaceMembers } from '../models/workspace/workspaceMembers';
 import { WorkspaceInfoInvite } from '../models/workspace/workspaceInfoInvite';
 import { CreateWorkspace } from '../models/workspace/createWorkspace';
+import { workspaceUserRoles } from '../models/workspace/workspaceUserRole';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +29,7 @@ export class WorkspaceService {
     private readonly workspaceServiceUrl = workspaceServiceUrl;
     private readonly taskUrl = taskUrl;
     private readonly changeWorkspaceRoleUrl = changeWorkspaceRoleUrl;
+    private readonly workspaceUserRolesUrl = workspaceUserRolesUrl;
 
     private httpOption = {
         headers: new HttpHeaders({
@@ -77,5 +80,9 @@ export class WorkspaceService {
 
     public changeWorkspaceRole(body: WorkspaceChangeRole): Observable<void>{
         return this.http.put<void>(this.changeWorkspaceRoleUrl, body, this.httpOption);
+    }
+
+    public getAllWorkspaceUserRole() {
+        return this.http.get<workspaceUserRoles[]>(this.workspaceUserRolesUrl, this.httpOption);
     }
 }
