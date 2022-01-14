@@ -2,11 +2,8 @@ import { WorkspaceInfo } from '../../../../core/models/workspace/workspaceInfo';
 import { WorkspaceTaskCreateComponent } from '../task-components/workspace-task-create/workspace-task-create.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
-import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import { workspaceUserRoles } from 'src/app/core/models/workspace/workspaceUserRole';
-import { GlobalVariablesService } from 'src/app/core/services/globalVariables.service';
 import { DataShareService } from 'src/app/core/services/DataShare.service';
-v
 
 @Component({
   selector: 'app-workspace-menu',
