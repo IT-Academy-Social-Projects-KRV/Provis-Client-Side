@@ -6,13 +6,14 @@ import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import { workspaceUserRoles } from 'src/app/core/models/workspace/workspaceUserRole';
 import { GlobalVariablesService } from 'src/app/core/services/globalVariables.service';
 import { DataShareService } from 'src/app/core/services/DataShare.service';
-
+v
 
 @Component({
   selector: 'app-workspace-menu',
   templateUrl: './workspace-menu.component.html',
   styleUrls: ['./workspace-menu.component.css']
 })
+
 export class WorkspaceMenuComponent implements OnInit {
 
   workspaceId: number;
@@ -27,6 +28,7 @@ export class WorkspaceMenuComponent implements OnInit {
   ngOnInit() {
     this.dataShareService.workspaceInfo.subscribe(data => {
       this.userWorkspaceInfo = data;
+
       this.dataShareService.getworkspaceRoleName(data.role).subscribe(role=>{
         this.roleName = role;
       });
@@ -37,5 +39,4 @@ export class WorkspaceMenuComponent implements OnInit {
     let dialogRef = this.dialog.open(WorkspaceTaskCreateComponent, {autoFocus: false});
     dialogRef.componentInstance.workspaceId = this.userWorkspaceInfo.id;
   }
-
 }
