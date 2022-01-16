@@ -27,7 +27,7 @@ const userWorkspaceRouters: Routes = [
     component: WorkspaceMemberManagmentComponent,
     canActivate: [PermissionGuard],
     data:{
-      userRoles: [1, 2]
+      userRoles: [1,2]
     }
   },
   { path: 'memberlist', component: WorkspaceMemberListComponent},

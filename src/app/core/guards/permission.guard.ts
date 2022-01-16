@@ -1,36 +1,39 @@
-import { DataShareService } from 'src/app/core/services/DataShare.service';
+import { WorkspaceService } from './../services/workspace.service';
 import Swal from 'sweetalert2';
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
-import { GlobalVariablesService } from '../services/globalVariables.service';
-import { firstValueFrom } from 'rxjs';
+import { ActivatedRoute, ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
+import { firstValueFrom, map, Observable } from 'rxjs';
 
 
 @Injectable({
   providedIn: 'root'
 })
 
-
 export class PermissionGuard implements CanActivate {
 
   currentUserRole: number;
+  workspaceId: number;
+  allowedUserRoles: number[];
 
-  constructor(private router: Router, private globalVariables: GlobalVariablesService, private dataShare: DataShareService){}
+  constructor(private router: Router, private workspaceService: WorkspaceService, private activeRoute: ActivatedRoute){}
 
-  async canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
+  async canActivate(route: ActivatedRouteSnapshot) : Promise<boolean>{
 
-    let allowedUserRoles = route.data['userRoles'];
+    if(route.routeConfig?.data){
+      this.allowedUserRoles = route.routeConfig.data['userRoles'];
+      this.workspaceId = route.parent?.params['id'];
+      this.currentUserRole = (await firstValueFrom(this.workspaceService.getWorkspaceInfo(this.workspaceId))).role;
 
-    this.currentUserRole = (await firstValueFrom(this.dataShare.workspaceInfo)).role;
+      if(this.allowedUserRoles.indexOf(this.currentUserRole) != -1) {
+        return true;
+      }
 
-    if(allowedUserRoles.indexOf(this.currentUserRole) != -1) {
-      return true;
+      this.showErrorAlert('you have no permission to view this page');
+      this.router.navigate(['']);
+
+      return false;
     }
-
-    this.showErrorAlert('you have no permission to view this page');
-    this.router.navigate(['']);
-
-    return false;
+    return true;
   }
 
   showErrorAlert(error: string){
