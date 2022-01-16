@@ -34,8 +34,9 @@ export class WorkspaceTaskAssignComponent implements OnInit {
     this.dataShare.workspaceInfo.subscribe((data : WorkspaceInfo) => {
       this.workspaceId = data.id;
     })
-    this.workspaceService.getWorkspaceUserList(this.workspaceId).subscribe((data: WorkspaceMembers[]) =>{
-      this.workspaceMembers = data;
+    this.workspaceService.getWorkspaceUserList(this.workspaceId)
+        .subscribe((data: WorkspaceMembers[]) => {
+          this.workspaceMembers = data;
     });
     this.taskServise.getWorkerRole().subscribe((role: TaskWorkerRole[]) => {
       this.taskRoles = role;
