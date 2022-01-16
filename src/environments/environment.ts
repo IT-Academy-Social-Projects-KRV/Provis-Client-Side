@@ -23,6 +23,10 @@ export const environment = {
     position: 'top-end' as SweetAlertPosition,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33'
+  },
+  attachmentsSettings: {
+    maxFileSize: 10, //Mb
+    maxFileNumber: 10
   }
 };
 

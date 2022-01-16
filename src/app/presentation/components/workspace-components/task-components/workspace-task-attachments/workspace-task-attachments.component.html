@@ -1,20 +1,29 @@
 <div class="attachments-container">
-<mat-list itemSize="3">
+  <mat-list>
 
-  <div mat-subheader>Attachments</div>
+    <div mat-subheader>Attachments</div>
 
-  <mat-list-item title="Add files" (click)="fileInput.click()" [disabled]="attachments.length > 10">
-    <mat-icon mat-list-icon>add_circle</mat-icon>
-    <div mat-line><u>Add</u></div>
-    <input #fileInput type="file" style="display:none;" multiple (change)="uploadAttachments($event)"/>
-  </mat-list-item>
+    <div class="mat-list-cotainer">
 
-  <mat-list-item *ngFor="let attachment of attachments"
-  [title]="'Download ' + attachment.name"
-  (click)="downloadFile(attachment.id)">
-    <mat-icon mat-list-icon>perm_media</mat-icon>
-    <div mat-line>{{attachment.name}}</div>
-  </mat-list-item>
+      <mat-list-item title="Add files" (click)="fileInput.click()" [disabled]="attachments.length >= maxFileNumber" >
+        <mat-icon mat-list-icon>add_circle</mat-icon>
+        <div mat-line><u>Add</u></div>
+        <span *ngIf="attachments.length >= maxFileNumber"><i>Max namber of files is {{maxFileNumber}}</i></span>
+        <input #fileInput type="file" style="display:none;" (change)="uploadAttachment($event)"/>
+      </mat-list-item>
 
-</mat-list>
+      <mat-list-item *ngFor="let attachment of attachments"
+      [title]="'Download ' + attachment.name"
+      (click)="downloadFile(attachment.id)">
+        <mat-icon mat-list-icon>perm_media</mat-icon>
+          <div mat-line>
+            <div class="list-item-container">
+              {{getAttacmentName(attachment.name)}}
+              <mat-icon class="delete-batton" (click)="deleteAttachment(attachment.id)">delete</mat-icon>
+            </div>
+          </div>
+      </mat-list-item>
+
+    </div>
+  </mat-list>
 </div>
