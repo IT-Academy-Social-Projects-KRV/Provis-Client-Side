@@ -16,7 +16,8 @@ export class WorkspaceSettingsComponent implements OnInit {
   protected routeSub: Subscription;
   workspaceId: number;
   workspace: WorkspaceInfo;
-  constructor(private route: ActivatedRoute, public dialog: MatDialog) { }
+
+  constructor(private route: ActivatedRoute, public dialog: MatDialog,) {}
 
   ngOnInit() {
     this.route.parent?.params.subscribe(

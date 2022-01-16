@@ -68,6 +68,10 @@ export class WorkspaceService {
         return this.http.delete<void>(this.workspaceServiceUrl + workspaceId + "/user/" + userId, this.httpOption);
     }
 
+    public leaveFromWorkspace(workspaceId: number): Observable<void>{
+        return this.http.delete<void>(this.workspaceServiceUrl+workspaceId+"/user", this.httpOption);
+    }
+
     public WorkspaceInviteInfo(workspaceId: number) {
         return this.http.get<WorkspaceInfoInvite[]>(this.workspaceServiceUrl + workspaceId + "/invite/active", this.httpOption);
     }

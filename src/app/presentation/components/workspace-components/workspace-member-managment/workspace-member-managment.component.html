@@ -29,7 +29,8 @@
             </div>
           </div>
         <span>
-          <button [disabled]="!(userWorkspaceInfo.role == 1 && item.role != 1)" mat-raised-button class="warning" (click)="delete(item.id)">Delete</button>
+          <button [disabled]= isOwner(item) 
+            mat-raised-button class="warning" (click)="delete(item.id)">Delete</button>
         </span>
       </li>
     </ul>
