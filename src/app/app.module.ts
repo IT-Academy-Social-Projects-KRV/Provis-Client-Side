@@ -58,8 +58,10 @@ import { TwoSetpVerificationComponent } from './presentation/components/user-com
 import { ChangeTwoFaComponent } from './presentation/components/user-components/change-two-fa/change-two-fa.component';
 import { AlertService } from './core/services/alerts.service';
 import { ErrorInterceptorProvider } from './core/services/interceptors/error.interceptor';
+import { IfUserRolesDirective } from './core/directives/IfUserRoles.directive';
 import { WorkspaceTaskEditComponent } from './presentation/components/workspace-components/task-components/workspace-task-edit/workspace-task-edit.component';
 import { DataShareService } from './core/services/DataShare.service';
+import { WorkspaceTaskHistoryComponent } from './presentation/components/workspace-components/task-components/workspace-task-history/workspace-task-history.component';
 
 
 @NgModule({
@@ -95,6 +97,9 @@ import { DataShareService } from './core/services/DataShare.service';
     WorkspaceUpdateComponent,
     WorkspaceUserTaskListComponent,
     WorkspaceTaskAttachmentsComponent,
+    WorkspaceTaskEditComponent,
+    WorkspaceTaskHistoryComponent,
+    IfUserRolesDirective,
     WorkspaceTaskEditComponent
   ],
   imports: [
