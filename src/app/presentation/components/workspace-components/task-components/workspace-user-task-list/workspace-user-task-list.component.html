@@ -19,7 +19,7 @@
           [cdkDropListConnectedTo]="listStatus"
           class="example-list"
           (cdkDropListDropped)="drop($event)">
-          <div class="example-box {{kanbanClasses[status.id-1]}}-task" *ngFor="let item of statusTasks.tasks[status.id]" cdkDrag>
+          <div class="example-box {{kanbanClasses[status.id-1]}}-task" *ngFor="let item of statusTasks.tasks[status.id]" cdkDrag (click)="showTask(item.id)">
             <span *ngIf="item.workerRoleId !=null" class="worker-status" [style.background-color]="statusColor[item.workerRoleId-1]">
               {{workerStatus[item.workerRoleId-1].name}}
             </span>
