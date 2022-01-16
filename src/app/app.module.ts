@@ -57,6 +57,7 @@ import { ChangeTwoFaComponent } from './presentation/components/user-components/
 import { AlertService } from './core/services/alerts.service';
 import { ErrorInterceptorProvider } from './core/services/interceptors/error.interceptor';
 import { IfUserRolesDirective } from './core/directives/IfUserRoles.directive';
+import { WorkspaceTaskEditComponent } from './presentation/components/workspace-components/task-components/workspace-task-edit/workspace-task-edit.component';
 import { DataShareService } from './core/services/DataShare.service';
 
 
@@ -93,6 +94,8 @@ import { DataShareService } from './core/services/DataShare.service';
     WorkspaceUpdateComponent,
     WorkspaceUserTaskListComponent,
     IfUserRolesDirective
+    WorkspaceTaskEditComponent
+
   ],
   imports: [
     BrowserModule,
