@@ -50,7 +50,7 @@ export class WorkspaceTaskCreateComponent implements OnInit {
   }
 
   CreateNewTask(): void{
-    if(this.taskForm.valid && this.isAssignedValid){
+    if(this.taskForm.valid && this.isAssignedValid) {
       this.createTask = this.taskForm.value;
       this.createTask.workspaceId = this.workspaceId;
       this.createTask.statusId = this.selectedStatus;

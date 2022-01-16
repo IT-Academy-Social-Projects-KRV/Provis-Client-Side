@@ -22,7 +22,7 @@ export class WorkspaceTaskAssignComponent implements OnInit {
   workspaceMembers: WorkspaceMembers[];
   taskRoles: TaskWorkerRole[];
   userNameValid = false;
-  roleValid = false; 
+  roleValid = false;
 
   constructor(
     private dataShare: DataShareService,
@@ -42,10 +42,8 @@ export class WorkspaceTaskAssignComponent implements OnInit {
     });
   }
 
-  assignMember()
-  {
-    if(this.assignMembers.length < this.workspaceMembers.length)
-    {
+  assignMember() {
+    if(this.assignMembers.length < this.workspaceMembers.length) {
         this.assignMembers.unshift(new AssignedMember());
         this.userNameValid = false;
         this.roleValid = false;
@@ -57,22 +55,19 @@ export class WorkspaceTaskAssignComponent implements OnInit {
     this.assignMembers.splice(i, 1);
   }
 
-  contains(userId: string) : boolean
-  {
+  contains(userId: string) : boolean {
       return this.assignMembers.some(e => e.userId == userId);
   }
 
-  changeUserNameIsValid(isValid: boolean | null){
-    if(isValid)
-    {
+  changeUserNameIsValid(isValid: boolean | null) {
+    if(isValid) {
       this.userNameValid = isValid;
       this.isValid.next(this.userNameValid && this.roleValid);
-    }  
+    }
   }
 
-  changeRoleIsValid(isValid: boolean | null){
-    if(isValid)
-    {
+  changeRoleIsValid(isValid: boolean | null) {
+    if(isValid) {
       this.roleValid = isValid;
       this.isValid.next(this.userNameValid && this.roleValid);
     }
