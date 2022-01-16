@@ -1,0 +1,29 @@
+<ng-form #assignedUserForm="ngForm">
+  <button mat-raised-button class="additional" (click)="assignMember()">Add members</button>
+  <section *ngFor="let member of assignMembers;let i = index;" class="member-section">
+    <div>
+
+      <mat-form-field appearance="fill" class="assign-fields">
+        <mat-label>Member</mat-label>
+        <mat-select name="userId_{{i}}" [ngModelOptions]="{standalone: true}" [(ngModel)]="member.userId"
+          (valueChange)="changeUserNameIsValid(!assignedUserForm.invalid)" required>
+          <mat-option *ngFor="let item of workspaceMembers" [value]="item.id" [disabled]="contains(item.id)">
+            {{item.userName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="assign-fields">
+        <mat-label>Role</mat-label>
+        <mat-select name="role_{{i}}" [ngModelOptions]="{standalone: true}" [(ngModel)]="member.roleTagId" 
+        (valueChange)="changeRoleIsValid(!assignedUserForm.invalid)" required>
+          <mat-option *ngFor="let item of taskRoles" [value]="item.id">
+            {{item.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+    </div>
+    <button mat-raised-button (click)="deAssignMember(i)" class="warning">remove</button>
+  </section>
+</ng-form>
