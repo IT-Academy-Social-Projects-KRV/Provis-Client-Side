@@ -1,13 +1,14 @@
 import { Tasks } from '../models/task/tasks';
 import { Observable } from 'rxjs';
-import { statusesUrl, rolesUrl, taskServiceUrl } from './../../configs/api-endpoints';
+import { statusesUrl, rolesUrl, taskServiceUrl, taskUrl } from './../../configs/api-endpoints';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TaskStatus } from '../models/task/taskStatus';
 import { TaskWorkerRole } from '../models/task/taskWorkerRoles';
 import { TaskAttachment } from '../models/task/taskAttachment';
 import { UnloadTaskAttachments } from '../models/task/uploadTaskAttachments';
-
+import { TaskDetalInfo } from '../models/task/taskDetalInfo';
+import { TaskChangeInfo } from '../models/task/taskChangeInfo';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,7 @@ export class TaskService {
   private readonly taskServiceUrl = taskServiceUrl;
   private readonly statusesUrl = statusesUrl;
   private readonly rolesUrl = rolesUrl;
+  private readonly taskUrl = taskUrl;
 
   private httpOption = {
     headers: new HttpHeaders({
@@ -70,5 +72,12 @@ export class TaskService {
   deleteAttachment(workspaceId: number, attachmentId: number): Observable<void> {
 
     return this.http.delete<void>(this.taskServiceUrl + '/workspace/' + workspaceId + '/attachment'+ attachmentId, this.httpOption);
+  }
+  public getTaskInfo(taskId: number):Observable<TaskDetalInfo>{
+    return this.http.get<TaskDetalInfo>(this.taskUrl + "/" + taskId, this.httpOption);
+  }
+
+  public editTask(taskChangeInfo: TaskChangeInfo):Observable<void>{
+    return this.http.put<void>(this.taskUrl, taskChangeInfo, this.httpOption);
   }
 }
