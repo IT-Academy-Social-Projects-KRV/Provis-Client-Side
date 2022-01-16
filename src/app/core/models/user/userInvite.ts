@@ -1,6 +1,6 @@
 export class UserInvite {
     id : number;
-    date: string;
+    date: Date;
     isConfirm?: boolean;
     workspaceName: string;
     fromUserName: string;

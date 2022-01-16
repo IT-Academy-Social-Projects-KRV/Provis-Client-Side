@@ -1,5 +1,5 @@
 export class WorkspaceInfoInvite {
-    date: string;
+    date: Date;
     fromUserName: string;
     toUserName: string;
     toUserEmail: string;

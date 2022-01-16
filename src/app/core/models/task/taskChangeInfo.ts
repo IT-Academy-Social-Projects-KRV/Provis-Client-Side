@@ -3,5 +3,5 @@ export class TaskChangeInfo {
     workspaceId: number;
     name: string;
     description: string;
-    deadline: string;
+    deadline: Date;
   }

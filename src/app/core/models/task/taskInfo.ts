@@ -1,6 +1,6 @@
 export class TaskInfo {
   id: number;
   name: string;
-  deadline: string;
+  deadline: Date;
   workerRoleId: number;
 }
