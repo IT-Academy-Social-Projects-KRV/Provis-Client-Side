@@ -17,9 +17,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge'
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
-import { CdkAccordionModule } from '@angular/cdk/accordion';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import {CdkAccordionModule} from '@angular/cdk/accordion';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatListModule} from '@angular/material/list';
 
 import { HomeComponent } from './presentation/components/home-components/home/home.component';
 import { AboutComponent } from './presentation/components/home-components/about/about.component';
@@ -39,6 +40,7 @@ import { WorkspaceMemberListComponent } from './presentation/components/workspac
 import { WorkspaceCalendarComponent } from './presentation/components/workspace-components/workspace-calendar/workspace-calendar.component';
 import { WorkspaceTaskListComponent } from './presentation/components/workspace-components/task-components/workspace-task-list/workspace-task-list.component';
 import { WorkspaceUserTaskListComponent } from './presentation/components/workspace-components/task-components/workspace-user-task-list/workspace-user-task-list.component';
+import { WorkspaceTaskAttachmentsComponent } from './presentation/components/workspace-components/task-components/workspace-task-attachments/workspace-task-attachments.component';
 import { WorkspaceTaskAssignComponent } from './presentation/components/workspace-components/task-components/workspace-task-assign/workspace-task-assign.component';
 
 import { AuthInterceptorProvider } from './core/services/interceptors/auth.interceptor';
@@ -95,6 +97,7 @@ import { WorkspaceTaskHistoryComponent } from './presentation/components/workspa
     WorkspaceTaskCreateComponent,
     WorkspaceUpdateComponent,
     WorkspaceUserTaskListComponent,
+    WorkspaceTaskAttachmentsComponent,
     WorkspaceTaskAssignComponent,
     WorkspaceTaskEditComponent,
     WorkspaceTaskHistoryComponent,
@@ -120,7 +123,8 @@ import { WorkspaceTaskHistoryComponent } from './presentation/components/workspa
     MatSelectModule,
     CdkAccordionModule,
     MatExpansionModule,
-    DragDropModule
+    DragDropModule,
+    MatListModule
   ],
   providers: [
     AuthInterceptorProvider,

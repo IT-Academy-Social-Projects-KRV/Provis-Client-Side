@@ -5,6 +5,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TaskStatus } from '../models/task/taskStatus';
 import { TaskWorkerRole } from '../models/task/taskWorkerRoles';
+import { TaskAttachment } from '../models/task/taskAttachment';
+import { UnloadTaskAttachment} from '../models/task/uploadTaskAttachments';
 import { TaskDetalInfo } from '../models/task/taskDetalInfo';
 import { TaskChangeInfo } from '../models/task/taskChangeInfo';
 import { TaskHistory } from '../models/task/taskHistory';
@@ -46,6 +48,36 @@ export class TaskService {
 
   getWorkerRole(){
     return this.http.get<TaskWorkerRole[]>(this.rolesUrl, this.httpOption);
+  }
+
+  getAttachmentList(workspaceId: number, taskId: number): Observable<TaskAttachment[]> {
+
+    return this.http.get<TaskAttachment[]>(this.taskServiceUrl +'task/'+ taskId + '/workspace/' + workspaceId + '/attachments', this.httpOption);
+  }
+
+  getAttachment(workspaceId: number, attachmentId: number): Observable<File> {
+
+    const options = {
+      headers: this.httpOption.headers,
+      responseType: 'Blob' as 'json'
+    }
+
+    return this.http.get<File>(this.taskServiceUrl + 'task/workspace/' + workspaceId + '/attachment/'+ attachmentId, options);
+  }
+
+  uploadAttachment(attachment:  UnloadTaskAttachment): Observable<TaskAttachment> {
+
+    const formData = new FormData();
+    formData.append('attachment', attachment.attachment, attachment.attachment.name);
+    formData.append('taskId', attachment.taskId.toString());
+    formData.append('workspaceId', attachment.workspaceId.toString());
+
+    return this.http.post<TaskAttachment>(this.taskServiceUrl + 'task/attachments', formData, this.httpOption);
+  }
+
+  deleteAttachment(workspaceId: number, attachmentId: number): Observable<void> {
+
+    return this.http.delete<void>(this.taskServiceUrl + 'task/workspace/' + workspaceId + '/attachment/'+ attachmentId, this.httpOption);
   }
 
   public getTaskInfo(taskId: number):Observable<TaskDetalInfo>{

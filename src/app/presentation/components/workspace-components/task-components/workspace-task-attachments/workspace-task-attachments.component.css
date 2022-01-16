@@ -1,0 +1,23 @@
+
+.list-item-container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+.mat-list-cotainer {
+    height: 150px;
+    overflow-y: scroll;
+}
+.mat-list-item {
+    cursor: pointer;
+}
+.mat-list-item:hover{
+    background-color: rgb(235, 235, 235);
+}
+.mat-list-item:hover .delete-batton {
+    display: inline-block;
+}
+.delete-batton {
+    display: none;
+}
+
