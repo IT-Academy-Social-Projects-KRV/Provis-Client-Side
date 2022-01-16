@@ -56,7 +56,7 @@ export class TaskService {
     return this.http.put<void>(this.taskUrl, taskChangeInfo, this.httpOption);
   }
 
-  public gethistoryTask(taskId: number): Observable<TaskHistory>{
-    return this.http.get<TaskHistory>(this.taskServiceUrl + taskId +'/history', this.httpOption);
+  public gethistoryTask(taskId: number) {
+    return this.http.get<TaskHistory[]>(this.taskServiceUrl + taskId +'/history', this.httpOption);
   }
 }

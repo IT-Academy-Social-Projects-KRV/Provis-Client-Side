@@ -3,5 +3,5 @@ export class TaskHistory{
     userName: string;
     statusId: number;
     status: string;
-    dataOfChange: string;
+    dateOfChange: string;
 }
