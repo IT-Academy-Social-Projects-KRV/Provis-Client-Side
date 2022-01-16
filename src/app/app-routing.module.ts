@@ -1,3 +1,4 @@
+import { PermissionGuard } from './core/guards/permission.guard';
 import { WorkspaceTaskListComponent } from './presentation/components/workspace-components/task-components/workspace-task-list/workspace-task-list.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -21,12 +22,26 @@ import { WorkspaceCalendarComponent } from './presentation/components/workspace-
 import { TwoSetpVerificationComponent } from './presentation/components/user-components/two-step-verification/two-step-verification.component';
 
 const userWorkspaceRouters: Routes = [
-  { path: 'managment', component: WorkspaceMemberManagmentComponent, pathMatch: 'full'},
+  {
+    path: 'managment',
+    component: WorkspaceMemberManagmentComponent,
+    canActivate: [PermissionGuard],
+    data:{
+      userRoles: [1,2]
+    }
+  },
   { path: 'memberlist', component: WorkspaceMemberListComponent},
   { path: 'calendar', component: WorkspaceCalendarComponent},
   { path: 'info', component: WorkspaceInfoComponent},
   { path: 'tasklist', component: WorkspaceTaskListComponent},
-  { path: 'settings', component: WorkspaceSettingsComponent}
+  {
+    path: 'settings',
+    component: WorkspaceSettingsComponent,
+    canActivate: [PermissionGuard],
+    data:{
+      userRoles: [1]
+    }
+  }
 ];
 
 const userRouters: Routes = [

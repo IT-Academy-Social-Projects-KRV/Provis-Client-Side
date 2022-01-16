@@ -1,4 +1,3 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { WorkspaceUpdate } from '../models/workspace/workspaceUpdate';
 import { workspaceUrl,
@@ -17,8 +16,10 @@ import { WorkspaceMembers } from '../models/workspace/workspaceMembers';
 import { WorkspaceInfoInvite } from '../models/workspace/workspaceInfoInvite';
 import { CreateWorkspace } from '../models/workspace/createWorkspace';
 import { WorkspaceInfo } from '../models/workspace/workspaceInfo';
-import { WorkspaceDescription } from '../models/workspace/WorkspaceDescription';
 import { WorkspaceRole } from '../models/workspace/workspaceRole';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { WorkspaceDescription } from '../models/workspace/workspaceDescription';
+
 
 @Injectable({
   providedIn: 'root',
@@ -77,7 +78,6 @@ export class WorkspaceService {
 
     public CreateTask(task: CreateTask): Observable<void> {
         return this.http.post<void>(this.taskUrl, task, this.httpOption);
-
     }
 
     public changeWorkspaceRole(body: WorkspaceChangeRole): Observable<void>{

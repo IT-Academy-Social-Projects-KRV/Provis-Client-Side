@@ -17,9 +17,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge'
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
-import {CdkAccordionModule} from '@angular/cdk/accordion';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {DragDropModule} from '@angular/cdk/drag-drop';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { HomeComponent } from './presentation/components/home-components/home/home.component';
 import { AboutComponent } from './presentation/components/home-components/about/about.component';
@@ -57,8 +57,10 @@ import { TwoSetpVerificationComponent } from './presentation/components/user-com
 import { ChangeTwoFaComponent } from './presentation/components/user-components/change-two-fa/change-two-fa.component';
 import { AlertService } from './core/services/alerts.service';
 import { ErrorInterceptorProvider } from './core/services/interceptors/error.interceptor';
+import { IfUserRolesDirective } from './core/directives/IfUserRoles.directive';
 import { WorkspaceTaskEditComponent } from './presentation/components/workspace-components/task-components/workspace-task-edit/workspace-task-edit.component';
 import { DataShareService } from './core/services/DataShare.service';
+import { WorkspaceTaskHistoryComponent } from './presentation/components/workspace-components/task-components/workspace-task-history/workspace-task-history.component';
 
 
 @NgModule({
@@ -94,6 +96,9 @@ import { DataShareService } from './core/services/DataShare.service';
     WorkspaceUpdateComponent,
     WorkspaceUserTaskListComponent,
     WorkspaceTaskAssignComponent,
+    WorkspaceTaskEditComponent,
+    WorkspaceTaskHistoryComponent,
+    IfUserRolesDirective,
     WorkspaceTaskEditComponent
   ],
   imports: [

@@ -9,7 +9,6 @@ import { WorkspaceMembers } from 'src/app/core/models/workspace/workspaceMembers
 import { AlertService } from 'src/app/core/services/alerts.service';
 import { TaskService } from 'src/app/core/services/task.service';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 @Component({
   selector: 'app-workspace-task-edit',

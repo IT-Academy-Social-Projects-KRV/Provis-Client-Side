@@ -9,16 +9,16 @@
     <ul>
       <li>
         <ul class="group-menu">
-          <li class="menu-item" *ngIf="userWorkspaceInfo.role == 1 || userWorkspaceInfo.role == 2" >
+          <li *appIfUserRoles='[1,2]' class="menu-item">
               <a [routerLink]="'/user/workspace/' + userWorkspaceInfo.id + '/managment/'">
               <mat-icon aria-hidden="false" aria-label="Example home icon">manage_accounts</mat-icon>
-              <span>Member Managment</span>  
+              <span>Member Managment</span>
             </a>
           </li>
           <li class="menu-item">
             <a [routerLink]="'/user/workspace/' + userWorkspaceInfo.id + '/memberlist/'">
               <mat-icon aria-hidden="false" aria-label="Example home icon">group</mat-icon>
-              <span>Members List</span>  
+              <span>Members List</span>
             </a>
           </li>
         </ul>
@@ -28,19 +28,19 @@
           <li class="menu-item">
             <a [routerLink]="'/user/workspace/' + userWorkspaceInfo.id + '/tasklist'">
               <mat-icon aria-hidden="false" aria-label="Example home icon">list_alt</mat-icon>
-              <span>Task List</span>  
+              <span>Task List</span>
             </a>
           </li>
           <li class="menu-item" (click)="modalCreateTask()">
             <a>
               <mat-icon aria-hidden="false" aria-label="Example home icon">queue</mat-icon>
-              <span>Create Task</span>  
+              <span>Create Task</span>
             </a>
           </li>
           <li class="menu-item" >
             <a>
               <mat-icon aria-hidden="false" aria-label="Example home icon">view_list</mat-icon>
-              <span>My Created Tasks</span>  
+              <span>My Created Tasks</span>
             </a>
           </li>
         </ul>
@@ -48,26 +48,26 @@
       <li class="menu-item">
         <a [routerLink]="'/user/workspace/' + userWorkspaceInfo.id + '/calendar'">
           <mat-icon aria-hidden="false" aria-label="Example home icon">calendar_month</mat-icon>
-          <span>Calendar</span>  
+          <span>Calendar</span>
         </a>
       </li>
       <ul class="group-menu">
         <li class="menu-item">
           <a [routerLink]="'/user/workspaces'">
             <mat-icon aria-hidden="false" aria-label="Example home icon">featured_play_list</mat-icon>
-            <span>Workspace list</span>  
+            <span>Workspace list</span>
           </a>
         </li>
         <li class="menu-item">
           <a [routerLink]="'/user/workspace/' +userWorkspaceInfo.id + '/info'">
             <mat-icon aria-hidden="false" aria-label="Example home icon">info</mat-icon>
-            <span>Workspace info</span>  
+            <span>Workspace info</span>
           </a>
         </li>
-        <li class="menu-item">
+        <li *appIfUserRoles='[1]' class="menu-item">
           <a [routerLink]="'/user/workspace/' + userWorkspaceInfo.id + '/settings'">
             <mat-icon aria-hidden="false" aria-label="Example home icon">admin_panel_settings</mat-icon>
-            <span>Workspace settings</span>  
+            <span>Workspace settings</span>
           </a>
         </li>
       </ul>
