@@ -32,34 +32,9 @@
           <mat-error *ngIf="taskForm.controls['StatusId'].invalid && taskForm.controls['StatusId'].touched">Invalid status</mat-error>
         </mat-form-field>
       </div>
+      
+      <app-workspace-task-assign [assignMembers]="assignedMembers" (isValid)="checkIsValidAssignedUser($event)"></app-workspace-task-assign>  
 
-      <form #assignForm="ngForm" [formGroup]="demoForm" class="assign-modal" (ngSubmit)="Ok()">
-        <button mat-raised-button (click)="AssignMember()" class="additional">Add members</button>
-        <section formArrayName="demoArray" *ngFor="let member of assignedMembers;let i = index;" class="member-section">
-
-          <div>
-            <mat-form-field appearance="fill" class="assign-fields">
-              <mat-label>Member</mat-label>
-              <mat-select [(ngModel)]="member.userId" name="userId_{{i}}" [ngModelOptions]="{standalone: true}">
-                <mat-option *ngFor="let item of workspaceMemberList" [value]="item.id" [disabled]="Contains(item.id)">
-                  {{item.userName}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-
-            <mat-form-field appearance="fill" class="assign-fields">
-              <mat-label>Role</mat-label>
-              <mat-select [(ngModel)]="member.roleTagId" name="role_{{i}}" [ngModelOptions]="{standalone: true}">
-                <mat-option *ngFor="let item of taskRole" [value]="item.id">
-                  {{item.name}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <button mat-raised-button (click)="DeAssignMember(i)"  class="warning">remove</button>
-
-        </section>
-      </form>
       <div class="modal-button">
         <button mat-raised-button (сlick)="CreateNewTask()" class="button-accept">Create</button>
       </div>
