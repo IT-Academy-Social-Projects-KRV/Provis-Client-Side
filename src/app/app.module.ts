@@ -39,6 +39,7 @@ import { WorkspaceMemberListComponent } from './presentation/components/workspac
 import { WorkspaceCalendarComponent } from './presentation/components/workspace-components/workspace-calendar/workspace-calendar.component';
 import { WorkspaceTaskListComponent } from './presentation/components/workspace-components/task-components/workspace-task-list/workspace-task-list.component';
 import { WorkspaceUserTaskListComponent } from './presentation/components/workspace-components/task-components/workspace-user-task-list/workspace-user-task-list.component';
+import { WorkspaceTaskAssignComponent } from './presentation/components/workspace-components/task-components/workspace-task-assign/workspace-task-assign.component';
 
 import { AuthInterceptorProvider } from './core/services/interceptors/auth.interceptor';
 import { WorkspaceService } from './core/services/workspace.service';
@@ -89,7 +90,8 @@ import { DataShareService } from './core/services/DataShare.service';
     WorkspaceTaskListComponent,
     WorkspaceTaskCreateComponent,
     WorkspaceUpdateComponent,
-    WorkspaceUserTaskListComponent
+    WorkspaceUserTaskListComponent,
+    WorkspaceTaskAssignComponent
   ],
   imports: [
     BrowserModule,
