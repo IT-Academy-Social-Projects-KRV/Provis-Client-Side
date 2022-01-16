@@ -74,7 +74,11 @@ export class WorkspaceUserTaskListComponent implements OnInit {
   }
 
   showTask(taskId : number) {
-    let dialogRef = this.dialog.open(WorkspaceTaskEditComponent, {autoFocus: false});
+    let dialogRef = this.dialog.open(WorkspaceTaskEditComponent, {
+      autoFocus: false,
+      height: '85%',
+      width: '85%'
+    });
     dialogRef.componentInstance.workspaceId = this.workspaceId;
     dialogRef.componentInstance.taskId = taskId;
   }
