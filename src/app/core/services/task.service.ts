@@ -5,6 +5,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TaskStatus } from '../models/task/taskStatus';
 import { TaskWorkerRole } from '../models/task/taskWorkerRoles';
+import { TaskAttachment } from '../models/task/taskAttachment';
+import { UnloadTaskAttachments } from '../models/task/uploadTaskAttachments';
 
 
 @Injectable({
@@ -43,5 +45,30 @@ export class TaskService {
 
   getWorkerRole(){
     return this.http.get<TaskWorkerRole[]>(this.rolesUrl, this.httpOption);
+  }
+
+  getAttachmentList(workspaceId: number, taskId: number): Observable<TaskAttachment[]> {
+
+    return this.http.get<TaskAttachment[]>(this.taskServiceUrl + taskId + '/workspace/' + workspaceId + '/attachments', this.httpOption);
+  }
+
+  getAttachment(workspaceId: number, attachmentId: number): Observable<File> {
+
+    const options = {
+      headers: this.httpOption.headers,
+      responseType: 'Blob' as 'json'
+    }
+
+    return this.http.get<File>(this.taskServiceUrl + '/workspace/' + workspaceId + '/attachment'+ attachmentId, options);
+  }
+
+  uploadAttachmentList(attachmentList: UnloadTaskAttachments): Observable<void> {
+
+    return this.http.put<void>(this.taskServiceUrl + 'atachments', attachmentList, this.httpOption);
+  }
+
+  deleteAttachment(workspaceId: number, attachmentId: number): Observable<void> {
+
+    return this.http.delete<void>(this.taskServiceUrl + '/workspace/' + workspaceId + '/attachment'+ attachmentId, this.httpOption);
   }
 }

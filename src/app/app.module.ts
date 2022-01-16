@@ -20,6 +20,7 @@ import { MatSelectModule } from '@angular/material/select';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatListModule} from '@angular/material/list';
 
 import { HomeComponent } from './presentation/components/home-components/home/home.component';
 import { AboutComponent } from './presentation/components/home-components/about/about.component';
@@ -39,6 +40,7 @@ import { WorkspaceMemberListComponent } from './presentation/components/workspac
 import { WorkspaceCalendarComponent } from './presentation/components/workspace-components/workspace-calendar/workspace-calendar.component';
 import { WorkspaceTaskListComponent } from './presentation/components/workspace-components/task-components/workspace-task-list/workspace-task-list.component';
 import { WorkspaceUserTaskListComponent } from './presentation/components/workspace-components/task-components/workspace-user-task-list/workspace-user-task-list.component';
+import { WorkspaceTaskAttachmentsComponent } from './presentation/components/workspace-components/task-components/workspace-task-attachments/workspace-task-attachments.component';
 
 import { AuthInterceptorProvider } from './core/services/interceptors/auth.interceptor';
 import { WorkspaceService } from './core/services/workspace.service';
@@ -89,7 +91,8 @@ import { DataShareService } from './core/services/DataShare.service';
     WorkspaceTaskListComponent,
     WorkspaceTaskCreateComponent,
     WorkspaceUpdateComponent,
-    WorkspaceUserTaskListComponent
+    WorkspaceUserTaskListComponent,
+    WorkspaceTaskAttachmentsComponent
   ],
   imports: [
     BrowserModule,
@@ -110,7 +113,8 @@ import { DataShareService } from './core/services/DataShare.service';
     MatSelectModule,
     CdkAccordionModule,
     MatExpansionModule,
-    DragDropModule
+    DragDropModule,
+    MatListModule
   ],
   providers: [
     AuthInterceptorProvider,

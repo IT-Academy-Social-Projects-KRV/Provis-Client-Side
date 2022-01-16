@@ -1,0 +1,20 @@
+<div class="attachments-container">
+<mat-list itemSize="3">
+
+  <div mat-subheader>Attachments</div>
+
+  <mat-list-item title="Add files" (click)="fileInput.click()" [disabled]="attachments.length > 10">
+    <mat-icon mat-list-icon>add_circle</mat-icon>
+    <div mat-line><u>Add</u></div>
+    <input #fileInput type="file" style="display:none;" multiple (change)="uploadAttachments($event)"/>
+  </mat-list-item>
+
+  <mat-list-item *ngFor="let attachment of attachments"
+  [title]="'Download ' + attachment.name"
+  (click)="downloadFile(attachment.id)">
+    <mat-icon mat-list-icon>perm_media</mat-icon>
+    <div mat-line>{{attachment.name}}</div>
+  </mat-list-item>
+
+</mat-list>
+</div>

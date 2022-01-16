@@ -1,0 +1,13 @@
+
+.attachments-container {
+    width: 600 px;
+    /* height: 200px;
+    overflow-y: scroll; */
+}
+.mat-list-item {
+    min-width: 400px;
+    cursor: pointer;
+}
+.mat-list-item:hover{
+    background-color: rgb(235, 235, 235);
+}
