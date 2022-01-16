@@ -1,8 +1,7 @@
 import { WorkspaceService } from './../services/workspace.service';
-import Swal from 'sweetalert2';
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
-import { firstValueFrom, map, Observable } from 'rxjs';
+import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { AlertService } from '../services/alerts.service';
 
 
@@ -19,11 +18,11 @@ export class PermissionGuard implements CanActivate {
   constructor(
     private router: Router,
     private workspaceService: WorkspaceService,
-    private alertService: AlertService){}
+    private alertService: AlertService) {}
 
-  async canActivate(route: ActivatedRouteSnapshot) : Promise<boolean>{
+  async canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
 
-    if(route.routeConfig?.data){
+    if(route.routeConfig?.data) {
       this.allowedUserRoles = route.routeConfig.data['userRoles'];
       this.workspaceId = route.parent?.params['id'];
       this.currentUserRole = (await firstValueFrom(

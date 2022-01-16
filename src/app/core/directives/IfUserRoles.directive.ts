@@ -12,14 +12,16 @@ export class IfUserRolesDirective implements OnInit {
 
   currentUserRole: number;
 
-  constructor(private viewContainerRef: ViewContainerRef, private templateRef: TemplateRef<any>, private dataShare: DataShareService) { }
+  constructor(
+    private viewContainerRef: ViewContainerRef,
+    private templateRef: TemplateRef<any>,
+    private dataShare: DataShareService) { }
 
   ngOnInit() {
-    this.dataShare.workspaceInfo.subscribe(data =>{
+    this.dataShare.workspaceInfo.subscribe(data => {
       this.currentUserRole = data.role;
 
-      if(this.appIfUserRoles.indexOf(this.currentUserRole) != -1)
-      {
+      if(this.appIfUserRoles.indexOf(this.currentUserRole) != -1) {
         this.viewContainerRef.createEmbeddedView(this.templateRef);
       } else {
         this.viewContainerRef.clear();
