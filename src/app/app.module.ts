@@ -93,9 +93,8 @@ import { DataShareService } from './core/services/DataShare.service';
     WorkspaceTaskCreateComponent,
     WorkspaceUpdateComponent,
     WorkspaceUserTaskListComponent,
-    IfUserRolesDirective
+    IfUserRolesDirective,
     WorkspaceTaskEditComponent
-
   ],
   imports: [
     BrowserModule,
