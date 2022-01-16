@@ -1,4 +1,3 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { WorkspaceUpdate } from '../models/workspace/workspaceUpdate';
 import { workspaceUrl,
@@ -18,7 +17,9 @@ import { WorkspaceInfoInvite } from '../models/workspace/workspaceInfoInvite';
 import { CreateWorkspace } from '../models/workspace/createWorkspace';
 import { WorkspaceInfo } from '../models/workspace/workspaceInfo';
 import { WorkspaceRole } from '../models/workspace/workspaceRole';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { WorkspaceDescription } from '../models/workspace/workspaceDescription';
+
 
 @Injectable({
   providedIn: 'root',
