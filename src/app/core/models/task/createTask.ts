@@ -1,7 +1,7 @@
 export class CreateTask {
     name: string;
     description: string;
-    dateOfEnd: string;
+    dateOfEnd: Date;
     workspaceId: number;
     statusId: number;
     assignedUsers: AssignedMember[];

@@ -41,6 +41,7 @@ import { WorkspaceCalendarComponent } from './presentation/components/workspace-
 import { WorkspaceTaskListComponent } from './presentation/components/workspace-components/task-components/workspace-task-list/workspace-task-list.component';
 import { WorkspaceUserTaskListComponent } from './presentation/components/workspace-components/task-components/workspace-user-task-list/workspace-user-task-list.component';
 import { WorkspaceTaskAttachmentsComponent } from './presentation/components/workspace-components/task-components/workspace-task-attachments/workspace-task-attachments.component';
+import { WorkspaceTaskAssignComponent } from './presentation/components/workspace-components/task-components/workspace-task-assign/workspace-task-assign.component';
 
 import { AuthInterceptorProvider } from './core/services/interceptors/auth.interceptor';
 import { WorkspaceService } from './core/services/workspace.service';
@@ -97,6 +98,7 @@ import { WorkspaceTaskHistoryComponent } from './presentation/components/workspa
     WorkspaceUpdateComponent,
     WorkspaceUserTaskListComponent,
     WorkspaceTaskAttachmentsComponent,
+    WorkspaceTaskAssignComponent,
     WorkspaceTaskEditComponent,
     WorkspaceTaskHistoryComponent,
     IfUserRolesDirective,

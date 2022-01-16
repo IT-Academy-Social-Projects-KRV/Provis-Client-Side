@@ -36,13 +36,13 @@ export class WorkspaceMemberManagmentComponent implements OnInit {
   workspaceActiveInviteInfo: UserInvite[];
   userWorkspaceInfo = new WorkspaceInfo;
   workspaceUserList: WorkspaceMembers[];
+  workspaceMember: WorkspaceMembers;
   
   constructor(
     private route: ActivatedRoute, 
     public dialog: MatDialog, 
     private alertService: AlertService,
     private workspaceServise: WorkspaceService, 
-    private userService: UserService,
     public authSrvice: AuthenticationService) {}
   
   ngOnInit() {
@@ -58,6 +58,15 @@ export class WorkspaceMemberManagmentComponent implements OnInit {
       });
   }
   
+  isOwner(workspaceMember: WorkspaceMembers){
+    if (workspaceMember.role == 1) {
+      return true
+    }
+    else {
+      return false
+    }
+  }
+
   modalInvites() {
     let dialogRef = this.dialog.open(WorkspaceInviteComponent, {autoFocus: false});
     dialogRef.componentInstance.workspaceId = this.workspaceId;
