@@ -2,37 +2,42 @@
   <div class="modal-title">
     <span class="title-invite">Edit Task</span>
   </div>
-  <form class="editTask-form" [formGroup]="detalInfoForm" (ngSubmit)="EditTask()">
-    <div>
 
-      <mat-form-field hintLabel="Max 50 characters" appearance="fill">
-        <mat-label>Name</mat-label>
-        <input type="text" matInput placeholder="Task name" #Name maxlength=50 formControlName="Name" required>
-        <mat-error *ngIf="detalInfoForm.controls['Name'].invalid && detalInfoForm.controls['Name'].touched">Invalid name</mat-error>
-      </mat-form-field>
+  <div class="edit-task-section">
 
-      <mat-form-field appearance="fill">
-        <mat-label>Description</mat-label>
-        <input type="text" matInput placeholder="Task description" formControlName="Description">
-        <mat-error *ngIf="detalInfoForm.controls['Description'].invalid && detalInfoForm.controls['Description'].touched">Invalid description</mat-error>
-      </mat-form-field>
+      <div class="task-section">
+        <form class="editTask-form" [formGroup]="detalInfoForm" (ngSubmit)="EditTask()">
+          <mat-form-field hintLabel="Max 50 characters" appearance="fill">
+            <mat-label>Name</mat-label>
+            <input type="text" matInput placeholder="Task name" #Name maxlength=50 formControlName="Name" required>
+            <mat-error *ngIf="detalInfoForm.controls['Name'].invalid && detalInfoForm.controls['Name'].touched">Invalid name</mat-error>
+          </mat-form-field>
 
-      <div class="form-half-input">
-        <mat-form-field appearance="fill">
-          <mat-label>Due date</mat-label>
-          <input type="date" [ngModel] ="deadLine | date:'yyyy-MM-dd'" (ngModelChange)="deadLine = $event" matInput placeholder="Task deadline" formControlName="DateOfEnd" required>
-          <mat-error *ngIf="detalInfoForm.controls['DateOfEnd'].invalid && detalInfoForm.controls['DateOfEnd'].touched">Invalid Due date</mat-error>
-        </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <input type="text" matInput placeholder="Task description" formControlName="Description">
+            <mat-error *ngIf="detalInfoForm.controls['Description'].invalid && detalInfoForm.controls['Description'].touched">Invalid description</mat-error>
+          </mat-form-field>
 
-        <div [textContent]="'Current status: ' + statusList[selectedStatus - 1].name" ></div>
+          <div class="form-half-input">
+            <mat-form-field appearance="fill">
+              <mat-label>Due date</mat-label>
+              <input type="date" [ngModel] ="deadLine | date:'yyyy-MM-dd'" (ngModelChange)="deadLine = $event" matInput placeholder="Task deadline" formControlName="DateOfEnd" required>
+              <mat-error *ngIf="detalInfoForm.controls['DateOfEnd'].invalid && detalInfoForm.controls['DateOfEnd'].touched">Invalid Due date</mat-error>
+            </mat-form-field>
 
+            <div [textContent]="'Current status: ' + statusList[selectedStatus - 1].name" ></div>
+
+          </div>
+
+          <div class="modal-button">
+            <button mat-raised-button (click)="EditTask()" class="button-accept">Save</button>
+          </div>
+        </form>
       </div>
-
-      <div class="modal-button">
-        <button mat-raised-button (click)="EditTask()" class="button-accept">Save</button>
+      
+      <div class="task-section">
+        <app-workspace-task-history></app-workspace-task-history>
       </div>
-
-    </div>
-  </form>
-  <app-workspace-task-history></app-workspace-task-history>
+    </div> 
 </div>
