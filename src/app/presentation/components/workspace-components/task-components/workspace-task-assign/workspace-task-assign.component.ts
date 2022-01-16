@@ -1,11 +1,12 @@
 import { Component, Input, OnInit, Output , EventEmitter} from '@angular/core';
-import { FormBuilder, NgForm} from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { AssignedMember } from 'src/app/core/models/task/createTask';
 import { TaskWorkerRole } from 'src/app/core/models/task/taskWorkerRoles';
 import { WorkspaceMembers } from 'src/app/core/models/workspace/workspaceMembers';
 import { TaskService } from 'src/app/core/services/task.service';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
-import { AlertService } from 'src/app/core/services/alerts.service';
+import { DataShareService } from 'src/app/core/services/DataShare.service';
+import { WorkspaceInfo } from 'src/app/core/models/workspace/workspaceInfo';
 
 @Component({
   selector: 'app-workspace-task-assign',
@@ -14,23 +15,25 @@ import { AlertService } from 'src/app/core/services/alerts.service';
 })
 
 export class WorkspaceTaskAssignComponent implements OnInit {
-  @Input() public workspaceId: number;
   @Input() public assignMembers: AssignedMember[];
   @Output() public isValid = new EventEmitter<boolean>(false);
 
+  public workspaceId: number;
   workspaceMembers: WorkspaceMembers[];
   taskRoles: TaskWorkerRole[];
   userNameValid = false;
-  roleValid = false;
+  roleValid = false; 
 
   constructor(
-    private formBuilder:FormBuilder,
+    private dataShare: DataShareService,
     private workspaceService: WorkspaceService,
-    private taskServise: TaskService,
-    private alertService: AlertService) {
+    private taskServise: TaskService) {
    }
 
   ngOnInit() {
+    this.dataShare.workspaceInfo.subscribe((data : WorkspaceInfo) => {
+      this.workspaceId = data.id;
+    })
     this.workspaceService.getWorkspaceUserList(this.workspaceId).subscribe((data: WorkspaceMembers[]) =>{
       this.workspaceMembers = data;
     });
