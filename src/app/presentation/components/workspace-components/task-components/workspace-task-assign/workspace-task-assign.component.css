@@ -2,36 +2,35 @@
     width: 100%;
     margin: 5px auto;
   }
-  .member-section {
+.member-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 10px;
   }
-  .mat-form-field-infix {
+.mat-form-field-infix {
     width: 100px;
   }
-  .assign-fields {
+.assign-fields {
     margin-right: 20px;
   }
-  .form-half-input {
+.form-half-input {
     display: flex;
     justify-content: space-between;
   }
-  .form-half-input mat-form-field {
+.form-half-input mat-form-field {
     width: 48%;
     margin: 0px;
   }
-  .modal-button {
+.modal-button {
     display: flex;
     justify-content: flex-end;
     border-top: 2px solid #3b394a;
     padding-top: 15px;
     margin-top: 15px;
   }
-  .member-section div {
+.member-section div {
     display: flex;
     justify-content: space-between;
     width: 100%;
   }
-  
