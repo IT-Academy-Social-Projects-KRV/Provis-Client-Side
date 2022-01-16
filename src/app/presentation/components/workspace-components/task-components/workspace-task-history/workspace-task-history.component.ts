@@ -15,11 +15,9 @@ export class WorkspaceTaskHistoryComponent implements OnInit {
   constructor(private taskService: TaskService) {}
 
   ngOnInit() {
-    
     this.taskService.gethistoryTask(this.taskId).subscribe((data: TaskHistory[]) => {
       this.history = data;
     });
-
   }
-
+  
 }
