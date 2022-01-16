@@ -1,5 +1,5 @@
 export class WorkspaceCard {
     id: number;
     name: string;
-    role: string;
+    role: number;
 }

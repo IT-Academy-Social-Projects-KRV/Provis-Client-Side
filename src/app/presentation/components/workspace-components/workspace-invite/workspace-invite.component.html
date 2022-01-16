@@ -27,7 +27,7 @@
               to<span class="toUserColor"> {{item.toUserName}}</span>
            </div>
           </div>
-          <div *ngIf="(item.fromUserName == currentUserName && currentUserRole.role == 'Manager') || currentUserRole.role == 'Owner'">
+          <div *ngIf="(item.fromUserName == currentUserName && currentUserRole.role == 2) || currentUserRole.role == 1">
             <button class="warning" mat-raised-button color="Primary" (click)='DeleteInvite(item.inviteId)'>
               Delete
             </button>

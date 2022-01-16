@@ -10,7 +10,7 @@ import { inviteUrl,
          twoFactorCodeUrl,
          imageUrl,
          activeInviteUrl} from 'src/app/configs/api-endpoints';
-import { Observable, pipe } from 'rxjs';
+import { Observable} from 'rxjs';
 import { UserInvite } from '../models/user/userInvite';
 import { UserInfoActiveInvites} from '../models/user/userInfoActiveInvites';
 import { UserProfile } from '../models/user/userProfile';
@@ -32,6 +32,7 @@ export class UserService {
   private readonly twoFactorCodeUrl = twoFactorCodeUrl;
   private readonly imageUrl = imageUrl;
   private readonly workspaceUrl = workspaceUrl;
+
 
   private httpOption = {
     headers: new HttpHeaders({
@@ -105,9 +106,5 @@ export class UserService {
     formData.append('image', image, image.name);
 
     return this.http.put<void>(this.imageUrl, formData, this.httpOption);
-  }
-
-  userWorkspaceInfo(workspaceId:number) :Observable<WorkspaceInfo> {
-    return this.http.get<WorkspaceInfo>(this.workspaceUrl + "/" + workspaceId + "/info", this.httpOption)
   }
 }

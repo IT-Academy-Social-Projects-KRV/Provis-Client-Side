@@ -6,7 +6,8 @@ import { workspaceUrl,
     workspacesUrl,
     inviteUrl,
     taskUrl,
-    changeWorkspaceRoleUrl } from 'src/app/configs/api-endpoints';
+    changeWorkspaceRoleUrl,
+    workspaceRolesUrl} from 'src/app/configs/api-endpoints';
 import { Observable } from 'rxjs';
 import { WorkspaceCard } from '../models/workspace/workspaceCard';
 import { InviteToWorkspace } from '../models/workspace/inviteToWorkspace';
@@ -15,6 +16,9 @@ import { WorkspaceChangeRole } from '../models/workspace/workspaceChangeRole';
 import { WorkspaceMembers } from '../models/workspace/workspaceMembers';
 import { WorkspaceInfoInvite } from '../models/workspace/workspaceInfoInvite';
 import { CreateWorkspace } from '../models/workspace/createWorkspace';
+import { WorkspaceInfo } from '../models/workspace/workspaceInfo';
+import { WorkspaceDescription } from '../models/workspace/WorkspaceDescription';
+import { WorkspaceRole } from '../models/workspace/workspaceRole';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +31,7 @@ export class WorkspaceService {
     private readonly workspaceServiceUrl = workspaceServiceUrl;
     private readonly taskUrl = taskUrl;
     private readonly changeWorkspaceRoleUrl = changeWorkspaceRoleUrl;
+    private readonly workspaceRolesUrl = workspaceRolesUrl;
 
     private httpOption = {
         headers: new HttpHeaders({
@@ -77,5 +82,17 @@ export class WorkspaceService {
 
     public changeWorkspaceRole(body: WorkspaceChangeRole): Observable<void>{
         return this.http.put<void>(this.changeWorkspaceRoleUrl, body, this.httpOption);
+    }
+
+    public getWorkspaceInfo(workspaceId: number): Observable<WorkspaceInfo> {
+        return this.http.get<WorkspaceInfo>(this.workspaceServiceUrl + workspaceId + "/info", this.httpOption)
+    }
+
+    public getWorkspaceDecscription(workspaceId: number): Observable<WorkspaceDescription> {
+        return this.http.get<WorkspaceDescription>(this.workspaceServiceUrl + workspaceId + "/description", this.httpOption)
+    }
+
+    public getWorkspaceRoles(): Observable<WorkspaceRole[]> {
+        return this.http.get<WorkspaceRole[]>(this.workspaceRolesUrl, this.httpOption)
     }
 }

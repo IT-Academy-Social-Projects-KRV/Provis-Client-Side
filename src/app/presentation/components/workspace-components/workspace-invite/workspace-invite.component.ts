@@ -40,7 +40,7 @@ export class WorkspaceInviteComponent implements OnInit {
       this.workspaceActiveInviteInfo = data;
     });
 
-    this.userService.userWorkspaceInfo(this.workspaceId).subscribe((data: WorkspaceInfo) => {
+    this.workspaceService.getWorkspaceInfo(this.workspaceId).subscribe((data: WorkspaceInfo) => {
       this.currentUserRole = data;
       this.currentUserName = this.authenticationService.currentUser.username;
     });
