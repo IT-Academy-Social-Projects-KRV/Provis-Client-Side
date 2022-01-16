@@ -8,6 +8,8 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { WorkspaceMembers } from 'src/app/core/models/workspace/workspaceMembers';
+import { MatDialog } from '@angular/material/dialog';
+import { WorkspaceTaskEditComponent } from '../workspace-task-edit/workspace-task-edit.component';
 
 
 @Component({
@@ -30,7 +32,7 @@ export class WorkspaceUserTaskListComponent implements OnInit {
   listStatus: string[] = [];
   statusTasks:{tasks: Tasks, userId: string} = {tasks:{}, userId:''};
 
-  constructor(private userTask: TaskService) { }
+  constructor(private userTask: TaskService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.userTask.getStatusTask().subscribe(data => {
@@ -70,4 +72,11 @@ export class WorkspaceUserTaskListComponent implements OnInit {
     };
     this.userTask.updateStatusTask(taskTo).subscribe();
   }
+
+  showTask(taskId : number) {
+    let dialogRef = this.dialog.open(WorkspaceTaskEditComponent, {autoFocus: false});
+    dialogRef.componentInstance.workspaceId = this.workspaceId;
+    dialogRef.componentInstance.taskId = taskId;
+  }
+
 }
