@@ -57,6 +57,8 @@ import { ChangeTwoFaComponent } from './presentation/components/user-components/
 import { AlertService } from './core/services/alerts.service';
 import { ErrorInterceptorProvider } from './core/services/interceptors/error.interceptor';
 import { WorkspaceTaskEditComponent } from './presentation/components/workspace-components/task-components/workspace-task-edit/workspace-task-edit.component';
+import { DataShareService } from './core/services/DataShare.service';
+
 
 @NgModule({
   declarations: [
@@ -119,7 +121,8 @@ import { WorkspaceTaskEditComponent } from './presentation/components/workspace-
     AuthenticationService,
     WorkspaceService,
     UserService,
-    AlertService
+    AlertService,
+    DataShareService
   ],
   bootstrap: [AppComponent]
 })
