@@ -209,14 +209,14 @@ button.warning:hover {
 }
 a.link-button.button-accept,
 button.button-accept {
-    background: #3e724c;
+    background: #486c61;
     color: #eee;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 600;
 }
 a.link-button.button-accept:hover,
 button.button-accept:hover {
-    background: #008725;
+    background: #096e24;
 }
 .right-side-title {
     border-radius: 4px;
