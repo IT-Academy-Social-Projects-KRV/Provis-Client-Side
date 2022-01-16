@@ -49,8 +49,8 @@ export class WorkspaceTaskCreateComponent implements OnInit {
     this.assignedMembers = [];
   }
 
-  CreateNewTask(): void{
-    if(this.taskForm.valid && this.isAssignedValid) {
+  CreateNewTask(): void {
+    if(this.taskForm.valid && (this.isAssignedValid || this.assignedMembers.length == 0)) {
       this.createTask = this.taskForm.value;
       this.createTask.workspaceId = this.workspaceId;
       this.createTask.statusId = this.selectedStatus;
