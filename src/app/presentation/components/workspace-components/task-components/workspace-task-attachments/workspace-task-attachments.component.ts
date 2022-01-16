@@ -4,6 +4,8 @@ import { UserService } from 'src/app/core/services/user.service';
 import { saveAs } from 'file-saver';
 import { environment } from 'src/environments/environment';
 import { AlertService } from 'src/app/core/services/alerts.service';
+import { TaskService } from 'src/app/core/services/task.service';
+import { UnloadTaskAttachment } from 'src/app/core/models/task/uploadTaskAttachments';
 
 @Component({
   selector: 'app-workspace-task-attachments',
@@ -18,21 +20,18 @@ export class WorkspaceTaskAttachmentsComponent implements OnInit {
   maxFileNumber: number = environment.attachmentsSettings.maxFileNumber;
   maxFileSize: number = environment.attachmentsSettings.maxFileSize;
 
-  attachments: TaskAttachment[] = [
-    {id: 1, name: 'File1safsdfdgdfghfhhgfhfdadsjlfsdhfjdhgsjkdlfhgjlhgfsdjklhgldfg;hsfdjkgkdfghfdjfsgafdkg[jrfa[po[gj]]].type'},
-    {id: 2, name: 'File2.type'},
-    {id: 3, name: 'File3.type'},
-    {id: 4, name: 'File4.type'},
-    {id: 5, name: 'File5.type'}
-  ];
+  attachments: TaskAttachment[] = [];
 
-  constructor(private userService: UserService, private alertService: AlertService) { }
+  constructor(private taskService: TaskService, private alertService: AlertService) { }
 
   ngOnInit() {
+    this.getAttachmentList();
   }
 
   getAttachmentList() {
-
+    this.taskService.getAttachmentList(this.workspaceId, this.taskId).subscribe((data) =>{
+      this.attachments = data;
+    });
   }
 
   uploadAttachment(event: any) {
@@ -45,10 +44,22 @@ export class WorkspaceTaskAttachmentsComponent implements OnInit {
       return;
     }
 
+    let uploadFile = new UnloadTaskAttachment();
+    uploadFile.workspaceId = this.workspaceId;
+    uploadFile.taskId = this.taskId;
+    uploadFile.attachment = file;
+
+    this.taskService.uploadAttachment(uploadFile).subscribe((data)=>{
+      this.attachments.push(data);
+    },
+    (err) => {
+      this.alertService.errorMessage(err);
+    })
+
   }
 
   downloadFile(attachmentId: number) {
-    this.userService.getUserImage().subscribe(file => {
+    this.taskService.getAttachment(this.workspaceId, attachmentId).subscribe(file => {
       saveAs(file, file.name);
     });
   }
@@ -62,5 +73,8 @@ export class WorkspaceTaskAttachmentsComponent implements OnInit {
   }
 
   deleteAttachment(attachmentId: number) {
+    this.taskService.deleteAttachment(this.workspaceId, attachmentId).subscribe(() => {
+      this.attachments.splice(this.attachments.findIndex(x=>x.id == attachmentId), 1);
+    });
   }
 }

@@ -1,5 +1,5 @@
-export class UnloadTaskAttachments {
+export class UnloadTaskAttachment {
     workspaceId: number;
     taskId: number;
-    attachments: File[];
+    attachment: File;
 }

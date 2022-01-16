@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 import { TaskStatus } from '../models/task/taskStatus';
 import { TaskWorkerRole } from '../models/task/taskWorkerRoles';
 import { TaskAttachment } from '../models/task/taskAttachment';
-import { UnloadTaskAttachments } from '../models/task/uploadTaskAttachments';
+import { UnloadTaskAttachment} from '../models/task/uploadTaskAttachments';
 import { TaskDetalInfo } from '../models/task/taskDetalInfo';
 import { TaskChangeInfo } from '../models/task/taskChangeInfo';
 import { TaskHistory } from '../models/task/taskHistory';
@@ -52,7 +52,7 @@ export class TaskService {
 
   getAttachmentList(workspaceId: number, taskId: number): Observable<TaskAttachment[]> {
 
-    return this.http.get<TaskAttachment[]>(this.taskServiceUrl + taskId + '/workspace/' + workspaceId + '/attachments', this.httpOption);
+    return this.http.get<TaskAttachment[]>(this.taskServiceUrl +'task/'+ taskId + '/workspace/' + workspaceId + '/attachments', this.httpOption);
   }
 
   getAttachment(workspaceId: number, attachmentId: number): Observable<File> {
@@ -62,18 +62,24 @@ export class TaskService {
       responseType: 'Blob' as 'json'
     }
 
-    return this.http.get<File>(this.taskServiceUrl + '/workspace/' + workspaceId + '/attachment'+ attachmentId, options);
+    return this.http.get<File>(this.taskServiceUrl + 'task/workspace/' + workspaceId + '/attachment/'+ attachmentId, options);
   }
 
-  uploadAttachmentList(attachmentList: UnloadTaskAttachments): Observable<void> {
+  uploadAttachment(attachment:  UnloadTaskAttachment): Observable<TaskAttachment> {
 
-    return this.http.put<void>(this.taskServiceUrl + 'atachments', attachmentList, this.httpOption);
+    const formData = new FormData();
+    formData.append('attachment', attachment.attachment, attachment.attachment.name);
+    formData.append('taskId', attachment.taskId.toString());
+    formData.append('workspaceId', attachment.workspaceId.toString());
+
+    return this.http.post<TaskAttachment>(this.taskServiceUrl + 'task/attachments', formData, this.httpOption);
   }
 
   deleteAttachment(workspaceId: number, attachmentId: number): Observable<void> {
 
-    return this.http.delete<void>(this.taskServiceUrl + '/workspace/' + workspaceId + '/attachment'+ attachmentId, this.httpOption);
+    return this.http.delete<void>(this.taskServiceUrl + 'task/workspace/' + workspaceId + '/attachment/'+ attachmentId, this.httpOption);
   }
+
   public getTaskInfo(taskId: number):Observable<TaskDetalInfo>{
     return this.http.get<TaskDetalInfo>(this.taskUrl + "/" + taskId, this.httpOption);
   }
