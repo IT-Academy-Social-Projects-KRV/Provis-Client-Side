@@ -1,3 +1,25 @@
 <div class="right-side-title">
   <span> Member list</span>
 </div>
+<div class="user-list">
+  <mat-card *ngFor="let user of userList" class="user-card"
+    [style.background-color]="userCardColor[user.role % userCardColor.length]">
+    <div class="user-section">
+      <div class="avatar">
+        <img src="../../../../../assets/img/user-profile-image.png">
+        <mat-card-subtitle class="user-role">
+          <span>{{getWorkspaceRoleName(user.role)}}</span>
+        </mat-card-subtitle>
+      </div>
+      <div class="title-section">
+        <mat-card-title class="title">
+          <span>{{user.name}}</span>
+          <span>{{user.surname}}</span>
+        </mat-card-title>
+        <mat-card-subtitle class="user-email">
+           <a href="mailto:{{user.email}}">{{user.email}}</a>
+        </mat-card-subtitle>
+      </div>
+    </div>
+  </mat-card>
+</div>
