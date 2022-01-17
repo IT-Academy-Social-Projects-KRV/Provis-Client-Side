@@ -19,6 +19,7 @@ import { WorkspaceInfo } from '../models/workspace/workspaceInfo';
 import { WorkspaceRole } from '../models/workspace/workspaceRole';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { WorkspaceDescription } from '../models/workspace/workspaceDescription';
+import { UserWorkspaceInfo } from '../models/user/userWorkspaceInfo';
 
 
 @Injectable({
@@ -98,5 +99,10 @@ export class WorkspaceService {
 
     public getWorkspaceRoles(): Observable<WorkspaceRole[]> {
         return this.http.get<WorkspaceRole[]>(this.workspaceRolesUrl, this.httpOption)
+    }
+
+    public getWorkspaceUserInfo(workspaceId: number): Observable<UserWorkspaceInfo[]> {
+        return this.http.get<UserWorkspaceInfo[]>(
+            this.workspaceServiceUrl + workspaceId + "/members", this.httpOption);
     }
 }
