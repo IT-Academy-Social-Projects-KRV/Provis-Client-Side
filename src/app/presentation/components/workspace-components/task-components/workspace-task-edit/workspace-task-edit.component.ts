@@ -25,6 +25,7 @@ export class WorkspaceTaskEditComponent implements OnInit {
   statusList: TaskStatus[];
   taskRole: TaskWorkerRole[];
   selectedStatus: number;
+  storyPoints: number;
   deadLine: Date;
 
   workspaceMemberList: WorkspaceMembers[];
@@ -35,14 +36,14 @@ export class WorkspaceTaskEditComponent implements OnInit {
   constructor(private workspaceService: WorkspaceService,
     private forbBuilder: FormBuilder,
     private alertService: AlertService,
-    private workspaceServ: WorkspaceService,
     public dialog: MatDialog,
     private taskServise: TaskService) {
     this.detalInfoForm = forbBuilder.group({
       "Name": ["", [Validators.maxLength(50)]],
       "Description": ["", [Validators.maxLength(100)]],
       "DateOfEnd": ["",],
-      "StatusId": ["", Validators.required]
+      "StatusId": ["", Validators.required],
+      "StoryPoints": ["", Validators.maxLength(2)]
     }),
       this.demoForm = this.forbBuilder.group({
         demoArray: this.forbBuilder.array([])
@@ -67,7 +68,8 @@ export class WorkspaceTaskEditComponent implements OnInit {
         "Name": data.name,
         "Description": data.description,
         "DateOfEnd": data.deadline,
-        "StatusId": data.statusId
+        "StatusId": data.statusId,
+        "StoryPoints": data.storyPoints
       });
       this.deadLine = data.deadline;
       this.selectedStatus = data.statusId;
@@ -75,13 +77,14 @@ export class WorkspaceTaskEditComponent implements OnInit {
     });
 
   }
+
   EditTask() {
     if (this.detalInfoForm.valid) {
-
       this.taskChangeInfo = this.detalInfoForm.value;
       this.taskChangeInfo.id = this.taskId;
       this.taskChangeInfo.workspaceId = this.workspaceId;
       this.taskChangeInfo.deadline = this.detalInfoForm.value.DateOfEnd;
+      this.taskChangeInfo.storyPoints = this.storyPoints;
       this.taskServise.editTask(this.taskChangeInfo).subscribe(
         () => {
           this.alertService.successMessage()

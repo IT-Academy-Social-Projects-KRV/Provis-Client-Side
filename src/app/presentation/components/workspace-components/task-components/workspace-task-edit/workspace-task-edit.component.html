@@ -22,12 +22,17 @@
           <div class="form-half-input">
             <mat-form-field appearance="fill">
               <mat-label>Due date</mat-label>
-              <input type="date" [ngModel] ="deadLine | date:'yyyy-MM-dd'" (ngModelChange)="deadLine = $event" matInput placeholder="Task deadline" formControlName="DateOfEnd" required>
+              <input type="date" [ngModel] ="deadLine |date:'yyyy-MM-dd'" (ngModelChange)="deadLine = $event" matInput placeholder="Task deadline" formControlName="DateOfEnd" required>
               <mat-error *ngIf="detalInfoForm.controls['DateOfEnd'].invalid && detalInfoForm.controls['DateOfEnd'].touched">Invalid Due date</mat-error>
             </mat-form-field>
-
+            
+            <mat-form-field appearance="fill">
+              <mat-label>Story Points</mat-label>
+              <input type="number" matInput placeholder="StoryPoints" formControlName="StoryPoints">
+              <mat-error *ngIf="detalInfoForm.controls['StoryPoints'].invalid && detalInfoForm.controls['StoryPoints'].touched">Invalid story points</mat-error>
+            </mat-form-field>
+            
             <div [textContent]="'Current status: ' + statusList[selectedStatus - 1].name" ></div>
-
           </div>
 
           <div class="modal-button">

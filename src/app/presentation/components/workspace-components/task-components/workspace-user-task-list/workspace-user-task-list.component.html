@@ -20,9 +20,14 @@
           class="example-list"
           (cdkDropListDropped)="drop($event)">
           <div class="example-box {{kanbanClasses[status.id-1]}}-task" *ngFor="let item of statusTasks.tasks[status.id]" cdkDrag (click)="showTask(item.id)">
-            <span *ngIf="item.workerRoleId !=null" class="worker-status" [style.background-color]="statusColor[item.workerRoleId-1]">
-              {{workerStatus[item.workerRoleId-1].name}}
-            </span>
+            <div class="tags">
+              <span class="story-points">
+                {{item.storyPoints}}
+              </span>
+              <span *ngIf="item.workerRoleId !=null" class="worker-status" [style.background-color]="statusColor[item.workerRoleId-1]">
+                {{workerStatus[item.workerRoleId-1].name}}
+              </span>
+           </div>
             <span class="task-title">{{item.name}}</span>
             <div class="task-info">
               <span>Deadline: {{item.deadline | date:'dd.MM.yyyy'}}</span>
