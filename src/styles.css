@@ -7,16 +7,15 @@ body *:not(.material-icons) {
 }
 ::-webkit-scrollbar {
     width: 12px;
-    height: 50%;
 }
-    ::-webkit-scrollbar-track {
-    background: #ddd;
+::-webkit-scrollbar-track {
+    background: white;
 }
-    ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     border-radius: 20px;
-    border: 4px solid #ddd;
+    border: 4px solid white;
 }
-    ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background-color: #3b394a
 }
 .header-sticky {
@@ -195,6 +194,10 @@ a.link-button:hover{
     display: flex;
     flex-direction: column;
 }
+button.mat-raised-button {
+    display: flex;
+    justify-content: center;
+}
 button.additional {
     background: rgb(77 84 151);
 }
@@ -234,6 +237,7 @@ button.button-accept:hover {
     border: 1px solid #cfcdcd;
     min-height: 40px;
     margin-bottom: 20px;
+    box-shadow: rgb(47 57 68) 0px 14px 14px -9px;
 }
 .button-after-page-title a {
     font-size: 10px;
@@ -251,6 +255,7 @@ button.button-accept:hover {
     background: #3b394a;
     padding: 10px 15px;
     border-radius: 4px;
+    box-shadow: rgb(47 57 68) 0px 14px 14px -9px;
 }
 .modal-title span {
     font-size: 13px;
@@ -259,4 +264,7 @@ button.button-accept:hover {
     letter-spacing: 0.75px;
     color: #eee;
     line-height: 30px;
+}
+.mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: rgb(47 57 68) 13px 18px 20px -9px;
 }
