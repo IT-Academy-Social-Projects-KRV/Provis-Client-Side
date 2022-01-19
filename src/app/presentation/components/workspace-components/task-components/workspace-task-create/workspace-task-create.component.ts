@@ -3,11 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { AssignedMember, CreateTask } from 'src/app/core/models/task/createTask';
 import { TaskStatus } from 'src/app/core/models/task/taskStatus';
-import { TaskWorkerRole } from 'src/app/core/models/task/taskWorkerRoles';
-import { WorkspaceMembers } from 'src/app/core/models/workspace/workspaceMembers';
 import { AlertService } from 'src/app/core/services/alerts.service';
 import { TaskService } from 'src/app/core/services/task.service';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
+import { mode } from 'src/app/core/types/assignUserMode';
 
 @Component({
   selector: 'app-workspace-task-create',
@@ -22,8 +21,8 @@ export class WorkspaceTaskCreateComponent implements OnInit {
   selectedStatus: number;
 
   public assignedMembers: AssignedMember[];
-  public isAssignedValid = false;
   id : string;
+  assignUserMode: mode = 'create task';
 
   constructor(
     private forbBuilder:FormBuilder,
@@ -50,7 +49,7 @@ export class WorkspaceTaskCreateComponent implements OnInit {
   }
 
   CreateNewTask(): void {
-    if(this.taskForm.valid && (this.isAssignedValid || this.assignedMembers.length == 0)) {
+    if(this.taskForm.valid) {
       this.createTask = this.taskForm.value;
       this.createTask.workspaceId = this.workspaceId;
       this.createTask.statusId = this.selectedStatus;
@@ -64,9 +63,5 @@ export class WorkspaceTaskCreateComponent implements OnInit {
         }
       );
     }
-  }
-
-  checkIsValidAssignedUser(isValid: boolean) {
-    this.isAssignedValid = isValid;
   }
 }

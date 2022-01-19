@@ -32,8 +32,8 @@
           <mat-error *ngIf="taskForm.controls['StatusId'].invalid && taskForm.controls['StatusId'].touched">Invalid status</mat-error>
         </mat-form-field>
       </div>
-      
-      <app-workspace-task-assign [assignMembers]="assignedMembers" (isValid)="checkIsValidAssignedUser($event)"></app-workspace-task-assign>  
+
+      <app-workspace-task-assign [mode]="assignUserMode" [assignMembers]="assignedMembers"></app-workspace-task-assign> 
 
       <div class="modal-button">
         <button mat-raised-button (сlick)="CreateNewTask()" class="button-accept">Create</button>
