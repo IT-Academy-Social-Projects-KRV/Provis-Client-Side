@@ -1,0 +1,13 @@
+<div class="task-comment">
+  <div *ngFor="let comment of comments">
+    <div class="comment-info">
+      <div>
+        <span class="selected-information">{{comment.userName}}: </span>
+        <span class="selected-information">{{comment.commentText}}</span>
+      </div>
+      <div>
+        {{comment.dateTime | date:'dd.MM.yyyy HH:mm'}}
+      </div>
+    </div>
+  </div>
+</div>
