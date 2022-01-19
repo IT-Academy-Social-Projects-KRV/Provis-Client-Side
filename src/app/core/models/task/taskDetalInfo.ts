@@ -3,10 +3,10 @@ export class TaskDetalInfo {
   description: string;
   deadline: Date;
   statusId: number;
-  assignedUsers: AssignedUsers[];
+  assignedUsers: AssignedMember[];
 }
 
-export class AssignedUsers{
+export class AssignedMember{
   userId: string;
   userName: string;
   roleTagId: number;
