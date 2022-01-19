@@ -29,3 +29,5 @@ export const taskServiceUrl = baseUrl + '/Task/';
 export const taskUrl = taskServiceUrl + 'task';
 export const statusesUrl = taskServiceUrl + 'statuses';
 export const rolesUrl = taskServiceUrl + 'roles';
+export const assignUrl = taskServiceUrl + 'assign';
+export const changeRoleUrl = taskServiceUrl + 'change-role';
