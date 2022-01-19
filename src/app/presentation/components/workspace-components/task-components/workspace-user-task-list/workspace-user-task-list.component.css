@@ -112,6 +112,9 @@
   font-weight: 500;
   text-align: end;
   letter-spacing: 0.5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 .example-container .task-status {
   margin: 0 10px 15px;
@@ -204,4 +207,11 @@ mat-panel-title span {
   min-height: 20px;
   text-align: center;
   text-transform: lowercase;
+}
+.comment {
+  margin-right: auto;
+  margin-left: 2.5px;
+}
+.icon {
+  transform: scale(0.9);
 }
