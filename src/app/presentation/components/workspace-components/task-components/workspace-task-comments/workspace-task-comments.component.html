@@ -1,3 +1,19 @@
+<div class="container">
+  <form [formGroup]="commentInfo" (ngSubmit)="createComment()" class="comment-form" novalidate>
+    <mat-form-field appearance="fill">
+      <mat-label>Comment</mat-label>
+      <textarea matInput #CommentText placeholder="Your comment" formControlName="CommentText"required></textarea>
+      <mat-error *ngIf="commentInfo.controls['CommentText'].invalid && commentInfo.controls['CommentText'].touched">Invalid text</mat-error>
+    </mat-form-field>
+
+    <div class="modal-button">
+      <button mat-raised-button color="primary" class="w-50">Add</button>
+    </div>
+
+  </form>
+</div>
+
+
 <div class="task-comment">
   <div *ngFor="let comment of comments">
     <div class="comment-info">
@@ -6,7 +22,7 @@
         <span class="selected-information">{{comment.commentText}}</span>
       </div>
       <div>
-        {{comment.dateTime | date:'dd.MM.yyyy HH:mm'}}
+        {{comment.dateTime |date:'dd.MM.yyyy HH:mm'}}
       </div>
     </div>
   </div>
