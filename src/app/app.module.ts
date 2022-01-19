@@ -64,7 +64,7 @@ import { WorkspaceTaskEditComponent } from './presentation/components/workspace-
 import { DataShareService } from './core/services/DataShare.service';
 import { WorkspaceTaskHistoryComponent } from './presentation/components/workspace-components/task-components/workspace-task-history/workspace-task-history.component';
 import { WorkspaceTaskCommentsComponent } from './presentation/components/workspace-components/task-components/workspace-task-comments/workspace-task-comments.component';
-import { CommentService } from './core/services/comment.service.service';
+import { CommentService } from './core/services/comment.service';
 
 
 @NgModule({

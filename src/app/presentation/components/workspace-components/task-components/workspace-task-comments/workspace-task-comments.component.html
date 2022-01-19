@@ -7,12 +7,11 @@
     </mat-form-field>
 
     <div class="modal-button">
-      <button mat-raised-button color="primary" class="w-50">Add</button>
+      <button mat-raised-button color="primary" class="w-50">Post comment</button>
     </div>
 
   </form>
 </div>
-
 
 <div class="task-comment">
   <div *ngFor="let comment of comments">
@@ -20,6 +19,7 @@
       <div>
         <span class="selected-information">{{comment.userName}}: </span>
         <span class="selected-information">{{comment.commentText}}</span>
+        <span (click)="deleteComment(comment.id)">Delete</span>
       </div>
       <div>
         {{comment.dateTime |date:'dd.MM.yyyy HH:mm'}}
