@@ -8,7 +8,6 @@ import { TaskWorkerRole } from 'src/app/core/models/task/taskWorkerRoles';
 import { WorkspaceMembers } from 'src/app/core/models/workspace/workspaceMembers';
 import { AlertService } from 'src/app/core/services/alerts.service';
 import { TaskService } from 'src/app/core/services/task.service';
-import { WorkspaceService } from 'src/app/core/services/workspace.service';
 
 @Component({
   selector: 'app-workspace-task-edit',
@@ -32,8 +31,7 @@ export class WorkspaceTaskEditComponent implements OnInit {
   id: string;
   demoForm: FormGroup;
 
-  constructor(private workspaceService: WorkspaceService,
-    private forbBuilder: FormBuilder,
+  constructor(private forbBuilder: FormBuilder,
     private alertService: AlertService,
     public dialog: MatDialog,
     private taskServise: TaskService) {
@@ -49,10 +47,6 @@ export class WorkspaceTaskEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.workspaceService.getWorkspaceUserList(this.workspaceId).subscribe((data: WorkspaceMembers[]) => {
-      this.workspaceMemberList = data;
-    });
-
     this.taskServise.getStatusTask().subscribe((statList: TaskStatus[]) => {
       this.statusList = statList;
     });
