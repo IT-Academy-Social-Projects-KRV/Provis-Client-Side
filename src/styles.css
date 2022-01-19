@@ -255,7 +255,6 @@ button.button-accept:hover {
     background: #3b394a;
     padding: 10px 15px;
     border-radius: 4px;
-    box-shadow: rgb(47 57 68) 0px 14px 14px -9px;
 }
 .modal-title span {
     font-size: 13px;

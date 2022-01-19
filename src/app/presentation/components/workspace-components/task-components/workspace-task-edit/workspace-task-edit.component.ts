@@ -9,6 +9,7 @@ import { WorkspaceMembers } from 'src/app/core/models/workspace/workspaceMembers
 import { AlertService } from 'src/app/core/services/alerts.service';
 import { TaskService } from 'src/app/core/services/task.service';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-workspace-task-edit',
@@ -39,10 +40,10 @@ export class WorkspaceTaskEditComponent implements OnInit {
     public dialog: MatDialog,
     private taskServise: TaskService) {
     this.detalInfoForm = forbBuilder.group({
-      "Name": ["", [Validators.maxLength(50)]],
-      "Description": ["", [Validators.maxLength(100)]],
-      "DateOfEnd": ["",],
-      "StatusId": ["", Validators.required]
+      "name": ["", [Validators.maxLength(50)]],
+      "description": ["", [Validators.maxLength(100)]],
+      "deadline": ["",],
+      "statusId": ["", Validators.required]
     }),
       this.demoForm = this.forbBuilder.group({
         demoArray: this.forbBuilder.array([])
@@ -63,15 +64,9 @@ export class WorkspaceTaskEditComponent implements OnInit {
     });
 
     this.taskServise.getTaskInfo(this.taskId).subscribe((data: TaskDetalInfo) => {
-      this.detalInfoForm = this.forbBuilder.group({
-        "Name": data.name,
-        "Description": data.description,
-        "DateOfEnd": data.deadline,
-        "StatusId": data.statusId
-      });
-      this.deadLine = data.deadline;
+      this.detalInfoForm.patchValue(data);
+      this.detalInfoForm.controls['deadline'].setValue(formatDate(data.deadline,'yyyy-MM-dd','en'));
       this.selectedStatus = data.statusId;
-      this.detalInfoForm.patchValue(this.detalInfo);
     });
 
   }
@@ -91,5 +86,14 @@ export class WorkspaceTaskEditComponent implements OnInit {
         }
       )}
   }
+
+  getSelectedStatus(selectedStatus: number): string {
+    if(selectedStatus)
+      return this.statusList[selectedStatus - 1].name;
+    else
+      return '';
+  }
+
+
 
 }
