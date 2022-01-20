@@ -23,7 +23,7 @@ export class TaskCommentsComponent implements OnInit {
     private alertService: AlertService,
     private formBuilder: FormBuilder) {
       this.commentInfo = formBuilder.group({
-        "CommentText": ["", [Validators.maxLength(50)]]
+        "CommentText": ["", [Validators.maxLength(500)]]
       });
     }
 
@@ -55,7 +55,9 @@ export class TaskCommentsComponent implements OnInit {
   }
 
   editComment(commentId: number){
-
+    this.commentInfo = this.formBuilder.group({
+      "CommentText": this.comments.find(x => x.id == commentId)?.commentText
+    });
   }
 
   createComment(){
@@ -63,10 +65,12 @@ export class TaskCommentsComponent implements OnInit {
       this.commentCreate = Object.assign({}, this.commentInfo.value);
       this.commentCreate.taskId = this.taskId;
       this.commentCreate.workspaceId = this.workspaceId;
+
       this.commentService.createComment(this.commentCreate).subscribe(
         () => {
           this.alertService.successMessage();
           this.updateCommentList();
+          this.commentInfo.reset();
         },
         err => {
           this.alertService.errorMessage(err);
