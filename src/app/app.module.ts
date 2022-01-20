@@ -63,7 +63,9 @@ import { IfUserRolesDirective } from './core/directives/IfUserRoles.directive';
 import { WorkspaceTaskEditComponent } from './presentation/components/workspace-components/task-components/workspace-task-edit/workspace-task-edit.component';
 import { DataShareService } from './core/services/DataShare.service';
 import { WorkspaceTaskHistoryComponent } from './presentation/components/workspace-components/task-components/workspace-task-history/workspace-task-history.component';
-
+import { EditTaskResolver } from './core/services/resolvers/edit-task-resolver';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -124,7 +126,9 @@ import { WorkspaceTaskHistoryComponent } from './presentation/components/workspa
     CdkAccordionModule,
     MatExpansionModule,
     DragDropModule,
-    MatListModule
+    MatListModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule
   ],
   providers: [
     AuthInterceptorProvider,
@@ -133,7 +137,8 @@ import { WorkspaceTaskHistoryComponent } from './presentation/components/workspa
     WorkspaceService,
     UserService,
     AlertService,
-    DataShareService
+    DataShareService,
+    EditTaskResolver
   ],
   bootstrap: [AppComponent]
 })
