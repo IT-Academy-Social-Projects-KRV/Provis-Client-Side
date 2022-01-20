@@ -84,8 +84,8 @@ export class TaskService {
     return this.http.delete<void>(this.taskServiceUrl + 'task/workspace/' + workspaceId + '/attachment/'+ attachmentId, this.httpOption);
   }
 
-  public getTaskInfo(taskId: number):Observable<TaskDetalInfo>{
-    return this.http.get<TaskDetalInfo>(this.taskUrl + "/" + taskId, this.httpOption);
+  public getTaskInfo(workspaceId: number, taskId: number):Observable<TaskDetalInfo>{
+    return this.http.get<TaskDetalInfo>(this.taskServiceUrl + "workspace/" + workspaceId + "/task/" + taskId, this.httpOption);
   }
 
   public editTask(taskChangeInfo: TaskChangeInfo):Observable<void>{

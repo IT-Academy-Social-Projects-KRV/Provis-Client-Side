@@ -42,11 +42,14 @@
   flex-direction: column;
   justify-content: space-between;
   box-sizing: border-box;
-  cursor: move;
+  cursor: grab;
   font-size: 12px;
   min-height: 100px;
   box-shadow: 2px 2px 5px 1px rgb(0 0 0 / 40%);
   position: relative;
+}
+.example-box:active {
+  cursor: grabbing;
 }
 .cdk-drag-preview {
   box-sizing: border-box;
@@ -142,13 +145,11 @@
   font-weight: 500;
   transition: 0.5s;
 }
-.mat-expansion-panel:hover
-.mat-expansion-panel-header {
+.mat-expansion-panel:hover .mat-expansion-panel-header {
   background-color: #3b394a;
   transition: 0.5s;
 }
-.mat-expansion-panel:hover
-.mat-expansion-panel-header-title {
+.mat-expansion-panel:hover .mat-expansion-panel-header-title {
   color: #adadad;
   transition: 0.5s;
 }
