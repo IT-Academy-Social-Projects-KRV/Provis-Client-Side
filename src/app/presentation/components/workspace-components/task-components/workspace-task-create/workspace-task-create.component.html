@@ -31,8 +31,14 @@
           </mat-select>
           <mat-error *ngIf="taskForm.controls['StatusId'].invalid && taskForm.controls['StatusId'].touched">Invalid status</mat-error>
         </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Story Points</mat-label>
+          <input type="number" matInput placeholder="StoryPoints" formControlName="StoryPoints" min="1"  max="99" oninput="this.value=this.value.replace(/^0+/,/[^0-9]/g,'');">
+          <mat-error *ngIf="taskForm.controls['StoryPoints'].invalid && taskForm.controls['StoryPoints'].touched">Invalid story points</mat-error>
+        </mat-form-field>
       </div>
-      
+
       <app-workspace-task-assign [assignMembers]="assignedMembers" (isValid)="checkIsValidAssignedUser($event)"></app-workspace-task-assign>  
 
       <div class="modal-button">
