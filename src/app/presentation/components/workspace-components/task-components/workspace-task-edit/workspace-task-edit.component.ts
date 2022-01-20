@@ -62,7 +62,7 @@ export class WorkspaceTaskEditComponent implements OnInit {
       this.taskRole = role;
     });
 
-    this.taskServise.getTaskInfo(this.taskId).subscribe((data: TaskDetalInfo) => {
+    this.taskServise.getTaskInfo(this.workspaceId, this.taskId).subscribe((data: TaskDetalInfo) => {
       this.detalInfoForm.patchValue(data);
       this.detalInfoForm.controls['deadline'].setValue(formatDate(data.deadline,'yyyy-MM-dd','en'));
       this.selectedStatus = data.statusId;
