@@ -36,7 +36,6 @@ export class WorkspaceTaskEditComponent implements OnInit {
   constructor(private workspaceService: WorkspaceService,
     private forbBuilder: FormBuilder,
     private alertService: AlertService,
-    private workspaceServ: WorkspaceService,
     public dialog: MatDialog,
     private taskServise: TaskService) {
     this.detalInfoForm = forbBuilder.group({
@@ -68,11 +67,10 @@ export class WorkspaceTaskEditComponent implements OnInit {
       this.detalInfoForm.controls['deadline'].setValue(formatDate(data.deadline,'yyyy-MM-dd','en'));
       this.selectedStatus = data.statusId;
     });
-
   }
+
   EditTask() {
     if (this.detalInfoForm.valid) {
-
       this.taskChangeInfo = this.detalInfoForm.value;
       this.taskChangeInfo.id = this.taskId;
       this.taskChangeInfo.workspaceId = this.workspaceId;
