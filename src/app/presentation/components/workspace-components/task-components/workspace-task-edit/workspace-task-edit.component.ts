@@ -27,6 +27,7 @@ export class WorkspaceTaskEditComponent implements OnInit {
   statusList: TaskStatus[];
   taskRole: TaskWorkerRole[];
   selectedStatus: number;
+  storyPoints?: number;
   deadLine: Date;
 
   assignUserMode: mode = 'edit task';
@@ -44,7 +45,8 @@ export class WorkspaceTaskEditComponent implements OnInit {
       "name": ["", [Validators.maxLength(50)]],
       "description": ["", [Validators.maxLength(100)]],
       "deadline": ["",],
-      "statusId": ["", Validators.required]
+      "statusId": ["", Validators.required],
+      "storyPoints": ["", [Validators.maxLength(2)]]
     }),
       this.demoForm = this.forbBuilder.group({
         demoArray: this.forbBuilder.array([])
@@ -77,7 +79,8 @@ export class WorkspaceTaskEditComponent implements OnInit {
       this.taskChangeInfo = this.detalInfoForm.value;
       this.taskChangeInfo.id = this.taskId;
       this.taskChangeInfo.workspaceId = this.workspaceId;
-      this.taskChangeInfo.deadline = this.detalInfoForm.value.DateOfEnd;
+      this.taskChangeInfo.deadline = this.detalInfoForm.value.deadline;
+      this.taskChangeInfo.storyPoints = this.storyPoints;
       this.taskServise.editTask(this.taskChangeInfo).subscribe(
         () => {
           this.alertService.successMessage()

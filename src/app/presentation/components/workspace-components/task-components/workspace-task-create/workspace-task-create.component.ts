@@ -14,27 +14,30 @@ import { mode } from 'src/app/core/types/assignUserMode';
   styleUrls: ['./workspace-task-create.component.css']
 })
 export class WorkspaceTaskCreateComponent implements OnInit {
+
   @Input() public workspaceId: number;
   taskForm: FormGroup;
   createTask: CreateTask = new CreateTask();
   statusList: TaskStatus[];
   selectedStatus: number;
+  storyPoints?: number;
 
   public assignedMembers: AssignedMember[];
   id : string;
   assignUserMode: mode = 'create task';
 
   constructor(
-    private forbBuilder:FormBuilder,
+    private formBuilder:FormBuilder,
     private alertService: AlertService,
     private workspaceServ: WorkspaceService,
     public dialog: MatDialog,
     private taskServise: TaskService) {
-    this.taskForm=forbBuilder.group({
+    this.taskForm=formBuilder.group({
       "Name":["",[Validators.maxLength(50)]],
       "Description":["",[Validators.maxLength(100)]],
       "DateOfEnd":["", ],
-      "StatusId": ["",Validators.required]
+      "StatusId": ["",Validators.required],
+      "StoryPoints": ["",[Validators.maxLength(2)]]
     })
    }
 
@@ -53,6 +56,7 @@ export class WorkspaceTaskCreateComponent implements OnInit {
       this.createTask = this.taskForm.value;
       this.createTask.workspaceId = this.workspaceId;
       this.createTask.statusId = this.selectedStatus;
+      this.createTask.storyPoints = this.storyPoints;
       this.createTask.assignedUsers = this.assignedMembers;
       this.workspaceServ.CreateTask(this.createTask).subscribe(
         () => {

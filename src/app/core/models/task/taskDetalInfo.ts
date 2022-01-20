@@ -1,9 +1,10 @@
 export class TaskDetalInfo {
-  name: string;
-  description: string;
-  deadline: Date;
-  statusId: number;
-  assignedUsers: AssignedMember[];
+    name: string;
+    description: string;
+    deadline: Date;
+    statusId: number;
+    storyPoints?: number;
+    assignedUsers: AssignedUsers[];
 }
 
 export class AssignedMember{

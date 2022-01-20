@@ -21,8 +21,8 @@
     display: flex;
     justify-content: space-between;
 }
-.form-half-input mat-form-field {
-    width: 48%;
+.form-half-input mat-form-field{
+    width: 33%;
     margin: 0px;
 }
 .modal-button {
