@@ -26,7 +26,7 @@ export class WorkspaceTaskEditComponent implements OnInit {
   statusList: TaskStatus[];
   taskRole: TaskWorkerRole[];
   selectedStatus: number;
-  storyPoints: number;
+  storyPoints?: number;
   deadLine: Date;
 
   workspaceMemberList: WorkspaceMembers[];
@@ -76,7 +76,7 @@ export class WorkspaceTaskEditComponent implements OnInit {
       this.taskChangeInfo = this.detalInfoForm.value;
       this.taskChangeInfo.id = this.taskId;
       this.taskChangeInfo.workspaceId = this.workspaceId;
-      this.taskChangeInfo.deadline = this.detalInfoForm.value.DateOfEnd;
+      this.taskChangeInfo.deadline = this.detalInfoForm.value.deadline;
       this.taskChangeInfo.storyPoints = this.storyPoints;
       this.taskServise.editTask(this.taskChangeInfo).subscribe(
         () => {
