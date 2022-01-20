@@ -1,25 +1,23 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommentCreate } from 'src/app/core/models/comment/commentCreate';
-import { CommentEdit } from 'src/app/core/models/comment/commentEdit';
 import { TaskComment } from 'src/app/core/models/comment/taskComment';
 import { AlertService } from 'src/app/core/services/alerts.service';
 import { CommentService } from 'src/app/core/services/comment.service';
 
 @Component({
-  selector: 'app-workspace-task-comments',
-  templateUrl: './workspace-task-comments.component.html',
-  styleUrls: ['./workspace-task-comments.component.css']
+  selector: 'app-task-comments',
+  templateUrl: './task-comments.component.html',
+  styleUrls: ['./task-comments.component.css']
 })
-export class WorkspaceTaskCommentsComponent implements OnInit {
+export class TaskCommentsComponent implements OnInit {
 
   @Input() public taskId: number;
   @Input() public workspaceId: number;
+  comments: TaskComment[];
 
   commentInfo: FormGroup;
   commentCreate: CommentCreate = new CommentCreate();
-  commentEdit: CommentEdit = new CommentEdit();
-  comments: TaskComment[];
 
   constructor(private commentService: CommentService,
     private alertService: AlertService,
@@ -30,10 +28,34 @@ export class WorkspaceTaskCommentsComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.updateCommentList();
+  }
+
+  updateCommentList(){
     this.commentService.getTaskComments(this.taskId,
       this.workspaceId).subscribe((data: TaskComment[]) => {
       this.comments = data;
     })
+  }
+
+  deleteComment(commentId: number){
+    this.commentService.deleteComment(commentId, this.workspaceId).subscribe(
+      async () => {
+        if(await this.alertService.confirmMessage(
+          "Are you shure to delete this comment?",
+          "Delete comment",
+          "Delete")){
+          this.updateCommentList();
+        }
+      },
+      err => {
+        this.alertService.errorMessage(err);
+      }
+    )
+  }
+
+  editComment(commentId: number){
+
   }
 
   createComment(){
@@ -44,32 +66,12 @@ export class WorkspaceTaskCommentsComponent implements OnInit {
       this.commentService.createComment(this.commentCreate).subscribe(
         () => {
           this.alertService.successMessage();
-          this.ngOnInit();
+          this.updateCommentList();
         },
         err => {
           this.alertService.errorMessage(err);
         }
       )
     }
-  }
-
-  deleteComment(commentId: number){
-    this.commentService.deleteComment(commentId, this.workspaceId).subscribe(
-      async () => {
-        if(await this.alertService.confirmMessage(
-          "Are you shure to delete this comment?",
-          "Delete comment",
-          "Delete")){
-          this.ngOnInit();
-        }
-      },
-      err => {
-        this.alertService.errorMessage(err);
-      }
-    )
-  }
-
-  editComment(){
-
   }
 }

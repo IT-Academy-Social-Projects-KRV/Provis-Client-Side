@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { WorkspaceTaskCommentsComponent } from './workspace-task-comments.component';
+import { TaskCommentsComponent } from './task-comments.component';
 
-describe('WorkspaceTaskCommentsComponent', () => {
-  let component: WorkspaceTaskCommentsComponent;
-  let fixture: ComponentFixture<WorkspaceTaskCommentsComponent>;
+describe('TaskCommentsComponent', () => {
+  let component: TaskCommentsComponent;
+  let fixture: ComponentFixture<TaskCommentsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WorkspaceTaskCommentsComponent ]
+      declarations: [ TaskCommentsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WorkspaceTaskCommentsComponent);
+    fixture = TestBed.createComponent(TaskCommentsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -63,8 +63,8 @@ import { IfUserRolesDirective } from './core/directives/IfUserRoles.directive';
 import { WorkspaceTaskEditComponent } from './presentation/components/workspace-components/task-components/workspace-task-edit/workspace-task-edit.component';
 import { DataShareService } from './core/services/DataShare.service';
 import { WorkspaceTaskHistoryComponent } from './presentation/components/workspace-components/task-components/workspace-task-history/workspace-task-history.component';
-import { WorkspaceTaskCommentsComponent } from './presentation/components/workspace-components/task-components/workspace-task-comments/workspace-task-comments.component';
 import { CommentService } from './core/services/comment.service';
+import { TaskCommentsComponent } from './presentation/components/workspace-components/task-components/comment-components/task-comments/task-comments.component';
 
 
 @NgModule({
@@ -105,7 +105,7 @@ import { CommentService } from './core/services/comment.service';
     WorkspaceTaskHistoryComponent,
     IfUserRolesDirective,
     WorkspaceTaskEditComponent,
-    WorkspaceTaskCommentsComponent
+    TaskCommentsComponent
   ],
   imports: [
     BrowserModule,
