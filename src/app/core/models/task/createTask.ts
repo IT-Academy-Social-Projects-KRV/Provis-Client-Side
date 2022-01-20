@@ -4,7 +4,7 @@ export class CreateTask {
     dateOfEnd: Date;
     workspaceId: number;
     statusId: number;
-    storyPoints: number;
+    storyPoints?: number;
     assignedUsers: AssignedMember[];
 }
 

@@ -4,5 +4,5 @@ export class TaskChangeInfo {
     name: string;
     description: string;
     deadline: Date;
-    storyPoints: number;
+    storyPoints?: number;
 }

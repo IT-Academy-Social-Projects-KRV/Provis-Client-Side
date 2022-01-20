@@ -19,7 +19,7 @@ export class WorkspaceTaskCreateComponent implements OnInit {
   createTask: CreateTask = new CreateTask();
   statusList: TaskStatus[];
   selectedStatus: number;
-  storyPoints: number;
+  storyPoints?: number;
 
   public assignedMembers: AssignedMember[];
   public isAssignedValid = false;

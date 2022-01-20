@@ -21,7 +21,7 @@
           (cdkDropListDropped)="drop($event)">
           <div class="example-box {{kanbanClasses[status.id-1]}}-task" *ngFor="let item of statusTasks.tasks[status.id]" cdkDrag (click)="showTask(item.id)">
             <div class="tags">
-              <span class="story-points">
+              <span class="story-points" *ngIf="item.storyPoints">
                 {{item.storyPoints}}
               </span>
               <span *ngIf="item.workerRoleId !=null" class="worker-status" [style.background-color]="statusColor[item.workerRoleId-1]">
