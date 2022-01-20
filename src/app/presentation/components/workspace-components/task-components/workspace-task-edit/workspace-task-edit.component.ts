@@ -35,7 +35,6 @@ export class WorkspaceTaskEditComponent implements OnInit {
   constructor(private workspaceService: WorkspaceService,
     private forbBuilder: FormBuilder,
     private alertService: AlertService,
-    private workspaceServ: WorkspaceService,
     public dialog: MatDialog,
     private taskServise: TaskService) {
     this.detalInfoForm = forbBuilder.group({
@@ -62,7 +61,7 @@ export class WorkspaceTaskEditComponent implements OnInit {
       this.taskRole = role;
     });
 
-    this.taskServise.getTaskInfo(this.taskId).subscribe((data: TaskDetalInfo) => {
+    this.taskServise.getTaskInfo(this.workspaceId, this.taskId).subscribe((data: TaskDetalInfo) => {
       this.detalInfoForm = this.forbBuilder.group({
         "Name": data.name,
         "Description": data.description,
@@ -75,9 +74,9 @@ export class WorkspaceTaskEditComponent implements OnInit {
     });
 
   }
+
   EditTask() {
     if (this.detalInfoForm.valid) {
-
       this.taskChangeInfo = this.detalInfoForm.value;
       this.taskChangeInfo.id = this.taskId;
       this.taskChangeInfo.workspaceId = this.workspaceId;
