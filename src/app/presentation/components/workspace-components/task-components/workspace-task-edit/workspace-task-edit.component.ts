@@ -33,6 +33,7 @@ export class WorkspaceTaskEditComponent implements OnInit {
   workspaceMemberList: WorkspaceMembers[];
   assignedMembers: AssignedMember[];
   id: string;
+  demoForm: FormGroup;
 
   constructor(private workspaceService: WorkspaceService,
     private forbBuilder: FormBuilder,
