@@ -3,7 +3,7 @@ export class TaskDetalInfo {
     description: string;
     deadline: Date;
     statusId: number;
-    storyPoints: number;
+    storyPoints?: number;
     assignedUsers: AssignedUsers[];
 }
 

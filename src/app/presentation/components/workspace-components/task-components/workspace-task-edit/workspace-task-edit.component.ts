@@ -40,11 +40,11 @@ export class WorkspaceTaskEditComponent implements OnInit {
     public dialog: MatDialog,
     private taskServise: TaskService) {
     this.detalInfoForm = forbBuilder.group({
-      "Name": ["", [Validators.maxLength(50)]],
-      "Description": ["", [Validators.maxLength(100)]],
-      "DateOfEnd": ["",],
-      "StatusId": ["", Validators.required],
-      "StoryPoints": ["", [Validators.maxLength(2)]]
+      "name": ["", [Validators.maxLength(50)]],
+      "description": ["", [Validators.maxLength(100)]],
+      "deadline": ["",],
+      "statusId": ["", Validators.required],
+      "storyPoints": ["", [Validators.maxLength(2)]]
     }),
       this.demoForm = this.forbBuilder.group({
         demoArray: this.forbBuilder.array([])
@@ -64,16 +64,7 @@ export class WorkspaceTaskEditComponent implements OnInit {
       this.taskRole = role;
     });
 
-    this.taskServise.getTaskInfo(this.taskId).subscribe((data: TaskDetalInfo) => {
-      this.detalInfoForm = this.forbBuilder.group({
-        "Name": data.name,
-        "Description": data.description,
-        "DateOfEnd": data.deadline,
-        "StatusId": data.statusId,
-        "StoryPoints": data.storyPoints
-      });
-      this.deadLine = data.deadline;
-      this.taskServise.getTaskInfo(this.workspaceId, this.taskId).subscribe((data: TaskDetalInfo) => {
+    this.taskServise.getTaskInfo(this.workspaceId, this.taskId).subscribe((data: TaskDetalInfo) => {
       this.detalInfoForm.patchValue(data);
       this.detalInfoForm.controls['deadline'].setValue(formatDate(data.deadline,'yyyy-MM-dd','en'));
       this.selectedStatus = data.statusId;
