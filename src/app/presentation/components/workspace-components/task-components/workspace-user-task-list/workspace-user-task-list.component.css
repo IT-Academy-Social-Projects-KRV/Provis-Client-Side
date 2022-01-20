@@ -211,7 +211,11 @@ mat-panel-title span {
 .comment {
   margin-right: auto;
   margin-left: 2.5px;
+  color: #939598;
 }
 .icon {
-  transform: scale(0.9);
+  font-size: 15px;
+  width: 20px;
+  height: 18px;
+  color: #939598;
 }
