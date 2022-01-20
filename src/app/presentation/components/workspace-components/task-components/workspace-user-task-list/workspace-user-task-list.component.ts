@@ -30,7 +30,8 @@ export class WorkspaceUserTaskListComponent implements OnInit {
   kanbanClasses = kanbanColors;
   kanban: TaskStatus[] = [];
   listStatus: string[] = [];
-  statusTasks:{tasks: Tasks, userId: string} = {tasks:{}, userId:''};
+  statusTasks: {tasks: Tasks, userId: string} = {tasks:{}, userId:''};
+  ifClosed: boolean = true;
 
   constructor(private userTask: TaskService, public dialog: MatDialog) { }
 
@@ -48,12 +49,19 @@ export class WorkspaceUserTaskListComponent implements OnInit {
   }
 
   showUserTasks(userId: string) {
-    this.userTask.getUserTask(userId, this.workspaceId).subscribe((data: {tasks: Tasks, userId: string}) => {
-      this.statusTasks = {tasks: {...this.statusTasks.tasks,...data.tasks}, userId: data.userId};
-    });
+    if(this.ifClosed) {
+      this.userTask.getUserTask(userId, this.workspaceId).subscribe((
+        data: {tasks: Tasks, userId: string}) => {
+          this.statusTasks = {tasks: {...this.statusTasks.tasks,...data.tasks}, userId: data.userId};
+      });
+      this.ifClosed = !this.ifClosed;
+    } else {
+      this.ifClosed = !this.ifClosed;
+    }
   }
 
   drop(event: CdkDragDrop<TaskInfo[]>) {
+
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -64,13 +72,18 @@ export class WorkspaceUserTaskListComponent implements OnInit {
         event.currentIndex,
       );
     }
-    let columnId = event.container.id.replace(this.index + '_','');
-    let taskTo = {
-      workspaceId: this.workspaceId,
-      statusId: +columnId,
-      taskId: this.statusTasks.tasks[+columnId][event.currentIndex].id
-    };
-    this.userTask.updateStatusTask(taskTo).subscribe();
+
+    let beforeStatus = event.previousContainer.id.replace(this.index + '_','');
+    let currentStatus = event.container.id.replace(this.index + '_','');
+
+    if(beforeStatus != currentStatus) {
+      let taskTo = {
+        workspaceId: this.workspaceId,
+        statusId: +currentStatus,
+        taskId: this.statusTasks.tasks[+currentStatus][event.currentIndex].id
+      };
+      this.userTask.updateStatusTask(taskTo).subscribe();
+    }
   }
 
   showTask(taskId : number) {

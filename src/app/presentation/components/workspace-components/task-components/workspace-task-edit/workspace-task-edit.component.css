@@ -2,19 +2,19 @@
     width: 100%;
     margin:5px auto;
 }
-.editTask-form{
+.editTask-form {
     margin-top: 10px;
 }
-.member-section{
+.member-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 10px;
 }
-.mat-form-field-infix{
+.mat-form-field-infix {
     width: 100px;
 }
-.assign-fields{
+.assign-fields {
     margin-right: 20px;
 }
 .form-half-input {
@@ -41,12 +41,21 @@
     display: flex;
     flex-direction: row;
 }
-.task-section{
+.task-section {
     width: 50%;
 }
-.edit-task-section .task-section:last-child{
+.edit-task-section .task-section:last-child {
     margin-left: 15px;
     margin-top: 15px;
     padding-left: 10px;
     border-left: 2px solid #3b394a;
+}
+.task-history-section {
+    height: 35vh;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+.status-block {
+    height: 35vh;
 }
