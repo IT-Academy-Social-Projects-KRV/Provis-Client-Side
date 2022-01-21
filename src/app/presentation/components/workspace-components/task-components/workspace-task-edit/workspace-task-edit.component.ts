@@ -80,7 +80,7 @@ export class WorkspaceTaskEditComponent implements OnInit {
       this.taskChangeInfo.id = this.taskId;
       this.taskChangeInfo.workspaceId = this.workspaceId;
       this.taskChangeInfo.deadline = this.detalInfoForm.value.deadline;
-      this.taskChangeInfo.storyPoints = this.storyPoints;
+      this.taskChangeInfo.storyPoints = this.detalInfoForm.value.storyPoints;
       this.taskServise.editTask(this.taskChangeInfo).subscribe(
         () => {
           this.alertService.successMessage()
