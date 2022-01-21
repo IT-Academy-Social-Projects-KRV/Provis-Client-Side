@@ -39,10 +39,12 @@
             <button mat-raised-button class="button-accept">Save</button>
           </div>
         </form>
+        <div class="assign-comp">
+          <app-workspace-task-assign [taskId]="taskId" [mode]="assignUserMode" [assignMembers]="assignedMembers"></app-workspace-task-assign>
+        </div>
 
         <app-workspace-task-attachments [taskId]="taskId" [workspaceId]="workspaceId"></app-workspace-task-attachments>
       </div>
-
       <div class="task-section status-block">
         <app-workspace-task-history [taskId]="taskId"></app-workspace-task-history>
       </div>
