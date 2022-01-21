@@ -46,7 +46,7 @@ export class WorkspaceTaskEditComponent implements OnInit {
       "description": ["", [Validators.maxLength(100)]],
       "deadline": ["",],
       "statusId": ["", Validators.required],
-      "storyPoints": ["", [Validators.maxLength(2)]]
+      "storyPoints": [null, [Validators.maxLength(2)]]
     }),
       this.demoForm = this.forbBuilder.group({
         demoArray: this.forbBuilder.array([])
