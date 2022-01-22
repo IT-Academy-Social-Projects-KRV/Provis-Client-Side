@@ -3,15 +3,15 @@
     height: 200px;
     overflow-y: auto;
     padding: 0 15px 15px 0;
-    border-bottom: 1px solid #3b394a;
+    border-bottom: 2px solid #3b394a;
 }
-.history-info{
+.history-info {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-top: 6px;
 }
-.selected-information{
+.selected-information {
     color: #3b394a;
     font-style: italic;
     font-weight: 600;
