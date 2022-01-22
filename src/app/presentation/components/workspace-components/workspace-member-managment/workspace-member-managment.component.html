@@ -15,21 +15,22 @@
           <div class="managment-title">
             <span>{{item.userName}}</span>
           </div>
-          <div>
+            <div>
               <mat-form-field appearance="fill">
                 <mat-label>Member role</mat-label>
-                <mat-select [(value)]="item.role" [disabled]="item.role == 1 || item.id == authSrvice.currentUser.id">
-                  <mat-option *ngFor="let role of roles" [value]="role.nameRole"
-                  (onSelectionChange)="chandeWorkspaceRole(role.roleId, item.role, item.id)"
-                  [disabled]="role.nameRole=='Owner'">
-                    {{role.nameRole}}
+                <mat-select [(value)]="item.role" [disabled]="isOwner(item) || isCurrentUser(item)">
+                  <mat-option *ngFor="let role of roles"
+                    [value]="role.id"
+                    (onSelectionChange)="chandeWorkspaceRole(role.id, item.role, item.id)"
+                    [disabled]="role.id == 1">
+                    <span>{{role.name}}</span>
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-            </div>
-          </div>
-        <span>
-          <button [disabled]= isOwner(item) 
+             </div>
+         </div>
+        <span *appIfUserRoles='[1]'>
+          <button [disabled]='isOwner(item)'
             mat-raised-button class="warning" (click)="delete(item.id)">Delete</button>
         </span>
       </li>

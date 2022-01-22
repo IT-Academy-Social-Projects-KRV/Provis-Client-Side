@@ -1,6 +1,6 @@
 import { Tasks } from '../models/task/tasks';
 import { Observable } from 'rxjs';
-import { statusesUrl, rolesUrl, taskServiceUrl, taskUrl, } from './../../configs/api-endpoints';
+import { statusesUrl, rolesUrl, taskServiceUrl, taskUrl, assignUrl, changeRoleUrl, } from './../../configs/api-endpoints';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TaskStatus } from '../models/task/taskStatus';
@@ -10,6 +10,8 @@ import { UnloadTaskAttachment} from '../models/task/uploadTaskAttachments';
 import { TaskDetalInfo } from '../models/task/taskDetalInfo';
 import { TaskChangeInfo } from '../models/task/taskChangeInfo';
 import { TaskHistory } from '../models/task/taskHistory';
+import { ChangeMemberRole } from '../models/task/changeMemberRole';
+import { JoinTaskMember } from '../models/task/joinTaskMember';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +23,8 @@ export class TaskService {
   private readonly statusesUrl = statusesUrl;
   private readonly rolesUrl = rolesUrl;
   private readonly taskUrl = taskUrl;
+  private readonly joinUrl = assignUrl;
+  private readonly changeUrl = changeRoleUrl;
 
   private httpOption = {
     headers: new HttpHeaders({
@@ -80,8 +84,8 @@ export class TaskService {
     return this.http.delete<void>(this.taskServiceUrl + 'task/workspace/' + workspaceId + '/attachment/'+ attachmentId, this.httpOption);
   }
 
-  public getTaskInfo(taskId: number):Observable<TaskDetalInfo>{
-    return this.http.get<TaskDetalInfo>(this.taskUrl + "/" + taskId, this.httpOption);
+  public getTaskInfo(workspaceId: number, taskId: number):Observable<TaskDetalInfo>{
+    return this.http.get<TaskDetalInfo>(this.taskServiceUrl + "workspace/" + workspaceId + "/task/" + taskId, this.httpOption);
   }
 
   public editTask(taskChangeInfo: TaskChangeInfo):Observable<void>{
@@ -90,5 +94,19 @@ export class TaskService {
 
   public gethistoryTask(taskId: number) {
     return this.http.get<TaskHistory[]>(this.taskServiceUrl + taskId +'/history', this.httpOption);
+  }
+
+  public taskMemberJoin(taskJoin: JoinTaskMember): Observable<void> {
+    return this.http.post<void>(this.joinUrl , taskJoin ,this.httpOption);
+  }
+
+  public taskDisjoinMember(workspaceId: number,taskId: number, disUserId: string): Observable<void> {
+    return this.http.delete<void>(
+        this.taskServiceUrl +'task/'+ taskId + '/workspace/' +
+            workspaceId + '/disjoin/' + disUserId,this.httpOption);
+  }
+
+  public changeMemberRole(changeMemberRole : ChangeMemberRole) : Observable<void> {
+    return this.http.put<void>(this.changeUrl , changeMemberRole, this.httpOption);
   }
 }

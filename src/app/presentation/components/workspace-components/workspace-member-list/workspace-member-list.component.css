@@ -1,8 +1,6 @@
 mat-card {
-  max-width: 265px;
-  min-width: 265px;
-  flex: 1 0 21%;
-  min-height: 135px;
+  width: 265px;
+  height: 115px;
   margin: 14px;
 }
 .user-list {
@@ -15,27 +13,30 @@ mat-card {
   flex-direction: row;
 }
 .avatar img{
-  height: 80px;
-  width: 80px;
+  height: 90px;
+  width: 90px;
   border-radius: 4px;
-  margin: 5px 5px 10px;
-}
-.user-section span {
-  display: block;
+  box-shadow: rgb(0 0 0 / 16%) 0px 3px 6px, rgb(0 0 0 / 23%) 0px 3px 6px;
 }
 .title-section {
   text-align: end;
-  font-weight: 600;
   overflow: hidden;
   margin-left: 15px;
   color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-shadow: 1px 2px 1px rgb(0 0 0), 0 1px 2px rgb(0 0 0);
 }
 .title {
   font-weight: 500;
   font-size: 14px;
-  margin-bottom: 15px;
   text-transform: uppercase;
   letter-spacing: 0.75px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1;
 }
 .title span:first-child {
   margin-bottom: 5px;
@@ -45,19 +46,21 @@ mat-card {
 }
 .user-email a{
   font-size: 12px;
-  color: #c3c3c3;
+  color: white;
   font-weight: 500;
   transition: 0.3s;
 }
 .user-email a:hover {
-  color:white;
+  color:#ccc;
   transition: 0.3;
 }
 .user-role {
   font-weight: 400;
-  font-size: 15px;
+  font-size: 13px;
   text-align: center;
   color: white;
+  text-transform:capitalize;
+  padding-top: 15px;
 }
 .user-card {
   transition: 0.3s;

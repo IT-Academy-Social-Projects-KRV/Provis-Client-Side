@@ -4,4 +4,5 @@ export class TaskInfo {
   deadline: Date;
   workerRoleId: number;
   commentCount: number;
+  storyPoints?: number;
 }
