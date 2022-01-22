@@ -216,6 +216,7 @@ button.button-accept {
     color: #eee;
     font-size: 10px;
     font-weight: 600;
+    transition: 0.3s all ease;
 }
 a.link-button.button-accept:hover,
 button.button-accept:hover {

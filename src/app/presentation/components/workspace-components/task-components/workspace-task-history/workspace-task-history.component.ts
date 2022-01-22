@@ -11,12 +11,15 @@ export class WorkspaceTaskHistoryComponent implements OnInit {
 
   @Input() taskId: number;
   history: TaskHistory[];
+  isLoading: boolean = false;
 
   constructor(private taskService: TaskService) {}
 
   ngOnInit() {
+    this.isLoading = true;
     this.taskService.gethistoryTask(this.taskId).subscribe((data: TaskHistory[]) => {
       this.history = data;
+      this.isLoading = false;
     });
   }
   

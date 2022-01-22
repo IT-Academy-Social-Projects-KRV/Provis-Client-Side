@@ -63,9 +63,9 @@ import { IfUserRolesDirective } from './core/directives/IfUserRoles.directive';
 import { WorkspaceTaskEditComponent } from './presentation/components/workspace-components/task-components/workspace-task-edit/workspace-task-edit.component';
 import { DataShareService } from './core/services/DataShare.service';
 import { WorkspaceTaskHistoryComponent } from './presentation/components/workspace-components/task-components/workspace-task-history/workspace-task-history.component';
-import { EditTaskResolver } from './core/services/resolvers/edit-task-resolver';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { SpinLoaderComponent } from './presentation/components/common components/spin-loader/spin-loader.component';
 
 @NgModule({
   declarations: [
@@ -104,7 +104,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     WorkspaceTaskEditComponent,
     WorkspaceTaskHistoryComponent,
     IfUserRolesDirective,
-    WorkspaceTaskEditComponent
+    WorkspaceTaskEditComponent,
+    SpinLoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -128,7 +129,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     DragDropModule,
     MatListModule,
     MatProgressSpinnerModule,
-    MatProgressBarModule
+    MatProgressBarModule,
   ],
   providers: [
     AuthInterceptorProvider,
@@ -137,8 +138,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     WorkspaceService,
     UserService,
     AlertService,
-    DataShareService,
-    EditTaskResolver
+    DataShareService
   ],
   bootstrap: [AppComponent]
 })

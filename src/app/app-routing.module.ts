@@ -1,4 +1,3 @@
-import { EditTaskResolver } from './core/services/resolvers/edit-task-resolver';
 import { PermissionGuard } from './core/guards/permission.guard';
 import { WorkspaceTaskListComponent } from './presentation/components/workspace-components/task-components/workspace-task-list/workspace-task-list.component';
 import { NgModule } from '@angular/core';
@@ -41,9 +40,6 @@ const userWorkspaceRouters: Routes = [
     canActivate: [PermissionGuard],
     data:{
       userRoles: [1]
-    },
-    resolve: {
-      description: EditTaskResolver
     }
   }
 ];

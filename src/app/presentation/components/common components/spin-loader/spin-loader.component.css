@@ -1,0 +1,12 @@
+.spin-loader {
+  display: flex;
+  margin: 10px;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  font-size: 13px;
+  text-transform: capitalize;
+}
+.spin-loader span {
+  margin-left: 10px;
+}

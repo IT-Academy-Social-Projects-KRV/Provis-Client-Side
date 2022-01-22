@@ -3,41 +3,41 @@
     <span class="title-invite">Edit Task</span>
   </div>
 
-  <div class="edit-task-section">
+  <app-spin-loader *ngIf="isLoading"></app-spin-loader>
+  <div *ngIf="!isLoading" class="edit-task-section">
+    <div class="task-section">
+      <form class="editTask-form" [formGroup]="detalInfoForm" (ngSubmit)="EditTask()">
+        <mat-form-field hintLabel="Max 50 characters" appearance="fill">
+          <mat-label>Name</mat-label>
+          <input type="text" matInput placeholder="Task name" #Name maxlength=50 formControlName="name" required>
+          <mat-error *ngIf="detalInfoForm.controls['name'].invalid && detalInfoForm.controls['name'].touched">Invalid name</mat-error>
+        </mat-form-field>
 
-      <div class="task-section">
-        <form class="editTask-form" [formGroup]="detalInfoForm" (ngSubmit)="EditTask()">
-          <mat-form-field hintLabel="Max 50 characters" appearance="fill">
-            <mat-label>Name</mat-label>
-            <input type="text" matInput placeholder="Task name" #Name maxlength=50 formControlName="name" required>
-            <mat-error *ngIf="detalInfoForm.controls['name'].invalid && detalInfoForm.controls['name'].touched">Invalid name</mat-error>
-          </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <input type="text" matInput placeholder="Task description" formControlName="description">
+          <mat-error *ngIf="detalInfoForm.controls['description'].invalid && detalInfoForm.controls['description'].touched">Invalid description</mat-error>
+        </mat-form-field>
 
+        <div class="form-half-input">
           <mat-form-field appearance="fill">
-            <mat-label>Description</mat-label>
-            <input type="text" matInput placeholder="Task description" formControlName="description">
-            <mat-error *ngIf="detalInfoForm.controls['description'].invalid && detalInfoForm.controls['description'].touched">Invalid description</mat-error>
+            <mat-label>Due date</mat-label>
+            <input type="date" (ngModelChange)="deadLine = $event" matInput placeholder="Task deadline" formControlName="deadline" required>
+            <mat-error *ngIf="detalInfoForm.controls['deadline'].invalid && detalInfoForm.controls['deadline'].touched">Invalid Due date</mat-error>
           </mat-form-field>
+          <div [textContent]="'Current status: ' + getSelectedStatus(selectedStatus)" ></div>
+        </div>
 
-          <div class="form-half-input">
-            <mat-form-field appearance="fill">
-              <mat-label>Due date</mat-label>
-              <input type="date" (ngModelChange)="deadLine = $event" matInput placeholder="Task deadline" formControlName="deadline" required>
-              <mat-error *ngIf="detalInfoForm.controls['deadline'].invalid && detalInfoForm.controls['deadline'].touched">Invalid Due date</mat-error>
-            </mat-form-field>
-            <div [textContent]="'Current status: ' + getSelectedStatus(selectedStatus)" ></div>
-          </div>
+        <div class="modal-button">
+          <button mat-raised-button class="button-accept">Save</button>
+        </div>
+      </form>
 
-          <div class="modal-button">
-            <button mat-raised-button class="button-accept">Save</button>
-          </div>
-        </form>
-
-        <app-workspace-task-attachments [taskId]="taskId" [workspaceId]="workspaceId"></app-workspace-task-attachments>
-      </div>
-
-      <div class="task-section status-block">
-        <app-workspace-task-history [taskId]="taskId"></app-workspace-task-history>
-      </div>
+      <app-workspace-task-attachments [taskId]="taskId" [workspaceId]="workspaceId"></app-workspace-task-attachments>
     </div>
+
+    <div class="task-section status-block">
+      <app-workspace-task-history [taskId]="taskId"></app-workspace-task-history>
+    </div>
+  </div>
 </div>

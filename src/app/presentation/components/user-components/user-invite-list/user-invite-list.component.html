@@ -10,9 +10,9 @@
             <span>Date time:</span> <span class="font-weight-600">{{item.date | date:'dd/MM/yyyy HH:mm'}}</span>
           </p>
         </div>
-        <div *ngIf="item.isConfirm == null; else noButtons">
+        <div *ngIf="item.isConfirm == null; else noButtons" class="invite-decline-buttons">
           <button mat-raised-button class="button-accept" (click)="accept(item.id)">Accept</button>
-          <button mat-raised-button color="warn" (click)="deny(item.id)">Decline</button>
+          <button mat-raised-button class="warning" (click)="deny(item.id)">Decline</button>
         </div>
 
         <ng-template #noButtons>

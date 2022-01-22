@@ -52,13 +52,14 @@
     font-weight: 600;
     text-transform: uppercase;
 }
-.button-accept {
-    color: white;
-    background: green;
-}
+
 .invite-accepted {
     color: green;
 }
 .invite-declined {
     color: #f44336;
+}
+.invite-decline-buttons {
+    display: flex;
+    align-items: center;
 }
