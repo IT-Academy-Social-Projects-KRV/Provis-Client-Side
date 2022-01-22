@@ -35,7 +35,6 @@ export class ChangeTwoFaComponent implements OnInit {
       this.service.changeTwoFactorVerification(this.userChange2fa).subscribe(
         () => {
           this.alertService.successMessage('Success', 'Update 2fa');
-          
           this.router.navigate(['/user/profile']);
           this.isAdded.emit(true);
         },

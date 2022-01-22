@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { CommentCreate } from 'src/app/core/models/comment/commentCreate';
 import { TaskComment } from 'src/app/core/models/comment/taskComment';
 import { AlertService } from 'src/app/core/services/alerts.service';
 import { CommentService } from 'src/app/core/services/comment.service';
+import { TaskCommentEditComponent } from '../task-comment-edit/task-comment-edit.component';
 
 @Component({
   selector: 'app-task-comments',
@@ -14,14 +16,15 @@ export class TaskCommentsComponent implements OnInit {
 
   @Input() public taskId: number;
   @Input() public workspaceId: number;
-  comments: TaskComment[];
 
+  comments: TaskComment[];
   commentInfo: FormGroup;
   commentCreate: CommentCreate = new CommentCreate();
 
   constructor(private commentService: CommentService,
     private alertService: AlertService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    public dialog: MatDialog) {
       this.commentInfo = formBuilder.group({
         "CommentText": ["", [Validators.maxLength(500)]]
       });
@@ -55,8 +58,18 @@ export class TaskCommentsComponent implements OnInit {
   }
 
   editComment(commentId: number){
-    this.commentInfo = this.formBuilder.group({
-      "CommentText": this.comments.find(x => x.id == commentId)?.commentText
+    let dialog = this.dialog.open(TaskCommentEditComponent);
+    dialog.componentInstance.commentId = commentId;
+    dialog.componentInstance.workspaceId = this.workspaceId;
+    dialog.componentInstance.editComemntForm.setValue(
+      {
+        "CommentText": this.comments.find(x => x.id == commentId)?.commentText
+      });
+    dialog.componentInstance.isAdded.subscribe(data => {
+      if(data){
+        dialog.close();
+        this.updateCommentList();
+      }
     });
   }
 
