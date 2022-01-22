@@ -1,22 +1,16 @@
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { WorkspaceInviteComponent } from '../workspace-invite/workspace-invite.component';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
-import { UserInvite } from 'src/app/core/models/user/userInvite';
 import { WorkspaceInfo } from 'src/app/core/models/workspace/workspaceInfo';
-import { UserService } from 'src/app/core/services/user.service';
 import { WorkspaceChangeRole } from 'src/app/core/models/workspace/workspaceChangeRole';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { WorkspaceMembers } from 'src/app/core/models/workspace/workspaceMembers';
 import { AlertService } from 'src/app/core/services/alerts.service';
+import { workspaceUserRoles } from 'src/app/core/models/workspace/workspaceUserRole';
 import { DataShareService } from 'src/app/core/services/DataShare.service';
-
-interface Role {
-  roleId: number;
-  nameRole: string;
-}
 
 @Component({
   selector: 'app-workspace-member-managment',
@@ -25,22 +19,16 @@ interface Role {
 })
 export class WorkspaceMemberManagmentComponent implements OnInit {
 
-  roles: Role[] = [
-    {roleId: 1, nameRole: 'Owner'},
-    {roleId: 2, nameRole: 'Manager'},
-    {roleId: 3, nameRole: 'Member'},
-    {roleId: 4, nameRole: 'Viewer'},
-  ];
-
   protected routeSub: Subscription;
   workspaceId: number;
-  workspaceActiveInviteInfo: UserInvite[];
   userWorkspaceInfo = new WorkspaceInfo;
   workspaceUserList: WorkspaceMembers[];
   workspaceMember: WorkspaceMembers;
+  roles: workspaceUserRoles[];
   
   constructor(
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
+    private dataShare: DataShareService,
     public dialog: MatDialog, 
     private alertService: AlertService,
     private workspaceServise: WorkspaceService, 
@@ -48,25 +36,28 @@ export class WorkspaceMemberManagmentComponent implements OnInit {
     private dataShare: DataShareService) {}
   
   ngOnInit() {
-    this.route.parent?.params.subscribe(
-      (params) =>
-      {this.workspaceId = Number(params['id']);
+    this.route.parent?.params.subscribe((params) => {
+      this.workspaceId = Number(params['id']);
     })
-    this.workspaceServise.getWorkspaceUserList(this.workspaceId).subscribe(data=>{
-      this.workspaceUserList=data;
+
+    this.workspaceServise.getWorkspaceUserList(this.workspaceId).subscribe(data => {
+      this.workspaceUserList = data;
     })
+    
     this.dataShare.workspaceInfo.subscribe((data: WorkspaceInfo) => {
       this.userWorkspaceInfo = data;
+      
+    this.dataShare.workspaceRoles.subscribe((data: workspaceUserRoles[]) => {
+        this.roles = data;
     });
   }
   
-  isOwner(workspaceMember: WorkspaceMembers){
-    if (workspaceMember.role == 1) {
-      return true
-    }
-    else {
-      return false
-    }
+  isOwner(workspaceMember: WorkspaceMembers): boolean {
+    return workspaceMember.role == 1;
+  }
+
+  isCurrentUser(workspaceMember: WorkspaceMembers): boolean {
+    return workspaceMember.id == this.authSrvice.currentUser.id;
   }
 
   modalInvites() {
@@ -74,8 +65,7 @@ export class WorkspaceMemberManagmentComponent implements OnInit {
     dialogRef.componentInstance.workspaceId = this.workspaceId;
   }
 
-  async delete(userId:string): Promise<void>{
-
+  async delete(userId: string): Promise<void> {
     if  (await this.alertService.confirmMessage('User will be deleted from all workspace tasks!', 
         'Are you sure?', 
         'Yes, delete!'))
@@ -88,24 +78,21 @@ export class WorkspaceMemberManagmentComponent implements OnInit {
   }
 
   chandeWorkspaceRole(roleId: number, currentRole: number, userId: string) {
-
-    if(roleId != currentRole)
-    {
+    if(roleId != currentRole) {
       let body = new WorkspaceChangeRole()
       body.roleId = roleId;
       body.userId = userId;
       body.workspaceId = this.workspaceId;
 
       this.workspaceServise.changeWorkspaceRole(body).subscribe(
-        ()=>{
+        () => {
           this.alertService.successMessage('Change role');
         },
-
-          err => {
-            this.alertService.errorMessage(err);
-          }
+        err => {
+          this.alertService.errorMessage(err);
+        }
       );
     }
-
   }
+
 }
