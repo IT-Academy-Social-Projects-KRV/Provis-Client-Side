@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { WorkspaceInfo } from 'src/app/core/models/workspace/workspaceInfo';
 import { AlertService } from 'src/app/core/services/alerts.service';
+import { DataShareService } from 'src/app/core/services/DataShare.service';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 
 @Component({
@@ -22,7 +23,8 @@ export class WorkspaceInfoComponent implements OnInit {
     public dialog: MatDialog,
     private router: Router, 
     private alertService: AlertService,
-    private workspaceServise: WorkspaceService,) {}
+    private workspaceServise: WorkspaceService,
+    private dataShare: DataShareService) {}
 
   ngOnInit() {
     this.route.parent?.params.subscribe(
@@ -30,14 +32,21 @@ export class WorkspaceInfoComponent implements OnInit {
       {
         this.workspaceId = Number(params['id']);
        });
-    this.workspaceServise.getWorkspaceInfo(this.workspaceId)
-    .subscribe((data: WorkspaceInfo) => {
-    this.workspace = data;
-    
-    if (this.workspace.role==1) {
+
+    this.dataShare.workspaceInfo.subscribe((data: WorkspaceInfo) => {
+      this.workspace = data;
+      if (this.workspace.role==1) {
         this.isOwner = true
       }
     });
+    // this.workspaceServise.getWorkspaceInfo(this.workspaceId)
+    // .subscribe((data: WorkspaceInfo) => {
+    // this.workspace = data;
+    
+    // if (this.workspace.role==1) {
+    //     this.isOwner = true
+    //   }
+    // });
   }
   
   async leave (){

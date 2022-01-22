@@ -7,6 +7,7 @@ import { WorkspaceInfo } from 'src/app/core/models/workspace/workspaceInfo';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { WorkspaceInfoInvite } from 'src/app/core/models/workspace/workspaceInfoInvite';
 import { AlertService } from 'src/app/core/services/alerts.service';
+import { DataShareService } from 'src/app/core/services/DataShare.service';
 
 @Component({
   selector: 'app-workspace-invite',
@@ -27,7 +28,8 @@ export class WorkspaceInviteComponent implements OnInit {
   private workspaceService: WorkspaceService, 
   private userService: UserService, 
   private authenticationService: AuthenticationService, 
-  private alertService: AlertService) {
+  private alertService: AlertService,
+  private dataShare: DataShareService) {
    this.inviteUserForm = formBuilder.group({
      'UserEmail': ['', [Validators.required, Validators.email]]
    }); 
@@ -40,10 +42,15 @@ export class WorkspaceInviteComponent implements OnInit {
       this.workspaceActiveInviteInfo = data;
     });
 
-    this.workspaceService.getWorkspaceInfo(this.workspaceId).subscribe((data: WorkspaceInfo) => {
+    this.dataShare.workspaceInfo.subscribe((data: WorkspaceInfo) => {
       this.currentUserRole = data;
       this.currentUserName = this.authenticationService.currentUser.username;
     });
+
+    // this.workspaceService.getWorkspaceInfo(this.workspaceId).subscribe((data: WorkspaceInfo) => {
+    //   this.currentUserRole = data;
+    //   this.currentUserName = this.authenticationService.currentUser.username;
+    // });
   }
 
   Invite(): void{

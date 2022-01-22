@@ -11,6 +11,7 @@ import { WorkspaceChangeRole } from 'src/app/core/models/workspace/workspaceChan
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { WorkspaceMembers } from 'src/app/core/models/workspace/workspaceMembers';
 import { AlertService } from 'src/app/core/services/alerts.service';
+import { DataShareService } from 'src/app/core/services/DataShare.service';
 
 interface Role {
   roleId: number;
@@ -43,7 +44,8 @@ export class WorkspaceMemberManagmentComponent implements OnInit {
     public dialog: MatDialog, 
     private alertService: AlertService,
     private workspaceServise: WorkspaceService, 
-    public authSrvice: AuthenticationService) {}
+    public authSrvice: AuthenticationService,
+    private dataShare: DataShareService) {}
   
   ngOnInit() {
     this.route.parent?.params.subscribe(
@@ -53,9 +55,12 @@ export class WorkspaceMemberManagmentComponent implements OnInit {
     this.workspaceServise.getWorkspaceUserList(this.workspaceId).subscribe(data=>{
       this.workspaceUserList=data;
     })
-    this.workspaceServise.getWorkspaceInfo(this.workspaceId).subscribe((data: WorkspaceInfo) => {
-        this.userWorkspaceInfo = data;
-      });
+    this.dataShare.workspaceInfo.subscribe((data: WorkspaceInfo) => {
+      this.userWorkspaceInfo = data;
+    });
+    // this.workspaceServise.getWorkspaceInfo(this.workspaceId).subscribe((data: WorkspaceInfo) => {
+    //     this.userWorkspaceInfo = data;
+    //   });
   }
   
   isOwner(workspaceMember: WorkspaceMembers){
