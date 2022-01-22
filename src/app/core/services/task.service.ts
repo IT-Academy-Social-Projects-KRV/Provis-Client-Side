@@ -92,8 +92,4 @@ export class TaskService {
   public gethistoryTask(taskId: number) {
     return this.http.get<TaskHistory[]>(this.taskServiceUrl + taskId +'/history', this.httpOption);
   }
-
-  public getTaskComments(taskId: number, workspaceId: number){
-    return this.http.get<TaskComment[]>(this.taskServiceUrl + taskId + '/workspace/' + workspaceId, this.httpOption);
-  }
 }
