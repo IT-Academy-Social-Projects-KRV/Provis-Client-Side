@@ -32,8 +32,7 @@ export class WorkspaceMemberManagmentComponent implements OnInit {
     public dialog: MatDialog, 
     private alertService: AlertService,
     private workspaceServise: WorkspaceService, 
-    public authSrvice: AuthenticationService,
-    private dataShare: DataShareService) {}
+    public authSrvice: AuthenticationService) {}
   
   ngOnInit() {
     this.route.parent?.params.subscribe((params) => {
@@ -46,7 +45,8 @@ export class WorkspaceMemberManagmentComponent implements OnInit {
     
     this.dataShare.workspaceInfo.subscribe((data: WorkspaceInfo) => {
       this.userWorkspaceInfo = data;
-      
+    });
+    
     this.dataShare.workspaceRoles.subscribe((data: workspaceUserRoles[]) => {
         this.roles = data;
     });

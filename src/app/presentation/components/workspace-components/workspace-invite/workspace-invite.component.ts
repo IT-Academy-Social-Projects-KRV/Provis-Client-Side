@@ -25,8 +25,7 @@ export class WorkspaceInviteComponent implements OnInit {
 
  constructor(
    formBuilder: FormBuilder, 
-  private workspaceService: WorkspaceService, 
-  private userService: UserService, 
+  private workspaceService: WorkspaceService,
   private authenticationService: AuthenticationService, 
   private alertService: AlertService,
   private dataShare: DataShareService) {
