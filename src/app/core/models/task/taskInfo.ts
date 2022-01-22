@@ -1,7 +1,8 @@
 export class TaskInfo {
-    id: number;
-    name: string;
-    deadline: Date;
-    storyPoints?: number;
-    workerRoleId: number;
+  id: number;
+  name: string;
+  deadline: Date;
+  workerRoleId: number;
+  commentCount: number;
+  storyPoints?: number;
 }
