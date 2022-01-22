@@ -46,11 +46,6 @@ export class WorkspaceInviteComponent implements OnInit {
       this.currentUserRole = data;
       this.currentUserName = this.authenticationService.currentUser.username;
     });
-
-    // this.workspaceService.getWorkspaceInfo(this.workspaceId).subscribe((data: WorkspaceInfo) => {
-    //   this.currentUserRole = data;
-    //   this.currentUserName = this.authenticationService.currentUser.username;
-    // });
   }
 
   Invite(): void{

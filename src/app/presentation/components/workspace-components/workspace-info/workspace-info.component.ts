@@ -35,18 +35,10 @@ export class WorkspaceInfoComponent implements OnInit {
 
     this.dataShare.workspaceInfo.subscribe((data: WorkspaceInfo) => {
       this.workspace = data;
-      if (this.workspace.role==1) {
+      if (this.workspace.role == 1) {
         this.isOwner = true
       }
     });
-    // this.workspaceServise.getWorkspaceInfo(this.workspaceId)
-    // .subscribe((data: WorkspaceInfo) => {
-    // this.workspace = data;
-    
-    // if (this.workspace.role==1) {
-    //     this.isOwner = true
-    //   }
-    // });
   }
   
   async leave (){

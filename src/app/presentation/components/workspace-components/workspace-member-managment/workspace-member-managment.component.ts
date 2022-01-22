@@ -58,9 +58,6 @@ export class WorkspaceMemberManagmentComponent implements OnInit {
     this.dataShare.workspaceInfo.subscribe((data: WorkspaceInfo) => {
       this.userWorkspaceInfo = data;
     });
-    // this.workspaceServise.getWorkspaceInfo(this.workspaceId).subscribe((data: WorkspaceInfo) => {
-    //     this.userWorkspaceInfo = data;
-    //   });
   }
   
   isOwner(workspaceMember: WorkspaceMembers){
