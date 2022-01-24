@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CommentCreate } from 'src/app/core/models/comment/commentCreate';
 import { TaskComment } from 'src/app/core/models/comment/taskComment';
 import { AlertService } from 'src/app/core/services/alerts.service';
+import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { CommentService } from 'src/app/core/services/comment.service';
 import { TaskCommentEditComponent } from '../task-comment-edit/task-comment-edit.component';
 
@@ -24,17 +25,15 @@ export class TaskCommentsComponent implements OnInit {
   constructor(private commentService: CommentService,
     private alertService: AlertService,
     private formBuilder: FormBuilder,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private authService: AuthenticationService) {
       this.commentInfo = formBuilder.group({
         "CommentText": ["", [Validators.maxLength(500)]]
       });
+      this.commentInfo.setErrors(null);
     }
 
   ngOnInit() {
-    this.updateCommentList();
-  }
-
-  updateCommentList(){
     this.commentService.getTaskComments(this.taskId,
       this.workspaceId).subscribe((data: TaskComment[]) => {
       this.comments = data;
@@ -48,7 +47,7 @@ export class TaskCommentsComponent implements OnInit {
           "Are you shure to delete this comment?",
           "Delete comment",
           "Delete")){
-          this.updateCommentList();
+            this.comments.splice(this.comments.findIndex(x => x.id == commentId), 1);
         }
       },
       err => {
@@ -67,22 +66,25 @@ export class TaskCommentsComponent implements OnInit {
       });
     dialog.componentInstance.isAdded.subscribe(data => {
       if(data){
+        let index = this.comments.findIndex(x  => x.id == commentId);
+        this.comments[index].commentText = dialog.componentInstance.editedText;
         dialog.close();
-        this.updateCommentList();
       }
     });
   }
 
   createComment(){
-    if(this.commentInfo.valid){
+    if(this.commentInfo.get("CommentText")?.value){
       this.commentCreate = Object.assign({}, this.commentInfo.value);
       this.commentCreate.taskId = this.taskId;
       this.commentCreate.workspaceId = this.workspaceId;
 
       this.commentService.createComment(this.commentCreate).subscribe(
-        () => {
+        (data) => {
+          data.userName = this.authService.currentUser.username;
+          this.comments.push(data)
+
           this.alertService.successMessage();
-          this.updateCommentList();
           this.commentInfo.reset();
         },
         err => {

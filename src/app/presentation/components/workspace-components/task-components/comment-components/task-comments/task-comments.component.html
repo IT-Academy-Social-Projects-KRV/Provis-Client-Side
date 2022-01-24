@@ -7,12 +7,11 @@
 
         <mat-form-field hintLabel="Max 500 characters" appearance="fill">
           <mat-label>Comment</mat-label>
-          <textarea formControlName="CommentText" #CommentText matInput placeholder="Your message" required></textarea>
-          <mat-error *ngIf="commentInfo.controls['CommentText'].invalid && commentInfo.controls['CommentText'].touched">Invalid text</mat-error>
+          <textarea class="textarea" formControlName="CommentText" #CommentText matInput placeholder="Your message"></textarea>
         </mat-form-field>
 
         <div class="modal-button">
-          <button type="submit" mat-raised-button class="button-accept">Post</button>
+          <button type="submit" mat-raised-button class="button-accept">Publish</button>
         </div>
       </form>
     </div>

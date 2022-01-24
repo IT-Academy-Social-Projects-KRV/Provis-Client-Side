@@ -52,5 +52,8 @@
 }
 mat-form-field {
     display: block;
-    width:100%;
+    width: 100%;
+}
+.textarea{
+    max-height: 150px;
 }

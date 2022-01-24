@@ -17,6 +17,7 @@ export class TaskCommentEditComponent implements OnInit {
   @Input() public commentId: number;
   @Input() public workspaceId: number;
   @Output() public isAdded = new EventEmitter<boolean>(false);
+  @Output() public editedText: string;
 
   constructor(private formBuilder: FormBuilder,
     private commentService: CommentService,
@@ -37,6 +38,7 @@ export class TaskCommentEditComponent implements OnInit {
 
       this.commentService.editComment(this.commentEdit).subscribe(
         () => {
+          this.editedText = this.editComemntForm.get("CommentText")?.value;
           this.isAdded.emit(true);
         },
         err => {

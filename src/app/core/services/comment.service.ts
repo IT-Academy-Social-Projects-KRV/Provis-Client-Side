@@ -27,8 +27,8 @@ export class CommentService {
         return this.http.get<TaskComment[]>(this.commentServiceUrl + taskId + '/workspace/' + workspaceId, this.httpOption);
     }
 
-    public createComment(comment: CommentCreate): Observable<void>{
-        return this.http.post<void>(this.commentServiceUrl, comment, this.httpOption);
+    public createComment(comment: CommentCreate): Observable<TaskComment>{
+        return this.http.post<TaskComment>(this.commentServiceUrl, comment, this.httpOption);
     }
 
     public deleteComment(commentId: number, workspaceId: number): Observable<void>{
