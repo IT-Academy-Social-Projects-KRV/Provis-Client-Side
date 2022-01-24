@@ -1,5 +1,6 @@
+import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import { Directive, OnInit, TemplateRef, Input, ViewContainerRef } from '@angular/core';
-import { DataShareService } from '../services/DataShare.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Directive({
@@ -11,22 +12,36 @@ export class IfUserRolesDirective implements OnInit {
   @Input() public appIfUserRoles: Array<number>;
 
   currentUserRole: number;
+  isVisible: boolean = false;
+  workspaceId: number;
 
   constructor(
     private viewContainerRef: ViewContainerRef,
     private templateRef: TemplateRef<any>,
-    private dataShare: DataShareService) { }
+    private route: ActivatedRoute,
+    private workspaceService: WorkspaceService) { }
 
   ngOnInit() {
-    this.dataShare.workspaceInfo.subscribe(data => {
-      this.currentUserRole = data.role;
+    this.route.params.subscribe(data => {
+      this.workspaceId = data['id'];
 
-      if(this.appIfUserRoles.indexOf(this.currentUserRole) != -1) {
-        this.viewContainerRef.createEmbeddedView(this.templateRef);
-      } else {
-        this.viewContainerRef.clear();
+      if(!this.workspaceId) {
+        this.workspaceId = this.route.parent?.snapshot.params['id'];
       }
-    });
-  };
+      
+      this.workspaceService.getWorkspaceInfo(this.workspaceId).subscribe(data => {
+        this.currentUserRole = data.role;
 
+        if(this.appIfUserRoles.indexOf(this.currentUserRole) != -1) {
+          if (!this.isVisible) {
+            this.isVisible = true;
+            this.viewContainerRef.createEmbeddedView(this.templateRef);
+          } else {
+            this.isVisible = false;
+            this.viewContainerRef.clear();
+          }
+        }
+      })
+    });
+  }
 }

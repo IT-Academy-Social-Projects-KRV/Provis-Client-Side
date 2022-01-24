@@ -9,31 +9,39 @@
         <form class="editTask-form" [formGroup]="detalInfoForm" (ngSubmit)="EditTask()">
           <mat-form-field hintLabel="Max 50 characters" appearance="fill">
             <mat-label>Name</mat-label>
-            <input type="text" matInput placeholder="Task name" #Name maxlength=50 formControlName="Name" required>
-            <mat-error *ngIf="detalInfoForm.controls['Name'].invalid && detalInfoForm.controls['Name'].touched">Invalid name</mat-error>
+            <input type="text" matInput placeholder="Task name" #Name maxlength=50 formControlName="name" required>
+            <mat-error *ngIf="detalInfoForm.controls['name'].invalid && detalInfoForm.controls['name'].touched">Invalid name</mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="fill">
             <mat-label>Description</mat-label>
-            <input type="text" matInput placeholder="Task description" formControlName="Description">
-            <mat-error *ngIf="detalInfoForm.controls['Description'].invalid && detalInfoForm.controls['Description'].touched">Invalid description</mat-error>
+            <input type="text" matInput placeholder="Task description" formControlName="description">
+            <mat-error *ngIf="detalInfoForm.controls['description'].invalid && detalInfoForm.controls['description'].touched">Invalid description</mat-error>
           </mat-form-field>
 
           <div class="form-half-input">
             <mat-form-field appearance="fill">
               <mat-label>Due date</mat-label>
-              <input type="date" [ngModel] ="deadLine | date:'yyyy-MM-dd'" (ngModelChange)="deadLine = $event" matInput placeholder="Task deadline" formControlName="DateOfEnd" required>
-              <mat-error *ngIf="detalInfoForm.controls['DateOfEnd'].invalid && detalInfoForm.controls['DateOfEnd'].touched">Invalid Due date</mat-error>
+              <input type="date" (ngModelChange)="deadLine = $event" matInput placeholder="Task deadline" formControlName="deadline" required>
+              <mat-error *ngIf="detalInfoForm.controls['deadline'].invalid && detalInfoForm.controls['deadline'].touched">Invalid Due date</mat-error>
             </mat-form-field>
 
-            <div [textContent]="'Current status: ' + statusList[selectedStatus - 1].name" ></div>
+            <mat-form-field appearance="fill">
+              <mat-label>Story Points</mat-label>
+              <input type="number" matInput placeholder="StoryPoints" formControlName="storyPoints" min="1" max="99" oninput="this.value=this.value.replace(/^0+/,/[^0-9]/g,'');">
+              <mat-error *ngIf="detalInfoForm.controls['storyPoints'].invalid && detalInfoForm.controls['storyPoints'].touched">Invalid story points</mat-error>
+            </mat-form-field>
 
+            <div [textContent]="'Current status: ' + getSelectedStatus(selectedStatus)" ></div>
           </div>
 
           <div class="modal-button">
-            <button mat-raised-button (click)="EditTask()" class="button-accept">Save</button>
+            <button mat-raised-button class="button-accept">Save</button>
           </div>
         </form>
+        <div class="assign-comp">
+          <app-workspace-task-assign [taskId]="taskId" [mode]="assignUserMode" [assignMembers]="assignedMembers"></app-workspace-task-assign>
+        </div>
 
         <app-workspace-task-attachments [taskId]="taskId" [workspaceId]="workspaceId"></app-workspace-task-attachments>
       </div>

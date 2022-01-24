@@ -31,3 +31,7 @@ export const statusesUrl = taskServiceUrl + 'statuses';
 export const rolesUrl = taskServiceUrl + 'roles';
 
 export const commentServiceUrl = baseUrl + '/Comment/';
+
+export const assignUrl = taskServiceUrl + 'assign';
+export const changeRoleUrl = taskServiceUrl + 'change-role';
+
