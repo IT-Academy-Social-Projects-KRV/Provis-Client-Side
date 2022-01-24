@@ -40,20 +40,18 @@ export class TaskCommentsComponent implements OnInit {
     })
   }
 
-  deleteComment(commentId: number){
-    this.commentService.deleteComment(commentId, this.workspaceId).subscribe(
-      async () => {
-        if(await this.alertService.confirmMessage(
-          "Are you shure to delete this comment?",
-          "Delete comment",
-          "Delete")){
-            this.comments.splice(this.comments.findIndex(x => x.id == commentId), 1);
+   async deleteComment(commentId: number){
+    if(await this.alertService.confirmMessage("Are you shure to delete this comment?",
+    "Delete comment","Delete")){
+      this.commentService.deleteComment(commentId, this.workspaceId).subscribe(
+        () => {
+          this.comments.splice(this.comments.findIndex(x => x.id == commentId), 1);
+        },
+        err => {
+          this.alertService.errorMessage(err);
         }
-      },
-      err => {
-        this.alertService.errorMessage(err);
-      }
-    )
+      )
+    }
   }
 
   editComment(commentId: number){
