@@ -6,9 +6,8 @@
                 <p class="registration_text">Best Task Manager</p>
             </div>
 
-                <form class="login-form" [formGroup]="loginForm" novalidate (ngSubmit)="submit()">
-
-                    <div style="padding:30px">
+            <form class="login-form" [formGroup]="loginForm" novalidate (ngSubmit)="submit()">
+                <div style="padding:30px">
                     <p class="form-title">Login</p>
                     <mat-form-field appearance="fill">
                         <mat-label>Email</mat-label>
@@ -28,8 +27,16 @@
                         <a href="#">Forgot password?</a>
                     </div>
                     <button mat-raised-button class="w-100 font-weight-600">Sign in</button>
+                    <div class="back-link">
+                        <a href="./"><span class="material-icons">navigate_before</span>
+                            Home
+                        </a>
+                        <a href="./registration">Registration
+                            <span class="material-icons">navigate_next</span>
+                        </a>
+                    </div>
                 </div>
-                </form>
+            </form>
 
         </div>
     </div>

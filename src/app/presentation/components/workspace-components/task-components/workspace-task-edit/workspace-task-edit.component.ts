@@ -10,7 +10,6 @@ import { AlertService } from 'src/app/core/services/alerts.service';
 import { TaskService } from 'src/app/core/services/task.service';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import { formatDate } from '@angular/common';
-import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-workspace-task-edit',
@@ -53,7 +52,7 @@ export class WorkspaceTaskEditComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
-    this.workspaceService.getWorkspaceUserList(this.workspaceId).pipe(delay(1000))
+    this.workspaceService.getWorkspaceUserList(this.workspaceId)
       .subscribe((data: WorkspaceMembers[]) => {
         this.workspaceMemberList = data;
           this.taskServise.getStatusTask().subscribe((statList: TaskStatus[]) => {

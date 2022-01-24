@@ -1,14 +1,13 @@
 .invite-modal{
     min-width: 600px;
     max-height: 600px;
-    margin: -38px -24px;
+    margin: -24px 0px;
     background: white;
     color: black;
 }
 .invite-list {
     list-style-type: none;
     padding: 20px 0;
-    margin: 14px 25px;
 }
 .invite-title {
     display: flex;
@@ -20,6 +19,18 @@
     flex-direction: row;
     align-content: center;
     justify-content: space-between;
+}
+.invite-absent {
+    padding: 20px;
+    min-height: 50px;
+    margin: 20px 0;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    color: #486c61;
+    font-weight: 600;
 }
 .invite-cart p {
     margin: 0px;
@@ -52,7 +63,6 @@
     font-weight: 600;
     text-transform: uppercase;
 }
-
 .invite-accepted {
     color: green;
 }

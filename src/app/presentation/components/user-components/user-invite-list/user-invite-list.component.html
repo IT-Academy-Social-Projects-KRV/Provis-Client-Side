@@ -1,30 +1,37 @@
-<div class="invite-modal">
-  <ul class="invite-list">
-    <li *ngFor="let item of userInviteList">
-      <div class="invite-cart">
-        <div>
-          <p class="invite-title">{{item.workspaceName}}</p>
-          <p class="invite-description">
-            <span>From user:</span> <span class="font-weight-600">{{item.fromUserName}}</span>
-            <span>|</span>
-            <span>Date time:</span> <span class="font-weight-600">{{item.date | date:'dd/MM/yyyy HH:mm'}}</span>
-          </p>
-        </div>
-        <div *ngIf="item.isConfirm == null; else noButtons" class="invite-decline-buttons">
-          <button mat-raised-button class="button-accept" (click)="accept(item.id)">Accept</button>
-          <button mat-raised-button class="warning" (click)="deny(item.id)">Decline</button>
-        </div>
-
-        <ng-template #noButtons>
-          <div class="invite-answer" *ngIf="item.isConfirm == true;">
-            <p class="invite-accepted">Accepted</p>
+<div class="invite-modal ">
+  <app-spin-loader *ngIf="isLoading"></app-spin-loader>
+  <div *ngIf="!isLoading">
+    <ul class="invite-list" *ngIf="!isEmpty(userInviteList.length); else noInvite">
+      <li *ngFor="let item of userInviteList">
+        <div class="invite-cart">
+          <div>
+            <p class="invite-title">{{item.workspaceName}}</p>
+            <p class="invite-description">
+              <span>From user:</span> <span class="font-weight-600">{{item.fromUserName}}</span>
+              <span>|</span>
+              <span>Date time:</span> <span class="font-weight-600">{{item.date | date:'dd/MM/yyyy HH:mm'}}</span>
+            </p>
           </div>
-          <div class="invite-answer" *ngIf="item.isConfirm == false;">
-            <p class="invite-declined">Declined</p>
+          <div *ngIf="item.isConfirm == null; else noButtons" class="invite-decline-buttons">
+            <button mat-raised-button class="button-accept" (click)="accept(item.id)">Accept</button>
+            <button mat-raised-button class="warning" (click)="deny(item.id)">Decline</button>
           </div>
-        </ng-template>
 
-      </div>
-    </li>
-  </ul>
+          <ng-template #noButtons>
+            <div class="invite-answer" *ngIf="item.isConfirm == true;">
+              <p class="invite-accepted">Accepted</p>
+            </div>
+            <div class="invite-answer" *ngIf="item.isConfirm == false;">
+              <p class="invite-declined">Declined</p>
+            </div>
+          </ng-template>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <ng-template #noInvite>
+    <div class="invite-absent">
+      <span>You don't have any active invites</span>
+    </div>
+  </ng-template>
 </div>

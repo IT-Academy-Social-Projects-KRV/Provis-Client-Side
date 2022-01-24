@@ -1,7 +1,7 @@
 import { WorkspaceInfo } from '../../../../core/models/workspace/workspaceInfo';
-import { map, Subscription, Observable, mapTo, filter, merge } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, ResolveEnd, ResolveStart, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { WorkspaceInviteComponent } from '../workspace-invite/workspace-invite.component';
 import { WorkspaceUpdateComponent } from '../workspace-update/workspace-update.component';
@@ -20,19 +20,7 @@ export class WorkspaceSettingsComponent implements OnInit {
 
   constructor(private activeRoute: ActivatedRoute, public dialog: MatDialog, ) {}
 
-  ngOnInit() {
-
-
-
-    this.description = this.activeRoute.snapshot.data['description'];
-    console.log(this.description);
-
-    // this.route.parent?.params.subscribe(
-    //   (params) =>
-    //   {
-    //     this.workspaceId = Number(params['id']);
-    //    });
-  }
+  ngOnInit() { }
 
   modalInvites() {
     let dialogRef = this.dialog.open(WorkspaceInviteComponent);

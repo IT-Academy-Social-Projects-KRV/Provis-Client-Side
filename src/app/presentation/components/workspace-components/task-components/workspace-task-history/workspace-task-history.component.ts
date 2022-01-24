@@ -22,5 +22,5 @@ export class WorkspaceTaskHistoryComponent implements OnInit {
       this.isLoading = false;
     });
   }
-  
+
 }
