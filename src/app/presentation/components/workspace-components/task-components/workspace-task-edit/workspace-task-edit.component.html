@@ -19,35 +19,33 @@
           <mat-error *ngIf="detalInfoForm.controls['description'].invalid && detalInfoForm.controls['description'].touched">Invalid description</mat-error>
         </mat-form-field>
 
-          <div class="form-half-input">
-            <mat-form-field appearance="fill">
-              <mat-label>Due date</mat-label>
-              <input type="date" (ngModelChange)="deadLine = $event" matInput placeholder="Task deadline" formControlName="deadline" required>
-              <mat-error *ngIf="detalInfoForm.controls['deadline'].invalid && detalInfoForm.controls['deadline'].touched">Invalid Due date</mat-error>
-            </mat-form-field>
+        <div class="form-half-input">
+          <mat-form-field appearance="fill">
+            <mat-label>Due date</mat-label>
+            <input type="date" (ngModelChange)="deadLine = $event" matInput placeholder="Task deadline" formControlName="deadline" required>
+            <mat-error *ngIf="detalInfoForm.controls['deadline'].invalid && detalInfoForm.controls['deadline'].touched">Invalid Due date</mat-error>
+          </mat-form-field>
 
-            <mat-form-field appearance="fill">
-              <mat-label>Story Points</mat-label>
-              <input type="number" matInput placeholder="StoryPoints" formControlName="storyPoints" min="1" max="99" oninput="this.value=this.value.replace(/^0+/,/[^0-9]/g,'');">
-              <mat-error *ngIf="detalInfoForm.controls['storyPoints'].invalid && detalInfoForm.controls['storyPoints'].touched">Invalid story points</mat-error>
-            </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Story Points</mat-label>
+            <input type="number" matInput placeholder="StoryPoints" formControlName="storyPoints" min="1" max="99" oninput="this.value=this.value.replace(/^0+/,/[^0-9]/g,'');">
+            <mat-error *ngIf="detalInfoForm.controls['storyPoints'].invalid && detalInfoForm.controls['storyPoints'].touched">Invalid story points</mat-error>
+          </mat-form-field>
 
-            <div [textContent]="'Current status: ' + getSelectedStatus(selectedStatus)" ></div>
-          </div>
-
-          <div class="modal-button">
-            <button mat-raised-button class="button-accept">Save</button>
-          </div>
-        </form>
-        <div class="assign-comp">
-          <app-workspace-task-assign [taskId]="taskId" [mode]="assignUserMode" [assignMembers]="assignedMembers"></app-workspace-task-assign>
+          <div [textContent]="'Current status: ' + getSelectedStatus(selectedStatus)" ></div>
         </div>
 
-        <app-workspace-task-attachments [taskId]="taskId" [workspaceId]="workspaceId"></app-workspace-task-attachments>
+        <div class="modal-button">
+          <button mat-raised-button class="button-accept">Save</button>
+        </div>
+      </form>
+      <div class="assign-comp">
+        <app-workspace-task-assign [taskId]="taskId" [mode]="assignUserMode" [assignMembers]="assignedMembers"></app-workspace-task-assign>
       </div>
-      <div class="task-section status-block">
-        <app-workspace-task-history [taskId]="taskId"></app-workspace-task-history>
-      </div>
+      <app-workspace-task-attachments [taskId]="taskId" [workspaceId]="workspaceId"></app-workspace-task-attachments>
+    </div>
+    <div class="task-section status-block">
+      <app-workspace-task-history [taskId]="taskId"></app-workspace-task-history>
     </div>
   </div>
 </div>
