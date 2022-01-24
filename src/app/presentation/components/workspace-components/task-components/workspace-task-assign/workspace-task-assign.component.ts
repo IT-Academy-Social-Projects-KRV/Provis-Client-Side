@@ -71,7 +71,7 @@ export class WorkspaceTaskAssignComponent implements OnInit {
           let joinMember = new JoinTaskMember();
           joinMember.id = this.taskId;
           joinMember.workspaceId = this.workspaceId;
-          joinMember.assignedUsers = [assignedMember];
+          joinMember.assignedUser = assignedMember;
 
           this.taskServise.taskMemberJoin(joinMember).subscribe(
             () => {
