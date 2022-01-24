@@ -26,12 +26,14 @@ export class WorkspaceMemberListComponent implements OnInit {
   ngOnInit() {
     this.route.parent?.params.subscribe((params) => {
       this.workspaceId = Number(params['id']);
-      this.workspaceService.getWorkspaceUserInfo(this.workspaceId).subscribe(data=> {
-        this.userList = data;
-      })
-      this.dataShareService.workspaceRoles.subscribe((data)=> {
-        this.workspaceRoles = data;
-      });
+    });
+
+    this.workspaceService.getWorkspaceUserInfo(this.workspaceId).subscribe(data=> {
+      this.userList = data;
+    });
+
+    this.dataShareService.workspaceRoles.subscribe((data)=> {
+      this.workspaceRoles = data;
     });
   }
 

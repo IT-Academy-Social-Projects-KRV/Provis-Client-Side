@@ -21,8 +21,8 @@
     display: flex;
     justify-content: space-between;
 }
-.form-half-input mat-form-field {
-    width: 48%;
+.form-half-input mat-form-field{
+    width: 33%;
     margin: 0px;
 }
 .modal-button {
@@ -49,6 +49,12 @@
     margin-top: 15px;
     padding-left: 10px;
     border-left: 2px solid #3b394a;
+}
+.assign-comp{
+    height: 300px;
+    overflow-y: auto;
+    padding-right: 15px;
+    margin-top: 15px;
 }
 .task-history-section {
     height: 35vh;

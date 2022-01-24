@@ -25,6 +25,10 @@ export class IfUserRolesDirective implements OnInit {
     this.route.params.subscribe(data => {
       this.workspaceId = data['id'];
 
+      if(!this.workspaceId) {
+        this.workspaceId = this.route.parent?.snapshot.params['id'];
+      }
+      
       this.workspaceService.getWorkspaceInfo(this.workspaceId).subscribe(data => {
         this.currentUserRole = data.role;
 

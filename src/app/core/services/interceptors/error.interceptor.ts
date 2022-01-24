@@ -14,6 +14,10 @@ export class ErrorInterceptor implements HttpInterceptor {
 
                 let errorMessage: string = '';
 
+                if(err.status == 403 && err.error == null) {
+                    return throwError(() => 'You don\'t have permissions');
+                }
+
                 if(err.error.errors && typeof err.error.errors === 'object') {
                     
                     const errors = err.error.errors;

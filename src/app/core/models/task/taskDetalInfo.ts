@@ -1,12 +1,13 @@
 export class TaskDetalInfo {
-  name: string;
-  description: string;
-  deadline: Date;
-  statusId: number;
-  assignedUsers: AssignedUsers[];
+    name: string;
+    description: string;
+    deadline: Date;
+    statusId: number;
+    storyPoints?: number;
+    assignedUsers: AssignedMember[];
 }
 
-export class AssignedUsers{
+export class AssignedMember{
   userId: string;
   userName: string;
   roleTagId: number;
