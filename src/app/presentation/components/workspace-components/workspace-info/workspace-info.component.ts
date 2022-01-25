@@ -52,12 +52,12 @@ export class WorkspaceInfoComponent implements OnInit {
         'http://localhost:3000/d-solo/o2AWvl1nz/grafana-provis?orgId=1&var-workspace=' +
        this.workspaceId.toString() + '&panelId=8&refresh=15s&from=now-24h');
 
-      //  this.dataShare.workspaceInfo.subscribe((data: WorkspaceInfo) => {
-      //    this.workspace = data;
-      //    if (this.workspace.role == 1) {
-      //      this.isOwner = true
-      //     }
-      //   });
+       this.dataShare.workspaceInfo.subscribe((data: WorkspaceInfo) => {
+         this.workspace = data;
+         if (this.workspace.role == 1) {
+           this.isOwner = true
+          }
+        });
 
      this.isLoading = false;
   }
