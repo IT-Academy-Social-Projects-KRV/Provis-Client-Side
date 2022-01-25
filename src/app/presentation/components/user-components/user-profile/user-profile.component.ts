@@ -85,54 +85,50 @@ export class UserProfileComponent implements OnInit {
     );
   }
 
-  modelEnterCode(){
-    this.userService.checkIsTwoFactorVerification().subscribe(
-      async res => {
-        if(!res){
-          this.showCheckEmailAlert();
+  async modelEnterCode(){
+    if(await this.alertService.confirmMessage(
+      'You have already activated two-factor authentication, do you want to disable it?',
+      'Are you sure?',
+      'Yes, disable')){
+        this.userService.checkIsTwoFactorVerification().subscribe(
+          async res => {
+            if(!res){
+              this.showCheckEmailAlert();
 
-          this.userService.sendTwoFactorCode().subscribe();
+              this.userService.sendTwoFactorCode().subscribe();
 
-          let dialogRef = this.dialog.open(ChangeTwoFaComponent);
-          dialogRef.componentInstance.isAdded.subscribe(data => {
-            if(data){
-              dialogRef.close();
+              let dialogRef = this.dialog.open(ChangeTwoFaComponent);
+              dialogRef.componentInstance.isAdded.subscribe(data => {
+                if(data){
+                  dialogRef.close();
+                }
+              })
             }
-          })
-        }
-        else{
+            else{
+                this.showCheckEmailAlert();
 
-          if (
-          await this.alertService.confirmMessage(
-            'You have already activated two-factor authentication, do you want to disable it?',
-            'Are you sure?', 
-            'Yes, disable'))
-          {
-            this.showCheckEmailAlert();
+                this.userService.sendTwoFactorCode().subscribe();
 
-            this.userService.sendTwoFactorCode().subscribe();
-
-            let dialogRef = this.dialog.open(ChangeTwoFaComponent);
-            dialogRef.componentInstance.isAdded.subscribe(data => {
-              if(data){
-                dialogRef.close();
-              }
-            })
+                let dialogRef = this.dialog.open(ChangeTwoFaComponent);
+                dialogRef.componentInstance.isAdded.subscribe(data => {
+                  if(data){
+                    dialogRef.close();
+                  }
+                })
+            }
+          },
+          err => {
+            this.alertService.errorMessage(err);
           }
-          
-        }
-      },
-      err => {
-        this.alertService.errorMessage(err);
+        )
       }
-    )
   }
 
   getImageTypes(): string {
 
     let types: string = '';
     environment.imageSettings.imageTypes.forEach( function(x) {
-      types += '.' + x + ',' 
+      types += '.' + x + ','
     });
 
     return types;
@@ -141,7 +137,7 @@ export class UserProfileComponent implements OnInit {
   uploadImage(event: any){
 
     let file: File = event.target.files[0];
-    
+
     if(file.size > environment.imageSettings.maxSize * 1024 * 1024)
     {
       this.alertService.errorMessage('Max size is ' + environment.imageSettings.maxSize + ' Mb', 'Error')

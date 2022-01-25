@@ -66,6 +66,10 @@ import { WorkspaceTaskHistoryComponent } from './presentation/components/workspa
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { SpinLoaderComponent } from './presentation/components/common components/spin-loader/spin-loader.component';
+import { CommentService } from './core/services/comment.service';
+import { TaskCommentsComponent } from './presentation/components/workspace-components/task-components/comment-components/task-comments/task-comments.component';
+import { TaskCommentEditComponent } from './presentation/components/workspace-components/task-components/comment-components/task-comment-edit/task-comment-edit.component';
+
 
 @NgModule({
   declarations: [
@@ -106,6 +110,9 @@ import { SpinLoaderComponent } from './presentation/components/common components
     IfUserRolesDirective,
     WorkspaceTaskEditComponent,
     SpinLoaderComponent
+    TaskCommentsComponent,
+    TaskCommentEditComponent
+
   ],
   imports: [
     BrowserModule,
@@ -138,7 +145,8 @@ import { SpinLoaderComponent } from './presentation/components/common components
     WorkspaceService,
     UserService,
     AlertService,
-    DataShareService
+    DataShareService,
+    CommentService
   ],
   bootstrap: [AppComponent]
 })
