@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, mergeMap, Observable, Subject, switchMap } from 'rxjs';
+import { DeleteTask } from '../models/task/deleteTask';
 import { TaskWorkerRole } from '../models/task/taskWorkerRoles';
 import { WorkspaceInfo } from '../models/workspace/workspaceInfo';
 import { WorkspaceRole } from '../models/workspace/workspaceRole';
@@ -19,7 +20,14 @@ export class DataShareService {
   private taskRolesSub = new BehaviorSubject<TaskWorkerRole[]>([new TaskWorkerRole()]);
   public taskRoles = this.taskRolesSub.asObservable();
 
+  private taskDeleteSub = new BehaviorSubject<DeleteTask>(new DeleteTask());
+  public taskDelete = this.taskDeleteSub.asObservable();
+
   constructor() { }
+
+  public nextTaskDelete(taskDelete: DeleteTask): void {
+    this.taskDeleteSub.next(taskDelete);
+  }
 
   public nextWorkspaceInfo(workspaceInfo: WorkspaceInfo): void {
     this.workspaceInfoSub.next(workspaceInfo);

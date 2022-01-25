@@ -118,4 +118,8 @@ export class TaskService {
   public changeMemberRole(changeMemberRole : ChangeMemberRole) : Observable<void> {
     return this.http.put<void>(this.changeUrl , changeMemberRole, this.httpOption);
   }
+
+  public deleteTask(workspaceId: number, taskId: number): Observable<void>{
+    return this.http.delete<void>(this.taskServiceUrl + 'task/' + taskId + '/workspace/' + workspaceId, this.httpOption);
+  }
 }

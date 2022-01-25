@@ -133,7 +133,7 @@ export class WorkspaceTaskAssignComponent implements OnInit {
   }
 
   getUserName(id: string) : string {
-    if(id) {
+    if(id && this.workspaceMembers) {
       return this.workspaceMembers[this.workspaceMembers
         .findIndex(x => x.id == id)].userName;
     }
