@@ -55,8 +55,9 @@ export class WorkspaceTaskAssignComponent implements OnInit {
         .subscribe((data: WorkspaceMembers[]) => {
           this.workspaceMembers = data;
     });
-    this.taskServise.getWorkerRole().subscribe((role: TaskWorkerRole[]) => {
-      this.taskRoles = role;
+
+    this.dataShare.taskRoles.subscribe((data: TaskWorkerRole[]) => {
+      this.taskRoles = data;
     });
   }
 
@@ -71,7 +72,7 @@ export class WorkspaceTaskAssignComponent implements OnInit {
           let joinMember = new JoinTaskMember();
           joinMember.id = this.taskId;
           joinMember.workspaceId = this.workspaceId;
-          joinMember.assignedUsers = [assignedMember];
+          joinMember.assignedUser = assignedMember;
 
           this.taskServise.taskMemberJoin(joinMember).subscribe(
             () => {

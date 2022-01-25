@@ -42,11 +42,11 @@ export class WorkspaceMemberManagmentComponent implements OnInit {
     this.workspaceServise.getWorkspaceUserList(this.workspaceId).subscribe(data => {
       this.workspaceUserList = data;
     })
-
-    this.workspaceServise.getWorkspaceInfo(this.workspaceId).subscribe((data: WorkspaceInfo) => {
-        this.userWorkspaceInfo = data;
-      });
-
+    
+    this.dataShare.workspaceInfo.subscribe((data: WorkspaceInfo) => {
+      this.userWorkspaceInfo = data;
+    });
+    
     this.dataShare.workspaceRoles.subscribe((data: workspaceUserRoles[]) => {
         this.roles = data;
     });

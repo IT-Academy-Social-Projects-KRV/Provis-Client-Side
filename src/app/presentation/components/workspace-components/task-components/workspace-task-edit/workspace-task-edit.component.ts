@@ -11,6 +11,7 @@ import { TaskService } from 'src/app/core/services/task.service';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import { mode } from 'src/app/core/types/assignUserMode';
 import { formatDate } from '@angular/common';
+import { DataShareService } from 'src/app/core/services/DataShare.service';
 
 @Component({
   selector: 'app-workspace-task-edit',
@@ -35,12 +36,14 @@ export class WorkspaceTaskEditComponent implements OnInit {
   assignedMembers: AssignedMember[];
   id: string;
   demoForm: FormGroup;
+  isLoading: boolean = false;
 
   constructor(private workspaceService: WorkspaceService,
     private forbBuilder: FormBuilder,
     private alertService: AlertService,
     public dialog: MatDialog,
-    private taskServise: TaskService) {
+    private taskServise: TaskService,
+    private dataShare: DataShareService) {
     this.detalInfoForm = forbBuilder.group({
       "name": ["", [Validators.maxLength(50)]],
       "description": ["", [Validators.maxLength(100)]],
@@ -54,24 +57,26 @@ export class WorkspaceTaskEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.workspaceService.getWorkspaceUserList(this.workspaceId).subscribe((data: WorkspaceMembers[]) => {
-      this.workspaceMemberList = data;
-    });
-
-    this.taskServise.getStatusTask().subscribe((statList: TaskStatus[]) => {
-      this.statusList = statList;
-    });
-
-    this.taskServise.getWorkerRole().subscribe((role: TaskWorkerRole[]) => {
-      this.taskRole = role;
-    });
-
-    this.taskServise.getTaskInfo(this.workspaceId, this.taskId).subscribe((data: TaskDetalInfo) => {
-      this.detalInfoForm.patchValue(data);
-      this.detalInfoForm.controls['deadline'].setValue(formatDate(data.deadline,'yyyy-MM-dd','en'));
-      this.selectedStatus = data.statusId;
-      this.assignedMembers = data.assignedUsers;
-    });
+    this.isLoading = true;
+    this.workspaceService.getWorkspaceUserList(this.workspaceId)
+      .subscribe((data: WorkspaceMembers[]) => {
+        this.workspaceMemberList = data;
+          this.taskServise.getStatusTask().subscribe((statList: TaskStatus[]) => {
+            this.statusList = statList;
+            this.taskServise.getWorkerRole().subscribe((role: TaskWorkerRole[]) => {
+              this.taskRole = role;
+                this.taskServise.getTaskInfo(this.workspaceId, this.taskId)
+                  .subscribe((data: TaskDetalInfo) => {
+                    this.detalInfoForm.patchValue(data);
+                    this.detalInfoForm.controls['deadline']
+                      .setValue(formatDate(data.deadline,'yyyy-MM-dd','en'));
+                    this.selectedStatus = data.statusId;
+                    this.assignedMembers = data.assignedUsers;
+                    this.isLoading = false;
+                });
+            });
+          });
+      });
   }
 
   EditTask() {

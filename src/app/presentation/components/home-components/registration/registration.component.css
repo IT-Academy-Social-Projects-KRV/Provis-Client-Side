@@ -5,6 +5,21 @@ form.register-form .mat-form-field {
     width: 100%;
     margin:5px auto;
 }
-.password-error{
+.password-error {
     margin-bottom: 5px;
+}
+.back-link {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px 10px 0;
+}
+.back-link a {
+    display: flex;
+    align-items: center;
+    transition: 0.3s all ease;
+    color: #807c9d;
+}
+.back-link a:hover {
+    color: #363446;
 }

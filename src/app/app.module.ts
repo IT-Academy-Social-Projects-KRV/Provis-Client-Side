@@ -64,6 +64,12 @@ import { IfUserRolesDirective } from './core/directives/IfUserRoles.directive';
 import { WorkspaceTaskEditComponent } from './presentation/components/workspace-components/task-components/workspace-task-edit/workspace-task-edit.component';
 import { DataShareService } from './core/services/DataShare.service';
 import { WorkspaceTaskHistoryComponent } from './presentation/components/workspace-components/task-components/workspace-task-history/workspace-task-history.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { SpinLoaderComponent } from './presentation/components/common components/spin-loader/spin-loader.component';
+import { CommentService } from './core/services/comment.service';
+import { TaskCommentsComponent } from './presentation/components/workspace-components/task-components/comment-components/task-comments/task-comments.component';
+import { TaskCommentEditComponent } from './presentation/components/workspace-components/task-components/comment-components/task-comment-edit/task-comment-edit.component';
 
 
 @NgModule({
@@ -103,7 +109,11 @@ import { WorkspaceTaskHistoryComponent } from './presentation/components/workspa
     WorkspaceTaskEditComponent,
     WorkspaceTaskHistoryComponent,
     IfUserRolesDirective,
-    WorkspaceTaskEditComponent
+    WorkspaceTaskEditComponent,
+    SpinLoaderComponent
+    TaskCommentsComponent,
+    TaskCommentEditComponent
+
   ],
   imports: [
     BrowserModule,
@@ -127,6 +137,8 @@ import { WorkspaceTaskHistoryComponent } from './presentation/components/workspa
     DragDropModule,
     MatListModule,
     MatTabsModule
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
   ],
   providers: [
     AuthInterceptorProvider,
@@ -135,7 +147,8 @@ import { WorkspaceTaskHistoryComponent } from './presentation/components/workspa
     WorkspaceService,
     UserService,
     AlertService,
-    DataShareService
+    DataShareService,
+    CommentService
   ],
   bootstrap: [AppComponent]
 })

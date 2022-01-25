@@ -23,3 +23,18 @@ form.login-form .mat-form-field {
 .forgot-pass a:hover {
     color: #272e44 !important;
 }
+.back-link {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px 10px 0;
+}
+.back-link a {
+    display: flex;
+    align-items: center;
+    transition: 0.3s all ease;
+    color: #807c9d;
+}
+.back-link a:hover {
+    color: #363446;
+}

@@ -98,10 +98,10 @@ button {
 a {
     text-decoration: none;
 }
-.nav-menu a, .home-top-section a, .benefits a, .footer a{
+.nav-menu a, .home-top-section a, .benefits a, .footer a, .bottom-section a{
     margin: 7px 0;
     padding: 0 20px;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     color: #fff;
     text-transform: uppercase;
@@ -122,13 +122,13 @@ a {
     padding-left: 0;
     overflow: hidden;
 }
-.sign-up, .home-top-section a.button, .benefits a.button {
+.sign-up, .home-top-section a.button, .benefits a.button, .bottom-section a {
     box-shadow: inset 0 0 0 #fff;
     border: 1px solid rgba(255,255,255,.25);
     border-radius: 4px;
     transition: 0.3s;
 }
-a.sign-up:hover, .home-top-section a.button:hover, .benefits a.button:hover {
+a.sign-up:hover, .home-top-section a.button:hover, .benefits a.button:hover, .bottom-section a.button:hover{
     color: #202020 !important;
     -webkit-box-shadow: inset 0 -36px 0 #fff;
     box-shadow: inset 0 -36px 0 #fff;
@@ -216,6 +216,7 @@ button.button-accept {
     color: #eee;
     font-size: 10px;
     font-weight: 600;
+    transition: 0.3s all ease;
 }
 a.link-button.button-accept:hover,
 button.button-accept:hover {

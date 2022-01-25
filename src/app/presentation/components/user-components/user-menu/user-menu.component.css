@@ -6,13 +6,13 @@
     padding: 0;
     position: relative;
 }
-.logo-title{
+.logo-title {
     font-size: 22px;
     font-weight: 600;
     color: #fff;
     text-transform: uppercase;
 }
-.user-header .right{
+.user-header .right {
     display: flex;
     align-items: center;
     margin: 0;
@@ -25,22 +25,32 @@
     box-shadow: 1px 3px 10px 1px rgb(136 129 137);
     border-bottom: 1px solid #bfbfbf;
 }
-.user-menu-button {
+.user-menu-buttons {
+    margin: 0 10px;
+}
+.user-menu-buttons a {
+    padding: 0;
+    font-weight: 500;
+}
+.user-menu-buttons button {
     color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     opacity: 0.75;
     background-color: #3b394a !important;
     transition: 0.3s;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding-right: 30px;
-    font-weight: 600;
+    font-weight: 500;
+    padding: 0;
 }
-.user-menu-button:hover{
+
+.user-menu-buttons button:hover,
+.user-menu-buttons a:hover {
     opacity: 1;
 }
-.user-menu-button div{
+.user-menu-buttons div {
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 .dropmenu {
     margin: -8px auto;
@@ -53,7 +63,7 @@
     flex-direction: column;
     align-items: flex-start;
 }
-ul.dropmenu  li{
+ul.dropmenu  li {
     padding: 0;
     margin: 0;
     width: 100%;
@@ -61,7 +71,7 @@ ul.dropmenu  li{
     display: flex;
     flex-direction: row;
 }
-.dropmenu li a{
+.dropmenu li a {
     margin: 0;
     padding: 8px 20px;
     color: #3b394a;
@@ -74,14 +84,14 @@ ul.dropmenu  li{
     font-weight: 600;
     width: 100%;
 }
- ul.dropmenu li:hover a{
+ ul.dropmenu li:hover a {
     background: #48537a;
     color: white;
 }
-.test .mat-menu-panel {
+.user-menu .mat-menu-panel {
     background: #cf4343;
 }
-.dropmenu li a{
+.dropmenu li a {
     display: flex;
     flex-direction: row;
 }

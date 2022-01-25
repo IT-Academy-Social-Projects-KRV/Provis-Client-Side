@@ -6,6 +6,7 @@ import { WorkspaceInfo } from 'src/app/core/models/workspace/workspaceInfo';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { WorkspaceInfoInvite } from 'src/app/core/models/workspace/workspaceInfoInvite';
 import { AlertService } from 'src/app/core/services/alerts.service';
+import { DataShareService } from 'src/app/core/services/DataShare.service';
 
 @Component({
   selector: 'app-workspace-invite',
@@ -22,13 +23,15 @@ export class WorkspaceInviteComponent implements OnInit {
   currentUserRole = new WorkspaceInfo();
   currentUserName: string|undefined;
 
-  constructor(formBuilder: FormBuilder, 
-    private workspaceService: WorkspaceService,
-    private authenticationService: AuthenticationService, 
-    private alertService: AlertService) {
-      this.inviteUserForm = formBuilder.group({
-      'UserEmail': ['', [Validators.required, Validators.email]]
-      }); 
+ constructor(
+   formBuilder: FormBuilder, 
+  private workspaceService: WorkspaceService,
+  private authenticationService: AuthenticationService, 
+  private alertService: AlertService,
+  private dataShare: DataShareService) {
+   this.inviteUserForm = formBuilder.group({
+     'UserEmail': ['', [Validators.required, Validators.email]]
+   }); 
  }
 
   ngOnInit() {
@@ -39,7 +42,7 @@ export class WorkspaceInviteComponent implements OnInit {
         this.workspaceActiveInviteInfo = data;
       });
 
-    this.workspaceService.getWorkspaceInfo(this.workspaceId).subscribe((data: WorkspaceInfo) => {
+    this.dataShare.workspaceInfo.subscribe((data: WorkspaceInfo) => {
       this.currentUserRole = data;
       this.currentUserName = this.authenticationService.currentUser.username;
     });

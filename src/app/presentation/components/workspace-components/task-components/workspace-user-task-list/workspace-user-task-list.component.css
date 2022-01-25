@@ -115,8 +115,14 @@
   text-align: end;
   letter-spacing: 0.5px;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+.task-info .material-icons {
+  font-size: 15px;
+  margin-bottom: 3px;
+  margin-right: 3px;
 }
 .example-container .task-status {
   margin: 0 10px 15px;
