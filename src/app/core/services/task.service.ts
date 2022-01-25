@@ -60,6 +60,14 @@ export class TaskService {
     return this.http.get<TaskAttachment[]>(this.taskServiceUrl +'task/'+ taskId + '/workspace/' + workspaceId + '/attachments', this.httpOption);
   }
 
+  getAttachmentPreview(workspaceId: number, attachmentId: number): Observable<File> {
+    const options = {
+      headers: this.httpOption.headers,
+      responseType: 'Blob' as 'json'
+    }
+    return this.http.get<File>(this.taskServiceUrl + 'task/workspace/' + workspaceId + '/attachment/' + attachmentId + '/preview', options)
+  }
+
   getAttachment(workspaceId: number, attachmentId: number): Observable<File> {
 
     const options = {

@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TaskAttachment } from 'src/app/core/models/task/taskAttachment';
-import { UserService } from 'src/app/core/services/user.service';
 import { saveAs } from 'file-saver';
 import { environment } from 'src/environments/environment';
 import { AlertService } from 'src/app/core/services/alerts.service';
 import { TaskService } from 'src/app/core/services/task.service';
 import { UnloadTaskAttachment } from 'src/app/core/models/task/uploadTaskAttachments';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-workspace-task-attachments',
@@ -21,11 +21,47 @@ export class WorkspaceTaskAttachmentsComponent implements OnInit {
   maxFileSize: number = environment.attachmentsSettings.maxFileSize;
 
   attachments: TaskAttachment[] = [];
+  attachmentPreview: SafeUrl[] = [];
 
-  constructor(private taskService: TaskService, private alertService: AlertService) { }
+  constructor(private sanitizer: DomSanitizer, 
+    private taskService: TaskService, 
+    private alertService: AlertService) { }
 
   ngOnInit() {
     this.getAttachmentList();
+  }
+
+  setAttachmentPreviewList(){
+    for(let attachment of this.attachments){
+      this.setAttachmentPreview(attachment);
+    }
+  } 
+
+  setAttachmentPreview(attachment: TaskAttachment) {
+    if(attachment.contentType.startsWith('image')) {
+      this.taskService.getAttachmentPreview(this.workspaceId, attachment.id).subscribe((data: Blob) => {
+        const blob = new Blob([data], { type: data.type });
+        const unsafeImg = URL.createObjectURL(blob);
+        attachment.preview = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+      })
+    }
+    else if(attachment.contentType.startsWith('application/msword') ||
+            attachment.contentType.startsWith('application/vnd.openxmlformats-officedocument.wordprocessingml.document')) {
+              attachment.preview = "assets/img/word-preview.png";
+    }
+    else if(attachment.contentType.startsWith('application/vnd.ms-excel') || 
+            attachment.contentType.startsWith('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')) {
+      attachment.preview = "assets/img/excel-preview.png";
+    }
+    else if(attachment.contentType.startsWith('application/pdf')) {
+      attachment.preview = "assets/img/pdf-preview.png";
+    }
+    else if(attachment.contentType.startsWith('text/plain')) {
+      attachment.preview = "assets/img/txt-preview.png";
+    }
+    else {
+      attachment.preview = "assets/img/default-preview.png";
+    }
   }
 
   getAttachmentList() {
@@ -49,7 +85,8 @@ export class WorkspaceTaskAttachmentsComponent implements OnInit {
     uploadFile.taskId = this.taskId;
     uploadFile.attachment = file;
 
-    this.taskService.uploadAttachment(uploadFile).subscribe((data)=>{
+    this.taskService.uploadAttachment(uploadFile).subscribe((data: TaskAttachment)=>{
+      this.setAttachmentPreview(data);
       this.attachments.push(data);
     },
     (err) => {
@@ -66,10 +103,10 @@ export class WorkspaceTaskAttachmentsComponent implements OnInit {
 
   getAttacmentName(name: string): string {
 
-    if(name.length<30)
+    if(name.length<10)
       return name;
     else
-      return name.substring(0, 30) + '...';
+      return name.substring(0, 10) + '...';
   }
 
   deleteAttachment(attachmentId: number) {

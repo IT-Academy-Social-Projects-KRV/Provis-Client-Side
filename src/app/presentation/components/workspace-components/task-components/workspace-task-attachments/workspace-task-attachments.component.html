@@ -1,43 +1,62 @@
 <div>
-  <mat-list>
-
-    <div mat-subheader>Attachments</div>
-
-    <div class="mat-list-cotainer">
-
+  <div class = "add-attachment" mat-subheader>Attachments
+    <mat-list>
       <mat-list-item title="Add file" (click)="fileInput.click()" [disabled]="attachments.length >= maxFileNumber" >
         <mat-icon mat-list-icon>add_circle</mat-icon>
         <div mat-line><u>Add</u></div>
         <span *ngIf="attachments.length >= maxFileNumber"><i>Max namber of files is {{maxFileNumber}}</i></span>
         <input #fileInput type="file" style="display:none;" (change)="uploadAttachment($event)"/>
       </mat-list-item>
+    </mat-list>
+  </div>
 
-      <div  *ngIf="attachments.length > 0 else noAttachments">
-        <mat-list-item *ngFor="let attachment of attachments">
-          <mat-icon mat-list-icon
-          [title]="'Download ' + attachment.name"
-          (click)="downloadFile(attachment.id)">
-            perm_media
-          </mat-icon>
+  <mat-tab-group (selectedTabChange) = "setAttachmentPreviewList()">
+    <mat-tab label="List">
+      <mat-list>
+        <div class="mat-list-cotainer">
+          <div *ngIf="attachments.length > 0 else noAttachments">
+            <mat-list-item *ngFor="let attachment of attachments">
+              <mat-icon mat-list-icon
+              [title]="'Download ' + attachment.name"
+              (click)="downloadFile(attachment.id)">
+                perm_media
+              </mat-icon>
+                <div mat-line>
+                  <div class="list-item-container">
+                    <span (click)="downloadFile(attachment.id)"
+                    [title]="'Download ' + attachment.name">
+                      {{getAttacmentName(attachment.name)}}
+                    </span>
+                    <mat-icon class="delete-batton" (click)="deleteAttachment(attachment.id)">delete</mat-icon>
+                  </div>
+                </div>
+            </mat-list-item>
+          </div>
+        </div>
+      </mat-list>
+    </mat-tab>
 
-            <div mat-line>
-              <div class="list-item-container">
-                <span (click)="downloadFile(attachment.id)"
-                [title]="'Download ' + attachment.name">
-                  {{getAttacmentName(attachment.name)}}
-                </span>
-                <mat-icon class="delete-batton" (click)="deleteAttachment(attachment.id)">delete</mat-icon>
-              </div>
-            </div>
-        </mat-list-item>
+    <mat-tab label="Board">
+      <mat-list>
+        <div *ngIf="attachments.length > 0 else noAttachments"></div>
+      </mat-list>
+      <div class = "preview-list">
+        <div class = "preview" *ngFor="let attachment of attachments">
+          <mat-icon class="delete-batton" (click)="deleteAttachment(attachment.id)">delete</mat-icon>
+          <div class = "preview-list-container" (click)="downloadFile(attachment.id)">
+            <img [title]="'Download ' + attachment.name" mat-card-sm-image [src]="attachment.preview">
+            <span>{{getAttacmentName(attachment.name)}}</span>
+          </div>
+        </div>
       </div>
+    </mat-tab>
 
-      <ng-template #noAttachments>
-        <mat-list-item>
-          No attachments yet
-        </mat-list-item>
-      </ng-template>
+  </mat-tab-group>
 
-    </div>
-  </mat-list>
+  <ng-template #noAttachments>
+    <mat-list-item>
+      No attachments yet
+    </mat-list-item>
+  </ng-template>
+
 </div>
