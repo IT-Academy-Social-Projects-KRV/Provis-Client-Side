@@ -110,7 +110,7 @@ import { TaskCommentEditComponent } from './presentation/components/workspace-co
     WorkspaceTaskHistoryComponent,
     IfUserRolesDirective,
     WorkspaceTaskEditComponent,
-    SpinLoaderComponent
+    SpinLoaderComponent,
     TaskCommentsComponent,
     TaskCommentEditComponent
 
@@ -136,7 +136,7 @@ import { TaskCommentEditComponent } from './presentation/components/workspace-co
     MatExpansionModule,
     DragDropModule,
     MatListModule,
-    MatTabsModule
+    MatTabsModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
   ],
