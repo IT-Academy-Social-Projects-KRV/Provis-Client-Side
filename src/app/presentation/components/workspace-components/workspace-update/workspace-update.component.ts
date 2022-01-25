@@ -15,7 +15,6 @@ export class WorkspaceUpdateComponent implements OnInit {
 
   updwsform: FormGroup;
   workspaceInfo: WorkspaceInfo;
-  @Input() workspaceId: number;
   updateWorkspace: WorkspaceUpdate = new WorkspaceUpdate();
   @Output() public isUpdated = new EventEmitter<boolean>(false);
 
@@ -26,7 +25,7 @@ export class WorkspaceUpdateComponent implements OnInit {
     private dataShareService: DataShareService) {
     this.updwsform = formBuilder.group({
       "Name": ['', [Validators.required]],
-      "Description": ['', [Validators.required]]
+      "Description": ['']
     })
   }
 
@@ -39,9 +38,9 @@ export class WorkspaceUpdateComponent implements OnInit {
       this.updwsform.controls['Name'].setValue(this.updateWorkspace.Name);
     });
 
-    this.workspaceService.getWorkspaceDecscription(this.workspaceId).subscribe((data: WorkspaceDescription) => {
+    this.workspaceService.getWorkspaceDecscription(this.workspaceInfo.id).subscribe((data: WorkspaceDescription) => {
       this.updateWorkspace.Description = data.description;
-      this.updwsform.controls['Description'].setValue(this.updateWorkspace.Description);
+      this.updwsform.controls['Description'].setValue(data.description);
     });
   }
 
