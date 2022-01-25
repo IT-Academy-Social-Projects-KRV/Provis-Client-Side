@@ -29,7 +29,6 @@ export class WorkspaceSettingsComponent implements OnInit {
 
   modalUpdate() {
     let dialogRef = this.dialog.open(WorkspaceUpdateComponent);
-    dialogRef.componentInstance.workspaceId=this.workspaceId;
     dialogRef.componentInstance.isUpdated.subscribe(data => {
       if(data)
         dialogRef.close();
