@@ -36,6 +36,7 @@ export class WorkspaceTaskEditComponent implements OnInit {
   assignedMembers: AssignedMember[];
   id: string;
   demoForm: FormGroup;
+  isLoading: boolean = false;
 
   constructor(private workspaceService: WorkspaceService,
     private forbBuilder: FormBuilder,
@@ -56,24 +57,26 @@ export class WorkspaceTaskEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.workspaceService.getWorkspaceUserList(this.workspaceId).subscribe((data: WorkspaceMembers[]) => {
-      this.workspaceMemberList = data;
-    });
-
-    this.taskServise.getStatusTask().subscribe((statList: TaskStatus[]) => {
-      this.statusList = statList;
-    });
-
-    this.dataShare.taskRoles.subscribe((data: TaskWorkerRole[]) => {
-      this.taskRole = data;
-    })
-
-    this.taskServise.getTaskInfo(this.workspaceId, this.taskId).subscribe((data: TaskDetalInfo) => {
-      this.detalInfoForm.patchValue(data);
-      this.detalInfoForm.controls['deadline'].setValue(formatDate(data.deadline,'yyyy-MM-dd','en'));
-      this.selectedStatus = data.statusId;
-      this.assignedMembers = data.assignedUsers;
-    });
+    this.isLoading = true;
+    this.workspaceService.getWorkspaceUserList(this.workspaceId)
+      .subscribe((data: WorkspaceMembers[]) => {
+        this.workspaceMemberList = data;
+          this.taskServise.getStatusTask().subscribe((statList: TaskStatus[]) => {
+            this.statusList = statList;
+            this.taskServise.getWorkerRole().subscribe((role: TaskWorkerRole[]) => {
+              this.taskRole = role;
+                this.taskServise.getTaskInfo(this.workspaceId, this.taskId)
+                  .subscribe((data: TaskDetalInfo) => {
+                    this.detalInfoForm.patchValue(data);
+                    this.detalInfoForm.controls['deadline']
+                      .setValue(formatDate(data.deadline,'yyyy-MM-dd','en'));
+                    this.selectedStatus = data.statusId;
+                    this.assignedMembers = data.assignedUsers;
+                    this.isLoading = false;
+                });
+            });
+          });
+      });
   }
 
   EditTask() {

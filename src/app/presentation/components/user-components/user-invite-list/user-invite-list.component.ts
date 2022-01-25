@@ -11,14 +11,23 @@ import { AlertService } from 'src/app/core/services/alerts.service';
 export class UserInviteListComponent implements OnInit {
 
   userInviteList: UserInvite [];
+  isLoading: boolean = false;
 
   constructor(private userService: UserService,
     private alertService: AlertService) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.userService.getUserInvite().subscribe((data: UserInvite[])=>{
       this.userInviteList = data;
-    })
+      this.isLoading = false;
+    });
+  }
+
+  isEmpty(length: number): boolean{
+    if(length == 0)
+      return true;
+    return false;
   }
 
   deny(inviteId:number)

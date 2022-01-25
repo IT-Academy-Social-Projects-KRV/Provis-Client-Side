@@ -16,16 +16,11 @@ export class WorkspaceSettingsComponent implements OnInit {
   protected routeSub: Subscription;
   workspaceId: number;
   workspace: WorkspaceInfo;
+  description: string;
 
-  constructor(private route: ActivatedRoute, public dialog: MatDialog,) {}
+  constructor(private activeRoute: ActivatedRoute, public dialog: MatDialog, ) {}
 
-  ngOnInit() {
-    this.route.parent?.params.subscribe(
-      (params) =>
-      {
-        this.workspaceId = Number(params['id']);
-       });
-  }
+  ngOnInit() { }
 
   modalInvites() {
     let dialogRef = this.dialog.open(WorkspaceInviteComponent);

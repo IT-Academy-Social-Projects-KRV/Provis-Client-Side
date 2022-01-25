@@ -1,15 +1,6 @@
 .home-page{
     width: 100%;
 }
-.home-tope-section-img{  
-    min-height: 500px;
-    min-width: 800px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    display: inline-block;
-    border-radius: 10px;
-}
 .home-top-section {
     align-items: center;
     justify-content: center;
@@ -67,7 +58,6 @@ button:hover{
 }
 .feature-text {
     flex-direction: column;
-    padding: 0 50px;
     font-size: 15px;
     font-weight: 400;
 }
@@ -146,4 +136,10 @@ button:hover{
 }
 .home-title-color {
     color: #cdcdcd;
+}
+.text-left {
+    padding-left:50px;
+}
+.text-right {
+    padding-right:50px;
 }

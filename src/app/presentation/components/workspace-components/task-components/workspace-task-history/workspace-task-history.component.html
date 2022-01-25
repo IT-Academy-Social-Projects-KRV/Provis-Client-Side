@@ -1,10 +1,11 @@
+<app-spin-loader *ngIf="isLoading"></app-spin-loader>
 <div class="task-history">
   <div *ngFor="let item of history">
     <div class="history-info">
       <div>
-        <span class="selected-information">{{item.userName}}</span> 
-        <span> changed status to </span> 
-        <span class="selected-information">{{item.status}}</span> 
+        <span class="selected-information">{{item.userName}}</span>
+        <span> changed status to </span>
+        <span class="selected-information">{{item.status}}</span>
       </div>
       <div class="history-date">
         {{item.dateOfChange |date:'dd.MM.yyyy HH:mm'}}
