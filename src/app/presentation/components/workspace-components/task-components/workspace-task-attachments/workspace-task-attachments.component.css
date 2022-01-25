@@ -20,4 +20,33 @@
 .delete-batton {
     display: none;
 }
-
+.preview > img{
+    width: 30px;
+}
+.preview{
+    display: flex;
+    flex: 48%;
+    overflow: hidden;
+    margin: 5px;
+    align-items: center;
+    max-width: 48%;
+    justify-content: space-between;
+}
+.add-attachment{
+    justify-content: space-between;
+}
+.preview-list{
+    display: flex;
+    flex-wrap: wrap;
+    cursor: pointer;
+}
+.preview:hover {
+    background-color: rgb(235, 235, 235);
+}
+.preview:hover .delete-batton {
+    display: inline-block;
+}
+.preview span{
+    margin-left: 5px;
+    font-size: 14px;
+}
