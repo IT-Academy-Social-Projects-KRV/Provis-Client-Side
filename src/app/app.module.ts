@@ -63,6 +63,9 @@ import { IfUserRolesDirective } from './core/directives/IfUserRoles.directive';
 import { WorkspaceTaskEditComponent } from './presentation/components/workspace-components/task-components/workspace-task-edit/workspace-task-edit.component';
 import { DataShareService } from './core/services/DataShare.service';
 import { WorkspaceTaskHistoryComponent } from './presentation/components/workspace-components/task-components/workspace-task-history/workspace-task-history.component';
+import { CommentService } from './core/services/comment.service';
+import { TaskCommentsComponent } from './presentation/components/workspace-components/task-components/comment-components/task-comments/task-comments.component';
+import { TaskCommentEditComponent } from './presentation/components/workspace-components/task-components/comment-components/task-comment-edit/task-comment-edit.component';
 
 
 @NgModule({
@@ -102,7 +105,9 @@ import { WorkspaceTaskHistoryComponent } from './presentation/components/workspa
     WorkspaceTaskEditComponent,
     WorkspaceTaskHistoryComponent,
     IfUserRolesDirective,
-    WorkspaceTaskEditComponent
+    WorkspaceTaskEditComponent,
+    TaskCommentsComponent,
+    TaskCommentEditComponent
   ],
   imports: [
     BrowserModule,
@@ -133,7 +138,8 @@ import { WorkspaceTaskHistoryComponent } from './presentation/components/workspa
     WorkspaceService,
     UserService,
     AlertService,
-    DataShareService
+    DataShareService,
+    CommentService
   ],
   bootstrap: [AppComponent]
 })

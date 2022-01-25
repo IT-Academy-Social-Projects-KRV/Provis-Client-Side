@@ -1,0 +1,40 @@
+<div>
+
+  <div class="comment-task-section">
+
+    <div class="comment-section">
+      <form (ngSubmit)="createComment()" [formGroup]="commentInfo" class="comment-form">
+
+        <mat-form-field hintLabel="Max 500 characters" appearance="fill">
+          <mat-label>Comment</mat-label>
+          <textarea class="textarea" formControlName="CommentText" #CommentText matInput placeholder="Your message"></textarea>
+        </mat-form-field>
+
+        <div class="modal-button">
+          <button type="submit" mat-raised-button class="button-accept">Publish</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+  <div class="comment-list">
+    <div *ngFor="let comment of comments">
+
+      <div class="comment-box">
+        <div class="comment-info">
+            <h3 class="username">{{comment.userName}}</h3>
+            <span class="wrap-text">{{comment.commentText}}</span>
+        </div>
+      </div>
+
+      <div class="comment-buttons">
+        <b class="float-right">{{comment.dateTime | date:'HH:mm dd.MM.yyyy'}}</b>
+        <button (click)="deleteComment(comment.id)"><mat-icon class="delete-button">delete_outline</mat-icon></button>
+        <button (click)="editComment(comment.id)"><mat-icon>edit</mat-icon></button>
+      </div>
+
+    </div>
+  </div>
+
+</div>

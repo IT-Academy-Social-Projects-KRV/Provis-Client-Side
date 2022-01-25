@@ -1,0 +1,12 @@
+<form (ngSubmit)="editComment()" [formGroup]="editComemntForm" class="comment-form">
+
+  <mat-form-field hintLabel="Max 500 characters" appearance="fill">
+    <mat-label>Comment</mat-label>
+    <textarea class="textarea" formControlName="CommentText" #CommentText matInput placeholder="Your message" required></textarea>
+    <mat-error *ngIf="editComemntForm.controls['CommentText'].invalid && editComemntForm.controls['CommentText'].touched">Invalid text</mat-error>
+  </mat-form-field>
+
+  <div class="modal-button">
+    <button type="submit" mat-raised-button class="w-100">Edit</button>
+  </div>
+</form>

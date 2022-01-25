@@ -45,8 +45,10 @@
 
         <app-workspace-task-attachments [taskId]="taskId" [workspaceId]="workspaceId"></app-workspace-task-attachments>
       </div>
-      <div class="task-section status-block">
+
+      <div class="task-section">
         <app-workspace-task-history [taskId]="taskId"></app-workspace-task-history>
+        <app-task-comments [taskId]="taskId" [workspaceId]="workspaceId"></app-task-comments>
       </div>
     </div>
 </div>
