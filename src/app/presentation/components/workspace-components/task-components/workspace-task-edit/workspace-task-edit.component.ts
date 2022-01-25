@@ -12,6 +12,7 @@ import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import { mode } from 'src/app/core/types/assignUserMode';
 import { formatDate } from '@angular/common';
 import { DataShareService } from 'src/app/core/services/DataShare.service';
+import { DeleteTask } from 'src/app/core/models/task/deleteTask';
 
 @Component({
   selector: 'app-workspace-task-edit',
@@ -37,6 +38,7 @@ export class WorkspaceTaskEditComponent implements OnInit {
   id: string;
   demoForm: FormGroup;
   isLoading: boolean = false;
+
 
   constructor(private workspaceService: WorkspaceService,
     private forbBuilder: FormBuilder,
@@ -102,4 +104,25 @@ export class WorkspaceTaskEditComponent implements OnInit {
     else
       return '';
   }
+
+  async deleteTask() {
+    if(await this.alertService.confirmMessage('Task will be deleted!', 
+        'Are you sure?', 
+        'Yes, delete!'))
+      {
+        this.taskServise.deleteTask(this.workspaceId, this.taskId).subscribe(
+        () => {
+          let deleteTask = new DeleteTask();
+          deleteTask.id = this.taskId;
+          deleteTask.statusId = this.selectedStatus;
+          this.alertService.successMessage();
+          this.dataShare.nextTaskDelete(deleteTask);
+          this.dialog.closeAll();
+        },
+        err => {
+          this.alertService.errorMessage(err);
+        })
+      }
+  }
+
 }

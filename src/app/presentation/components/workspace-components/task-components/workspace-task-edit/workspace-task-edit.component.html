@@ -6,7 +6,7 @@
   <app-spin-loader *ngIf="isLoading"></app-spin-loader>
   <div *ngIf="!isLoading" class="edit-task-section">
     <div class="task-section">
-      <form class="editTask-form" [formGroup]="detalInfoForm" (ngSubmit)="EditTask()">
+      <form class="editTask-form" [formGroup]="detalInfoForm">
         <mat-form-field hintLabel="Max 50 characters" appearance="fill">
           <mat-label>Name</mat-label>
           <input type="text" matInput placeholder="Task name" #Name maxlength=50 formControlName="name" required>
@@ -35,7 +35,8 @@
           <div [textContent]="'Current status: ' + getSelectedStatus(selectedStatus)" ></div>
         </div>
         <div class="modal-button">
-          <button mat-raised-button class="button-accept">Save</button>
+          <button mat-raised-button (click)='deleteTask()' class="warning">Delete</button>
+          <button mat-raised-button class="button-accept" (click) = "EditTask()">Save</button>
         </div>
       </form>
       <div class="assign-comp">
@@ -48,6 +49,5 @@
       <app-workspace-task-history [taskId]="taskId"></app-workspace-task-history>
       <app-task-comments [taskId]="taskId" [workspaceId]="workspaceId"></app-task-comments>
     </div>
-    
   </div>
 </div>
