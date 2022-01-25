@@ -20,17 +20,18 @@
 .delete-batton {
     display: none;
 }
-.preview > img{
-    width: 30px;
+.preview img{
+    width: 90px;
 }
 .preview{
     display: flex;
-    flex: 48%;
+    flex: 21%;
     overflow: hidden;
     margin: 5px;
     align-items: center;
-    max-width: 48%;
-    justify-content: space-between;
+    justify-content: center;
+    max-width: 21%;
+    position: relative;
 }
 .add-attachment{
     justify-content: space-between;
@@ -45,8 +46,18 @@
 }
 .preview:hover .delete-batton {
     display: inline-block;
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    z-index: 10;
 }
 .preview span{
     margin-left: 5px;
     font-size: 14px;
+}
+.preview-list-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
 }

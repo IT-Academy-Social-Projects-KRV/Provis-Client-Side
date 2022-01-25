@@ -54,7 +54,7 @@ export class WorkspaceTaskAttachmentsComponent implements OnInit {
       attachment.preview = "assets/img/excel-preview.png";
     }
     else if(attachment.contentType.startsWith('application/pdf')) {
-      attachment.preview = "assets/img/pdf-preview.jpg";
+      attachment.preview = "assets/img/pdf-preview.png";
     }
     else if(attachment.contentType.startsWith('text/plain')) {
       attachment.preview = "assets/img/txt-preview.png";
@@ -103,10 +103,10 @@ export class WorkspaceTaskAttachmentsComponent implements OnInit {
 
   getAttacmentName(name: string): string {
 
-    if(name.length<30)
+    if(name.length<10)
       return name;
     else
-      return name.substring(0, 30) + '...';
+      return name.substring(0, 10) + '...';
   }
 
   deleteAttachment(attachmentId: number) {

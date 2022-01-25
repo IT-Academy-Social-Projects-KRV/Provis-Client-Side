@@ -41,11 +41,11 @@
         <div *ngIf="attachments.length > 0 else noAttachments"></div>
       </mat-list>
       <div class = "preview-list">
-        <div class = "preview"*ngFor="let attachment of attachments">
-          <img mat-card-sm-image [src]="attachment.preview">
-          <span (click)="downloadFile(attachment.id)">{{getAttacmentName(attachment.name)}}</span>
-          <div>
-            <mat-icon class="delete-batton" (click)="deleteAttachment(attachment.id)">delete</mat-icon>
+        <div class = "preview" *ngFor="let attachment of attachments">
+          <mat-icon class="delete-batton" (click)="deleteAttachment(attachment.id)">delete</mat-icon>
+          <div class = "preview-list-container" (click)="downloadFile(attachment.id)">
+            <img [title]="'Download ' + attachment.name" mat-card-sm-image [src]="attachment.preview">
+            <span>{{getAttacmentName(attachment.name)}}</span>
           </div>
         </div>
       </div>
