@@ -86,10 +86,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   async modelEnterCode(){
-    if(await this.alertService.confirmMessage(
-      'You have already activated two-factor authentication, do you want to disable it?',
-      'Are you sure?',
-      'Yes, disable')){
+   
         this.userService.checkIsTwoFactorVerification().subscribe(
           async res => {
             if(!res){
@@ -105,6 +102,10 @@ export class UserProfileComponent implements OnInit {
               })
             }
             else{
+              if(await this.alertService.confirmMessage(
+                'You have already activated two-factor authentication, do you want to disable it?',
+                'Are you sure?',
+                'Yes, disable')){
                 this.showCheckEmailAlert();
 
                 this.userService.sendTwoFactorCode().subscribe();
@@ -116,12 +117,12 @@ export class UserProfileComponent implements OnInit {
                   }
                 })
             }
-          },
+          }},
           err => {
             this.alertService.errorMessage(err);
           }
         )
-      }
+      
   }
 
   getImageTypes(): string {
