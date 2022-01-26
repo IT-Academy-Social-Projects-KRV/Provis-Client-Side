@@ -30,10 +30,14 @@
            </div>
             <span class="task-title">{{item.name}}</span>
             <div class="task-info">
-              <mat-icon class="icon"> comment</mat-icon>
-              <span class="comment">{{item.commentCount}}</span>
-              <span class="material-icons">query_builder</span>
-              <span>{{item.deadline | date:'dd.MM.yyyy'}}</span>
+              <div class="icon-section">
+                <span class="material-icons icon-comment"> comment</span>
+                <span class="comment">{{item.commentCount}}</span>
+              </div>
+              <div class="icon-section">
+                <span class="material-icons icon-time">query_builder</span>
+                <span>{{item.deadline | date:'dd.MM.yyyy'}}</span>
+              </div>
             </div>
           </div>
         </div>
