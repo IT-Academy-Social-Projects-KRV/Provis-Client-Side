@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { numbers } from '@material/slider';
 import { Subscription } from 'rxjs';
 import { WorkspaceInfo } from 'src/app/core/models/workspace/workspaceInfo';
 import { AlertService } from 'src/app/core/services/alerts.service';

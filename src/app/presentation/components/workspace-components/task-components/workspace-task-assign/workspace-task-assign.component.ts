@@ -8,7 +8,6 @@ import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import { DataShareService } from 'src/app/core/services/DataShare.service';
 import { WorkspaceInfo } from 'src/app/core/models/workspace/workspaceInfo';
 import { mode } from 'src/app/core/types/assignUserMode';
-import { ChangeMemberRole } from 'src/app/core/models/task/changeMemberRole';
 import { MatDialog } from '@angular/material/dialog';
 import { AlertService } from 'src/app/core/services/alerts.service';
 import { JoinTaskMember } from 'src/app/core/models/task/joinTaskMember';

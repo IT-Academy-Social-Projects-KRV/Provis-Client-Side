@@ -48,6 +48,12 @@ export class WorkspaceInviteComponent implements OnInit {
     });
   }
 
+  IsThereAccess(user: WorkspaceInfoInvite): boolean{
+    return user.fromUserName == this.currentUserName && 
+      this.currentUserRole.role == 2 || 
+      this.currentUserRole.role == 1;
+  }
+
   Invite(): void{
     if(this.inviteUserForm.valid){
       this.userInvite = this.inviteUserForm.value;

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TaskWorkerRole } from 'src/app/core/models/task/taskWorkerRoles';
 import { WorkspaceInfo } from 'src/app/core/models/workspace/workspaceInfo';
-import { WorkspaceRole } from 'src/app/core/models/workspace/workspaceRole';
 import { DataShareService } from 'src/app/core/services/DataShare.service';
 import { TaskService } from 'src/app/core/services/task.service';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
