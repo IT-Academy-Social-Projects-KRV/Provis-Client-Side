@@ -1,6 +1,5 @@
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import { MatAccordion } from '@angular/material/expansion';
-import { TaskService } from '../../../../../core/services/task.service';
 import { WorkspaceTaskCreateComponent } from '../workspace-task-create/workspace-task-create.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -26,7 +25,7 @@ export class WorkspaceTaskListComponent implements OnInit {
     role: 1
   };
 
-  constructor(public dialog: MatDialog, private userTask: TaskService, private route: ActivatedRoute, private workspaceService: WorkspaceService) { }
+  constructor(public dialog: MatDialog, private route: ActivatedRoute, private workspaceService: WorkspaceService) { }
 
   ngOnInit() {
     this.route.parent?.params.subscribe((params) => { 

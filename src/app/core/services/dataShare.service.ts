@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, mergeMap, Observable, Subject, switchMap } from 'rxjs';
+import { BehaviorSubject, map, Observable} from 'rxjs';
 import { DeleteTask } from '../models/task/deleteTask';
 import { TaskWorkerRole } from '../models/task/taskWorkerRoles';
 import { WorkspaceInfo } from '../models/workspace/workspaceInfo';
