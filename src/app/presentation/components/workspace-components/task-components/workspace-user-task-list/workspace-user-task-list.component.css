@@ -110,7 +110,7 @@
   margin-bottom: 10px;
 }
 .example-box .task-info {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
   text-align: end;
   letter-spacing: 0.5px;
@@ -204,7 +204,7 @@ mat-panel-title span {
   position: absolute;
   top: 6px;
   right: 6px;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.5px;
   min-height: 20px;
   text-align: center;
@@ -219,26 +219,39 @@ mat-panel-title span {
   padding: 0px 6px;
   border: 1px solid #727272;
 }
-.story-points {
-  padding: 0px 6px;
-  background-color: #3c4242;
-  color: white;
-  font-weight: 500;
-  border: 1px solid #727272;
-}
-.comment {
-  margin-right: auto;
-  margin-left: 3px;
-  color: #939598;
-}
 .icon-section {
+  color: #939598;
+  font-weight: 500;
   display: flex;
   align-items: center;
 }
-.icon-comment {
-  color: #939598;
+.icon-section>div {
+  display: flex;
+  align-items: center;
+}
+.icon-section span:nth-child(even) {
+  margin-left: 3px;
+  margin-right: 5px;
 }
 .icon-time {
+  color:white;
   margin-right: 3px;
-  margin-bottom: 3px;
+}
+.creator-title {
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  color: gold;
+  margin-bottom: -3px;
+}
+.icon-person {
+  font-size: 15px;
+}
+.creator-username {
+  margin-left: 3px;
+  padding-top: 3px;
+}
+.date-time {
+  margin-top: 2px;
+  color:white;
 }
