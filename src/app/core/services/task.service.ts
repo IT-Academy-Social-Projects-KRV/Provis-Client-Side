@@ -10,7 +10,6 @@ import { UnloadTaskAttachment} from '../models/task/uploadTaskAttachments';
 import { TaskDetalInfo } from '../models/task/taskDetalInfo';
 import { TaskChangeInfo } from '../models/task/taskChangeInfo';
 import { TaskHistory } from '../models/task/taskHistory';
-import { TaskComment } from '../models/comment/taskComment';
 import { ChangeMemberRole } from '../models/task/changeMemberRole';
 import { JoinTaskMember } from '../models/task/joinTaskMember';
 

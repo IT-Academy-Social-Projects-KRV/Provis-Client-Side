@@ -1,6 +1,6 @@
 import { WorkspaceUpdate } from 'src/app/core/models/workspace/workspaceUpdate';
 import { WorkspaceInfo } from 'src/app/core/models/workspace/workspaceInfo';
-import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import { WorkspaceDescription } from 'src/app/core/models/workspace/workspaceDescription';

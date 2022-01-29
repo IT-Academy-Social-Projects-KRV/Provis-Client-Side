@@ -82,7 +82,6 @@ export class TaskCommentsComponent implements OnInit {
           data.userName = this.authService.currentUser.username;
           this.comments.push(data)
 
-          this.alertService.successMessage();
           this.commentInfo.reset();
         },
         err => {

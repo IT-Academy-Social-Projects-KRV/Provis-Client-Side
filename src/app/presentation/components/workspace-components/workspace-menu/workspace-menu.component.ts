@@ -1,4 +1,3 @@
-import { Router } from '@angular/router';
 import { WorkspaceInfo } from '../../../../core/models/workspace/workspaceInfo';
 import { WorkspaceTaskCreateComponent } from '../task-components/workspace-task-create/workspace-task-create.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -19,10 +18,7 @@ export class WorkspaceMenuComponent implements OnInit {
   userWorkspaceInfo: WorkspaceInfo = new WorkspaceInfo();
   roleName: string = '';
 
-  constructor(
-    public dialog: MatDialog,
-    private dataShareService: DataShareService,
-    private router: Router) { }
+  constructor(public dialog: MatDialog, private dataShareService: DataShareService) {}
 
   ngOnInit() {
     this.dataShareService.workspaceInfo.subscribe(data => {

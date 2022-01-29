@@ -1,5 +1,4 @@
 import { workspaceUrl } from './../../configs/api-endpoints';
-import { WorkspaceInfo } from '../models/workspace/workspaceInfo';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { inviteUrl,
@@ -31,8 +30,6 @@ export class UserService {
   private readonly twoFactorVerificationUrl = twoFactorVerificationUrl;
   private readonly twoFactorCodeUrl = twoFactorCodeUrl;
   private readonly imageUrl = imageUrl;
-  private readonly workspaceUrl = workspaceUrl;
-
 
   private httpOption = {
     headers: new HttpHeaders({

@@ -106,7 +106,7 @@
 }
 .example-box .task-title {
   font-weight: 500;
-  max-width: 175px;
+  max-width: 155px;
   margin-bottom: 10px;
 }
 .example-box .task-info {
@@ -116,13 +116,11 @@
   letter-spacing: 0.5px;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
 }
 .task-info .material-icons {
   font-size: 15px;
-  margin-bottom: 3px;
-  margin-right: 3px;
 }
 .example-container .task-status {
   margin: 0 10px 15px;
@@ -219,23 +217,28 @@ mat-panel-title span {
 }
 .worker-status {
   padding: 0px 6px;
-  box-shadow: 2px 2px 4px 0px rgb(0, 0, 0, 0.7);
+  border: 1px solid #727272;
 }
-.story-points{ 
+.story-points {
   padding: 0px 6px;
-  box-shadow: 2px 2px 4px 0px rgb(0 0 0 / 70%);
-  background-color: #7e3132;
+  background-color: #3c4242;
   color: white;
-  font-weight: 600;
+  font-weight: 500;
+  border: 1px solid #727272;
 }
 .comment {
   margin-right: auto;
-  margin-left: 2.5px;
+  margin-left: 3px;
   color: #939598;
 }
-.icon {
-  font-size: 15px;
-  width: 20px;
-  height: 18px;
+.icon-section {
+  display: flex;
+  align-items: center;
+}
+.icon-comment {
   color: #939598;
+}
+.icon-time {
+  margin-right: 3px;
+  margin-bottom: 3px;
 }

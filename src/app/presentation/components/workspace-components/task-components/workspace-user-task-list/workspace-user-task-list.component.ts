@@ -44,6 +44,7 @@ export class WorkspaceUserTaskListComponent implements OnInit {
         this.statusTasks.tasks[element.id] = [];
       });
     });
+    
     this.userTask.getWorkerRole().subscribe(data => {
       this.workerStatus = data;
     });

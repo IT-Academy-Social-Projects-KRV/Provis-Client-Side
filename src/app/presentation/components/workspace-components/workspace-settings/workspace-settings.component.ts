@@ -1,7 +1,6 @@
 import { WorkspaceInfo } from '../../../../core/models/workspace/workspaceInfo';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { WorkspaceInviteComponent } from '../workspace-invite/workspace-invite.component';
 import { WorkspaceUpdateComponent } from '../workspace-update/workspace-update.component';
@@ -18,7 +17,7 @@ export class WorkspaceSettingsComponent implements OnInit {
   workspace: WorkspaceInfo;
   description: string;
 
-  constructor(private activeRoute: ActivatedRoute, public dialog: MatDialog, ) {}
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit() { }
 

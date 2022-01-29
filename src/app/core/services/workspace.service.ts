@@ -78,7 +78,7 @@ export class WorkspaceService {
     }
 
     public WorkspaceActiveInviteDelete(id: number, workspaceId: number){
-        return this.http.delete<void>(this.workspaceServiceUrl + workspaceId + "/invite/" + id + "/cancel", this.httpOption);
+        return this.http.delete<void>(this.workspaceUrl + '/' + workspaceId + "/invite/" + id + "/cancel", this.httpOption);
     }
 
     public CreateTask(task: CreateTask): Observable<void> {
