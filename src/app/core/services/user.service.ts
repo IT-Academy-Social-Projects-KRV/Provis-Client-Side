@@ -107,4 +107,8 @@ export class UserService {
 
     return this.http.put<void>(this.imageUrl, formData, this.httpOption);
   }
+
+  sendResetPasswordToken(): Observable<void>{
+    return this.http.get<void>(this., this.httpOption);
+  }
 }

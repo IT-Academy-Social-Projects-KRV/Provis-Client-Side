@@ -20,6 +20,7 @@ import { WorkspaceMemberManagmentComponent } from './presentation/components/wor
 import { WorkspaceMemberListComponent } from './presentation/components/workspace-components/workspace-member-list/workspace-member-list.component';
 import { WorkspaceCalendarComponent } from './presentation/components/workspace-components/workspace-calendar/workspace-calendar.component';
 import { TwoSetpVerificationComponent } from './presentation/components/user-components/two-step-verification/two-step-verification.component';
+import { ForgotPasswordComponent } from './presentation/components/forgot-password/forgot-password.component';
 
 const userWorkspaceRouters: Routes = [
   {
@@ -61,6 +62,7 @@ const routes: Routes = [
   {path: 'twoStepVerification', component: TwoSetpVerificationComponent},
   {path: 'registration', component: RegistrationComponent},
   {path: 'user', component: UserComponent, children: userRouters, canActivate: [AuthGuard]},
+  {path: 'passwordrecovery', component: ForgotPasswordComponent},
   {path: '**', redirectTo: '', pathMatch: 'full'}
 ];
 
