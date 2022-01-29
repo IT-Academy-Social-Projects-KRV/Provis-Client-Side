@@ -1,4 +1,4 @@
-import { workspaceUrl } from './../../configs/api-endpoints';
+import { authenticationServiceUrl, workspaceUrl } from './../../configs/api-endpoints';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { inviteUrl,
@@ -16,6 +16,7 @@ import { UserProfile } from '../models/user/userProfile';
 import { ConfirmEmailCode } from '../models/user/confirmEmailCode';
 import { UserChangeProfile } from '../models/user/userChangeProfile';
 import { UserChangeTwoFactor } from '../models/user/userChangeTwoFactor';
+import { ForgotPassword } from '../models/user/forgotPassword';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,7 @@ export class UserService {
   private readonly twoFactorVerificationUrl = twoFactorVerificationUrl;
   private readonly twoFactorCodeUrl = twoFactorCodeUrl;
   private readonly imageUrl = imageUrl;
+  private readonly authenticationServiceUrl = authenticationServiceUrl;
 
   private httpOption = {
     headers: new HttpHeaders({
@@ -105,7 +107,7 @@ export class UserService {
     return this.http.put<void>(this.imageUrl, formData, this.httpOption);
   }
 
-  sendResetPasswordToken(): Observable<void>{
-    return this.http.get<void>(this., this.httpOption);
+  sendResetPasswordToken(forgotPassword: ForgotPassword): Observable<void>{
+    return this.http.get<void>(this.authenticationServiceUrl + 'forgot-password/' + forgotPassword.email, this.httpOption);
   }
 }
