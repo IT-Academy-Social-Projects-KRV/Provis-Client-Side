@@ -1,6 +1,6 @@
-<mat-expansion-panel (click) = "showUserTasks(user.id)">
+<mat-expansion-panel>
   <mat-expansion-panel-header>
-    <mat-panel-title class="user-name-title">
+    <mat-panel-title (click) = "showUserTasks(user.id)">
       {{user.userName}}
       <app-spin-loader *ngIf="isLoading"></app-spin-loader>
     </mat-panel-title>
