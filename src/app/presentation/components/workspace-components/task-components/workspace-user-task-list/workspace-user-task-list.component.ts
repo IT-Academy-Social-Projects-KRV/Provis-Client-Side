@@ -10,7 +10,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { WorkspaceMembers } from 'src/app/core/models/workspace/workspaceMembers';
 import { MatDialog } from '@angular/material/dialog';
 import { WorkspaceTaskEditComponent } from '../workspace-task-edit/workspace-task-edit.component';
-import { DataShareService } from 'src/app/core/services/DataShare.service';
+import { DataShareService } from 'src/app/core/services/dataShare.service';
 
 
 @Component({
@@ -44,13 +44,26 @@ export class WorkspaceUserTaskListComponent implements OnInit {
         this.statusTasks.tasks[element.id] = [];
       });
     });
-    
+
     this.userTask.getWorkerRole().subscribe(data => {
       this.workerStatus = data;
     });
-    
+
+    this.dataShare.taskUpdate.subscribe(data => {
+      if(data.id) {
+        console.log(data);
+        console.log(this.statusTasks);
+        let index = this.statusTasks.tasks[data.statusId]?.findIndex(x => x.id == data.id);
+        if(index != -1) {
+          this.statusTasks.tasks[data.statusId][index].name = data.name;
+          this.statusTasks.tasks[data.statusId][index].deadline = data.deadline;
+          this.statusTasks.tasks[data.statusId][index].storyPoints = data.storyPoints;
+        }
+      }
+    })
+
     this.dataShare.taskDelete.subscribe(data => {
-      if(data.id){
+      if(data.id) {
         let index = this.statusTasks.tasks[data.statusId]?.findIndex(x => x.id == data.id);
         if(index != -1)
           this.statusTasks.tasks[data.statusId].splice(index, 1);
@@ -61,7 +74,6 @@ export class WorkspaceUserTaskListComponent implements OnInit {
   showUserTasks(userId: string) {
      if(this.ifClosed) {
       this.statusTasks = {tasks:{}, userId:''};
-      this.ngOnInit();
       this.userTask.getUserTask(userId, this.workspaceId).subscribe((
         data: {tasks: Tasks, userId: string}) => {
           this.statusTasks = {tasks: {...this.statusTasks.tasks,...data.tasks}, userId: data.userId};

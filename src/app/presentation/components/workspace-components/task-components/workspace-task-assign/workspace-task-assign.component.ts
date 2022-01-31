@@ -5,7 +5,7 @@ import { TaskWorkerRole } from 'src/app/core/models/task/taskWorkerRoles';
 import { WorkspaceMembers } from 'src/app/core/models/workspace/workspaceMembers';
 import { TaskService } from 'src/app/core/services/task.service';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
-import { DataShareService } from 'src/app/core/services/DataShare.service';
+import { DataShareService } from 'src/app/core/services/dataShare.service';
 import { WorkspaceInfo } from 'src/app/core/models/workspace/workspaceInfo';
 import { mode } from 'src/app/core/types/assignUserMode';
 import { MatDialog } from '@angular/material/dialog';

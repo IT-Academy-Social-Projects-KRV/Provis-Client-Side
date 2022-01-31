@@ -3,7 +3,7 @@ import { WorkspaceTaskCreateComponent } from '../task-components/workspace-task-
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { workspaceUserRoles } from 'src/app/core/models/workspace/workspaceUserRole';
-import { DataShareService } from 'src/app/core/services/DataShare.service';
+import { DataShareService } from 'src/app/core/services/dataShare.service';
 
 @Component({
   selector: 'app-workspace-menu',

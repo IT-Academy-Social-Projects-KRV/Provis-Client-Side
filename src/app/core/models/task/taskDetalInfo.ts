@@ -1,4 +1,5 @@
 export class TaskDetalInfo {
+    id: number;
     name: string;
     description: string;
     deadline: Date;

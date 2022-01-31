@@ -4,6 +4,9 @@ import { DeleteTask } from '../models/task/deleteTask';
 import { TaskWorkerRole } from '../models/task/taskWorkerRoles';
 import { WorkspaceInfo } from '../models/workspace/workspaceInfo';
 import { WorkspaceRole } from '../models/workspace/workspaceRole';
+import { CreateTask } from '../models/task/createTask';
+import { TaskDetalInfo } from '../models/task/taskDetalInfo';
+import { TaskChangeInfo } from '../models/task/taskChangeInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +26,20 @@ export class DataShareService {
   private taskDeleteSub = new BehaviorSubject<DeleteTask>(new DeleteTask());
   public taskDelete = this.taskDeleteSub.asObservable();
 
+  private taskCreateSub = new BehaviorSubject<CreateTask>(new CreateTask());
+  public taskCreate = this.taskCreateSub.asObservable();
+
+  private taskUpdateSub = new BehaviorSubject<TaskChangeInfo>(new TaskChangeInfo());
+  public taskUpdate = this.taskUpdateSub.asObservable();
+
   constructor() { }
 
+  public nextTaskUpdate(taskUpdate: TaskChangeInfo): void {
+    this.taskUpdateSub.next(taskUpdate);
+  }
+  public nextTaskCreate(taskCreate: CreateTask): void {
+    this.taskCreateSub.next(taskCreate);
+  }
   public nextTaskDelete(taskDelete: DeleteTask): void {
     this.taskDeleteSub.next(taskDelete);
   }

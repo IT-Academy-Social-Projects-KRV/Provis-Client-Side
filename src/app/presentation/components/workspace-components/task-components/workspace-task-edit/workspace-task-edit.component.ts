@@ -11,7 +11,7 @@ import { TaskService } from 'src/app/core/services/task.service';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import { mode } from 'src/app/core/types/assignUserMode';
 import { formatDate } from '@angular/common';
-import { DataShareService } from 'src/app/core/services/DataShare.service';
+import { DataShareService } from 'src/app/core/services/dataShare.service';
 import { DeleteTask } from 'src/app/core/models/task/deleteTask';
 
 @Component({
@@ -88,8 +88,10 @@ export class WorkspaceTaskEditComponent implements OnInit {
       this.taskChangeInfo.workspaceId = this.workspaceId;
       this.taskChangeInfo.deadline = this.detalInfoForm.value.deadline;
       this.taskChangeInfo.storyPoints = this.detalInfoForm.value.storyPoints;
+      this.taskChangeInfo.statusId = this.selectedStatus;
       this.taskServise.editTask(this.taskChangeInfo).subscribe(
         () => {
+          this.dataShare.nextTaskUpdate(this.taskChangeInfo);
           this.alertService.successMessage()
         },
         err => {
@@ -106,8 +108,8 @@ export class WorkspaceTaskEditComponent implements OnInit {
   }
 
   async deleteTask() {
-    if(await this.alertService.confirmMessage('Task will be deleted!', 
-        'Are you sure?', 
+    if(await this.alertService.confirmMessage('Task will be deleted!',
+        'Are you sure?',
         'Yes, delete!'))
       {
         this.taskServise.deleteTask(this.workspaceId, this.taskId).subscribe(

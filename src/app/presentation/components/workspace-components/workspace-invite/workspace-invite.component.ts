@@ -6,7 +6,7 @@ import { WorkspaceInfo } from 'src/app/core/models/workspace/workspaceInfo';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { WorkspaceInfoInvite } from 'src/app/core/models/workspace/workspaceInfoInvite';
 import { AlertService } from 'src/app/core/services/alerts.service';
-import { DataShareService } from 'src/app/core/services/DataShare.service';
+import { DataShareService } from 'src/app/core/services/dataShare.service';
 
 @Component({
   selector: 'app-workspace-invite',
@@ -24,14 +24,14 @@ export class WorkspaceInviteComponent implements OnInit {
   currentUserName: string|undefined;
 
  constructor(
-   formBuilder: FormBuilder, 
+   formBuilder: FormBuilder,
   private workspaceService: WorkspaceService,
-  private authenticationService: AuthenticationService, 
+  private authenticationService: AuthenticationService,
   private alertService: AlertService,
   private dataShare: DataShareService) {
    this.inviteUserForm = formBuilder.group({
      'UserEmail': ['', [Validators.required, Validators.email]]
-   }); 
+   });
  }
 
   ngOnInit() {
@@ -49,8 +49,8 @@ export class WorkspaceInviteComponent implements OnInit {
   }
 
   IsThereAccess(user: WorkspaceInfoInvite): boolean{
-    return user.fromUserName == this.currentUserName && 
-      this.currentUserRole.role == 2 || 
+    return user.fromUserName == this.currentUserName &&
+      this.currentUserRole.role == 2 ||
       this.currentUserRole.role == 1;
   }
 
@@ -67,7 +67,7 @@ export class WorkspaceInviteComponent implements OnInit {
         err => {
           this.alertService.errorMessage(err);
         }
-      );    
+      );
     }
   }
 
