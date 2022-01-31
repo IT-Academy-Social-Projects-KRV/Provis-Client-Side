@@ -22,9 +22,10 @@ export class WorkspaceTaskAttachmentsComponent implements OnInit {
 
   attachments: TaskAttachment[] = [];
   attachmentPreview: SafeUrl[] = [];
+  isLoading: boolean = false;
 
-  constructor(private sanitizer: DomSanitizer, 
-    private taskService: TaskService, 
+  constructor(private sanitizer: DomSanitizer,
+    private taskService: TaskService,
     private alertService: AlertService) { }
 
   ngOnInit() {
@@ -35,7 +36,7 @@ export class WorkspaceTaskAttachmentsComponent implements OnInit {
     for(let attachment of this.attachments){
       this.setAttachmentPreview(attachment);
     }
-  } 
+  }
 
   setAttachmentPreview(attachment: TaskAttachment) {
     if(attachment.contentType.startsWith('image')) {
@@ -49,7 +50,7 @@ export class WorkspaceTaskAttachmentsComponent implements OnInit {
             attachment.contentType.startsWith('application/vnd.openxmlformats-officedocument.wordprocessingml.document')) {
               attachment.preview = "assets/img/word-preview.png";
     }
-    else if(attachment.contentType.startsWith('application/vnd.ms-excel') || 
+    else if(attachment.contentType.startsWith('application/vnd.ms-excel') ||
             attachment.contentType.startsWith('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')) {
       attachment.preview = "assets/img/excel-preview.png";
     }

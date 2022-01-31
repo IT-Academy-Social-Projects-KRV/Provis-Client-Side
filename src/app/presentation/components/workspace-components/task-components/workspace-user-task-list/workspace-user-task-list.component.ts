@@ -1,6 +1,6 @@
 import { TaskStatus } from 'src/app/core/models/task/taskStatus';
 import { TaskWorkerRole } from 'src/app/core/models/task/taskWorkerRoles';
-import { colorWorkerStatus, kanbanColors } from './../../../../../configs/colorsForWorkspaceCards';
+import { colorWorkerStatus, statusColors } from './../../../../../configs/colorsForWorkspaceCards';
 import { TaskInfo } from '../../../../../core/models/task/taskInfo';
 import { Tasks } from '../../../../../core/models/task/tasks';
 import { TaskService } from '../../../../../core/services/task.service';
@@ -28,27 +28,28 @@ export class WorkspaceUserTaskListComponent implements OnInit {
   taskStatuses: Array<TaskStatus>;
   workerStatus: TaskWorkerRole[];
   statusColor = colorWorkerStatus;
-  kanbanClasses = kanbanColors;
-  kanban: TaskStatus[] = [];
+  kanbanClasses = statusColors;
+  kanbanBoard: TaskStatus[] = [];
   listStatus: string[] = [];
   statusTasks: {tasks: Tasks, userId: string} = {tasks:{}, userId:''};
   ifClosed: boolean = true;
+  isLoading: boolean = false;
 
   constructor(private userTask: TaskService, public dialog: MatDialog, private dataShare: DataShareService) { }
 
   ngOnInit() {
     this.userTask.getStatusTask().subscribe(data => {
-      this.kanban = data;
+      this.kanbanBoard = data;
       data.map(element => {
         this.listStatus.push(this.index + '_' + element.id.toString());
         this.statusTasks.tasks[element.id] = [];
       });
     });
-    
+
     this.userTask.getWorkerRole().subscribe(data => {
       this.workerStatus = data;
     });
-    
+
     this.dataShare.taskDelete.subscribe(data => {
       if(data.id){
         let index = this.statusTasks.tasks[data.statusId]?.findIndex(x => x.id == data.id);
@@ -59,12 +60,14 @@ export class WorkspaceUserTaskListComponent implements OnInit {
   }
 
   showUserTasks(userId: string) {
-     if(this.ifClosed) {
+    if(this.ifClosed) {
+      this.isLoading = true;
       this.statusTasks = {tasks:{}, userId:''};
       this.ngOnInit();
       this.userTask.getUserTask(userId, this.workspaceId).subscribe((
         data: {tasks: Tasks, userId: string}) => {
           this.statusTasks = {tasks: {...this.statusTasks.tasks,...data.tasks}, userId: data.userId};
+          this.isLoading = false;
       });
       this.ifClosed = !this.ifClosed;
     } else {

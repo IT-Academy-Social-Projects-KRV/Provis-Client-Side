@@ -1,3 +1,4 @@
+import { delay } from 'rxjs';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -21,6 +22,7 @@ export class TaskCommentsComponent implements OnInit {
   comments: TaskComment[];
   commentInfo: FormGroup;
   commentCreate: CommentCreate = new CommentCreate();
+  isLoading: boolean = false;
 
   constructor(private commentService: CommentService,
     private alertService: AlertService,
@@ -34,15 +36,17 @@ export class TaskCommentsComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.isLoading = true;
     this.commentService.getTaskComments(this.taskId,
       this.workspaceId).subscribe((data: TaskComment[]) => {
-      this.comments = data;
+        this.comments = data;
+        this.isLoading = false;
     })
   }
 
-   async deleteComment(commentId: number){
-    if(await this.alertService.confirmMessage("Are you shure to delete this comment?",
-    "Delete comment","Delete")){
+   async deleteComment(commentId: number) {
+    if(await this.alertService.confirmMessage("Are you sure to delete this comment?",
+      "Delete comment","Delete")) {
       this.commentService.deleteComment(commentId, this.workspaceId).subscribe(
         () => {
           this.comments.splice(this.comments.findIndex(x => x.id == commentId), 1);
@@ -54,7 +58,7 @@ export class TaskCommentsComponent implements OnInit {
     }
   }
 
-  editComment(commentId: number){
+  editComment(commentId: number) {
     let dialog = this.dialog.open(TaskCommentEditComponent);
     dialog.componentInstance.commentId = commentId;
     dialog.componentInstance.workspaceId = this.workspaceId;
@@ -63,7 +67,7 @@ export class TaskCommentsComponent implements OnInit {
         "CommentText": this.comments.find(x => x.id == commentId)?.commentText
       });
     dialog.componentInstance.isAdded.subscribe(data => {
-      if(data){
+      if(data) {
         let index = this.comments.findIndex(x  => x.id == commentId);
         this.comments[index].commentText = dialog.componentInstance.editedText;
         dialog.close();
