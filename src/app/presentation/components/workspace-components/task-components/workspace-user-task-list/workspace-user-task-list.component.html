@@ -1,42 +1,45 @@
-<mat-expansion-panel (click) = "showUserTasks(user.id)">
+<mat-expansion-panel>
   <mat-expansion-panel-header>
-    <mat-panel-title>
+    <mat-panel-title (click) = "showUserTasks(user.id)">
       {{user.userName}}
+      <app-spin-loader *ngIf="isLoading"></app-spin-loader>
     </mat-panel-title>
   </mat-expansion-panel-header>
-  <div *ngIf="(statusTasks.tasks | json) != '{}'">
-    <div class="task-card-block">
-      <div *ngFor="let status of kanban"
-      class="example-container {{kanbanClasses[status.id-1]}}">
-        <div class="task-status border-column">
-          <span>{{status.name}}</span>
-          <span>({{(statusTasks.tasks[status.id]).length}})</span>
-        </div>
-        <div
-          id = "{{index + '_' + status.id}}"
-          cdkDropList
-          [cdkDropListData]="statusTasks.tasks[status.id]"
-          [cdkDropListConnectedTo]="listStatus"
-          class="example-list"
-          (cdkDropListDropped)="drop($event)">
-          <div class="example-box {{kanbanClasses[status.id-1]}}-task" *ngFor="let item of statusTasks.tasks[status.id]" cdkDrag (click)="showTask(item.id)">
-            <div class="tags">
-              <span class="story-points" *ngIf="item.storyPoints">
-                {{item.storyPoints}}
-              </span>
-              <span *ngIf="item.workerRoleId !=null" class="worker-status" [style.background-color]="statusColor[item.workerRoleId-1]">
-                {{workerStatus[item.workerRoleId-1].name}}
-              </span>
-           </div>
-            <span class="task-title">{{item.name}}</span>
-            <div class="task-info">
-              <div class="icon-section">
-                <span class="material-icons icon-comment"> comment</span>
-                <span class="comment">{{item.commentCount}}</span>
-              </div>
-              <div class="icon-section">
-                <span class="material-icons icon-time">query_builder</span>
-                <span>{{item.deadline | date:'dd.MM.yyyy'}}</span>
+  <div>
+    <div  class="task-card-block">
+      <div *ngFor="let status of kanbanBoard" class="example-container {{kanbanClasses[status.id-1]}}">
+        <div *ngIf="!isLoading">
+          <div class="task-status border-column">
+            <span>{{status.name}}</span>
+            <span>({{(statusTasks.tasks[status.id]).length}})</span>
+          </div>
+          <div
+            id = "{{index + '_' + status.id}}"
+            cdkDropList
+            [cdkDropListData]="statusTasks.tasks[status.id]"
+            [cdkDropListConnectedTo]="listStatus"
+            class="example-list"
+            (cdkDropListDropped)="drop($event)">
+            <div class="example-box {{kanbanClasses[status.id-1]}}-task" *ngFor="let item of statusTasks.tasks[status.id]"
+              cdkDrag (click)="showTask(item.id)">
+              <div class="tags">
+                <span class="story-points" *ngIf="item.storyPoints">
+                  {{item.storyPoints}}
+                </span>
+                <span *ngIf="item.workerRoleId !=null" class="worker-status" [style.background-color]="statusColor[item.workerRoleId-1]">
+                  {{workerStatus[item.workerRoleId-1].name}}
+                </span>
+            </div>
+              <span class="task-title">{{item.name}}</span>
+              <div class="task-info">
+                <div class="icon-section">
+                  <span class="material-icons icon-comment"> comment</span>
+                  <span class="comment">{{item.commentCount}}</span>
+                </div>
+                <div class="icon-section">
+                  <span class="material-icons icon-time">query_builder</span>
+                  <span>{{item.deadline | date:'dd.MM.yyyy'}}</span>
+                </div>
               </div>
             </div>
           </div>
