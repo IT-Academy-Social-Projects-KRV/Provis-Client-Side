@@ -1,6 +1,6 @@
-<mat-expansion-panel (click) = "showUserTasks(user.id)">
+<mat-expansion-panel>
   <mat-expansion-panel-header>
-    <mat-panel-title>
+    <mat-panel-title (click) = "showUserTasks(user.id)">
       {{user.userName}}
     </mat-panel-title>
   </mat-expansion-panel-header>
