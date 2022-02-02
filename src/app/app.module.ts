@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatDialogModule } from '@angular/material/dialog';
@@ -44,7 +44,7 @@ import { WorkspaceUserTaskListComponent } from './presentation/components/worksp
 import { WorkspaceTaskAttachmentsComponent } from './presentation/components/workspace-components/task-components/workspace-task-attachments/workspace-task-attachments.component';
 import { WorkspaceTaskAssignComponent } from './presentation/components/workspace-components/task-components/workspace-task-assign/workspace-task-assign.component';
 
-import { AuthInterceptorProvider } from './core/services/interceptors/auth.interceptor';
+import { AuthInterceptor, AuthInterceptorProvider } from './core/services/interceptors/auth.interceptor';
 import { WorkspaceService } from './core/services/workspace.service';
 import { AuthenticationService } from './core/services/authentication.service';
 import { UserService } from './core/services/user.service';
@@ -70,7 +70,13 @@ import { SpinLoaderComponent } from './presentation/components/common components
 import { CommentService } from './core/services/comment.service';
 import { TaskCommentsComponent } from './presentation/components/workspace-components/task-components/comment-components/task-comments/task-comments.component';
 import { TaskCommentEditComponent } from './presentation/components/workspace-components/task-components/comment-components/task-comment-edit/task-comment-edit.component';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider } from 'angularx-social-login';
+import { JwtModule } from '@auth0/angular-jwt';
 
+export function tokenGetter() {
+  return localStorage.getItem("token");
+}
 
 @NgModule({
   declarations: [
@@ -139,6 +145,8 @@ import { TaskCommentEditComponent } from './presentation/components/workspace-co
     MatTabsModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
+    SocialLoginModule,
+    JwtModule
   ],
   providers: [
     AuthInterceptorProvider,
@@ -148,7 +156,21 @@ import { TaskCommentEditComponent } from './presentation/components/workspace-co
     UserService,
     AlertService,
     DataShareService,
-    CommentService
+    CommentService,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '302496423382-lpe5fg70huej4qa1nvgstk6qdl57vssk.apps.googleusercontent.com'
+            )
+          },
+        ],
+      } as SocialAuthServiceConfig
+    }
   ],
   bootstrap: [AppComponent]
 })

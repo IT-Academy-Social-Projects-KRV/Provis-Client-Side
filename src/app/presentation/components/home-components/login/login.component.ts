@@ -4,6 +4,9 @@ import { SignInUpValidator } from 'src/app/core/validators/signInUpValidator';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { UserLogin } from 'src/app/core/models/user/userLogin';
 import { AlertService } from 'src/app/core/services/alerts.service';
+import { SocialUser } from 'angularx-social-login';
+import { UserExternalAuth } from 'src/app/core/models/user/UserExternalAuth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,8 +17,9 @@ export class LoginComponent implements OnInit {
 
   loginForm : FormGroup;
   userForLogin: UserLogin = new UserLogin();
-
-  constructor(private fb:FormBuilder, private service: AuthenticationService, private alertService: AlertService){
+  
+  constructor(private fb:FormBuilder, private service: AuthenticationService, 
+    private alertService: AlertService, private router: Router){
     this.loginForm=fb.group({
         "email":["",SignInUpValidator.getEmailValidator()],
         "password" : [""]
@@ -23,6 +27,33 @@ export class LoginComponent implements OnInit {
   }
   
   ngOnInit(): void {
+  }
+
+  public externalLogin = () => {
+    this.service.signInWithGoogle()
+    .then(res => {
+      const user: SocialUser = { ...res };
+      console.log(user);
+      const externalAuth: UserExternalAuth = {
+        provider: user.provider,
+        idToken: user.idToken
+      }
+      this.validateExternalAuth(externalAuth);
+    }, error => {
+        this.alertService.errorMessage(error)
+    });
+  }
+
+  private validateExternalAuth(externalAuth: UserExternalAuth) {
+    this.service.externalLogin(externalAuth)
+      .subscribe(() => {
+        this.service.isAuthenticatedWithRefreshToken();
+        this.router.navigate(['user/workspaces']);
+      },
+      error => {
+        this.alertService.errorMessage(error);
+        this.service.signOutExternal();
+      });
   }
 
   submit()
