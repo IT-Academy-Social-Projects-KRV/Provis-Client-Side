@@ -11,7 +11,6 @@ export const twoStepVerificationUrl = authenticationServiceUrl + 'login-two-step
 export const forgotPasswordUrl = authenticationServiceUrl + 'forgot-password/';
 export const resetPasswordUrl = authenticationServiceUrl + 'reset-password';
 
-
 export const workspaceServiceUrl = baseUrl + '/Workspace/';
 export const workspaceUrl = workspaceServiceUrl + 'workspace';
 export const workspacesUrl = workspaceServiceUrl + 'workspaces';
