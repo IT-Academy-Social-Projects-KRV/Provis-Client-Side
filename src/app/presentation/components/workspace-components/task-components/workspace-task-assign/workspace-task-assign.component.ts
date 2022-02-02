@@ -92,7 +92,6 @@ export class WorkspaceTaskAssignComponent implements OnInit {
 
   changeMemberRole(userId: string,$event : number) {
     if(this.mode == 'edit task') {
-      console.log(this.mode);
       let member = {
         taskId : this.taskId,
         workspaceId: this.workspaceId,

@@ -8,11 +8,15 @@ import { loginUrl,
   logoutUrl,
   refreshTokenUrl,
   registrationUrl,
-  twoStepVerificationUrl } from 'src/app/configs/api-endpoints';
+  twoStepVerificationUrl,
+  forgotPasswordUrl,
+  resetPasswordUrl } from 'src/app/configs/api-endpoints';
 import { UserAuthResponse } from '../models/user/userAuthResponse';
 import { UserInfo } from '../models/user/userInfo';
 import { UserTwoFactor } from '../models/user/userTwoFactor';
 import { Router } from '@angular/router';
+import { ForgotPassword } from '../models/user/forgotPassword';
+import { ResetPassword } from '../models/user/resetPassword';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +33,8 @@ export class AuthenticationService {
   private readonly refreshTokenUrl = refreshTokenUrl;
   private readonly logoutUrl = logoutUrl;
   private readonly twoStepVerificationUrl = twoStepVerificationUrl;
+  private readonly forgotPasswordUrl = forgotPasswordUrl;
+  private readonly resetPasswordUrl = resetPasswordUrl;
 
   public currentUser: UserInfo;
 
@@ -158,4 +164,13 @@ export class AuthenticationService {
       this.currentUser = new UserInfo();
     }));
   }
+
+  sendResetPasswordToken(forgotPassword: ForgotPassword): Observable<void>{
+    return this.http.get<void>(this.forgotPasswordUrl + forgotPassword.email);
+  }
+
+  resetPassword(resetPassword: ResetPassword): Observable<void>{
+    return this.http.post<void>(this.resetPasswordUrl, resetPassword);
+  }
+  
 }
