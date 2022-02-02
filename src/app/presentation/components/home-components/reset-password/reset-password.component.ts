@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ResetPassword } from 'src/app/core/models/user/resetPassword';
 import { AlertService } from 'src/app/core/services/alerts.service';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
+import { DataShareService } from 'src/app/core/services/DataShare.service';
 import { SignInUpValidator } from 'src/app/core/validators/signInUpValidator';
 
 @Component({
@@ -19,7 +20,8 @@ export class ResetPasswordComponent implements OnInit {
   constructor(private fb:FormBuilder, 
     private service: AuthenticationService, 
     private alertService: AlertService,
-    private router: Router) {
+    private router: Router,
+    private dataShare: DataShareService) {
     this.resetPasswordForm=fb.group({
         "email":["",SignInUpValidator.getEmailValidator()],
         "newPassword":["",SignInUpValidator.getPasswordValidator(8,50)],
@@ -32,6 +34,8 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dataShare.email.subscribe(data => 
+      this.resetPasswordForm.get('email')?.setValue(data));
   }
 
   resetPassword() {

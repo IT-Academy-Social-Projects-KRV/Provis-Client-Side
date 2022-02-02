@@ -5,6 +5,7 @@ import { AlertService } from 'src/app/core/services/alerts.service';
 import { ForgotPassword } from 'src/app/core/models/user/forgotPassword';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { Router } from '@angular/router';
+import { DataShareService } from 'src/app/core/services/DataShare.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -19,7 +20,8 @@ export class ForgotPasswordComponent implements OnInit {
   constructor(private fb:FormBuilder,
     private service: AuthenticationService,
     private alertService: AlertService,
-    private router: Router) {
+    private router: Router,
+    private dataShare: DataShareService) {
     this.forgotPasswordForm=fb.group({
         "email":["",SignInUpValidator.getEmailValidator()]
     })
@@ -35,6 +37,7 @@ export class ForgotPasswordComponent implements OnInit {
       this.service.sendResetPasswordToken(this.userForgotPassword).subscribe(
         () => {
           this.alertService.successMessage();
+          this.dataShare.nextEmail(this.userForgotPassword.email);
           this.router.navigate(['recovery/reset']);
         },
         err => {
