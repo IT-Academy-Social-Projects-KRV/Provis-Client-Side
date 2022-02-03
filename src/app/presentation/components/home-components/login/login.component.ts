@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public externalLogin = () => {
+  public externalLoginGoogle = () => {
     this.service.signInWithGoogle()
     .then(res => {
       const user: SocialUser = { ...res };
@@ -38,14 +38,41 @@ export class LoginComponent implements OnInit {
         provider: user.provider,
         idToken: user.idToken
       }
-      this.validateExternalAuth(externalAuth);
+      this.validateExternalGoogleAuth(externalAuth);
     }, error => {
         this.alertService.errorMessage(error)
     });
   }
 
-  private validateExternalAuth(externalAuth: UserExternalAuth) {
-    this.service.externalLogin(externalAuth)
+  public externalLoginFB = () => {
+    this.service.signInWithFB()
+    .then(res => {
+      const user: SocialUser = { ...res };
+      console.log(user);
+      const externalAuth: UserExternalAuth = {
+        provider: user.provider,
+        idToken: user.id
+      }
+      this.validateExternalFBAuth(externalAuth);
+    }, error => {
+        this.alertService.errorMessage(error)
+    });
+  }
+
+  private validateExternalGoogleAuth(externalAuth: UserExternalAuth) {
+    this.service.externalGoogleLogin(externalAuth)
+      .subscribe(() => {
+        this.service.isAuthenticatedWithRefreshToken();
+        this.router.navigate(['user/workspaces']);
+      },
+      error => {
+        this.alertService.errorMessage(error);
+        this.service.signOutExternal();
+      });
+  }
+
+  private validateExternalFBAuth(externalAuth: UserExternalAuth) {
+    this.service.externalFBLogin(externalAuth)
       .subscribe(() => {
         this.service.isAuthenticatedWithRefreshToken();
         this.router.navigate(['user/workspaces']);
