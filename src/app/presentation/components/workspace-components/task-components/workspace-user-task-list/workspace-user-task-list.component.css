@@ -39,7 +39,7 @@
 }
 .example-box {
   padding: 10px;
-  margin: 15px 10px;
+  margin: 15px 10px 20px;
   color: #eee;
   display: flex;
   flex-direction: column;
@@ -47,7 +47,7 @@
   box-sizing: border-box;
   cursor: grab;
   font-size: 12px;
-  min-height: 100px;
+  min-height: 110px;
   box-shadow: 2px 2px 5px 1px rgb(0 0 0 / 40%);
   position: relative;
 }
@@ -143,6 +143,7 @@
 .mat-expansion-panel,
 .mat-expansion-panel.mat-expansion-panel-spacing {
   background: #3b394a;
+  box-shadow: rgb(47 57 68) 0px 14px 14px -9px;
 }
 .mat-expansion-panel-header {
   border-radius: 0px;
@@ -166,6 +167,8 @@
 .mat-expansion-panel-header-title {
   color: white;
   transition: 0.5s;
+  display: flex;
+  align-items: center;
 }
 .mat-accordion:first-child(div) {
   margin-bottom: 25px;

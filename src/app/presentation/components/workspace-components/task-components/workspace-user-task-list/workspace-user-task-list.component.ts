@@ -2,7 +2,7 @@ import { TaskStatus } from 'src/app/core/models/task/taskStatus';
 import { TaskWorkerRole } from 'src/app/core/models/task/taskWorkerRoles';
 import { colorWorkerStatus, statusColors } from './../../../../../configs/colorsForWorkspaceCards';
 import { TaskInfo } from '../../../../../core/models/task/taskInfo';
-import { Tasks } from '../../../../../core/models/task/tasks';
+import { Tasks, usersTasks } from '../../../../../core/models/task/tasks';
 import { TaskService } from '../../../../../core/services/task.service';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
@@ -32,29 +32,22 @@ export class WorkspaceUserTaskListComponent implements OnInit {
   kanbanBoard: TaskStatus[] = [];
   listStatus: string[] = [];
   statusTasks: {tasks: Tasks, userId: string} = {tasks:{}, userId:''};
-  ifClosed: boolean = true;
   isLoading: boolean = false;
+  tempUserTasks: usersTasks = {};
 
-  constructor(private userTask: TaskService, public dialog: MatDialog, private dataShare: DataShareService) { }
+  constructor(private userTask: TaskService,
+    public dialog: MatDialog,
+    private dataShare: DataShareService) { }
 
   ngOnInit() {
-    this.userTask.getStatusTask().subscribe(data => {
-      this.kanbanBoard = data;
-      data.map(element => {
-        this.listStatus.push(this.index + '_' + element.id.toString());
-        this.statusTasks.tasks[element.id] = [];
-      });
-    });
 
-    this.userTask.getWorkerRole().subscribe(data => {
-      this.workerStatus = data;
-    });
+    this.dataShare.usersTasks.subscribe(data => this.tempUserTasks = data);
 
-      this.dataShare.taskUpdate.subscribe(data => {
-      if(data.id) {
-        console.log(data);
-        console.log(this.statusTasks);
-        let index = this.statusTasks.tasks[data.statusId]?.findIndex(x => x.id == data.id);
+    this.userTask.getWorkerRole().subscribe(data => this.workerStatus = data);
+
+    this.dataShare.taskUpdate.subscribe(data => {
+      let index = this.statusTasks.tasks[data.statusId]?.findIndex(x => x.id == data.id);
+      if(index >= 0) {
         if(index != -1) {
           this.statusTasks.tasks[data.statusId][index].name = data.name;
           this.statusTasks.tasks[data.statusId][index].deadline = data.deadline;
@@ -70,21 +63,62 @@ export class WorkspaceUserTaskListComponent implements OnInit {
           this.statusTasks.tasks[data.statusId].splice(index, 1);
       }
     })
+
+    this.dataShare.taskAdd.subscribe(data => {
+      if(data.id) {
+        let addNewTask = {
+          id: data.id,
+          name: data.name,
+          deadline: data.deadline,
+          workerRoleId: data.workerRoleId,
+          commentCount: data.commentCount,
+          storyPoints: data.storyPoints,
+          memberCount: data.memberCount,
+          creatorUsername: data.creatorUsername,
+        }
+
+        if(data.toUserId == this.statusTasks.userId) {
+          this.tempUserTasks[data.toUserId][data.status].push(addNewTask);
+        }
+
+        if(data.toUserId == 'null' && this.statusTasks.userId == null) {
+          this.tempUserTasks[data.toUserId][data.status].push(addNewTask);
+        }
+
+        if(data.fromUser == 'null') {
+          let index =  this.tempUserTasks[data.fromUser][data.status]?.findIndex(x => x.id == data.id);
+          if(index != -1)
+            this.tempUserTasks[data.fromUser][data.status].splice(index, 1);
+        }
+      }
+    })
+
+  }
+
+  closeUser() {
+    delete this.tempUserTasks[this.statusTasks.userId];
+    this.statusTasks = {tasks:{}, userId:''};
   }
 
   showUserTasks(userId: string) {
-    if(this.ifClosed) {
-      this.isLoading = true;
-      this.statusTasks = {tasks:{}, userId:''};
+    this.isLoading = true;
+    this.kanbanBoard = [];
+    this.statusTasks = {tasks:{}, userId:''};
+    this.userTask.getStatusTask().subscribe(statuses => {
+      this.kanbanBoard = statuses;
+      statuses.map(element => {
+        this.listStatus.push(this.index + '_' + element.id.toString());
+        this.statusTasks.tasks[element.id] = [];
+      });
       this.userTask.getUserTask(userId, this.workspaceId).subscribe((
         data: {tasks: Tasks, userId: string}) => {
           this.statusTasks = {tasks: {...this.statusTasks.tasks,...data.tasks}, userId: data.userId};
           this.isLoading = false;
+
+          this.tempUserTasks[this.statusTasks.userId] = this.statusTasks.tasks;
+          this.dataShare.nextUsersTasks(this.tempUserTasks);
       });
-      this.ifClosed = !this.ifClosed;
-    } else {
-      this.ifClosed = !this.ifClosed;
-    }
+    });
   }
 
   drop(event: CdkDragDrop<TaskInfo[]>) {
@@ -110,10 +144,47 @@ export class WorkspaceUserTaskListComponent implements OnInit {
         taskId: this.statusTasks.tasks[+currentStatus][event.currentIndex].id
       };
       this.userTask.updateStatusTask(taskTo).subscribe();
+
+      let currentTask = this.statusTasks.tasks[+currentStatus][event.currentIndex];
+      let currentUserId = this.statusTasks.userId;
+
+      for(let [key, value] of Object.entries(this.tempUserTasks)) {
+        if(key != currentUserId) {
+          let index = this.isTaskExist(key, +beforeStatus, currentTask.id);
+          if(index != -1) {
+            let currentTaskInAnotherUser = this.tempUserTasks[key][+beforeStatus][index];
+            this.tempUserTasks[key][+currentStatus].push(currentTaskInAnotherUser);
+            this.tempUserTasks[key][+beforeStatus].splice(index,1);
+          }
+        }
+      }
     }
   }
 
-  showTask(taskId : number) {
+  isTaskExist(userId: string, status: number, taskId: number){
+    return this.tempUserTasks[userId][status]?.findIndex(x => x.id == taskId);
+  }
+
+  showTask(taskId: number, status: number) {
+
+    let currentUserId = this.user.id == '' ? 'null': this.user.id;
+    let index = this.isTaskExist(currentUserId, status, taskId);
+
+    if(index != -1)
+      this.dataShare.currentTask = {
+        id: taskId,
+        toUserId: currentUserId,
+        fromUser: currentUserId,
+        name: this.tempUserTasks[currentUserId][status][index].name,
+        deadline: this.tempUserTasks[currentUserId][status][index].deadline,
+        workerRoleId: this.tempUserTasks[currentUserId][status][index].workerRoleId,
+        commentCount: this.tempUserTasks[currentUserId][status][index].commentCount,
+        storyPoints: this.tempUserTasks[currentUserId][status][index].storyPoints,
+        memberCount: this.tempUserTasks[currentUserId][status][index].memberCount,
+        creatorUsername: this.tempUserTasks[currentUserId][status][index].creatorUsername,
+        status:status
+      };
+
     let dialogRef = this.dialog.open(WorkspaceTaskEditComponent, {
       autoFocus: false,
       height: '85%',
