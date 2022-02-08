@@ -11,6 +11,8 @@ import { WorkspaceMembers } from 'src/app/core/models/workspace/workspaceMembers
 import { MatDialog } from '@angular/material/dialog';
 import { WorkspaceTaskEditComponent } from '../workspace-task-edit/workspace-task-edit.component';
 import { DataShareService } from 'src/app/core/services/dataShare.service';
+import { AlertService } from 'src/app/core/services/alerts.service';
+import { UpdateTaskStatus } from 'src/app/core/models/task/updateTaskStatus';
 
 
 @Component({
@@ -37,7 +39,8 @@ export class WorkspaceUserTaskListComponent implements OnInit {
 
   constructor(private userTask: TaskService,
     public dialog: MatDialog,
-    private dataShare: DataShareService) { }
+    private dataShare: DataShareService,
+    private alertService: AlertService) { }
 
   ngOnInit() {
 
@@ -75,6 +78,7 @@ export class WorkspaceUserTaskListComponent implements OnInit {
           storyPoints: data.storyPoints,
           memberCount: data.memberCount,
           creatorUsername: data.creatorUsername,
+          rowVersion: data.rowVersion
         }
 
         if(data.toUserId == this.statusTasks.userId) {
@@ -141,9 +145,17 @@ export class WorkspaceUserTaskListComponent implements OnInit {
       let taskTo = {
         workspaceId: this.workspaceId,
         statusId: +currentStatus,
-        taskId: this.statusTasks.tasks[+currentStatus][event.currentIndex].id
+        taskId: this.statusTasks.tasks[+currentStatus][event.currentIndex].id,
+        rowVersion: this.statusTasks.tasks[+currentStatus][event.currentIndex].rowVersion
       };
-      this.userTask.updateStatusTask(taskTo).subscribe();
+      this.userTask.updateStatusTask(taskTo).subscribe(
+        (data: UpdateTaskStatus) => {
+          this.statusTasks.tasks[+currentStatus][event.currentIndex].rowVersion = data.rowVersion;
+        },
+        err =>
+        {
+          this.alertService.errorMessage(err)
+        });
 
       let currentTask = this.statusTasks.tasks[+currentStatus][event.currentIndex];
       let currentUserId = this.statusTasks.userId;
@@ -182,7 +194,8 @@ export class WorkspaceUserTaskListComponent implements OnInit {
         storyPoints: this.tempUserTasks[currentUserId][status][index].storyPoints,
         memberCount: this.tempUserTasks[currentUserId][status][index].memberCount,
         creatorUsername: this.tempUserTasks[currentUserId][status][index].creatorUsername,
-        status:status
+        status:status,
+        rowVersion: this.tempUserTasks[currentUserId][status][index].rowVersion
       };
 
     let dialogRef = this.dialog.open(WorkspaceTaskEditComponent, {
