@@ -32,6 +32,7 @@ export class WorkspaceTaskEditComponent implements OnInit {
   selectedStatus: number;
   storyPoints?: number;
   deadLine: Date;
+  rowVersion: Uint8Array;
 
   assignUserMode: mode = 'edit task';
   workspaceMemberList: WorkspaceMembers[];
@@ -75,6 +76,7 @@ export class WorkspaceTaskEditComponent implements OnInit {
                     this.selectedStatus = data.statusId;
                     this.assignedMembers = data.assignedUsers;
                     this.isLoading = false;
+                    this.rowVersion = data.rowVersion;
                 });
             });
           });
@@ -89,8 +91,10 @@ export class WorkspaceTaskEditComponent implements OnInit {
       this.taskChangeInfo.deadline = this.detailInfoForm.value.deadline;
       this.taskChangeInfo.storyPoints = this.detailInfoForm.value.storyPoints;
       this.taskChangeInfo.statusId = this.selectedStatus;
+      this.taskChangeInfo.rowVersion = this.rowVersion;
       this.taskService.editTask(this.taskChangeInfo).subscribe(
-        () => {
+        (data: TaskDetalInfo) => {
+          this.rowVersion = data.rowVersion;
           this.dataShare.nextTaskUpdate(this.taskChangeInfo);
           this.alertService.successMessage()
         },

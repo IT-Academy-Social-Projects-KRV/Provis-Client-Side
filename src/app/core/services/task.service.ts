@@ -96,8 +96,8 @@ export class TaskService {
     return this.http.get<TaskDetalInfo>(this.taskServiceUrl + "workspace/" + workspaceId + "/task/" + taskId, this.httpOption);
   }
 
-  public editTask(taskChangeInfo: TaskChangeInfo):Observable<void>{
-    return this.http.put<void>(this.taskUrl, taskChangeInfo, this.httpOption);
+  public editTask(taskChangeInfo: TaskChangeInfo):Observable<TaskDetalInfo>{
+    return this.http.put<TaskDetalInfo>(this.taskUrl, taskChangeInfo, this.httpOption);
   }
 
   public gethistoryTask(taskId: number) {

@@ -6,6 +6,7 @@ export class TaskDetalInfo {
     statusId: number;
     storyPoints?: number;
     assignedUsers: AssignedMember[];
+    rowVersion: Uint8Array;
 }
 
 export class AssignedMember{
