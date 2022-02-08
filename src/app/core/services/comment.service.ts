@@ -59,7 +59,7 @@ export class CommentService {
         const formData = new FormData();
 
         formData.append('attachment', attachment.attachment, attachment.attachment.name);
-        formData.append('taskId', attachment.commentId.toString());
+        formData.append('commentId', attachment.commentId.toString());
         formData.append('workspaceId', attachment.workspaceId.toString());
 
         return this.http.post<CommentAttachment>(this.commentServiceUrl + 'comment/attachments', formData, this.httpOption);

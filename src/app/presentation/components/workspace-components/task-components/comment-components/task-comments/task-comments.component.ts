@@ -1,3 +1,4 @@
+import { UploadCommentAttachment } from './../../../../../../core/models/comment/uploadCommentAttachment';
 import { CommentAttachment } from './../../../../../../core/models/comment/commentAttachment';
 import { delay } from 'rxjs';
 import { Component, Input, OnInit } from '@angular/core';
@@ -11,6 +12,7 @@ import { CommentService } from 'src/app/core/services/comment.service';
 import { TaskCommentEditComponent } from '../task-comment-edit/task-comment-edit.component';
 import * as saveAs from 'file-saver';
 import { DomSanitizer } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-task-comments',
@@ -26,6 +28,9 @@ export class TaskCommentsComponent implements OnInit {
   commentInfo: FormGroup;
   commentCreate: CommentCreate = new CommentCreate();
   isLoading: boolean = false;
+
+  maxFileNumber: number = environment.attachmentsSettings.maxFileNumber;
+  maxFileSize: number = environment.attachmentsSettings.maxFileSize;
 
   constructor(private sanitizer: DomSanitizer,
     private commentService: CommentService,
@@ -95,10 +100,10 @@ export class TaskCommentsComponent implements OnInit {
       this.commentCreate = Object.assign({}, this.commentInfo.value);
       this.commentCreate.taskId = this.taskId;
       this.commentCreate.workspaceId = this.workspaceId;
-
       this.commentService.createComment(this.commentCreate).subscribe(
         (data) => {
           data.userName = this.authService.currentUser.username;
+          data.attachments=[];
           this.comments.push(data);
 
           this.commentInfo.reset();
@@ -158,14 +163,40 @@ export class TaskCommentsComponent implements OnInit {
   }
 
   setAttachmentPreviewList(){
-    for(let comment of this.comments)
+    for(let comment of this.comments){
+      if(comment.attachments)
       for(let attachment of comment.attachments){
         this.setAttachmentPreview(attachment);
       }
+    }
   }
   checkAttachments(comment: TaskComment)
   {
-    console.log(comment.attachments!==undefined && comment.attachments.length > 0);
     return comment.attachments!==undefined && comment.attachments.length > 0;
+  }
+
+  uploadAttachment(event: any, comment: TaskComment) {
+
+    let file = event.target.files[0] as File;
+
+    if(file.size > this.maxFileSize * 1024 * 1024)
+    {
+      this.alertService.errorMessage('Max size is ' + this.maxFileSize + ' Mb', 'Error')
+      return;
+    }
+
+    let uploadFile = new UploadCommentAttachment();
+    uploadFile.workspaceId = this.workspaceId;
+    uploadFile.commentId = comment.id;
+    uploadFile.attachment = file;
+
+    this.commentService.uploadAttachment(uploadFile).subscribe((data: CommentAttachment)=>{
+      this.setAttachmentPreview(data);
+      comment.attachments.push(data);
+    },
+    (err) => {
+      this.alertService.errorMessage(err);
+    })
+
   }
 }

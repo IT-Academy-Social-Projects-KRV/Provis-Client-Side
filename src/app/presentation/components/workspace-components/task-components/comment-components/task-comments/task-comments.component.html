@@ -43,9 +43,11 @@
 
       <div class="comment-buttons">
         <b class="float-right">{{comment.dateTime | date:'HH:mm dd.MM.yyyy'}}</b>
-        <button (click)="deleteComment(comment.id)"><mat-icon class="delete-button">delete_outline</mat-icon></button>
+        <button (click)="deleteComment(comment.id)"><mat-icon class="delete-comment-button">delete_outline</mat-icon></button>
         <button (click)="editComment(comment.id)"><mat-icon>edit</mat-icon></button>
-        <button (click)="editComment(comment.id)"><mat-icon>attach_file</mat-icon></button>
+        <button title="Max number of files is {{maxFileNumber}}" (click)="fileInput.click()"
+         [disabled]="comment.attachments!==undefined && comment.attachments.length >= maxFileNumber"><mat-icon>attach_file</mat-icon></button>
+        <input #fileInput type="file" style="display:none;" (change)="uploadAttachment($event, comment)"/>
       </div>
 
     </div>

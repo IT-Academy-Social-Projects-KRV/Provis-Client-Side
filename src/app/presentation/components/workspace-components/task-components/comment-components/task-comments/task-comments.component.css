@@ -36,7 +36,7 @@
 .username{
     font-weight: bold;
 }
-.delete-button{
+.delete-comment-button{
     color: red;
 }
 .comment-buttons{
@@ -73,14 +73,15 @@ mat-form-field {
 .mat-list-item:hover{
   background-color: rgb(235, 235, 235);
 }
-.mat-list-item:hover .delete-batton {
+.mat-list-item:hover .delete-button {
   display: inline-block;
 }
-.delete-batton {
+.delete-button {
   display: none;
 }
 .preview img{
   width: 45px;
+  height: 45px;
 }
 .preview{
   display: flex;
@@ -103,7 +104,7 @@ mat-form-field {
 .preview:hover {
   background-color: rgb(235, 235, 235);
 }
-.preview:hover .delete-batton {
+.preview:hover .delete-button {
   display: inline-block;
   position: absolute;
   top: 3px;
