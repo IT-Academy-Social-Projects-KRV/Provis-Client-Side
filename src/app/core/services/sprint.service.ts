@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { sprintServiceUrl } from 'src/app/configs/api-endpoints';
 import { ChangeSprint } from '../models/sprint/addSprint';
-import { SprintDetailInfo } from '../models/sprint/SprintDetailInfo';
+import { SprintDetailInfo } from '../models/sprint/sprintDetailInfo';
 import { SprintInfo } from '../models/sprint/sprintInfo';
 
 @Injectable({

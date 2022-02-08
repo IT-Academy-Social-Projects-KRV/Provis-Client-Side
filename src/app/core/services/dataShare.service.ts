@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable} from 'rxjs';
 import { SprintInfo } from '../models/sprint/sprintInfo';
-import { SprintDetailInfo } from '../models/sprint/SprintDetailInfo';
+import { SprintDetailInfo } from '../models/sprint/sprintDetailInfo';
 import { DeleteTask } from '../models/task/deleteTask';
 import { TaskWorkerRole } from '../models/task/taskWorkerRoles';
 import { WorkspaceInfo } from '../models/workspace/workspaceInfo';

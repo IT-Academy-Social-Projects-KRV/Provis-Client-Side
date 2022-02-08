@@ -5,9 +5,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { WorkspaceMembers } from 'src/app/core/models/workspace/workspaceMembers';
-import { SprintDetailInfo } from 'src/app/core/models/sprint/SprintDetailInfo';
 import { SprintService } from 'src/app/core/services/sprint.service';
 import { DataShareService } from 'src/app/core/services/dataShare.service';
+import { SprintDetailInfo } from 'src/app/core/models/sprint/sprintDetailInfo';
 
 @Component({
   selector: 'app-workspace-task-list',

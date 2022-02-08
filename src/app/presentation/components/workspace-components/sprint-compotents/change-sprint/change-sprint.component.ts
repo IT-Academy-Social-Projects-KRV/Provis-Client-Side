@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ChangeSprint } from 'src/app/core/models/sprint/addSprint';
-import { SprintDetailInfo } from 'src/app/core/models/sprint/SprintDetailInfo';
+import { SprintDetailInfo } from 'src/app/core/models/sprint/sprintDetailInfo';
 import { AlertService } from 'src/app/core/services/alerts.service';
 import { DataShareService } from 'src/app/core/services/dataShare.service';
 import { SprintService } from 'src/app/core/services/sprint.service';
