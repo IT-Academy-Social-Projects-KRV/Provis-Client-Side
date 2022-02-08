@@ -38,8 +38,10 @@ export class TaskService {
     return localStorage.getItem('token')?.toString();
   }
 
-  getUserTask(userId: string, workspaceId: number): Observable<{tasks: Tasks, userId: string}>{
-    return this.http.get<{tasks: Tasks, userId: string}>(this.taskServiceUrl + 'tasks?userId='  + userId + '&workspaceId=' + workspaceId, this.httpOption);
+  getUserTask(userId: string, workspaceId: number, sprintId: number | null): Observable<{tasks: Tasks, userId: string}>{
+    return this.http.get<{tasks: Tasks, userId: string}>(
+      this.taskServiceUrl + 'tasks?userId='  + userId + '&workspaceId=' + workspaceId +
+      '&sprintId=' + ((sprintId)? sprintId : ''), this.httpOption);
   }
 
   public updateStatusTask(data:{workspaceId: number, statusId: number, taskId: number}):Observable<void>{

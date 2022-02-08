@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { WorkspaceCard } from 'src/app/core/models/workspace/workspaceCard';
 import { MatDialog } from '@angular/material/dialog';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
-import { DataShareService } from 'src/app/core/services/DataShare.service';
+import { DataShareService } from 'src/app/core/services/dataShare.service';
 import { WorkspaceRole } from 'src/app/core/models/workspace/workspaceRole';
 
 @Component({
@@ -13,13 +13,15 @@ import { WorkspaceRole } from 'src/app/core/models/workspace/workspaceRole';
   styleUrls: ['./user-workspace-list.component.css']
 })
 export class UserWorkspaceListComponent implements OnInit {
-  
+
   userWorkspaceList: WorkspaceCard[];
   cardColors = colorWorkspaceCardArray;
   public workspaceRoles: WorkspaceRole[];
-   
-  constructor(private workspaceService: WorkspaceService, public dialog: MatDialog, private dataShareService: DataShareService) {}
-  
+
+  constructor(private workspaceService: WorkspaceService,
+    public dialog: MatDialog,
+    private dataShareService: DataShareService) {}
+
   ngOnInit() {
     this.workspaceService.getUserWorkspace().subscribe((data: WorkspaceCard[]) => {
       this.userWorkspaceList = data;
@@ -33,7 +35,7 @@ export class UserWorkspaceListComponent implements OnInit {
   modalCreateWorkspace() {
     let dialogRef = this.dialog.open(WorkspaceCreateComponent, {autoFocus: false});
     dialogRef.componentInstance.isAdded.subscribe(data => {
-      if(data) 
+      if(data)
         dialogRef.close();
     });
   }

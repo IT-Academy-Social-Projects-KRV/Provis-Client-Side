@@ -10,7 +10,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { WorkspaceMembers } from 'src/app/core/models/workspace/workspaceMembers';
 import { MatDialog } from '@angular/material/dialog';
 import { WorkspaceTaskEditComponent } from '../workspace-task-edit/workspace-task-edit.component';
-import { DataShareService } from 'src/app/core/services/DataShare.service';
+import { DataShareService } from 'src/app/core/services/dataShare.service';
 
 
 @Component({
@@ -24,6 +24,7 @@ export class WorkspaceUserTaskListComponent implements OnInit {
   @Input() public workspaceId: number;
   @Input() public user: WorkspaceMembers;
   @Input() public index: number;
+  @Input() public sprintId: number | null;
 
   taskStatuses: Array<TaskStatus>;
   workerStatus: TaskWorkerRole[];
@@ -64,7 +65,7 @@ export class WorkspaceUserTaskListComponent implements OnInit {
       this.isLoading = true;
       this.statusTasks = {tasks:{}, userId:''};
       this.ngOnInit();
-      this.userTask.getUserTask(userId, this.workspaceId).subscribe((
+      this.userTask.getUserTask(userId, this.workspaceId, this.sprintId).subscribe((
         data: {tasks: Tasks, userId: string}) => {
           this.statusTasks = {tasks: {...this.statusTasks.tasks,...data.tasks}, userId: data.userId};
           this.isLoading = false;

@@ -22,6 +22,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatListModule} from '@angular/material/list';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 import { HomeComponent } from './presentation/components/home-components/home/home.component';
 import { AboutComponent } from './presentation/components/home-components/about/about.component';
@@ -43,6 +44,8 @@ import { WorkspaceTaskListComponent } from './presentation/components/workspace-
 import { WorkspaceUserTaskListComponent } from './presentation/components/workspace-components/task-components/workspace-user-task-list/workspace-user-task-list.component';
 import { WorkspaceTaskAttachmentsComponent } from './presentation/components/workspace-components/task-components/workspace-task-attachments/workspace-task-attachments.component';
 import { WorkspaceTaskAssignComponent } from './presentation/components/workspace-components/task-components/workspace-task-assign/workspace-task-assign.component';
+import { AddSprintComponent } from './presentation/components/workspace-components/sprint-compotents/add-sprint/add-sprint.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 import { AuthInterceptorProvider } from './core/services/interceptors/auth.interceptor';
 import { WorkspaceService } from './core/services/workspace.service';
@@ -62,7 +65,7 @@ import { AlertService } from './core/services/alerts.service';
 import { ErrorInterceptorProvider } from './core/services/interceptors/error.interceptor';
 import { IfUserRolesDirective } from './core/directives/IfUserRoles.directive';
 import { WorkspaceTaskEditComponent } from './presentation/components/workspace-components/task-components/workspace-task-edit/workspace-task-edit.component';
-import { DataShareService } from './core/services/DataShare.service';
+import { DataShareService } from './core/services/dataShare.service';
 import { WorkspaceTaskHistoryComponent } from './presentation/components/workspace-components/task-components/workspace-task-history/workspace-task-history.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -70,7 +73,8 @@ import { SpinLoaderComponent } from './presentation/components/common components
 import { CommentService } from './core/services/comment.service';
 import { TaskCommentsComponent } from './presentation/components/workspace-components/task-components/comment-components/task-comments/task-comments.component';
 import { TaskCommentEditComponent } from './presentation/components/workspace-components/task-components/comment-components/task-comment-edit/task-comment-edit.component';
-
+import { SprintService } from './core/services/sprint.service';
+import { ChangeSprintComponent } from './presentation/components/workspace-components/sprint-compotents/change-sprint/change-sprint.component';
 
 @NgModule({
   declarations: [
@@ -112,8 +116,9 @@ import { TaskCommentEditComponent } from './presentation/components/workspace-co
     WorkspaceTaskEditComponent,
     SpinLoaderComponent,
     TaskCommentsComponent,
-    TaskCommentEditComponent
-
+    TaskCommentEditComponent,
+    AddSprintComponent,
+    ChangeSprintComponent
   ],
   imports: [
     BrowserModule,
@@ -139,6 +144,8 @@ import { TaskCommentEditComponent } from './presentation/components/workspace-co
     MatTabsModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
+    MatSlideToggleModule,
+    ScrollingModule
   ],
   providers: [
     AuthInterceptorProvider,
@@ -148,7 +155,8 @@ import { TaskCommentEditComponent } from './presentation/components/workspace-co
     UserService,
     AlertService,
     DataShareService,
-    CommentService
+    CommentService,
+    SprintService
   ],
   bootstrap: [AppComponent]
 })

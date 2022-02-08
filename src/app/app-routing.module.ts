@@ -34,6 +34,7 @@ const userWorkspaceRouters: Routes = [
   { path: 'calendar', component: WorkspaceCalendarComponent},
   { path: 'info', component: WorkspaceInfoComponent},
   { path: 'tasklist', component: WorkspaceTaskListComponent},
+  { path: 'tasklist/sprint/:sprintId', component: WorkspaceTaskListComponent},
   {
     path: 'settings',
     component: WorkspaceSettingsComponent,
@@ -65,7 +66,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 
