@@ -12,4 +12,5 @@ export class AssignedMember{
   userId: string;
   userName: string;
   roleTagId: number;
+  rowVersion: Uint8Array;
 }
