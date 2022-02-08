@@ -77,15 +77,18 @@ export class WorkspaceMemberManagmentComponent implements OnInit {
       }
   }
 
-  chandeWorkspaceRole(roleId: number, currentRole: number, userId: string) {
+  chandeWorkspaceRole(roleId: number, currentRole: number, userId: string, rowVersion: Uint8Array) {
     if(roleId != currentRole) {
       let body = new WorkspaceChangeRole()
       body.roleId = roleId;
       body.userId = userId;
       body.workspaceId = this.workspaceId;
+      body.rowVersion = rowVersion;
 
       this.workspaceServise.changeWorkspaceRole(body).subscribe(
-        () => {
+        (data: WorkspaceChangeRole) => {
+          let userListIndex = this.workspaceUserList.findIndex(x => x.id == data.userId);
+          this.workspaceUserList[userListIndex].rowVersion = data.rowVersion;
           this.alertService.successMessage('Change role');
         },
         err => {
