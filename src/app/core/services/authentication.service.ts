@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserRegister } from '../models/user/userRegister';
-import { map, Observable, of, Subject } from 'rxjs';
+import { map, Observable, Subject } from 'rxjs';
 import { UserLogin } from '../models/user/userLogin';
 import { googleAuthUrl, loginUrl,
   logoutUrl,

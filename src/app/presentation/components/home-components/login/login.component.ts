@@ -4,9 +4,6 @@ import { SignInUpValidator } from 'src/app/core/validators/signInUpValidator';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { UserLogin } from 'src/app/core/models/user/userLogin';
 import { AlertService } from 'src/app/core/services/alerts.service';
-import { SocialUser } from 'angularx-social-login';
-import { UserExternalAuth } from 'src/app/core/models/user/UserExternalAuth';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +16,7 @@ export class LoginComponent implements OnInit {
   userForLogin: UserLogin = new UserLogin();
   
   constructor(private fb:FormBuilder, private service: AuthenticationService, 
-    private alertService: AlertService, private router: Router){
+    private alertService: AlertService){
     this.loginForm=fb.group({
         "email":["",SignInUpValidator.getEmailValidator()],
         "password" : [""]
