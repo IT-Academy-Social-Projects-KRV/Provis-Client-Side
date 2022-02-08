@@ -45,6 +45,16 @@ export class CommentService {
       return this.http.get<CommentAttachment[]>(this.commentServiceUrl +'comment/'+ commentId + '/workspace/' + workspaceId + '/attachments', this.httpOption);
     }
 
+    public getAttachment(workspaceId: number, attachmentId: number): Observable<File> {
+
+      const options = {
+        headers: this.httpOption.headers,
+        responseType: 'Blob' as 'json'
+      }
+
+      return this.http.get<File>(this.commentServiceUrl + 'comment/workspace/' + workspaceId + '/attachment/'+ attachmentId, options);
+    }
+
     public uploadAttachment(attachment:  UploadCommentAttachment): Observable<CommentAttachment> {
         const formData = new FormData();
 
@@ -59,4 +69,11 @@ export class CommentService {
       return this.http.delete<void>(this.commentServiceUrl + 'comment/workspace/' + workspaceId + '/attachment/'+ attachmentId, this.httpOption);
     }
 
+    public getAttachmentPreview(workspaceId: number, attachmentId: number): Observable<File> {
+      const options = {
+        headers: this.httpOption.headers,
+        responseType: 'Blob' as 'json'
+      }
+      return this.http.get<File>(this.commentServiceUrl + 'comment/workspace/' + workspaceId + '/attachment/' + attachmentId + '/preview', options)
+    }
 }
