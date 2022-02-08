@@ -37,9 +37,11 @@
                     </div>
                 </div>
             </form>
-            <div class="buttons">
-                <button mat-raised-button class="externalSignInGoogle" (click)="externalLoginGoogle()">Sign in with Google</button>
-                <button mat-raised-button class="externalSignInFacebook" (click)="externalLoginFB()">Sign in with Facebook</button>
+            <div class="google-btn">
+                <div class="google-icon-wrapper">
+                    <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+                </div>
+                <p class="btn-text" (click)="externalLog()">Sign in with google</p>
             </div>
         </div>
     </div>

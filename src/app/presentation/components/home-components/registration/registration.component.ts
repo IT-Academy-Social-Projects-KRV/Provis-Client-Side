@@ -5,6 +5,7 @@ import { UserRegister } from 'src/app/core/models/user/userRegister';
 import { AlertService } from 'src/app/core/services/alerts.service';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { SignInUpValidator } from 'src/app/core/validators/signInUpValidator';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-registration',
@@ -33,6 +34,10 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  public externalLog(){
+    this.service.externalLoginGoogle();
   }
 
   submit(){

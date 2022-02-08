@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:500);
+
 .container {
     background: linear-gradient(0deg,#3f3c52 0%,#161518 100%);
 }
@@ -40,18 +42,44 @@ form.login-form .mat-form-field {
     color: #363446;
 }
 
-.externalSignInGoogle {
-    width: 49%;
+.google-btn {
+    margin-top: 20px;
+    width: 300px;
+    height: 38px;
+    background-color: #4285f4;
+    border-radius: 6px;
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+    cursor: pointer;
 }
-
-.externalSignInFacebook {
-    width: 49%;
+.google-btn .google-icon-wrapper {
+    position: absolute;
+    margin-top: 1px;
+    margin-left: 1px;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    background-color: #fff;
 }
-
-.buttons {
-    display: flex;
-    justify-content: space-between;
-    font-weight: 600;
-    margin-top: 10px;
-    width: 470px;
+.google-btn .google-icon {
+    position: absolute;
+    margin-top: 9px;
+    margin-left: 9px;
+    width: 18px;
+    height: 18px;
+}
+.google-btn .btn-text {
+    float: right;
+    margin-top: 9px;
+    color: #fff;
+    font-size: 16px;
+    letter-spacing: 0.6px;
+    font-family: "Roboto";
+    width: 265px;
+    text-align: center;
+}
+.google-btn:hover {
+    box-shadow: 0 0 6px #4285f4;
+}
+.google-btn:active {
+    background: #1669F2;
 }

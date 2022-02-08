@@ -13,10 +13,11 @@ import { UserAuthResponse } from '../models/user/userAuthResponse';
 import { UserInfo } from '../models/user/userInfo';
 import { UserTwoFactor } from '../models/user/userTwoFactor';
 import { Router } from '@angular/router';
-import { SocialAuthService } from "angularx-social-login";
+import { SocialAuthService, SocialUser } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
 import { UserAuthorizationResponse } from '../models/user/UserAuthorizationResponse';
 import { UserExternalAuth } from '../models/user/UserExternalAuth';
+import { AlertService } from './alerts.service';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,7 @@ export class AuthenticationService {
   public currentUser: UserInfo;
 
   constructor(private http: HttpClient, private router: Router, 
-    private _externalAuthService: SocialAuthService) {
+    private _externalAuthService: SocialAuthService, private alertService: AlertService) {
     const user = localStorage.getItem('user');
 
     if(user) {
@@ -66,6 +67,33 @@ export class AuthenticationService {
       tokens.refreshToken = authResponse.refreshToken;
       this.setTokensInLocalStorage(tokens);
     }))
+  }
+
+  public externalLoginGoogle = () => {
+    this.signInWithGoogle()
+    .then(res => {
+      const user: SocialUser = { ...res };
+      console.log(user);
+      const externalAuth: UserExternalAuth = {
+        provider: user.provider,
+        idToken: user.idToken
+      }
+      this.validateExternalGoogleAuth(externalAuth);
+    }, error => {
+        this.alertService.errorMessage(error)
+    });
+  }
+
+  private validateExternalGoogleAuth(externalAuth: UserExternalAuth) {
+    this.externalLogin(externalAuth)
+      .subscribe(() => {
+        this.isAuthenticatedWithRefreshToken();
+        this.router.navigate(['user/workspaces']);
+      },
+      error => {
+        this.alertService.errorMessage(error);
+        this.signOutExternal();
+      });
   }
     
   public sendAuthStateChangeNotification = (isAuthenticated: boolean) => {
