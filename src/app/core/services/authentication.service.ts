@@ -170,7 +170,8 @@ export class AuthenticationService {
   }
 
   resetPassword(resetPassword: ResetPassword): Observable<void>{
-    return this.http.post<void>(this.resetPasswordUrl, resetPassword);
+    return this.http.put<void>(this.resetPasswordUrl, resetPassword);
+    console.log("sssssss");
   }
   
 }
