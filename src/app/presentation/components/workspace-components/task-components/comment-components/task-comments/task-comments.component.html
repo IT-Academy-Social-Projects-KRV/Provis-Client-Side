@@ -26,13 +26,28 @@
         <div class="comment-info">
             <h3 class="username">{{comment.userName}}</h3>
             <span class="wrap-text">{{comment.commentText}}</span>
+            <span class="wrap-text">{{comment.attachments?.length}}</span>
+        </div>
+        <div label="Board" *ngIf="checkAttachments(comment)" >
+          <div class = "preview-list">
+            <div class = "preview" *ngFor="let attachment of comment.attachments">
+              <mat-icon class="delete-button" (click)="deleteAttachment(attachment.id, comment)">delete</mat-icon>
+              <div class = "preview-list-container" (click)="downloadFile(attachment.id)">
+                <img [title]="'Download ' + attachment.name" mat-card-sm-image [src]="attachment.preview">
+                <span>{{getAttachmentName(attachment.name)}}</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="comment-buttons">
         <b class="float-right">{{comment.dateTime | date:'HH:mm dd.MM.yyyy'}}</b>
-        <button (click)="deleteComment(comment.id)"><mat-icon class="delete-button">delete_outline</mat-icon></button>
+        <button (click)="deleteComment(comment.id)"><mat-icon class="delete-comment-button">delete_outline</mat-icon></button>
         <button (click)="editComment(comment.id)"><mat-icon>edit</mat-icon></button>
+        <button title="Max number of files is {{maxFileNumber}}" (click)="fileInput.click()"
+         [disabled]="comment.attachments!==undefined && comment.attachments.length >= maxFileNumber"><mat-icon>attach_file</mat-icon></button>
+        <input #fileInput type="file" style="display:none;" (change)="uploadAttachment($event, comment)"/>
       </div>
 
     </div>
