@@ -8,8 +8,8 @@ export const loginUrl = authenticationServiceUrl + 'login';
 export const refreshTokenUrl = authenticationServiceUrl + 'refresh-token';
 export const logoutUrl = authenticationServiceUrl + 'logout';
 export const twoStepVerificationUrl = authenticationServiceUrl + 'login-two-step';
-export const forgotPasswordUrl = authenticationServiceUrl + 'recover-password/';
-export const resetPasswordUrl = authenticationServiceUrl + 'reset-password';
+export const forgotPasswordUrl = authenticationServiceUrl + 'password/';
+export const resetPasswordUrl = authenticationServiceUrl + 'password';
 
 export const workspaceServiceUrl = baseUrl + '/Workspace/';
 export const workspaceUrl = workspaceServiceUrl + 'workspace';
