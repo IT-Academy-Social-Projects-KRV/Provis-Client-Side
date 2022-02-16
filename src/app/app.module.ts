@@ -17,11 +17,11 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge'
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
-import {CdkAccordionModule} from '@angular/cdk/accordion';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {DragDropModule} from '@angular/cdk/drag-drop';
-import {MatListModule} from '@angular/material/list';
-import {MatTabsModule} from '@angular/material/tabs';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { MatExpansionModule} from '@angular/material/expansion';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatListModule } from '@angular/material/list';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { HomeComponent } from './presentation/components/home-components/home/home.component';
 import { AboutComponent } from './presentation/components/home-components/about/about.component';
@@ -62,7 +62,7 @@ import { AlertService } from './core/services/alerts.service';
 import { ErrorInterceptorProvider } from './core/services/interceptors/error.interceptor';
 import { IfUserRolesDirective } from './core/directives/IfUserRoles.directive';
 import { WorkspaceTaskEditComponent } from './presentation/components/workspace-components/task-components/workspace-task-edit/workspace-task-edit.component';
-import { DataShareService } from './core/services/DataShare.service';
+import { DataShareService } from './core/services/dataShare.service';
 import { WorkspaceTaskHistoryComponent } from './presentation/components/workspace-components/task-components/workspace-task-history/workspace-task-history.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';

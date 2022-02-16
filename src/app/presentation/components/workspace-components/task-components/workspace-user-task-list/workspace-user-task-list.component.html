@@ -1,17 +1,17 @@
-<mat-expansion-panel>
+<mat-expansion-panel (opened)="showUserTasks(user.id)" (closed)="closeUser()">
   <mat-expansion-panel-header>
-    <mat-panel-title (click) = "showUserTasks(user.id)">
+    <mat-panel-title>
       {{user.userName}}
       <app-spin-loader *ngIf="isLoading"></app-spin-loader>
     </mat-panel-title>
   </mat-expansion-panel-header>
   <div>
-    <div  class="task-card-block">
-      <div *ngFor="let status of kanbanBoard" class="example-container {{kanbanClasses[status.id-1]}}">
-        <div *ngIf="!isLoading">
+    <div *ngIf="!isLoading && statusTasks.userId != ''">
+       <div  class="task-card-block">
+        <div *ngFor="let status of kanbanBoard" class="example-container {{kanbanClasses[status.id-1]}}">
           <div class="task-status border-column">
             <span>{{status.name}}</span>
-            <span>({{(statusTasks.tasks[status.id]).length}})</span>
+            <span>({{statusTasks.tasks[status.id].length}})</span>
           </div>
           <div
             id = "{{index + '_' + status.id}}"
@@ -20,25 +20,40 @@
             [cdkDropListConnectedTo]="listStatus"
             class="example-list"
             (cdkDropListDropped)="drop($event)">
-            <div class="example-box {{kanbanClasses[status.id-1]}}-task" *ngFor="let item of statusTasks.tasks[status.id]"
-              cdkDrag (click)="showTask(item.id)">
-              <div class="tags">
-                <span class="story-points" *ngIf="item.storyPoints">
-                  {{item.storyPoints}}
-                </span>
-                <span *ngIf="item.workerRoleId !=null" class="worker-status" [style.background-color]="statusColor[item.workerRoleId-1]">
+            <div class="example-box {{kanbanClasses[status.id-1]}}-task" *ngFor="let item of statusTasks.tasks[status.id]" let i = index;
+              cdkDrag (click)="showTask(item.id, status.id)">
+              <div *ngIf="item.workerRoleId != null" class="tags" >
+                 <span *ngIf="item.workerRoleId != 0" class="worker-status" [style.background-color]="statusColor[item.workerRoleId-1]">
                   {{workerStatus[item.workerRoleId-1].name}}
                 </span>
-            </div>
-              <span class="task-title">{{item.name}}</span>
-              <div class="task-info">
-                <div class="icon-section">
-                  <span class="material-icons icon-comment"> comment</span>
-                  <span class="comment">{{item.commentCount}}</span>
+              </div>
+              <div>
+                <span class="task-title">{{item.name}}</span>
+              </div>
+              <div>
+                <div class="creator-title">
+                  <span class="material-icons icon-person">person</span>
+                  <span class="creator-username">{{item.creatorUsername}}</span>
                 </div>
-                <div class="icon-section">
-                  <span class="material-icons icon-time">query_builder</span>
-                  <span>{{item.deadline | date:'dd.MM.yyyy'}}</span>
+                <div class="task-info">
+                  <div class="icon-section">
+                    <div>
+                      <span class="material-icons"> comment</span>
+                      <span>{{item.commentCount}}</span>
+                    </div>
+                    <div>
+                      <span class="material-icons">people_alt</span>
+                      <span>{{item.memberCount}}</span>
+                    </div>
+                    <div>
+                      <span class="material-icons" *ngIf="item.storyPoints">stars</span>
+                      <span *ngIf="item.storyPoints">{{item.storyPoints}}</span>
+                    </div>
+                  </div>
+                  <div class="icon-section">
+                    <span class="material-icons icon-time">query_builder</span>
+                    <span class="date-time">{{item.deadline | date:'dd.MM.yyyy'}}</span>
+                  </div>
                 </div>
               </div>
             </div>

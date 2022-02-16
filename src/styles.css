@@ -2,6 +2,9 @@ html, body { height: 100%; }
 body {
     margin: 0;
 }
+body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) {
+    overflow: initial !important;
+}
 body *:not(.material-icons) {
     font-family: 'Montserrat', sans-serif !important;
 }

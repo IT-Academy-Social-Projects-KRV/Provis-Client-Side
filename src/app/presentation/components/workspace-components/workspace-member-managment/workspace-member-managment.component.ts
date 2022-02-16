@@ -10,7 +10,7 @@ import { AuthenticationService } from 'src/app/core/services/authentication.serv
 import { WorkspaceMembers } from 'src/app/core/models/workspace/workspaceMembers';
 import { AlertService } from 'src/app/core/services/alerts.service';
 import { workspaceUserRoles } from 'src/app/core/models/workspace/workspaceUserRole';
-import { DataShareService } from 'src/app/core/services/DataShare.service';
+import { DataShareService } from 'src/app/core/services/dataShare.service';
 
 @Component({
   selector: 'app-workspace-member-managment',
@@ -25,15 +25,15 @@ export class WorkspaceMemberManagmentComponent implements OnInit {
   workspaceUserList: WorkspaceMembers[];
   workspaceMember: WorkspaceMembers;
   roles: workspaceUserRoles[];
-  
+
   constructor(
     private route: ActivatedRoute,
     private dataShare: DataShareService,
-    public dialog: MatDialog, 
+    public dialog: MatDialog,
     private alertService: AlertService,
-    private workspaceServise: WorkspaceService, 
+    private workspaceServise: WorkspaceService,
     public authSrvice: AuthenticationService) {}
-  
+
   ngOnInit() {
     this.route.parent?.params.subscribe((params) => {
       this.workspaceId = Number(params['id']);
@@ -42,16 +42,16 @@ export class WorkspaceMemberManagmentComponent implements OnInit {
     this.workspaceServise.getWorkspaceUserList(this.workspaceId).subscribe(data => {
       this.workspaceUserList = data;
     })
-    
+
     this.dataShare.workspaceInfo.subscribe((data: WorkspaceInfo) => {
       this.userWorkspaceInfo = data;
     });
-    
+
     this.dataShare.workspaceRoles.subscribe((data: workspaceUserRoles[]) => {
         this.roles = data;
     });
   }
-  
+
   isOwner(workspaceMember: WorkspaceMembers): boolean {
     return workspaceMember.role == 1;
   }
@@ -66,12 +66,12 @@ export class WorkspaceMemberManagmentComponent implements OnInit {
   }
 
   async delete(userId: string): Promise<void> {
-    if  (await this.alertService.confirmMessage('User will be deleted from all workspace tasks!', 
-        'Are you sure?', 
+    if  (await this.alertService.confirmMessage('User will be deleted from all workspace tasks!',
+        'Are you sure?',
         'Yes, delete!'))
       {
       this.workspaceServise.delUserFromWorksp(this.workspaceId, userId).subscribe(
-        () => { 
+        () => {
           window.location.reload();
         })
       }
