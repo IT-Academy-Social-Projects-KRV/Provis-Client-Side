@@ -86,8 +86,8 @@ export class WorkspaceService {
         return this.http.post<void>(this.taskUrl, task, this.httpOption);
     }
 
-    public changeWorkspaceRole(body: WorkspaceChangeRole): Observable<void>{
-        return this.http.put<void>(this.changeWorkspaceRoleUrl, body, this.httpOption);
+    public changeWorkspaceRole(body: WorkspaceChangeRole): Observable<WorkspaceChangeRole>{
+        return this.http.put<WorkspaceChangeRole>(this.changeWorkspaceRoleUrl, body, this.httpOption);
     }
 
     public getWorkspaceInfo(workspaceId: number): Observable<WorkspaceInfo> {

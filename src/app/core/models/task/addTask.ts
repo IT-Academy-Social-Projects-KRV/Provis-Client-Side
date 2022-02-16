@@ -1,5 +1,7 @@
-export class TaskInfo {
+export class AddTask {
   id: number;
+  toUserId: string;
+  fromUser: string;
   name: string;
   deadline: Date;
   workerRoleId: number;
@@ -7,5 +9,6 @@ export class TaskInfo {
   storyPoints?: number;
   memberCount: number;
   creatorUsername: string;
+  status: number;
   rowVersion: Uint8Array;
 }

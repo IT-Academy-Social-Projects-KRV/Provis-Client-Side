@@ -15,7 +15,7 @@ export class WorkspaceComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private workspaceService: WorkspaceService,
-    private dataShareSrervice: DataShareService,
+    private dataShareService: DataShareService,
     private taskService: TaskService) { }
 
   ngOnInit() {
@@ -24,11 +24,11 @@ export class WorkspaceComponent implements OnInit {
       let workspaceId = Number(this.route.snapshot.paramMap.get('id'));
 
       this.workspaceService.getWorkspaceInfo(workspaceId).subscribe((data: WorkspaceInfo) => {
-        this.dataShareSrervice.nextWorkspaceInfo(data);
+        this.dataShareService.nextWorkspaceInfo(data);
       });
 
       this.taskService.getWorkerRole().subscribe((data: TaskWorkerRole[]) => {
-        this.dataShareSrervice.nextTaskRoles(data);
+        this.dataShareService.nextTaskRoles(data);
       });
     });
   }

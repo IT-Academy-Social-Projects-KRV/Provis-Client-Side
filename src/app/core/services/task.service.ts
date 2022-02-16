@@ -12,6 +12,7 @@ import { TaskChangeInfo } from '../models/task/taskChangeInfo';
 import { TaskHistory } from '../models/task/taskHistory';
 import { ChangeMemberRole } from '../models/task/changeMemberRole';
 import { JoinTaskMember } from '../models/task/joinTaskMember';
+import { UpdateTaskStatus } from '../models/task/updateTaskStatus';
 
 @Injectable({
   providedIn: 'root',
@@ -44,8 +45,8 @@ export class TaskService {
       '&sprintId=' + ((sprintId)? sprintId : ''), this.httpOption);
   }
 
-  public updateStatusTask(data:{workspaceId: number, statusId: number, taskId: number}):Observable<void>{
-    return this.http.put<void>(this.taskServiceUrl + 'status', data, this.httpOption);
+  public updateStatusTask(data:{workspaceId: number, statusId: number, taskId: number}):Observable<UpdateTaskStatus>{
+    return this.http.put<UpdateTaskStatus>(this.taskServiceUrl + 'status', data, this.httpOption);
   }
 
   getStatusTask() {
@@ -98,8 +99,8 @@ export class TaskService {
     return this.http.get<TaskDetalInfo>(this.taskServiceUrl + "workspace/" + workspaceId + "/task/" + taskId, this.httpOption);
   }
 
-  public editTask(taskChangeInfo: TaskChangeInfo):Observable<void>{
-    return this.http.put<void>(this.taskUrl, taskChangeInfo, this.httpOption);
+  public editTask(taskChangeInfo: TaskChangeInfo):Observable<TaskDetalInfo>{
+    return this.http.put<TaskDetalInfo>(this.taskUrl, taskChangeInfo, this.httpOption);
   }
 
   public gethistoryTask(taskId: number) {

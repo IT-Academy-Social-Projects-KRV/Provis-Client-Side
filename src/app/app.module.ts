@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -23,6 +21,11 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatListModule} from '@angular/material/list';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { MatExpansionModule} from '@angular/material/expansion';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatListModule } from '@angular/material/list';
+import { MatTabsModule } from '@angular/material/tabs';
 
 import { HomeComponent } from './presentation/components/home-components/home/home.component';
 import { AboutComponent } from './presentation/components/home-components/about/about.component';
@@ -75,6 +78,8 @@ import { TaskCommentsComponent } from './presentation/components/workspace-compo
 import { TaskCommentEditComponent } from './presentation/components/workspace-components/task-components/comment-components/task-comment-edit/task-comment-edit.component';
 import { SprintService } from './core/services/sprint.service';
 import { ChangeSprintComponent } from './presentation/components/workspace-components/sprint-compotents/change-sprint/change-sprint.component';
+import { ForgotPasswordComponent } from './presentation/components/home-components/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './presentation/components/home-components/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -119,6 +124,8 @@ import { ChangeSprintComponent } from './presentation/components/workspace-compo
     TaskCommentEditComponent,
     AddSprintComponent,
     ChangeSprintComponent
+    ForgotPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

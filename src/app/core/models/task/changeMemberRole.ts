@@ -3,4 +3,5 @@ export class ChangeMemberRole {
     workspaceId: number;
     userId: string;
     roleId: number;
+    rowVersion: Uint8Array;
 }

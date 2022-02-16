@@ -12,4 +12,5 @@ export class CreateTask {
 export class AssignedMember{
     userId: string;
     roleTagId: number;
+    rowVersion: Uint8Array;
 }

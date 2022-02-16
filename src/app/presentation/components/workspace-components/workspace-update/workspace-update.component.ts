@@ -38,9 +38,10 @@ export class WorkspaceUpdateComponent implements OnInit {
       this.updwsform.controls['Name'].setValue(this.updateWorkspace.Name);
     });
 
-    this.workspaceService.getWorkspaceDecscription(this.workspaceInfo.id).subscribe((data: WorkspaceDescription) => {
-      this.updateWorkspace.Description = data.description;
-      this.updwsform.controls['Description'].setValue(data.description);
+    this.workspaceService.getWorkspaceDecscription(this.workspaceInfo.id)
+      .subscribe((data: WorkspaceDescription) => {
+        this.updateWorkspace.Description = data.description;
+        this.updwsform.controls['Description'].setValue(data.description);
     });
   }
 
