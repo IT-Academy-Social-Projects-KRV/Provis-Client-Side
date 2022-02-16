@@ -5,7 +5,7 @@ import { AlertService } from 'src/app/core/services/alerts.service';
 import { ForgotPassword } from 'src/app/core/models/user/forgotPassword';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { Router } from '@angular/router';
-import { DataShareService } from 'src/app/core/services/DataShare.service';
+import { DataShareService } from 'src/app/core/services/dataShare.service';
 
 @Component({
   selector: 'app-forgot-password',

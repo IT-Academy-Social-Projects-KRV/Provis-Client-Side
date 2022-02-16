@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { ResetPassword } from 'src/app/core/models/user/resetPassword';
 import { AlertService } from 'src/app/core/services/alerts.service';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
-import { DataShareService } from 'src/app/core/services/DataShare.service';
+import { DataShareService } from 'src/app/core/services/dataShare.service';
 import { SignInUpValidator } from 'src/app/core/validators/signInUpValidator';
 
 @Component({
