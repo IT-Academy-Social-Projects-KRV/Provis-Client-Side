@@ -21,11 +21,6 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatListModule} from '@angular/material/list';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import { CdkAccordionModule } from '@angular/cdk/accordion';
-import { MatExpansionModule} from '@angular/material/expansion';
-import { DragDropModule } from '@angular/cdk/drag-drop';
-import { MatListModule } from '@angular/material/list';
-import { MatTabsModule } from '@angular/material/tabs';
 
 import { HomeComponent } from './presentation/components/home-components/home/home.component';
 import { AboutComponent } from './presentation/components/home-components/about/about.component';
@@ -123,7 +118,7 @@ import { ResetPasswordComponent } from './presentation/components/home-component
     TaskCommentsComponent,
     TaskCommentEditComponent,
     AddSprintComponent,
-    ChangeSprintComponent
+    ChangeSprintComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent
   ],
