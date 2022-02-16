@@ -17,6 +17,7 @@ import { mode } from 'src/app/core/types/assignUserMode';
 export class WorkspaceTaskCreateComponent implements OnInit {
 
   @Input() public workspaceId: number;
+  @Input() public sprintId?: number;
   taskForm: FormGroup;
   createTask: CreateTask = new CreateTask();
   statusList: TaskStatus[];
@@ -59,6 +60,7 @@ export class WorkspaceTaskCreateComponent implements OnInit {
       this.createTask.workspaceId = this.workspaceId;
       this.createTask.statusId = this.selectedStatus;
       this.createTask.storyPoints = this.storyPoints;
+      this.createTask.sprintId = this.sprintId;
       this.createTask.assignedUsers = this.assignedMembers;
       this.workspaceService.CreateTask(this.createTask).subscribe(
         () => {

@@ -66,3 +66,29 @@ mat-icon {
     color: #5ab9af;
     transition: 0.4s;
 }
+
+.sub-menu-item {
+    padding-left: 25px;
+    font-size: 11px;
+}
+
+.task-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-list-item:hover .add-sprint {
+    opacity: 1;
+    visibility: visible;
+}
+
+.add-sprint {
+    opacity: 0;
+    visibility: hidden;
+    transition: .30s opacity, .30s visibility;
+}
+
+cdk-virtual-scroll-viewport {
+    height: 25vh;
+}

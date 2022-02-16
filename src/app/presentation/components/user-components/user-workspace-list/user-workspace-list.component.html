@@ -4,7 +4,7 @@
       <a mat-raised-button class="link-button" color="primary" [routerLink]="['../create']"></a>
       <div class="list">
         <mat-card *ngFor="let workspace of userWorkspaceList" 
-          [routerLink]="'../workspace/' + workspace.id + '/tasklist'" class="card" 
+          [routerLink]="'../workspace/' + workspace.id + '/tasklist/product-backlog'" class="card"
           [style.border-color]="cardColors[workspace.id % cardColors.length]">
           <div class="header-card-block" 
           [style.background-color]="cardColors[workspace.id % cardColors.length]">

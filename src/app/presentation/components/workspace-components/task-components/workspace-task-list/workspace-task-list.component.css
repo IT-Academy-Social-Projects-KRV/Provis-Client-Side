@@ -33,6 +33,25 @@
   align-items: center;
   justify-content: space-between;
 }
+.sprint-description {
+  display: block;
+  margin-top: 10px;
+  max-width: 400px;
+  text-transform: none;
+  font-size: 13px;
+  font-style: italic;
+}
+.sprint-dates {
+  text-transform: none;
+  font-size: 12px;
+  font-style: italic;
+}
+.sprint-info {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 a.link-button.button-accept {
   box-shadow: rgb(47 57 68) 0px 14px 14px -9px;
 }

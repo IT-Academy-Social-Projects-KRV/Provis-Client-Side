@@ -26,6 +26,7 @@ export class WorkspaceUserTaskListComponent implements OnInit {
   @Input() public workspaceId: number;
   @Input() public user: WorkspaceMembers;
   @Input() public index: number;
+  @Input() public sprintId: number | null;
 
   taskStatuses: Array<TaskStatus>;
   workerStatus: TaskWorkerRole[];
@@ -114,7 +115,7 @@ export class WorkspaceUserTaskListComponent implements OnInit {
         this.listStatus.push(this.index + '_' + element.id.toString());
         this.statusTasks.tasks[element.id] = [];
       });
-      this.userTask.getUserTask(userId, this.workspaceId).subscribe((
+      this.userTask.getUserTask(userId, this.workspaceId, this.sprintId).subscribe((
         data: {tasks: Tasks, userId: string}) => {
           this.statusTasks = {tasks: {...this.statusTasks.tasks,...data.tasks}, userId: data.userId};
           this.isLoading = false;

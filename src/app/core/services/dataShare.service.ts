@@ -1,6 +1,8 @@
 import { usersTasks } from './../models/task/tasks';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable} from 'rxjs';
+import { SprintInfo } from '../models/sprint/sprintInfo';
+import { SprintDetailInfo } from '../models/sprint/sprintDetailInfo';
 import { DeleteTask } from '../models/task/deleteTask';
 import { TaskWorkerRole } from '../models/task/taskWorkerRoles';
 import { WorkspaceInfo } from '../models/workspace/workspaceInfo';
@@ -30,6 +32,15 @@ export class DataShareService {
   private taskDeleteSub = new BehaviorSubject<DeleteTask>(new DeleteTask());
   public taskDelete = this.taskDeleteSub.asObservable();
 
+  public firstSprintIdSub = new BehaviorSubject<number | null>(null);
+  public firstSprintId = this.firstSprintIdSub.asObservable();
+
+  public AddSrintSub = new BehaviorSubject<SprintInfo | null>(null);
+  public AddSprint = this.AddSrintSub.asObservable();
+
+  public UpdateSrintSub = new BehaviorSubject<SprintDetailInfo | null>(null);
+  public UpdateSprint = this.UpdateSrintSub.asObservable();
+  
   private taskAddSub = new BehaviorSubject<AddTask>(new AddTask());
   public taskAdd = this.taskAddSub.asObservable();
 
@@ -69,6 +80,18 @@ export class DataShareService {
 
   public nextTaskDelete(taskDelete: DeleteTask): void {
     this.taskDeleteSub.next(taskDelete);
+  }
+
+  public nextFirstSprintId(sprintId: number | null): void {
+    this.firstSprintIdSub.next(sprintId);
+  }
+
+  public nextAddSprint(sprint: SprintInfo): void {
+    this.AddSrintSub.next(sprint);
+  }
+
+  public nextUpdateSprint(sprint: SprintDetailInfo): void {
+    this.UpdateSrintSub.next(sprint);
   }
 
   public nextWorkspaceInfo(workspaceInfo: WorkspaceInfo): void {

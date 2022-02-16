@@ -36,3 +36,5 @@ export const commentServiceUrl = baseUrl + '/Comment/';
 export const assignUrl = taskServiceUrl + 'assign';
 export const changeRoleUrl = taskServiceUrl + 'change-role';
 
+export const sprintServiceUrl = baseUrl + '/Sprint';
+

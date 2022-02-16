@@ -18,7 +18,9 @@ export class UserWorkspaceListComponent implements OnInit {
   cardColors = colorWorkspaceCardArray;
   public workspaceRoles: WorkspaceRole[];
 
-  constructor(private workspaceService: WorkspaceService, public dialog: MatDialog, private dataShareService: DataShareService) {}
+  constructor(private workspaceService: WorkspaceService,
+    public dialog: MatDialog,
+    private dataShareService: DataShareService) {}
 
   ngOnInit() {
     this.workspaceService.getUserWorkspace().subscribe((data: WorkspaceCard[]) => {

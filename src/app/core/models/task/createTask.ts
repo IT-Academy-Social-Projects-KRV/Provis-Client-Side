@@ -5,6 +5,7 @@ export class CreateTask {
     workspaceId: number;
     statusId: number;
     storyPoints?: number;
+    sprintId?: number
     assignedUsers: AssignedMember[];
 }
 

@@ -25,12 +25,51 @@
       </li>
       <li>
         <ul class="group-menu">
-          <li class="menu-item">
-            <a [routerLink]="'/user/workspace/' + userWorkspaceInfo.id + '/tasklist'">
-              <mat-icon aria-hidden="false" aria-label="Example home icon">list_alt</mat-icon>
-              <span>Task List</span>
+          <li class="menu-item task-list-item">
+
+            <a (click)="showTasks()">
+              <mat-icon *ngIf="isUseSprint && !isShowSprintList">arrow_right</mat-icon>
+              <mat-icon *ngIf="isUseSprint && isShowSprintList">arrow_drop_down</mat-icon>
+              <mat-icon aria-hidden="false" aria-label="Example home icon" *ngIf="!isUseSprint">list_alt</mat-icon>
+              <span>{{(isUseSprint) ? 'Sprint List': 'Task List'}}</span>
             </a>
+
+            <div *appIfUserRoles="[1, 2]">
+              <mat-icon *ngIf="isUseSprint"
+              aria-hidden="false"
+              aria-label="Example home icon" class="add-sprint"
+              (click) = "showAddSprint()">
+                add_circle_outline
+              </mat-icon>
+            </div>
           </li>
+
+            <ul class="group-menu">
+              <cdk-virtual-scroll-viewport *ngIf="isShowSprintList" itemSize="2">
+                <li class="menu-item sub-menu-item task-list-item" >
+                  <a [routerLink]="'/user/workspace/' + userWorkspaceInfo.id + '/tasklist/product-backlog'">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">bar_chart</mat-icon>
+                    <span>Product Backlog</span>
+                  </a>
+                </li>
+                <li class="menu-item sub-menu-item task-list-item" *ngFor="let item of sprintList">
+                  <a (click)="regirectToSprint(item.id)">
+                    <mat-icon aria-hidden="false" aria-label="Example home icon">bar_chart</mat-icon>
+                    <span>{{ item.name }}</span>
+                  </a>
+
+                  <div *appIfUserRoles="[1, 2]">
+                    <mat-icon *ngIf="isUseSprint"
+                    aria-hidden="false"
+                    aria-label="Example home icon" class="add-sprint"
+                    (click) = "showUpdateSprint(item.id)">
+                      edit
+                    </mat-icon>
+                  </div>
+                </li>
+            </cdk-virtual-scroll-viewport>
+            </ul>
+
           <li class="menu-item" (click)="modalCreateTask()">
             <a>
               <mat-icon aria-hidden="false" aria-label="Example home icon">queue</mat-icon>

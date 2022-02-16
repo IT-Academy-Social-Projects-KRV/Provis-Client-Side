@@ -1,0 +1,40 @@
+<div>
+  <div class="modal-title">
+    <span class="title-invite">Update Sprint</span>
+  </div>
+  <form class="create-sprint-form" [formGroup]="sprintForm" (ngSubmit)="updateSprint()">
+    <div>
+
+      <mat-form-field hintLabel="Max 50 characters" appearance="fill">
+        <mat-label>Name</mat-label>
+        <input type="text" matInput placeholder="Sprint name" formControlName="name">
+        <mat-error *ngIf="sprintForm.controls['name'].invalid && sprintForm.controls['name'].touched">Invalid name</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <input type="text" matInput placeholder="Sprint description" formControlName="description">
+        <mat-error *ngIf="sprintForm.controls['description'].invalid && sprintForm.controls['description'].touched">Invalid description</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Date of start</mat-label>
+        <input type="date" matInput placeholder="Date of start" formControlName="dateOfStart">
+        <mat-error *ngIf="sprintForm.controls['dateOfStart'].invalid && sprintForm.controls['dateOfStart'].touched">Invalid date</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Date of end</mat-label>
+        <input type="date" matInput placeholder="Date of end" formControlName="dateOfEnd">
+        <mat-error *ngIf="sprintForm.controls['dateOfEnd'].hasError('invalidDate') && sprintForm.controls['dateOfEnd'].touched">
+          Date of end mast be more or equal date of start
+        </mat-error>
+      </mat-form-field>
+
+      <div class="modal-button">
+        <button mat-raised-button class="button-accept">Update</button>
+      </div>
+
+    </div>
+  </form>
+</div>
