@@ -9,8 +9,7 @@ import { loginUrl,
   refreshTokenUrl,
   registrationUrl,
   twoStepVerificationUrl,
-  forgotPasswordUrl,
-  resetPasswordUrl } from 'src/app/configs/api-endpoints';
+  passwordUrl } from 'src/app/configs/api-endpoints';
 import { UserAuthResponse } from '../models/user/userAuthResponse';
 import { UserInfo } from '../models/user/userInfo';
 import { UserTwoFactor } from '../models/user/userTwoFactor';
@@ -33,8 +32,7 @@ export class AuthenticationService {
   private readonly refreshTokenUrl = refreshTokenUrl;
   private readonly logoutUrl = logoutUrl;
   private readonly twoStepVerificationUrl = twoStepVerificationUrl;
-  private readonly forgotPasswordUrl = forgotPasswordUrl;
-  private readonly resetPasswordUrl = resetPasswordUrl;
+  private readonly passwordUrl = passwordUrl;
 
   public currentUser: UserInfo;
 
@@ -166,12 +164,11 @@ export class AuthenticationService {
   }
 
   sendResetPasswordToken(forgotPassword: ForgotPassword): Observable<void>{
-    return this.http.get<void>(this.forgotPasswordUrl + forgotPassword.email);
+    return this.http.get<void>(this.passwordUrl + '/' + forgotPassword.email);
   }
 
   resetPassword(resetPassword: ResetPassword): Observable<void>{
-    return this.http.put<void>(this.resetPasswordUrl, resetPassword);
-    console.log("sssssss");
+    return this.http.put<void>(this.passwordUrl, resetPassword);
   }
   
 }
