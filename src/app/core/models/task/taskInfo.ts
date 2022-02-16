@@ -7,4 +7,5 @@ export class TaskInfo {
   storyPoints?: number;
   memberCount: number;
   creatorUsername: string;
+  rowVersion: Uint8Array;
 }

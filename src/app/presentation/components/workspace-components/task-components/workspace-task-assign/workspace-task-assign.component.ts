@@ -112,7 +112,9 @@ export class WorkspaceTaskAssignComponent implements OnInit {
         taskId : this.taskId,
         workspaceId: this.workspaceId,
         userId: userId,
-        roleId: $event
+        roleId: $event,
+        rowVersion: this.assignMembers
+          [this.assignMembers.findIndex(x => x.userId == userId)].rowVersion
       };
       this.taskService.changeMemberRole(member).subscribe(
         () => {

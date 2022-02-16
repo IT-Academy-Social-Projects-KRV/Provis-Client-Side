@@ -10,4 +10,5 @@ export class AddTask {
   memberCount: number;
   creatorUsername: string;
   status: number;
+  rowVersion: Uint8Array;
 }

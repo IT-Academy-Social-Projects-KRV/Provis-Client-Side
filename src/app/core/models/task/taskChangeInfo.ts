@@ -6,4 +6,5 @@ export class TaskChangeInfo {
     deadline: Date;
     storyPoints?: number;
     statusId: number;
+    rowVersion: Uint8Array;
 }

@@ -112,7 +112,7 @@ export class WorkspaceTaskAttachmentsComponent implements OnInit {
 
   deleteAttachment(attachmentId: number) {
     this.taskService.deleteAttachment(this.workspaceId, attachmentId).subscribe(() => {
-      this.attachments.splice(this.attachments.findIndex(x=>x.id == attachmentId), 1);
-    });
+      this.attachments.splice(this.attachments.findIndex(x=>x.id == attachmentId), 1)
+    }, err => { this.alertService.errorMessage(err) });
   }
 }
