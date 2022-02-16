@@ -41,9 +41,16 @@ export class DataShareService {
 
   private usersTasksSub = new BehaviorSubject<usersTasks>(new usersTasks());
   public usersTasks = this.usersTasksSub.asObservable();
+  
+  private emailSub = new BehaviorSubject<string>("");
+  public email = this.emailSub.asObservable();
 
   constructor() { }
 
+  public nextEmail(email: string): void {
+    this.emailSub.next(email);
+  }
+  
   public nextUsersTasks(usersTasks: usersTasks): void {
     this.usersTasksSub.next(usersTasks);
   }
@@ -59,6 +66,7 @@ export class DataShareService {
   public nextTaskAdd(taskAdd: AddTask): void {
     this.taskAddSub.next(taskAdd);
   }
+
   public nextTaskDelete(taskDelete: DeleteTask): void {
     this.taskDeleteSub.next(taskDelete);
   }

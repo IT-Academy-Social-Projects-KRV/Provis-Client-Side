@@ -1,4 +1,3 @@
-import { workspaceUrl } from './../../configs/api-endpoints';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { inviteUrl,
