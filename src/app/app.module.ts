@@ -70,6 +70,8 @@ import { SpinLoaderComponent } from './presentation/components/common components
 import { CommentService } from './core/services/comment.service';
 import { TaskCommentsComponent } from './presentation/components/workspace-components/task-components/comment-components/task-comments/task-comments.component';
 import { TaskCommentEditComponent } from './presentation/components/workspace-components/task-components/comment-components/task-comment-edit/task-comment-edit.component';
+import { ForgotPasswordComponent } from './presentation/components/home-components/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './presentation/components/home-components/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -112,7 +114,9 @@ import { TaskCommentEditComponent } from './presentation/components/workspace-co
     WorkspaceTaskEditComponent,
     SpinLoaderComponent,
     TaskCommentsComponent,
-    TaskCommentEditComponent
+    TaskCommentEditComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent
 
   ],
   imports: [

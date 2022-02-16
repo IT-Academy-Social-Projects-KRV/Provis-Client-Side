@@ -23,7 +23,14 @@ export class DataShareService {
   private taskDeleteSub = new BehaviorSubject<DeleteTask>(new DeleteTask());
   public taskDelete = this.taskDeleteSub.asObservable();
 
+  private emailSub = new BehaviorSubject<string>("");
+  public email = this.emailSub.asObservable();
+
   constructor() { }
+
+  public nextEmail(email: string): void {
+    this.emailSub.next(email);
+  }
 
   public nextTaskDelete(taskDelete: DeleteTask): void {
     this.taskDeleteSub.next(taskDelete);
