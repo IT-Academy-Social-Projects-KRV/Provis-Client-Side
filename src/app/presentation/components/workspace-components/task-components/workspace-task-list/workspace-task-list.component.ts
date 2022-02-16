@@ -23,6 +23,7 @@ export class WorkspaceTaskListComponent implements OnInit {
   workspaceId: number;
   sprintId: number | null = null;
   sprintInfo: SprintDetailInfo | null = null;
+  isUseSprits: boolean = false;
   userNull = {
     id:"",
     userName: "Unassigned task",
@@ -54,6 +55,10 @@ export class WorkspaceTaskListComponent implements OnInit {
         });
       }
       this.accordion.closeAll();
+    });
+
+    this.dataShare.workspaceInfo.subscribe(data => {
+      this.isUseSprits = data.isUseSprints;
     });
 
     this.dataShare.UpdateSprint.subscribe(data=>{

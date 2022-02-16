@@ -35,6 +35,7 @@ const userWorkspaceRouters: Routes = [
   { path: 'info', component: WorkspaceInfoComponent},
   { path: 'tasklist', component: WorkspaceTaskListComponent},
   { path: 'tasklist/sprint/:sprintId', component: WorkspaceTaskListComponent},
+  { path: 'tasklist/product-backlog', component: WorkspaceTaskListComponent},
   {
     path: 'settings',
     component: WorkspaceSettingsComponent,

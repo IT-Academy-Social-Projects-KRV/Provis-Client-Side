@@ -39,31 +39,26 @@ export class WorkspaceMenuComponent implements OnInit {
       this.dataShareService.getworkspaceRoleName(data.role).subscribe(role=>{
         this.roleName = role;
         this.isUseSprint = data.isUseSprints;
-
-        if(data.isUseSprints) {
-          this.sprintService.getSprintList(data.id).subscribe(sprintList=>{
-            this.sprintList = sprintList;
-            if(this.router.url == '/user/workspace/' + data.id ||
-               this.router.url == '/user/workspace/' + data.id + '/tasklist') {
-              this.router.navigate(['/user/workspace/' + data.id + '/tasklist/sprint/' + sprintList[0].id]);
-            }
-          });
-        } else if (!data.isUseSprints && this.router.url == '/user/workspace/' + data.id) {
-          this.router.navigate(['/user/workspace/' + data.id + '/tasklist']);
-        } else if (!data.isUseSprints) {
-          this.sprintList = [];
-          this.isShowSprintList = false;
-        }
       });
 
-      this.dataShareService.UpdateSprint.subscribe(data=>{
-        if(data) {
-          let index = this.sprintList.findIndex(x=>x.id == data.id);
-          if(index != -1) {
-            this.sprintList[index].name = data.name;
-          }
+      if(data.isUseSprints) {
+        this.sprintService.getSprintList(data.id).subscribe(sprintList=>{
+          this.sprintList = sprintList;
+        });
+      } else if (!data.isUseSprints) {
+        this.sprintList = [];
+        this.isShowSprintList = false;
+      }
+
+    });
+
+    this.dataShareService.UpdateSprint.subscribe(data=>{
+      if(data) {
+        let index = this.sprintList.findIndex(x=>x.id == data.id);
+        if(index != -1) {
+          this.sprintList[index].name = data.name;
         }
-      });
+      }
     });
 
     this.dataShareService.AddSprint.subscribe(data => {

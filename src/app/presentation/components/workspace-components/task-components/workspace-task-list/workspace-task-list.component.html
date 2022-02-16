@@ -1,7 +1,9 @@
 <div class="right-side-title">
-  <span *ngIf="!sprintId">Task List</span>
+  <span *ngIf="!isUseSprits">Task List</span>
 
-  <div *ngIf="sprintInfo" class="sprint-info">
+  <span *ngIf="isUseSprits && !sprintInfo">Product Backlog</span>
+
+  <div *ngIf="isUseSprits && sprintInfo" class="sprint-info">
     <div>
       <span>{{sprintInfo.name}}</span>
       <p *ngIf="sprintInfo.description" class="sprint-description">{{sprintInfo.description}}</p>
