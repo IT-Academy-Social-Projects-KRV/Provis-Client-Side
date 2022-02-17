@@ -155,7 +155,8 @@ export class WorkspaceUserTaskListComponent implements OnInit {
         },
         err =>
         {
-          this.alertService.errorMessage(err)
+          this.alertService.errorMessage(err.error)
+          console.log(err.error);
         });
 
       let currentTask = this.statusTasks.tasks[+currentStatus][event.currentIndex];
