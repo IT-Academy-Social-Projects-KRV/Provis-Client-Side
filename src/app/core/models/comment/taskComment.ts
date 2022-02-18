@@ -1,3 +1,4 @@
+import { CommentAttachment } from './commentAttachment';
 export class TaskComment{
     id: number;
     commentText: string;
@@ -5,4 +6,5 @@ export class TaskComment{
     taskId: number;
     userId: string;
     userName: string;
+    attachments: CommentAttachment[] = [];
 }

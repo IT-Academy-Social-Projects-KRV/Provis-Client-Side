@@ -20,10 +20,11 @@ export class AlertService{
       text: text,
       position: environment.alertSettings.position,
       showConfirmButton: false,
-      timer: environment.alertSettings.timer
+      timer: environment.alertSettings.timer,
+      scrollbarPadding: environment.alertSettings.scrollbarPadding
     })
   }
-  
+
   public warningMessage(text: string, title?: string, confirmText: string='Ok'){
     Swal.fire({
       icon: 'warning',

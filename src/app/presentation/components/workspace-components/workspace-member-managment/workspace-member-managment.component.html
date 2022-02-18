@@ -21,7 +21,7 @@
                 <mat-select [(value)]="item.role" [disabled]="isOwner(item) || isCurrentUser(item)">
                   <mat-option *ngFor="let role of roles"
                     [value]="role.id"
-                    (onSelectionChange)="chandeWorkspaceRole(role.id, item.role, item.id)"
+                    (onSelectionChange)="chandeWorkspaceRole(role.id, item.role, item.id, item.rowVersion)"
                     [disabled]="role.id == 1">
                     <span>{{role.name}}</span>
                   </mat-option>

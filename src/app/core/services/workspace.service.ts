@@ -6,7 +6,8 @@ import { workspaceUrl,
     inviteUrl,
     taskUrl,
     changeWorkspaceRoleUrl,
-    workspaceRolesUrl} from 'src/app/configs/api-endpoints';
+    workspaceRolesUrl,
+    sprintServiceUrl} from 'src/app/configs/api-endpoints';
 import { Observable } from 'rxjs';
 import { WorkspaceCard } from '../models/workspace/workspaceCard';
 import { InviteToWorkspace } from '../models/workspace/inviteToWorkspace';
@@ -85,8 +86,8 @@ export class WorkspaceService {
         return this.http.post<void>(this.taskUrl, task, this.httpOption);
     }
 
-    public changeWorkspaceRole(body: WorkspaceChangeRole): Observable<void>{
-        return this.http.put<void>(this.changeWorkspaceRoleUrl, body, this.httpOption);
+    public changeWorkspaceRole(body: WorkspaceChangeRole): Observable<WorkspaceChangeRole>{
+        return this.http.put<WorkspaceChangeRole>(this.changeWorkspaceRoleUrl, body, this.httpOption);
     }
 
     public getWorkspaceInfo(workspaceId: number): Observable<WorkspaceInfo> {
@@ -105,4 +106,11 @@ export class WorkspaceService {
         return this.http.get<UserWorkspaceInfo[]>(
             this.workspaceServiceUrl + workspaceId + "/members", this.httpOption);
     }
+
+    public SetUsingSprints(workspaceId: number, isUseSprints: boolean): Observable<void>{
+        const body = {
+            isUseSprints: isUseSprints
+        }
+        return this.http.put<void>(this.workspaceServiceUrl + workspaceId + '/using-sprints', body, this.httpOption);
+      }
 }

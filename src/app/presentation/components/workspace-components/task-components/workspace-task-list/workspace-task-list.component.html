@@ -1,6 +1,29 @@
 <div class="right-side-title">
-  <span>Task List</span>
+  <span *ngIf="!isUseSprits">Task List</span>
+
+  <span *ngIf="isUseSprits && !sprintInfo">Product Backlog</span>
+
+  <div *ngIf="isUseSprits && sprintInfo" class="sprint-info">
+    <div>
+      <span>{{sprintInfo.name}}</span>
+      <p *ngIf="sprintInfo.description" class="sprint-description">{{sprintInfo.description}}</p>
+    </div>
+    <div class="sprint-dates">
+      <span *ngIf="sprintInfo.dateOfStart && !sprintInfo.dateOfEnd">
+        Date of start: {{sprintInfo.dateOfStart | date:'dd/MM/yyyy'}}
+      </span>
+
+      <span *ngIf="!sprintInfo.dateOfStart && sprintInfo.dateOfEnd">
+        Date of end: {{sprintInfo.dateOfEnd | date:'dd/MM/yyyy'}}
+      </span>
+
+      <span *ngIf="sprintInfo.dateOfStart && sprintInfo.dateOfEnd">
+        {{sprintInfo.dateOfStart | date:'dd/MM/yyyy'}} - {{sprintInfo.dateOfEnd | date:'dd/MM/yyyy'}}
+      </span>
+    </div>
+  </div>
 </div>
+
 <div class="toggle-block">
   <div class="button-after-page-title">
     <a mat-raised-button class="link-button button-accept" (click)="modalCreateTask()">
@@ -14,6 +37,6 @@
 </div>
 <mat-accordion multi>
   <div *ngFor="let user of workspaceUserList; let i = index">
-    <app-workspace-user-task-list [user]="user" [workspaceId]="workspaceId" [index]="i"></app-workspace-user-task-list>
+    <app-workspace-user-task-list [user]="user" [workspaceId]="workspaceId" [sprintId]="sprintId" [index]="i"></app-workspace-user-task-list>
   </div>
 </mat-accordion>

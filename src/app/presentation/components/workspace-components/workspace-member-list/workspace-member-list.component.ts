@@ -1,5 +1,5 @@
 import { userCardColor } from './../../../../configs/colorsForWorkspaceCards';
-import { DataShareService } from 'src/app/core/services/DataShare.service';
+import { DataShareService } from 'src/app/core/services/dataShare.service';
 import { UserWorkspaceInfo } from './../../../../core/models/user/userWorkspaceInfo';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import { Component, OnInit } from '@angular/core';

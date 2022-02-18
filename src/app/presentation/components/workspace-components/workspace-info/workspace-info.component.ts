@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { WorkspaceInfo } from 'src/app/core/models/workspace/workspaceInfo';
 import { AlertService } from 'src/app/core/services/alerts.service';
-import { DataShareService } from 'src/app/core/services/DataShare.service';
+import { DataShareService } from 'src/app/core/services/dataShare.service';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 

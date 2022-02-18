@@ -1,3 +1,6 @@
+import { UploadCommentAttachment } from './../../../../../../core/models/comment/uploadCommentAttachment';
+import { CommentAttachment } from './../../../../../../core/models/comment/commentAttachment';
+import { delay } from 'rxjs';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,6 +10,9 @@ import { AlertService } from 'src/app/core/services/alerts.service';
 import { AuthenticationService } from 'src/app/core/services/authentication.service';
 import { CommentService } from 'src/app/core/services/comment.service';
 import { TaskCommentEditComponent } from '../task-comment-edit/task-comment-edit.component';
+import * as saveAs from 'file-saver';
+import { DomSanitizer } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-task-comments',
@@ -18,11 +24,16 @@ export class TaskCommentsComponent implements OnInit {
   @Input() public taskId: number;
   @Input() public workspaceId: number;
 
-  comments: TaskComment[];
+  comments: TaskComment[]=[];
   commentInfo: FormGroup;
   commentCreate: CommentCreate = new CommentCreate();
+  isLoading: boolean = false;
 
-  constructor(private commentService: CommentService,
+  maxFileNumber: number = environment.attachmentsSettings.maxFileNumber;
+  maxFileSize: number = environment.attachmentsSettings.maxFileSize;
+
+  constructor(private sanitizer: DomSanitizer,
+    private commentService: CommentService,
     private alertService: AlertService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
@@ -34,15 +45,12 @@ export class TaskCommentsComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.commentService.getTaskComments(this.taskId,
-      this.workspaceId).subscribe((data: TaskComment[]) => {
-      this.comments = data;
-    })
+    this.getCommentsAndAttachments();
   }
 
-   async deleteComment(commentId: number){
-    if(await this.alertService.confirmMessage("Are you shure to delete this comment?",
-    "Delete comment","Delete")){
+   async deleteComment(commentId: number) {
+    if(await this.alertService.confirmMessage("Are you sure to delete this comment?",
+      "Delete comment","Delete")) {
       this.commentService.deleteComment(commentId, this.workspaceId).subscribe(
         () => {
           this.comments.splice(this.comments.findIndex(x => x.id == commentId), 1);
@@ -54,7 +62,23 @@ export class TaskCommentsComponent implements OnInit {
     }
   }
 
-  editComment(commentId: number){
+  getCommentsAndAttachments()
+  {
+    this.isLoading = true;
+    this.commentService.getTaskComments(this.taskId,
+      this.workspaceId).subscribe((data: TaskComment[]) => {
+        this.comments = data;
+        this.comments.forEach(x=>{
+          this.commentService.getAttachmentList(this.workspaceId, x.id).subscribe((data: CommentAttachment[])=>
+          {
+              x.attachments=data;
+              this.setAttachmentPreviewList();
+              this.isLoading = false;
+          })
+        });
+    });
+  }
+  editComment(commentId: number) {
     let dialog = this.dialog.open(TaskCommentEditComponent);
     dialog.componentInstance.commentId = commentId;
     dialog.componentInstance.workspaceId = this.workspaceId;
@@ -63,7 +87,7 @@ export class TaskCommentsComponent implements OnInit {
         "CommentText": this.comments.find(x => x.id == commentId)?.commentText
       });
     dialog.componentInstance.isAdded.subscribe(data => {
-      if(data){
+      if(data) {
         let index = this.comments.findIndex(x  => x.id == commentId);
         this.comments[index].commentText = dialog.componentInstance.editedText;
         dialog.close();
@@ -76,11 +100,11 @@ export class TaskCommentsComponent implements OnInit {
       this.commentCreate = Object.assign({}, this.commentInfo.value);
       this.commentCreate.taskId = this.taskId;
       this.commentCreate.workspaceId = this.workspaceId;
-
       this.commentService.createComment(this.commentCreate).subscribe(
         (data) => {
           data.userName = this.authService.currentUser.username;
-          this.comments.push(data)
+          data.attachments=[];
+          this.comments.push(data);
 
           this.commentInfo.reset();
         },
@@ -89,5 +113,90 @@ export class TaskCommentsComponent implements OnInit {
         }
       )
     }
+  }
+
+  deleteAttachment(attachmentId: number, comment: TaskComment) {
+    this.commentService.deleteAttachment(this.workspaceId, attachmentId).subscribe(() => {
+      comment.attachments.splice(comment.attachments.findIndex(x=>x.id == attachmentId), 1);
+    });
+  }
+
+  downloadFile(attachmentId: number) {
+    this.commentService.getAttachment(this.workspaceId, attachmentId).subscribe(file => {
+      saveAs(file, file.name);
+    });
+  }
+
+  getAttachmentName(name: string): string {
+
+    if(name.length<10)
+      return name;
+    else
+      return name.substring(0, 10) + '...';
+  }
+
+  setAttachmentPreview(attachment: CommentAttachment) {
+    if(attachment.contentType.startsWith('image')) {
+      this.commentService.getAttachmentPreview(this.workspaceId, attachment.id).subscribe((data: Blob) => {
+        const blob = new Blob([data], { type: data.type });
+        const unsafeImg = URL.createObjectURL(blob);
+        attachment.preview = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+      })
+    }
+    else if(attachment.contentType.startsWith('application/msword') ||
+            attachment.contentType.startsWith('application/vnd.openxmlformats-officedocument.wordprocessingml.document')) {
+              attachment.preview = "assets/img/word-preview.png";
+    }
+    else if(attachment.contentType.startsWith('application/vnd.ms-excel') ||
+            attachment.contentType.startsWith('application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')) {
+      attachment.preview = "assets/img/excel-preview.png";
+    }
+    else if(attachment.contentType.startsWith('application/pdf')) {
+      attachment.preview = "assets/img/pdf-preview.png";
+    }
+    else if(attachment.contentType.startsWith('text/plain')) {
+      attachment.preview = "assets/img/txt-preview.png";
+    }
+    else {
+      attachment.preview = "assets/img/default-preview.png";
+    }
+  }
+
+  setAttachmentPreviewList(){
+    for(let comment of this.comments){
+      if(comment.attachments)
+      for(let attachment of comment.attachments){
+        this.setAttachmentPreview(attachment);
+      }
+    }
+  }
+  checkAttachments(comment: TaskComment)
+  {
+    return comment.attachments!==undefined && comment.attachments.length > 0;
+  }
+
+  uploadAttachment(event: any, comment: TaskComment) {
+
+    let file = event.target.files[0] as File;
+
+    if(file.size > this.maxFileSize * 1024 * 1024)
+    {
+      this.alertService.errorMessage('Max size is ' + this.maxFileSize + ' Mb', 'Error')
+      return;
+    }
+
+    let uploadFile = new UploadCommentAttachment();
+    uploadFile.workspaceId = this.workspaceId;
+    uploadFile.commentId = comment.id;
+    uploadFile.attachment = file;
+
+    this.commentService.uploadAttachment(uploadFile).subscribe((data: CommentAttachment)=>{
+      this.setAttachmentPreview(data);
+      comment.attachments.push(data);
+    },
+    (err) => {
+      this.alertService.errorMessage(err);
+    })
+
   }
 }

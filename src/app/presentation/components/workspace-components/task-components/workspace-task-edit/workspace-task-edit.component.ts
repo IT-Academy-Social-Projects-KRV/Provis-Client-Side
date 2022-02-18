@@ -11,7 +11,7 @@ import { TaskService } from 'src/app/core/services/task.service';
 import { WorkspaceService } from 'src/app/core/services/workspace.service';
 import { mode } from 'src/app/core/types/assignUserMode';
 import { formatDate } from '@angular/common';
-import { DataShareService } from 'src/app/core/services/DataShare.service';
+import { DataShareService } from 'src/app/core/services/dataShare.service';
 import { DeleteTask } from 'src/app/core/models/task/deleteTask';
 
 @Component({
@@ -23,14 +23,16 @@ export class WorkspaceTaskEditComponent implements OnInit {
 
   @Input() public taskId: number;
   @Input() public workspaceId: number;
-  detalInfoForm: FormGroup;
-  detalInfo: TaskDetalInfo = new TaskDetalInfo();
+
+  detailInfoForm: FormGroup;
+  detailInfo: TaskDetalInfo = new TaskDetalInfo();
   taskChangeInfo: TaskChangeInfo;
   statusList: TaskStatus[];
   taskRole: TaskWorkerRole[];
   selectedStatus: number;
   storyPoints?: number;
   deadLine: Date;
+  rowVersion: Uint8Array;
 
   assignUserMode: mode = 'edit task';
   workspaceMemberList: WorkspaceMembers[];
@@ -39,14 +41,13 @@ export class WorkspaceTaskEditComponent implements OnInit {
   demoForm: FormGroup;
   isLoading: boolean = false;
 
-
   constructor(private workspaceService: WorkspaceService,
     private forbBuilder: FormBuilder,
     private alertService: AlertService,
     public dialog: MatDialog,
-    private taskServise: TaskService,
+    private taskService: TaskService,
     private dataShare: DataShareService) {
-    this.detalInfoForm = forbBuilder.group({
+    this.detailInfoForm = forbBuilder.group({
       "name": ["", [Validators.maxLength(50)]],
       "description": ["", [Validators.maxLength(100)]],
       "deadline": ["",],
@@ -63,18 +64,19 @@ export class WorkspaceTaskEditComponent implements OnInit {
     this.workspaceService.getWorkspaceUserList(this.workspaceId)
       .subscribe((data: WorkspaceMembers[]) => {
         this.workspaceMemberList = data;
-          this.taskServise.getStatusTask().subscribe((statList: TaskStatus[]) => {
+          this.taskService.getStatusTask().subscribe((statList: TaskStatus[]) => {
             this.statusList = statList;
-            this.taskServise.getWorkerRole().subscribe((role: TaskWorkerRole[]) => {
+            this.taskService.getWorkerRole().subscribe((role: TaskWorkerRole[]) => {
               this.taskRole = role;
-                this.taskServise.getTaskInfo(this.workspaceId, this.taskId)
+                this.taskService.getTaskInfo(this.workspaceId, this.taskId)
                   .subscribe((data: TaskDetalInfo) => {
-                    this.detalInfoForm.patchValue(data);
-                    this.detalInfoForm.controls['deadline']
+                    this.detailInfoForm.patchValue(data);
+                    this.detailInfoForm.controls['deadline']
                       .setValue(formatDate(data.deadline,'yyyy-MM-dd','en'));
                     this.selectedStatus = data.statusId;
                     this.assignedMembers = data.assignedUsers;
                     this.isLoading = false;
+                    this.rowVersion = data.rowVersion;
                 });
             });
           });
@@ -82,14 +84,18 @@ export class WorkspaceTaskEditComponent implements OnInit {
   }
 
   EditTask() {
-    if (this.detalInfoForm.valid) {
-      this.taskChangeInfo = this.detalInfoForm.value;
+    if (this.detailInfoForm.valid) {
+      this.taskChangeInfo = this.detailInfoForm.value;
       this.taskChangeInfo.id = this.taskId;
       this.taskChangeInfo.workspaceId = this.workspaceId;
-      this.taskChangeInfo.deadline = this.detalInfoForm.value.deadline;
-      this.taskChangeInfo.storyPoints = this.detalInfoForm.value.storyPoints;
-      this.taskServise.editTask(this.taskChangeInfo).subscribe(
-        () => {
+      this.taskChangeInfo.deadline = this.detailInfoForm.value.deadline;
+      this.taskChangeInfo.storyPoints = this.detailInfoForm.value.storyPoints;
+      this.taskChangeInfo.statusId = this.selectedStatus;
+      this.taskChangeInfo.rowVersion = this.rowVersion;
+      this.taskService.editTask(this.taskChangeInfo).subscribe(
+        (data: TaskDetalInfo) => {
+          this.rowVersion = data.rowVersion;
+          this.dataShare.nextTaskUpdate(this.taskChangeInfo);
           this.alertService.successMessage()
         },
         err => {
@@ -106,11 +112,11 @@ export class WorkspaceTaskEditComponent implements OnInit {
   }
 
   async deleteTask() {
-    if(await this.alertService.confirmMessage('Task will be deleted!', 
-        'Are you sure?', 
+    if(await this.alertService.confirmMessage('Task will be deleted!',
+        'Are you sure?',
         'Yes, delete!'))
       {
-        this.taskServise.deleteTask(this.workspaceId, this.taskId).subscribe(
+        this.taskService.deleteTask(this.workspaceId, this.taskId).subscribe(
         () => {
           let deleteTask = new DeleteTask();
           deleteTask.id = this.taskId;

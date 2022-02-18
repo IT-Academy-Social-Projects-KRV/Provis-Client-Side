@@ -5,4 +5,7 @@ export class TaskInfo {
   workerRoleId: number;
   commentCount: number;
   storyPoints?: number;
+  memberCount: number;
+  creatorUsername: string;
+  rowVersion: Uint8Array;
 }

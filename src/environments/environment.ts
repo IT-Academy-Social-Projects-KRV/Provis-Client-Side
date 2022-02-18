@@ -22,7 +22,8 @@ export const environment = {
     timer: 1200, //ms
     position: 'top-end' as SweetAlertPosition,
     confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33'
+    cancelButtonColor: '#d33',
+    scrollbarPadding: false
   },
   attachmentsSettings: {
     maxFileSize: 10, //Mb

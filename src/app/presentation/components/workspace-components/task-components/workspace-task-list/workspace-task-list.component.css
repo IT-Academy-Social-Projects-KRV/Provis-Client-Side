@@ -2,7 +2,7 @@
   margin-bottom: 25px;
 }
 .mat-accordion>div {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 .toggle-button {
   display: flex;
@@ -15,19 +15,46 @@
   padding: 3px 10px;
   border-radius: 4px;
   transition: 0.5s;
+  box-shadow: rgb(47 57 68) 0px 14px 14px -9px;
 }
 .toggle-button div:hover {
   background-color: #48537a;
   color: #eee;
   cursor: pointer;
   transition: 0.5s;
+  box-shadow: rgb(47 57 68) 0px 5px 5px -3px;
 }
 .toggle-block {
-  padding: 0px 0px 10px;
+  padding: 0px 0px 15px;
   border-bottom: 2px solid #3b394a;
   margin: 10px 0px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+}
+.sprint-description {
+  display: block;
+  margin-top: 10px;
+  max-width: 400px;
+  text-transform: none;
+  font-size: 13px;
+  font-style: italic;
+}
+.sprint-dates {
+  text-transform: none;
+  font-size: 12px;
+  font-style: italic;
+}
+.sprint-info {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+a.link-button.button-accept {
+  box-shadow: rgb(47 57 68) 0px 14px 14px -9px;
+}
+a.link-button.button-accept:hover{
+  box-shadow: rgb(47 57 68) 0px 5px 5px -3px;
 }

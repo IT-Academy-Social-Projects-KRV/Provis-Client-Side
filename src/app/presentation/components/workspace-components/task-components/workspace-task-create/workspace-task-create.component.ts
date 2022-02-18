@@ -1,3 +1,4 @@
+import { DataShareService } from 'src/app/core/services/dataShare.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -16,6 +17,7 @@ import { mode } from 'src/app/core/types/assignUserMode';
 export class WorkspaceTaskCreateComponent implements OnInit {
 
   @Input() public workspaceId: number;
+  @Input() public sprintId?: number;
   taskForm: FormGroup;
   createTask: CreateTask = new CreateTask();
   statusList: TaskStatus[];
@@ -29,9 +31,10 @@ export class WorkspaceTaskCreateComponent implements OnInit {
   constructor(
     private formBuilder:FormBuilder,
     private alertService: AlertService,
-    private workspaceServ: WorkspaceService,
+    private workspaceService: WorkspaceService,
     public dialog: MatDialog,
-    private taskServise: TaskService) {
+    private taskService: TaskService,
+    private dataShare: DataShareService) {
     this.taskForm=formBuilder.group({
       "Name":["",[Validators.maxLength(50)]],
       "Description":["",[Validators.maxLength(100)]],
@@ -44,7 +47,7 @@ export class WorkspaceTaskCreateComponent implements OnInit {
   ngOnInit() {
     this.createTask.workspaceId = this.workspaceId;
 
-    this.taskServise.getStatusTask().subscribe((statList: TaskStatus[]) => {
+    this.taskService.getStatusTask().subscribe((statList: TaskStatus[]) => {
       this.statusList = statList;
     });
 
@@ -57,9 +60,11 @@ export class WorkspaceTaskCreateComponent implements OnInit {
       this.createTask.workspaceId = this.workspaceId;
       this.createTask.statusId = this.selectedStatus;
       this.createTask.storyPoints = this.storyPoints;
+      this.createTask.sprintId = this.sprintId;
       this.createTask.assignedUsers = this.assignedMembers;
-      this.workspaceServ.CreateTask(this.createTask).subscribe(
+      this.workspaceService.CreateTask(this.createTask).subscribe(
         () => {
+          this.dataShare.nextTaskCreate(this.createTask);
           this.dialog.closeAll();
         },
         err => {

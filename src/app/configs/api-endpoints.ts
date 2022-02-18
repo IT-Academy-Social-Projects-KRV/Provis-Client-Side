@@ -9,6 +9,7 @@ export const refreshTokenUrl = authenticationServiceUrl + 'refresh-token';
 export const logoutUrl = authenticationServiceUrl + 'logout';
 export const twoStepVerificationUrl = authenticationServiceUrl + 'login-two-step';
 export const googleAuthUrl = authenticationServiceUrl + 'signin-google';
+export const passwordUrl = authenticationServiceUrl + 'password';
 
 export const workspaceServiceUrl = baseUrl + '/Workspace/';
 export const workspaceUrl = workspaceServiceUrl + 'workspace';
@@ -35,4 +36,6 @@ export const commentServiceUrl = baseUrl + '/Comment/';
 
 export const assignUrl = taskServiceUrl + 'assign';
 export const changeRoleUrl = taskServiceUrl + 'change-role';
+
+export const sprintServiceUrl = baseUrl + '/Sprint';
 

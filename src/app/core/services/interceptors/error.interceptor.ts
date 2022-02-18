@@ -8,7 +8,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     constructor() { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        
+
         return next.handle(req).pipe(
             catchError(err => {
 
@@ -19,7 +19,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                 }
 
                 if(err.error.errors && typeof err.error.errors === 'object') {
-                    
+
                     const errors = err.error.errors;
 
                     for(let key in errors) {
@@ -29,6 +29,10 @@ export class ErrorInterceptor implements HttpInterceptor {
                     }
 
                     return throwError(() => errorMessage);
+                }
+
+                if(err.error && err.error.statusId && typeof err.error === 'object'){
+                    return throwError(() => err.error);
                 }
 
                 if(err.error && typeof err.error === 'object') {

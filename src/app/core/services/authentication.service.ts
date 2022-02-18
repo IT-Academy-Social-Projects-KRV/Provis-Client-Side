@@ -8,7 +8,8 @@ import { googleAuthUrl, loginUrl,
   logoutUrl,
   refreshTokenUrl,
   registrationUrl,
-  twoStepVerificationUrl } from 'src/app/configs/api-endpoints';
+  twoStepVerificationUrl,
+  passwordUrl } from 'src/app/configs/api-endpoints';
 import { UserAuthResponse } from '../models/user/userAuthResponse';
 import { UserInfo } from '../models/user/userInfo';
 import { UserTwoFactor } from '../models/user/userTwoFactor';
@@ -18,6 +19,8 @@ import { GoogleLoginProvider } from "angularx-social-login";
 import { UserAuthorizationResponse } from '../models/user/UserAuthorizationResponse';
 import { UserExternalAuth } from '../models/user/UserExternalAuth';
 import { AlertService } from './alerts.service';
+import { ForgotPassword } from '../models/user/forgotPassword';
+import { ResetPassword } from '../models/user/resetPassword';
 
 @Injectable({
   providedIn: 'root'
@@ -35,8 +38,8 @@ export class AuthenticationService {
   private readonly logoutUrl = logoutUrl;
   private readonly twoStepVerificationUrl = twoStepVerificationUrl;
   private readonly googleAuthUrl = googleAuthUrl;
-
   private _authChangeSub = new Subject<boolean>()
+  private readonly passwordUrl = passwordUrl;
 
   public currentUser: UserInfo;
 
@@ -214,4 +217,13 @@ export class AuthenticationService {
       this.currentUser = new UserInfo();
     }));
   }
+
+  sendResetPasswordToken(forgotPassword: ForgotPassword): Observable<void>{
+    return this.http.get<void>(this.passwordUrl + '/' + forgotPassword.email);
+  }
+
+  resetPassword(resetPassword: ResetPassword): Observable<void>{
+    return this.http.put<void>(this.passwordUrl, resetPassword);
+  }
+  
 }
