@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -71,10 +71,17 @@ import { SpinLoaderComponent } from './presentation/components/common components
 import { CommentService } from './core/services/comment.service';
 import { TaskCommentsComponent } from './presentation/components/workspace-components/task-components/comment-components/task-comments/task-comments.component';
 import { TaskCommentEditComponent } from './presentation/components/workspace-components/task-components/comment-components/task-comment-edit/task-comment-edit.component';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider } from 'angularx-social-login';
+import { JwtModule } from '@auth0/angular-jwt';
 import { SprintService } from './core/services/sprint.service';
 import { ChangeSprintComponent } from './presentation/components/workspace-components/sprint-compotents/change-sprint/change-sprint.component';
 import { ForgotPasswordComponent } from './presentation/components/home-components/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './presentation/components/home-components/reset-password/reset-password.component';
+
+export function tokenGetter() {
+  return localStorage.getItem("token");
+}
 
 @NgModule({
   declarations: [
@@ -146,6 +153,8 @@ import { ResetPasswordComponent } from './presentation/components/home-component
     MatTabsModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
+    SocialLoginModule,
+    JwtModule,
     MatSlideToggleModule,
     ScrollingModule
   ],
@@ -158,7 +167,21 @@ import { ResetPasswordComponent } from './presentation/components/home-component
     AlertService,
     DataShareService,
     CommentService,
-    SprintService
+    SprintService,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '302496423382-lpe5fg70huej4qa1nvgstk6qdl57vssk.apps.googleusercontent.com'
+            )
+          },
+        ],
+      } as SocialAuthServiceConfig
+    }
   ],
   bootstrap: [AppComponent]
 })

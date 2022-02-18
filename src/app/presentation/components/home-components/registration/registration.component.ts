@@ -35,6 +35,10 @@ export class RegistrationComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public externalLog(){
+    this.service.externalLoginGoogle();
+  }
+
   submit(){
     if(this.registerForm.valid){
       this.userForRegistreation = Object.assign({}, this.registerForm.value);

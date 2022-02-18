@@ -14,8 +14,9 @@ export class LoginComponent implements OnInit {
 
   loginForm : FormGroup;
   userForLogin: UserLogin = new UserLogin();
-
-  constructor(private fb:FormBuilder, private service: AuthenticationService, private alertService: AlertService){
+  
+  constructor(private fb:FormBuilder, private service: AuthenticationService, 
+    private alertService: AlertService){
     this.loginForm=fb.group({
         "email":["",SignInUpValidator.getEmailValidator()],
         "password" : [""]
@@ -23,6 +24,10 @@ export class LoginComponent implements OnInit {
   }
   
   ngOnInit(): void {
+  }
+
+  public externalLog(){
+    this.service.externalLoginGoogle();
   }
 
   submit()

@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserRegister } from '../models/user/userRegister';
-import { map, Observable, of } from 'rxjs';
+import { map, Observable, Subject } from 'rxjs';
 import { UserLogin } from '../models/user/userLogin';
-import { loginUrl,
+import { googleAuthUrl, loginUrl,
   logoutUrl,
   refreshTokenUrl,
   registrationUrl,
@@ -14,6 +14,11 @@ import { UserAuthResponse } from '../models/user/userAuthResponse';
 import { UserInfo } from '../models/user/userInfo';
 import { UserTwoFactor } from '../models/user/userTwoFactor';
 import { Router } from '@angular/router';
+import { SocialAuthService, SocialUser } from "angularx-social-login";
+import { GoogleLoginProvider } from "angularx-social-login";
+import { UserAuthorizationResponse } from '../models/user/UserAuthorizationResponse';
+import { UserExternalAuth } from '../models/user/UserExternalAuth';
+import { AlertService } from './alerts.service';
 import { ForgotPassword } from '../models/user/forgotPassword';
 import { ResetPassword } from '../models/user/resetPassword';
 
@@ -32,11 +37,14 @@ export class AuthenticationService {
   private readonly refreshTokenUrl = refreshTokenUrl;
   private readonly logoutUrl = logoutUrl;
   private readonly twoStepVerificationUrl = twoStepVerificationUrl;
+  private readonly googleAuthUrl = googleAuthUrl;
+  private _authChangeSub = new Subject<boolean>()
   private readonly passwordUrl = passwordUrl;
 
   public currentUser: UserInfo;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, 
+    private _externalAuthService: SocialAuthService, private alertService: AlertService) {
     const user = localStorage.getItem('user');
 
     if(user) {
@@ -47,6 +55,53 @@ export class AuthenticationService {
     }
    }
 
+   public signInWithGoogle = ()=> {
+    return this._externalAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+  
+  public signOutExternal = () => {
+    this._externalAuthService.signOut();
+  }
+
+  public externalLogin (body: UserExternalAuth): Observable<void> {
+    return this.http.post<UserAuthorizationResponse>(this.googleAuthUrl, body).pipe(map((authResponse: UserAuthorizationResponse)=>{
+      let tokens = new UserAuthResponse();
+      tokens.token = authResponse.token;
+      tokens.refreshToken = authResponse.refreshToken;
+      this.setTokensInLocalStorage(tokens);
+    }))
+  }
+
+  public externalLoginGoogle = () => {
+    this.signInWithGoogle()
+    .then(res => {
+      const user: SocialUser = { ...res };
+      console.log(user);
+      const externalAuth: UserExternalAuth = {
+        provider: user.provider,
+        idToken: user.idToken
+      }
+      this.validateExternalGoogleAuth(externalAuth);
+    }, error => {
+        this.alertService.errorMessage(error)
+    });
+  }
+
+  private validateExternalGoogleAuth(externalAuth: UserExternalAuth) {
+    this.externalLogin(externalAuth)
+      .subscribe(() => {
+        this.isAuthenticatedWithRefreshToken();
+        this.router.navigate(['user/workspaces']);
+      },
+      error => {
+        this.alertService.errorMessage(error);
+        this.signOutExternal();
+      });
+  }
+    
+  public sendAuthStateChangeNotification = (isAuthenticated: boolean) => {
+    this._authChangeSub.next(isAuthenticated);
+  }
 
   public register(user: UserRegister): Observable<void> {
 

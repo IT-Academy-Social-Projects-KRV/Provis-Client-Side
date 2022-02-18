@@ -8,6 +8,7 @@ export const loginUrl = authenticationServiceUrl + 'login';
 export const refreshTokenUrl = authenticationServiceUrl + 'refresh-token';
 export const logoutUrl = authenticationServiceUrl + 'logout';
 export const twoStepVerificationUrl = authenticationServiceUrl + 'login-two-step';
+export const googleAuthUrl = authenticationServiceUrl + 'signin-google';
 export const passwordUrl = authenticationServiceUrl + 'password';
 
 export const workspaceServiceUrl = baseUrl + '/Workspace/';
