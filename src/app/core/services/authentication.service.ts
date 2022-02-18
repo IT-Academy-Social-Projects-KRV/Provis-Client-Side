@@ -16,6 +16,7 @@ import { UserTwoFactor } from '../models/user/userTwoFactor';
 import { Router } from '@angular/router';
 import { ForgotPassword } from '../models/user/forgotPassword';
 import { ResetPassword } from '../models/user/resetPassword';
+import { SetPassword } from '../models/user/setPassword';
 
 @Injectable({
   providedIn: 'root'
@@ -170,5 +171,4 @@ export class AuthenticationService {
   resetPassword(resetPassword: ResetPassword): Observable<void>{
     return this.http.put<void>(this.passwordUrl, resetPassword);
   }
-  
 }

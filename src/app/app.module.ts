@@ -75,6 +75,7 @@ import { SprintService } from './core/services/sprint.service';
 import { ChangeSprintComponent } from './presentation/components/workspace-components/sprint-compotents/change-sprint/change-sprint.component';
 import { ForgotPasswordComponent } from './presentation/components/home-components/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './presentation/components/home-components/reset-password/reset-password.component';
+import { UserSetPasswordComponent } from './presentation/components/user-components/user-set-password/user-set-password.component';
 
 @NgModule({
   declarations: [
@@ -120,7 +121,8 @@ import { ResetPasswordComponent } from './presentation/components/home-component
     AddSprintComponent,
     ChangeSprintComponent,
     ForgotPasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    UserSetPasswordComponent
   ],
   imports: [
     BrowserModule,

@@ -7,7 +7,8 @@ import { inviteUrl,
          twoFactorVerificationUrl,
          twoFactorCodeUrl,
          imageUrl,
-         activeInviteUrl} from 'src/app/configs/api-endpoints';
+         activeInviteUrl,
+         userpasswordUrl} from 'src/app/configs/api-endpoints';
 import { Observable} from 'rxjs';
 import { UserInvite } from '../models/user/userInvite';
 import { UserInfoActiveInvites} from '../models/user/userInfoActiveInvites';
@@ -15,6 +16,7 @@ import { UserProfile } from '../models/user/userProfile';
 import { ConfirmEmailCode } from '../models/user/confirmEmailCode';
 import { UserChangeProfile } from '../models/user/userChangeProfile';
 import { UserChangeTwoFactor } from '../models/user/userChangeTwoFactor';
+import { SetPassword } from '../models/user/setPassword';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +31,7 @@ export class UserService {
   private readonly twoFactorVerificationUrl = twoFactorVerificationUrl;
   private readonly twoFactorCodeUrl = twoFactorCodeUrl;
   private readonly imageUrl = imageUrl;
+  private readonly userpasswordUrl = userpasswordUrl;
 
   private httpOption = {
     headers: new HttpHeaders({
@@ -102,5 +105,13 @@ export class UserService {
     formData.append('image', image, image.name);
 
     return this.http.put<void>(this.imageUrl, formData, this.httpOption);
+  }
+
+  setPassword(setPassword: SetPassword): Observable<void>{
+    return this.http.post<void>(this.userpasswordUrl, setPassword, this.httpOption);
+  }
+
+  checkPassword(): Observable<boolean>{
+    return this.http.get<boolean>(this.userpasswordUrl + "/check", this.httpOption);
   }
 }

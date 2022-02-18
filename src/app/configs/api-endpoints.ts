@@ -25,6 +25,7 @@ export const confirmEmailUrl = userServiceUrl + 'confirm-email';
 export const twoFactorVerificationUrl = userServiceUrl + 'two-factor-auntification/enable';
 export const twoFactorCodeUrl = userServiceUrl + 'two-factor-auntification/code';
 export const imageUrl = userServiceUrl + 'image';
+export const userpasswordUrl = userServiceUrl + 'password';
 
 export const taskServiceUrl = baseUrl + '/Task/';
 export const taskUrl = taskServiceUrl + 'task';
