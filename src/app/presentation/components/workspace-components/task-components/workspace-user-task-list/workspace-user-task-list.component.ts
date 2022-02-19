@@ -13,6 +13,9 @@ import { WorkspaceTaskEditComponent } from '../workspace-task-edit/workspace-tas
 import { DataShareService } from 'src/app/core/services/dataShare.service';
 import { AlertService } from 'src/app/core/services/alerts.service';
 import { UpdateTaskStatus } from 'src/app/core/models/task/updateTaskStatus';
+import { SprintInfo } from 'src/app/core/models/sprint/sprintInfo';
+import { SprintService } from 'src/app/core/services/sprint.service';
+import { ChangeSprintForTask } from 'src/app/core/models/task/changeSprintForTask';
 
 
 @Component({
@@ -37,13 +40,29 @@ export class WorkspaceUserTaskListComponent implements OnInit {
   statusTasks: {tasks: Tasks, userId: string} = {tasks:{}, userId:''};
   isLoading: boolean = false;
   tempUserTasks: usersTasks = {};
+  isUserSprints: boolean = false;
+  sprintList: SprintInfo[] = [];
 
   constructor(private userTask: TaskService,
     public dialog: MatDialog,
     private dataShare: DataShareService,
-    private alertService: AlertService) { }
+    private alertService: AlertService,
+    private sprintService: SprintService,
+    private taskService: TaskService) { }
 
   ngOnInit() {
+
+    this.dataShare.workspaceInfo.subscribe(data => {
+      this.isUserSprints = data.isUseSprints;
+
+      if(data.isUseSprints) {
+        this.sprintService.getSprintList(data.id).subscribe(sprintList=>{
+          this.sprintList = sprintList;
+          if(this.sprintId)
+            this.sprintList.unshift({id: -1, name: 'Product Backlog'});
+        });
+      }
+    });
 
     this.dataShare.usersTasks.subscribe(data => this.tempUserTasks = data);
 
@@ -206,6 +225,24 @@ export class WorkspaceUserTaskListComponent implements OnInit {
     });
     dialogRef.componentInstance.workspaceId = this.workspaceId;
     dialogRef.componentInstance.taskId = taskId;
+  }
+
+  moveToAnotherSprint(taskId: number, sprintId: number, statusId: number) {
+
+    if(sprintId == this.sprintId)
+      return;
+
+    let body = new ChangeSprintForTask();
+    body.sprintId = (sprintId != -1)? sprintId : undefined;
+
+    this.taskService.changeSprintForTask(this.workspaceId, taskId, body).subscribe(() => {
+      let index = this.statusTasks.tasks[statusId]?.findIndex(x => x.id == taskId);
+      if(index != -1)
+        this.statusTasks.tasks[statusId].splice(index, 1);
+    },
+    err =>{
+      this.alertService.errorMessage(err);
+    });
   }
 
 }
