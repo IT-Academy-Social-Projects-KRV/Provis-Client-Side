@@ -149,6 +149,10 @@ export class WorkspaceUserTaskListComponent implements OnInit {
         taskId: this.statusTasks.tasks[+currentStatus][event.currentIndex].id,
         rowVersion: this.statusTasks.tasks[+currentStatus][event.currentIndex].rowVersion
       };
+
+      let currentTask = this.statusTasks.tasks[+currentStatus][event.currentIndex];
+      let currentUserId = this.statusTasks.userId;
+
       this.userTask.updateStatusTask(taskTo).subscribe(
         (data: UpdateTaskStatus) => {
           this.statusTasks.tasks[+currentStatus][event.currentIndex].rowVersion = data.rowVersion;
@@ -156,11 +160,10 @@ export class WorkspaceUserTaskListComponent implements OnInit {
         err =>
         {
           this.alertService.errorMessage(err.error)
-          console.log(err.error);
+          this.tempUserTasks[currentUserId][err.statusId].push(currentTask);
+          this.tempUserTasks[currentUserId][+currentStatus].splice(event.currentIndex,1);
         });
 
-      let currentTask = this.statusTasks.tasks[+currentStatus][event.currentIndex];
-      let currentUserId = this.statusTasks.userId;
 
       for(let [key, value] of Object.entries(this.tempUserTasks)) {
         if(key != currentUserId) {
