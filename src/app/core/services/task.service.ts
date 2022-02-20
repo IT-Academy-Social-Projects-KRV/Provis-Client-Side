@@ -13,6 +13,7 @@ import { TaskHistory } from '../models/task/taskHistory';
 import { ChangeMemberRole } from '../models/task/changeMemberRole';
 import { JoinTaskMember } from '../models/task/joinTaskMember';
 import { UpdateTaskStatus } from '../models/task/updateTaskStatus';
+import { ChangeSprintForTask } from '../models/task/changeSprintForTask';
 
 @Injectable({
   providedIn: 'root',
@@ -123,5 +124,9 @@ export class TaskService {
 
   public deleteTask(workspaceId: number, taskId: number): Observable<void>{
     return this.http.delete<void>(this.taskServiceUrl + 'task/' + taskId + '/workspace/' + workspaceId, this.httpOption);
+  }
+
+  public changeSprintForTask(workspaceId: number, taskId: number, body: ChangeSprintForTask): Observable<void>{
+    return this.http.put<void>(this.taskServiceUrl + taskId + '/workspace/' + workspaceId, body ,this.httpOption);
   }
 }

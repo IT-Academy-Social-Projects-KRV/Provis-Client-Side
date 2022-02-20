@@ -21,41 +21,57 @@
             class="example-list"
             (cdkDropListDropped)="drop($event)">
             <div class="example-box {{kanbanClasses[status.id-1]}}-task" *ngFor="let item of statusTasks.tasks[status.id]" let i = index;
-              cdkDrag (click)="showTask(item.id, status.id)">
-              <div *ngIf="item.workerRoleId != null" class="tags" >
-                 <span *ngIf="item.workerRoleId != 0" class="worker-status" [style.background-color]="statusColor[item.workerRoleId-1]">
-                  {{workerStatus[item.workerRoleId-1].name}}
-                </span>
-              </div>
-              <div>
-                <span class="task-title">{{item.name}}</span>
-              </div>
-              <div>
-                <div class="creator-title">
-                  <span class="material-icons icon-person">person</span>
-                  <span class="creator-username">{{item.creatorUsername}}</span>
+              cdkDrag >
+              <div (click)="showTask(item.id, status.id)" class="card-info">
+                <div *ngIf="item.workerRoleId != null" class="tags" >
+                  <span *ngIf="item.workerRoleId != 0" class="worker-status" [style.background-color]="statusColor[item.workerRoleId-1]">
+                    {{workerStatus[item.workerRoleId-1].name}}
+                  </span>
                 </div>
-                <div class="task-info">
-                  <div class="icon-section">
-                    <div>
-                      <span class="material-icons"> comment</span>
-                      <span>{{item.commentCount}}</span>
+                <div>
+                  <span class="task-title">{{item.name}}</span>
+                </div>
+                <div>
+                  <div class="creator-title">
+                    <span class="material-icons icon-person">person</span>
+                    <span class="creator-username">{{item.creatorUsername}}</span>
+                  </div>
+                  <div class="task-info">
+                    <div class="icon-section">
+                      <div>
+                        <span class="material-icons"> comment</span>
+                        <span>{{item.commentCount}}</span>
+                      </div>
+                      <div>
+                        <span class="material-icons">people_alt</span>
+                        <span>{{item.memberCount}}</span>
+                      </div>
+                      <div>
+                        <span class="material-icons" *ngIf="item.storyPoints">stars</span>
+                        <span *ngIf="item.storyPoints">{{item.storyPoints}}</span>
+                      </div>
                     </div>
-                    <div>
-                      <span class="material-icons">people_alt</span>
-                      <span>{{item.memberCount}}</span>
-                    </div>
-                    <div>
-                      <span class="material-icons" *ngIf="item.storyPoints">stars</span>
-                      <span *ngIf="item.storyPoints">{{item.storyPoints}}</span>
+                    <div class="icon-section">
+                      <span class="material-icons icon-time">query_builder</span>
+                      <span class="date-time">{{item.deadline | date:'dd.MM.yyyy'}}</span>
                     </div>
                   </div>
-                  <div class="icon-section">
-                    <span class="material-icons icon-time">query_builder</span>
-                    <span class="date-time">{{item.deadline | date:'dd.MM.yyyy'}}</span>
-                  </div>
-                </div>
               </div>
+            </div>
+              <mat-icon *ngIf="isUserSprints" class="menu-button" mat-icon-button [matMenuTriggerFor]="menu">more_horiz</mat-icon>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item class="menu-item" [matMenuTriggerFor]="sprintsMenu">
+                  <span>Move to another sprint</span>
+                </button>
+              </mat-menu>
+
+              <mat-menu #sprintsMenu="matMenu">
+                <button mat-menu-item class="menu-item" *ngFor="let sprint of sprintList"
+                (click) ="moveToAnotherSprint(item.id, sprint.id, status.id)">
+                  <span>{{sprint.name}}</span>
+                </button>
+              </mat-menu>
+
             </div>
           </div>
         </div>
