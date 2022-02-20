@@ -10,6 +10,7 @@ import { ChangeTwoFaComponent } from '../change-two-fa/change-two-fa.component';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 import { AlertService } from 'src/app/core/services/alerts.service';
+import { UserSetPasswordComponent } from '../user-set-password/user-set-password.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -24,6 +25,7 @@ export class UserProfileComponent implements OnInit {
   userProfileForm : FormGroup;
   userProfile: UserProfile = new UserProfile();
   changeUserInfo: UserChangeProfile = new UserChangeProfile();
+  checkPassword: boolean = true;
 
   constructor(private formBuilder: FormBuilder,
     private userService: UserService,
@@ -49,6 +51,10 @@ export class UserProfileComponent implements OnInit {
       const blob = new Blob([data], { type: data.type });
       const unsafeImg = URL.createObjectURL(blob);
       this.image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+    });
+
+    this.userService.checkPassword().subscribe((data: boolean) => {
+      this.checkPassword = data;
     });
   }
 
@@ -151,6 +157,15 @@ export class UserProfileComponent implements OnInit {
     },
     err =>{
       this.alertService.errorMessage(err);
+    });
+  }
+
+  setPassword() {
+    let dialogRef = this.dialog.open(UserSetPasswordComponent);
+    dialogRef.componentInstance.isUpdated.subscribe(data => {
+      if(data)
+      this.checkPassword = true;
+        dialogRef.close();
     });
   }
 }

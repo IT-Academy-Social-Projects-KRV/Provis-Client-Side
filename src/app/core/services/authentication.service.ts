@@ -21,6 +21,7 @@ import { UserExternalAuth } from '../models/user/UserExternalAuth';
 import { AlertService } from './alerts.service';
 import { ForgotPassword } from '../models/user/forgotPassword';
 import { ResetPassword } from '../models/user/resetPassword';
+import { SetPassword } from '../models/user/setPassword';
 
 @Injectable({
   providedIn: 'root'
@@ -225,5 +226,4 @@ export class AuthenticationService {
   resetPassword(resetPassword: ResetPassword): Observable<void>{
     return this.http.put<void>(this.passwordUrl, resetPassword);
   }
-  
 }
