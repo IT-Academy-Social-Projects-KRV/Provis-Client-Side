@@ -20,11 +20,11 @@
     </mat-card-content>
 
     <mat-card-content>
-      <button *ngIf="!checkPassword" mat-raised-button color="primary" (click)="setPassword()">Add Password</button>
+      <button mat-raised-button color="primary" (click)="modelEnterCode()">2FA</button>
     </mat-card-content>
 
-    <mat-card-content>
-      <button mat-raised-button color="primary" (click)="modelEnterCode()">2FA</button>
+    <mat-card-content *ngIf="!checkPassword">
+      <button mat-raised-button color="primary" (click)="setPassword()">Add Password</button>
     </mat-card-content>
   </div>
 
