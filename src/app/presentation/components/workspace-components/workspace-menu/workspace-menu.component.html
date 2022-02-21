@@ -43,9 +43,9 @@
               </mat-icon>
             </div>
           </li>
-
-            <ul class="group-menu">
-              <cdk-virtual-scroll-viewport *ngIf="isShowSprintList" itemSize="2">
+          <li>
+            <ul class="group-menu sprint-list">
+              <div *ngIf="isShowSprintList" itemSize="2"  >
                 <li class="menu-item sub-menu-item task-list-item" >
                   <a [routerLink]="'/user/workspace/' + userWorkspaceInfo.id + '/tasklist/product-backlog'">
                     <mat-icon aria-hidden="false" aria-label="Example home icon">bar_chart</mat-icon>
@@ -67,9 +67,9 @@
                     </mat-icon>
                   </div>
                 </li>
-            </cdk-virtual-scroll-viewport>
+            </div>
             </ul>
-
+          </li>
           <li class="menu-item" (click)="modalCreateTask()">
             <a>
               <mat-icon aria-hidden="false" aria-label="Example home icon">queue</mat-icon>
