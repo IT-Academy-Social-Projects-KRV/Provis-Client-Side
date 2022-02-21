@@ -36,7 +36,7 @@ export class WorkspaceTaskCreateComponent implements OnInit {
     private taskService: TaskService,
     private dataShare: DataShareService) {
     this.taskForm=formBuilder.group({
-      "Name":["",[Validators.maxLength(50)]],
+      "Name":["",[Validators.maxLength(100)]],
       "Description":["",[Validators.maxLength(100)]],
       "DateOfEnd":["", ],
       "StatusId": ["",Validators.required],
