@@ -84,6 +84,7 @@ export class AuthenticationService {
       }
       this.validateExternalGoogleAuth(externalAuth);
     }, error => {
+      if(error.error != 'popup_closed_by_user')
         this.alertService.errorMessage(error)
     });
   }
