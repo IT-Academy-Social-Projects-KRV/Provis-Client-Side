@@ -55,7 +55,9 @@ export class WorkspaceTaskListComponent implements OnInit {
           this.sprintInfo = data;
         });
       }
-      this.accordion.closeAll();
+
+      if(this.accordion)
+        this.accordion.closeAll();
     });
 
     this.dataShare.workspaceInfo.subscribe(data => {
