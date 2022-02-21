@@ -77,7 +77,6 @@ export class AuthenticationService {
     this.signInWithGoogle()
     .then(res => {
       const user: SocialUser = { ...res };
-      console.log(user);
       const externalAuth: UserExternalAuth = {
         provider: user.provider,
         idToken: user.idToken
