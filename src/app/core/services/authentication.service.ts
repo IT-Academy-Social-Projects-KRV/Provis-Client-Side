@@ -77,13 +77,13 @@ export class AuthenticationService {
     this.signInWithGoogle()
     .then(res => {
       const user: SocialUser = { ...res };
-      console.log(user);
       const externalAuth: UserExternalAuth = {
         provider: user.provider,
         idToken: user.idToken
       }
       this.validateExternalGoogleAuth(externalAuth);
     }, error => {
+      if(error.error != 'popup_closed_by_user')
         this.alertService.errorMessage(error)
     });
   }
