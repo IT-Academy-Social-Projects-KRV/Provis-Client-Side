@@ -36,7 +36,6 @@ export class ForgotPasswordComponent implements OnInit {
       this.userForgotPassword = Object.assign({}, this.forgotPasswordForm.value);
       this.service.sendResetPasswordToken(this.userForgotPassword).subscribe(
         () => {
-          this.alertService.successMessage();
           this.dataShare.nextEmail(this.userForgotPassword.email);
           this.router.navigate(['recovery/reset']);
         },
